@@ -134,6 +134,8 @@ export const FIELD_READERS = {
   name: text("name", 120),
   type: oneOf(FACILITY_TYPES, "lot type"),
   operator: text("operator", 120),
+  ownership: oneOf(["public", "private"] as const, "ownership"),
+  access: oneOf(["public", "pass_required", "restricted"] as const, "access"),
   address: text("address", 200),
   aliases: (v: string) => v.split(";").map((s) => s.trim()).filter(Boolean),
   description: text("description", 600),

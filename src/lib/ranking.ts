@@ -2,6 +2,7 @@ import type { Amenity, UniversalAmenity, Attribution, ConfidenceLevel, EventKind
 import { confidenceRank, lowestConfidence } from "@/lib/confidence";
 import { estimateWalk } from "@/lib/geo";
 import { EMPTY_PAYMENT_FILTER, type PaymentFilter } from "@/lib/payment";
+import { isRestricted } from "@/lib/access";
 
 export type Factor = "cost" | "walk" | "tailgate" | "exit";
 export const FACTORS: Factor[] = ["cost", "walk", "tailgate", "exit"];
@@ -164,6 +165,8 @@ export function exitDirectionDataAvailable(facilities: ParkingFacility[], direct
 
 export function isRankable(facility: ParkingFacility, prefs: RankingPreferences): boolean {
   if (!PARKABLE.includes(facility.type)) return false;
+  // Lots reserved for specific people are never recommended.
+  if (isRestricted(facility)) return false;
   // Dedicated ADA lots are reserved for permit holders: rank them only when ADA parking is requested.
   if (facility.type === "ada" && !prefs.features.includes("ada")) return false;
   if (!facility.vehicleTypes.includes(prefs.vehicle)) return false;

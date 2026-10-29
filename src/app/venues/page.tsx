@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { listVenues } from "@/lib/data/repository";
+import { listVenuesWithFacilities } from "@/lib/data/repository";
+import { lotSearchEntry } from "@/lib/lot-search";
 import { VenueDirectory } from "@/components/VenueDirectory";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
@@ -10,7 +11,9 @@ export const metadata: Metadata = {
 };
 
 export default async function VenuesPage() {
-  const venues = await listVenues();
+  const withLots = await listVenuesWithFacilities();
+  const venues = withLots.map((x) => x.venue);
+  const lots = withLots.flatMap(({ venue, facilities }) => facilities.map((f) => lotSearchEntry(venue, f)));
   return (
     <div className="mx-auto max-w-5xl px-4 py-6">
       <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Venues", path: "/venues" }]} />
@@ -20,7 +23,7 @@ export default async function VenuesPage() {
         we never fill pages with made-up lots.
       </p>
       <div className="mt-2">
-        <VenueDirectory venues={venues} />
+        <VenueDirectory venues={venues} lots={lots} />
       </div>
     </div>
   );

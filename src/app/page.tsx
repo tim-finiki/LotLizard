@@ -42,12 +42,12 @@ export default async function Home() {
               source and confidence behind every number.
             </p>
             <form action="/venues" className="flex max-w-xl gap-2" role="search">
-              <label htmlFor="home-search" className="sr-only">Search venues</label>
+              <label htmlFor="home-search" className="sr-only">Search venues or parking lots</label>
               <input
                 id="home-search"
                 name="q"
                 type="search"
-                placeholder="Stadium, team or city"
+                placeholder="Stadium, team, city or lot name"
                 className="h-12 min-w-0 flex-1 rounded-xl border-0 bg-white px-4 text-base text-ink shadow outline-none focus:ring-4 focus:ring-lizard/50"
               />
               <button className="flex h-12 shrink-0 items-center gap-2 rounded-xl bg-lizard px-5 font-semibold text-ink hover:bg-lizard-strong">

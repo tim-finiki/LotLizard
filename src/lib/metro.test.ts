@@ -22,8 +22,10 @@ describe("metro hubs", () => {
     }
     expect(isIndexableMetro(metro("philadelphia-pa"), all)).toBe(true);
     expect(isIndexableMetro(metro("kansas-city-mo"), all)).toBe(true);
+    // Buffalo qualifies once KeyBank Center has a guide alongside Highmark Stadium.
+    expect(guideVenues(metro("buffalo-ny"), all).map((x) => x.venue.slug).sort()).toEqual(["highmark-stadium", "keybank-center"]);
+    expect(metroHasPage(metro("buffalo-ny"), all)).toBe(true);
     // One-venue metros never get a page: it would duplicate the venue guide.
-    expect(metroHasPage(metro("buffalo-ny"), all)).toBe(false);
     expect(metroHasPage(metro("new-york-city"), all)).toBe(false);
   });
 

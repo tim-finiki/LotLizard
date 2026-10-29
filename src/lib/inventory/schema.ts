@@ -30,6 +30,8 @@ export const LOT_FIELDS = [
   "name",
   "type",
   "operator",
+  "ownership",
+  "access",
   "address",
   "aliases",
   "description",

@@ -4,9 +4,10 @@ import acrisureStadium from "./acrisure-stadium.json";
 import citizensBankPark from "./citizens-bank-park.json";
 import gehaFieldAtArrowheadStadium from "./geha-field-at-arrowhead-stadium.json";
 import kauffmanStadium from "./kauffman-stadium.json";
+import keybankCenter from "./keybank-center.json";
 import lambeauField from "./lambeau-field.json";
 import lincolnFinancialField from "./lincoln-financial-field.json";
 import metlifeStadium from "./metlife-stadium.json";
 import pncPark from "./pnc-park.json";
 
-export const INVENTORY: VenueInventory[] = [acrisureStadium, citizensBankPark, gehaFieldAtArrowheadStadium, kauffmanStadium, lambeauField, lincolnFinancialField, metlifeStadium, pncPark] as VenueInventory[];
+export const INVENTORY: VenueInventory[] = [acrisureStadium, citizensBankPark, gehaFieldAtArrowheadStadium, kauffmanStadium, keybankCenter, lambeauField, lincolnFinancialField, metlifeStadium, pncPark] as VenueInventory[];

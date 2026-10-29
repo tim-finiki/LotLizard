@@ -1,13 +1,18 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import type { Venue, VenueType } from "@/lib/types";
 import { searchVenues } from "@/lib/search";
 import { VENUE_TYPE_LABEL } from "@/lib/labels";
 import { stateName } from "@/lib/states";
 import { VenueCard } from "@/components/VenueCard";
+import { FACILITY_TYPE_COLOR, FACILITY_TYPE_LABEL } from "@/lib/labels";
+import { lotOnMapPath, lotPath, matchNote, searchLots, type LotSearchEntry } from "@/lib/lot-search";
 
-export function VenueDirectory({ venues }: { venues: Venue[] }) {
+const MAX_LOT_RESULTS = 8;
+
+export function VenueDirectory({ venues, lots = [] }: { venues: Venue[]; lots?: LotSearchEntry[] }) {
   const [query, setQuery] = useState("");
   const [type, setType] = useState<VenueType | "all">("all");
   const [state, setState] = useState("all");
@@ -33,6 +38,19 @@ export function VenueDirectory({ venues }: { venues: Venue[] }) {
     [venues, query, type, state],
   );
 
+  // Lot matches are a separate list so a lot name never reorders or hides venue results.
+  const lotResults = useMemo(
+    () =>
+      query.trim().length >= 2
+        ? searchLots(
+            lots.filter((l) => (type === "all" || venues.find((v) => v.slug === l.venueSlug)?.type === type) && (state === "all" || l.venueState === state)),
+            query,
+            MAX_LOT_RESULTS,
+          )
+        : [],
+    [lots, venues, query, type, state],
+  );
+
   return (
     <div className="flex flex-col gap-4">
       <div className="sticky top-14 z-20 -mx-4 flex flex-col gap-2 bg-mist/95 px-4 py-3 backdrop-blur dark:bg-ink/95">
@@ -42,7 +60,7 @@ export function VenueDirectory({ venues }: { venues: Venue[] }) {
           type="search"
           inputMode="search"
           autoComplete="off"
-          placeholder="Search by venue, team, city or state"
+          placeholder="Search venues, teams, cities or lot names"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           className="h-12 w-full rounded-xl border border-black/10 bg-white px-4 text-base shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 dark:border-white/15 dark:bg-ink-soft"
@@ -74,8 +92,9 @@ export function VenueDirectory({ venues }: { venues: Venue[] }) {
       </div>
       <p className="text-sm text-neutral-500" aria-live="polite">
         {results.length} {results.length === 1 ? "venue" : "venues"}
+        {lotResults.length > 0 && ` · ${lotResults.length} ${lotResults.length === 1 ? "lot" : "lots"}`}
       </p>
-      {results.length === 0 && (
+      {results.length === 0 && lotResults.length === 0 && (
         <div className="rounded-2xl bg-white p-6 text-center ring-1 ring-line dark:bg-ink-soft dark:ring-white/10">
           <p className="font-display font-bold">No venues match that search</p>
           <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">Try a team, city or state — or clear the filters.</p>
@@ -97,7 +116,33 @@ export function VenueDirectory({ venues }: { venues: Venue[] }) {
           <VenueCard key={v.id} venue={v} />
         ))}
       </div>
-      {results.length === 0 && (
+      {lotResults.length > 0 && (
+        <section aria-labelledby="lot-results-heading" className="flex flex-col gap-2">
+          <h2 id="lot-results-heading" className="text-sm font-bold">
+            Parking lots &amp; garages matching &ldquo;{query.trim()}&rdquo;
+          </h2>
+          <ul className="grid gap-2 sm:grid-cols-2">
+            {lotResults.map((m) => (
+              <li key={`${m.entry.venueSlug}/${m.entry.lotSlug}`} className="flex items-center gap-3 rounded-2xl bg-white p-3 ring-1 ring-line dark:bg-ink-soft dark:ring-white/10">
+                <span aria-hidden className="h-3 w-3 shrink-0 rounded-full ring-1 ring-black/10 dark:ring-white/40" style={{ background: FACILITY_TYPE_COLOR[m.entry.type] }} />
+                <span className="min-w-0 flex-1">
+                  <Link href={m.entry.restricted ? lotPath(m.entry) : lotOnMapPath(m.entry)} className="block truncate font-semibold hover:underline">
+                    {m.entry.name}
+                  </Link>
+                  <span className="block truncate text-xs text-neutral-500">
+                    {FACILITY_TYPE_LABEL[m.entry.type]} at {m.entry.venueName}, {m.entry.venueCity}
+                    {matchNote(m) && ` · ${matchNote(m)}`}
+                  </span>
+                </span>
+                <Link href={lotPath(m.entry)} className="shrink-0 text-xs font-semibold text-brand-700 underline dark:text-brand-100">
+                  Details<span className="sr-only"> for {m.entry.name}, {m.entry.venueName}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+      {results.length === 0 && lotResults.length === 0 && (
         <p className="rounded-xl bg-white p-4 text-sm dark:bg-ink-soft">
           No venues match. Missing a venue? <a href="/submit" className="font-semibold text-brand-700 underline dark:text-brand-100">Tell us about it</a>.
         </p>

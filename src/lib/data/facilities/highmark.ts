@@ -1,4 +1,4 @@
-import type { ParkingFacility, PaymentPolicy, PriceObservation } from "@/lib/types";
+import type { AccessLevel, Ownership, ParkingFacility, PaymentPolicy, PriceObservation } from "@/lib/types";
 import { attr, fact } from "@/lib/data/attr";
 
 /**
@@ -28,6 +28,14 @@ const officialPrepay: PaymentPolicy = {
   attribution: attr("medium", ["bills-parking", "bills-gameday"]),
 };
 const officialTailgate = fact<boolean | "unknown">(true, "medium", ["bills-parking"], "Tailgating allowed from lot opening (4 hours before kickoff) until kickoff. No post-game tailgating.");
+/** Bills lots are pass-only; the stadium property is public, but individual lot parcels aren't confirmed. */
+const officialAccess = fact<AccessLevel>("pass_required", "medium", ["bills-parking", "bills-gameday"], "A pass bought in advance is required and is valid only for the lot printed on it.");
+const officialOwnership = fact<Ownership>(
+  "public",
+  "low",
+  ["erie-county-stadium-transfer", "wamc-stadium-transfer"],
+  "Erie County transferred the new stadium to New York State (Erie County Stadium Corporation) in 2026. Whether each lot's parcel is part of that property isn't confirmed.",
+);
 const officialAmenities = fact<ParkingFacility["amenities"]["value"]>(["tailgate_area", "paved"], "low", ["bills-parking", "lotlizard-editorial"], "Each space is 9×18 ft with a 9×10 ft tailgate area. Surface and other amenities not yet verified.");
 
 function officialPriceRange(lot: string): PriceObservation {
@@ -62,6 +70,8 @@ function officialLot(
     name,
     type: "official_lot",
     operator: "Buffalo Bills",
+    ownership: officialOwnership,
+    access: officialAccess,
     location: { ...location, precision: "approximate" },
     description: `Official Bills lot ${sideText}, per the 2026 lot configuration reported by third-party guides. Pass must be bought in advance.`,
     prices: [officialPriceRange(slug)],
@@ -174,6 +184,7 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     name: "Bus & Limo Lot",
     type: "official_lot",
     operator: "Buffalo Bills",
+    access: fact<AccessLevel>("pass_required", "medium", ["bills-parking"], "Advance permit from the Bills Ticket Office required; vehicles without one are turned away."),
     location: { lat: 42.7801, lng: -78.7893, precision: "approximate" },
     description: "Advance permit from the Bills Ticket Office required; vehicles without a permit are turned away. Only limos carrying 11 or fewer may tailgate. Location reported along Southwestern Blvd in 2025 and may have changed.",
     prices: [],
@@ -264,6 +275,8 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     name: "Hammer's Lot",
     type: "private_lot",
     operator: "Eric Matwijow (owner, per media)",
+    ownership: fact<Ownership>("private", "medium", ["wkbw-hammers-2024", "audacy-hammers"], "Privately owned by the same owner for about 40 years, per local media."),
+    access: fact<AccessLevel>("public", "low", ["prked-patriots"], "A single 2026 third-party listing says first-come, first-served, paid on arrival."),
     address: "4170 Abbott Rd, Orchard Park, NY 14127",
     location: { lat: 42.7681, lng: -78.7881, precision: "approximate" },
     description: "Famous private tailgate lot next to the stadium near Big Tree Rd, run by the same owner for about 40 years. Reported open and busy for the 2026 opener. Private lots are not covered by Bills tailgate rules.",
@@ -302,6 +315,7 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     venueId: VENUE_ID,
     name: "Gorilla Parking",
     type: "private_lot",
+    ownership: fact<Ownership>("private", "low", ["facebook-gorilla"], "Described as a private lot on its own Facebook page; not independently confirmed."),
     address: "4177 Abbott Rd, Orchard Park, NY 14127",
     location: { lat: 42.7677, lng: -78.7869, precision: "approximate" },
     description: "Private lot on Abbott Rd with its own Facebook page. No lot-specific price found yet.",
@@ -330,7 +344,10 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     slug: "yellow-brick-parking",
     venueId: VENUE_ID,
     name: "Yellow Brick Parking “Lot 1”",
+    aliases: ["Lot 1", "Yellow Brick Parking"],
+    aliasesAttribution: attr("low", ["coparking-yellowbrick"], "From the name on a parking aggregator listing."),
     type: "private_lot",
+    ownership: fact<Ownership>("private", "low", ["coparking-yellowbrick"], "Listed as a private lot by a parking aggregator."),
     address: "5265 Big Tree Rd, Orchard Park, NY 14127",
     location: { lat: 42.7662, lng: -78.7812, precision: "approximate" },
     description: "Private lot on Big Tree Rd listed by a parking aggregator. No price found yet.",
@@ -347,6 +364,7 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     venueId: VENUE_ID,
     name: "Danny's South",
     type: "private_lot",
+    ownership: fact<Ownership>("private", "low", ["arenacapacity"], "Described as a private lot by a third-party guide."),
     address: "Southwestern Blvd, Orchard Park, NY (exact address unconfirmed)",
     description: "Private lot on Southwestern Blvd listed by a third-party guide. Exact location unconfirmed, so it is not pinned.",
     prices: [

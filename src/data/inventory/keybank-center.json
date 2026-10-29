@@ -1,0 +1,639 @@
+{
+  "lots": {
+    "adam-ramp": {
+      "fields": {
+        "access": {
+          "confidence": "medium",
+          "evidence": "Downtown Parking Ramps are managed by Buffalo Civic Auto Ramps (BCAR)",
+          "method": "search_snippet",
+          "notes": "Public city ramp with hourly and daily rates.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "buffalony-gov-1733-downtown-parking-ramps"
+          ],
+          "value": "public"
+        },
+        "address": {
+          "confidence": "low",
+          "evidence": "343 Washington St",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "en-parkopedia-com-parking-garage-robert-b-adam-ramp-14203-buffalo"
+          ],
+          "value": "343 Washington St, Buffalo, NY 14203"
+        },
+        "aliases": {
+          "confidence": "low",
+          "evidence": "the 1,800-space Adams Ramp on Washington Street",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "btpm-org-local-2025-03-11-downtown-parking-ramps-to-get-much-needed-renovations"
+          ],
+          "value": "Adams Ramp"
+        },
+        "covered": {
+          "confidence": "low",
+          "evidence": "the 1,800-space Adams Ramp on Washington Street",
+          "method": "search_snippet",
+          "notes": "Covered because it is a multi-level ramp.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "btpm-org-local-2025-03-11-downtown-parking-ramps-to-get-much-needed-renovations"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "The ramps closest to Key Bank Center are the One Seneca Ramp and the Adam Ramp",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "buffalony-gov-civicalerts-asp"
+          ],
+          "value": "City-owned downtown ramp on Washington Street, named by the city as one of the ramps closest to the arena."
+        },
+        "ev_charging": {
+          "confidence": "low",
+          "evidence": "Adam Ramp, 343 Washington Street",
+          "method": "search_snippet",
+          "notes": "Open Charge Map says the charger listing hasn't been recently verified.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "openchargemap-org-poi-details-112300"
+          ],
+          "value": "available"
+        },
+        "location": {
+          "confidence": "low",
+          "evidence": "Adam Ramp, 343 Washington Street, Buffalo, NY 14203",
+          "method": "search_snippet",
+          "notes": "Third-party coordinate for the ramp's EV chargers.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "openchargemap-org-poi-details-112300"
+          ],
+          "value": "42.8838,-78.8729,approximate"
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "The ramps closest to Key Bank Center are the One Seneca Ramp and the Adam Ramp",
+          "method": "search_snippet",
+          "notes": "City advisory from a past Sabres season.",
+          "observedAt": "2018-10-01",
+          "sources": [
+            "buffalony-gov-civicalerts-asp"
+          ],
+          "value": "Adam Ramp"
+        },
+        "operator": {
+          "confidence": "medium",
+          "evidence": "Our Downtown Parking Ramps are managed by Buffalo Civic Auto Ramps (BCAR)",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "buffalony-gov-1733-downtown-parking-ramps"
+          ],
+          "value": "Buffalo Civic Auto Ramps (BCAR)"
+        },
+        "ownership": {
+          "confidence": "medium",
+          "evidence": "all of the city-owned parking facilities are located within walking distance of the light-rail on Main Street",
+          "method": "search_snippet",
+          "notes": "Listed by the City of Buffalo among its city-owned ramps.",
+          "observedAt": "2018-10-01",
+          "sources": [
+            "buffalony-gov-civicalerts-asp"
+          ],
+          "value": "public"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "the Adam Ramp",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "buffalony-gov-civicalerts-asp"
+          ],
+          "value": "garage"
+        }
+      },
+      "prices": {}
+    },
+    "keybank-center-ramp": {
+      "fields": {
+        "access": {
+          "confidence": "medium",
+          "evidence": "Parking is available on a limited game-to-game basis in both the KeyBank Center parking ramp and surface lots.",
+          "method": "search_snippet",
+          "notes": "Game-to-game spaces are limited; part of the ramp is reserved for suite and club season-ticket holders.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "nhl-com-sabres-fans-a-z-guide"
+          ],
+          "value": "public"
+        },
+        "ada": {
+          "confidence": "medium",
+          "evidence": "The KeyBank Center parking ramp has parking spaces for guests with disabilities located throughout the facility on all Levels next to the elevators.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "nhl-com-sabres-fans-a-z-guide"
+          ],
+          "value": "available"
+        },
+        "address": {
+          "confidence": "low",
+          "evidence": "1 Seymour H Knox III Plaza",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "en-parkopedia-com-parking-garage-keybank-center-garage-14203-buffalo"
+          ],
+          "value": "1 Seymour H Knox III Plaza, Buffalo, NY 14203"
+        },
+        "aliases": {
+          "confidence": "low",
+          "evidence": "KeyBank Center Garage - 1100 spots - Events only",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "en-parkopedia-com-parking-garage-keybank-center-garage-14203-buffalo"
+          ],
+          "value": "KeyBank Center Garage"
+        },
+        "covered": {
+          "confidence": "low",
+          "evidence": "KeyBank Center parking ramp",
+          "method": "search_snippet",
+          "notes": "Covered because it is a multi-level ramp.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "nhl-com-sabres-fans-a-z-guide"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "park next to the venue at the KeyBank Center Parking Ramp between Perry Street and Illinois Street",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "thestadiumreviews-com-parking-keybank-center"
+          ],
+          "value": "The arena's own parking ramp, between Perry Street and Illinois Street. Game-to-game spaces are limited; suite and club season-ticket holders also park here."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "Parking is available on a limited game-to-game basis in both the KeyBank Center parking ramp and surface lots.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "nhl-com-sabres-fans-a-z-guide"
+          ],
+          "value": "KeyBank Center Parking Ramp"
+        },
+        "tailgating": {
+          "confidence": "medium",
+          "evidence": "tailgating is not permitted in any of our KeyBank Center parking lots or ramps",
+          "method": "search_snippet",
+          "notes": "From a Sabres playoff parking notice.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "nhl-com-sabres-news-buffalo-sabres-playoff-parking-traffic-information"
+          ],
+          "value": "no"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "KeyBank Center parking ramp",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "nhl-com-sabres-fans-a-z-guide"
+          ],
+          "value": "garage"
+        }
+      },
+      "prices": {}
+    },
+    "keybank-center-surface-lot": {
+      "fields": {
+        "access": {
+          "confidence": "medium",
+          "evidence": "Parking is available on a limited game-to-game basis in both the KeyBank Center parking ramp and surface lots.",
+          "method": "search_snippet",
+          "notes": "Game-to-game spaces are limited; season-long reserved spaces are for season-ticket holders.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "nhl-com-sabres-fans-a-z-guide"
+          ],
+          "value": "public"
+        },
+        "address": {
+          "confidence": "low",
+          "evidence": "118 Perry St",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "en-parkopedia-com-parking-lot-keybank-center-lot-14203-buffalo"
+          ],
+          "value": "118 Perry St, Buffalo, NY 14203"
+        },
+        "aliases": {
+          "confidence": "low",
+          "evidence": "KeyBank Center Lot - 470 spots - Events only",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "en-parkopedia-com-parking-lot-keybank-center-lot-14203-buffalo"
+          ],
+          "value": "KeyBank Center Lot"
+        },
+        "description": {
+          "confidence": "medium",
+          "evidence": "KeyBank Center surface lot (Perry St./Baltimore St.)",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "nhl-com-sabres-news-buffalo-sabres-playoff-parking-traffic-information"
+          ],
+          "value": "The arena's surface lot at Perry Street and Baltimore Street. Game-to-game spaces are limited; season parking for season-ticket holders is also on Perry Street."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "parking is available in the KeyBank Center surface lot (Perry St./Baltimore St.)",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "nhl-com-sabres-news-buffalo-sabres-playoff-parking-traffic-information"
+          ],
+          "value": "KeyBank Center Surface Lot"
+        },
+        "tailgating": {
+          "confidence": "medium",
+          "evidence": "tailgating is not permitted in any of our KeyBank Center parking lots or ramps",
+          "method": "search_snippet",
+          "notes": "From a Sabres playoff parking notice.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "nhl-com-sabres-news-buffalo-sabres-playoff-parking-traffic-information"
+          ],
+          "value": "no"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "KeyBank Center surface lot (Perry St./Baltimore St.)",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "nhl-com-sabres-news-buffalo-sabres-playoff-parking-traffic-information"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lecom-harborcenter-ramp": {
+      "fields": {
+        "access": {
+          "confidence": "medium",
+          "evidence": "parking is available in the KeyBank Center surface lot (Perry St./Baltimore St.) and LECOM Harborcenter parking ramp for presale purchase",
+          "method": "search_snippet",
+          "notes": "Offered for presale for a Sabres playoff game.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "nhl-com-sabres-news-buffalo-sabres-playoff-parking-traffic-information"
+          ],
+          "value": "public"
+        },
+        "address": {
+          "confidence": "low",
+          "evidence": "100 Washington St, Buffalo, New York",
+          "method": "search_snippet",
+          "notes": "Address of the Harborcenter complex, which includes the ramp.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "en-wikipedia-org-wiki-lecom-harborcenter"
+          ],
+          "value": "100 Washington St, Buffalo, NY 14203"
+        },
+        "aliases": {
+          "confidence": "low",
+          "evidence": "Harborcenter Ramp",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "koobit-com-sabres-vs-bruins-e215043-travel-parking-harborcenter-ramp-111820"
+          ],
+          "value": "Harborcenter Ramp"
+        },
+        "covered": {
+          "confidence": "low",
+          "evidence": "LECOM Harborcenter ramp",
+          "method": "search_snippet",
+          "notes": "Covered because it is a multi-level ramp.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gogriffs-com-facilities-lecom-harborcenter-1"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "directly across from and connected to the KeyBank Center",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "en-wikipedia-org-wiki-lecom-harborcenter"
+          ],
+          "value": "Parking ramp in the LECOM Harborcenter complex, directly across from and connected to KeyBank Center."
+        },
+        "location": {
+          "confidence": "low",
+          "evidence": "42.87664°N 78.876686°W",
+          "method": "search_snippet",
+          "notes": "Coordinates of the Harborcenter complex, not the ramp entrance.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "en-wikipedia-org-wiki-lecom-harborcenter"
+          ],
+          "value": "42.87664,-78.876686,approximate"
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "LECOM Harborcenter parking ramp for presale purchase",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "nhl-com-sabres-news-buffalo-sabres-playoff-parking-traffic-information"
+          ],
+          "value": "LECOM Harborcenter Parking Ramp"
+        },
+        "payment_timing": {
+          "confidence": "low",
+          "evidence": "LECOM Harborcenter parking ramp for presale purchase",
+          "method": "search_snippet",
+          "notes": "Presale was offered for a playoff game; whether you can also pay on arrival varies by event.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "nhl-com-sabres-news-buffalo-sabres-playoff-parking-traffic-information"
+          ],
+          "value": "advance_optional"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "LECOM Harborcenter parking ramp",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "nhl-com-sabres-news-buffalo-sabres-playoff-parking-traffic-information"
+          ],
+          "value": "garage"
+        }
+      },
+      "prices": {}
+    },
+    "one-seneca-ramp": {
+      "fields": {
+        "aliases": {
+          "confidence": "low",
+          "evidence": "Seneca One Ramp",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "latlong-net-poi-seneca-one-ramp-488934"
+          ],
+          "value": "Seneca One Ramp"
+        },
+        "covered": {
+          "confidence": "low",
+          "evidence": "underground parking",
+          "method": "search_snippet",
+          "notes": "Listed as underground parking.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "latlong-net-poi-one-seneca-ramp-488911"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "One Seneca Ramp, Washington Street, 14203",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "latlong-net-poi-one-seneca-ramp-488911"
+          ],
+          "value": "Ramp at the Seneca One tower on Washington Street, named by the city as one of the ramps closest to the arena."
+        },
+        "location": {
+          "confidence": "low",
+          "evidence": "One Seneca Ramp 42.8796000,-78.8754273",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "latlong-net-poi-one-seneca-ramp-488911"
+          ],
+          "value": "42.8796,-78.8754,approximate"
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "The ramps closest to Key Bank Center are the One Seneca Ramp and the Adam Ramp",
+          "method": "search_snippet",
+          "observedAt": "2018-10-01",
+          "sources": [
+            "buffalony-gov-civicalerts-asp"
+          ],
+          "value": "One Seneca Ramp"
+        },
+        "ownership": {
+          "confidence": "low",
+          "evidence": "The Buffalo Common Council is expected to pass the city's possessory rights to Jemal's Seneca LLC",
+          "method": "search_snippet",
+          "notes": "A report describes the city transferring its rights in the ramp to a private developer. Whether that transfer completed, and who owns it now, isn't confirmed.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "wgrz-com-article-money-business-douglas-jemal-on-the-brink-of-owning-457-space-p"
+          ],
+          "value": "private"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "the One Seneca Ramp",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "buffalony-gov-civicalerts-asp"
+          ],
+          "value": "garage"
+        }
+      },
+      "prices": {}
+    }
+  },
+  "slug": "keybank-center",
+  "sources": {
+    "arenacapacity-com": {
+      "method": "search_snippet",
+      "name": "ArenaCapacity — KeyBank Center parking guide",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://www.arenacapacity.com/?p=8938"
+    },
+    "btpm-org-local-2025-03-11-downtown-parking-ramps-to-get-much-needed-renovations": {
+      "method": "search_snippet",
+      "name": "WBFO — Downtown parking ramps to get renovations",
+      "retrievedAt": "2026-10-29",
+      "type": "media",
+      "url": "https://www.btpm.org/local/2025-03-11/downtown-parking-ramps-to-get-much-needed-renovations-this-summer"
+    },
+    "buffalony-gov-1733-downtown-parking-ramps": {
+      "method": "search_snippet",
+      "name": "City of Buffalo — Downtown Parking Ramps",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.buffalony.gov/1733/Downtown-Parking-Ramps"
+    },
+    "buffalony-gov-civicalerts-asp": {
+      "method": "search_snippet",
+      "name": "City of Buffalo — Parking advisory for Sabres fans",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.buffalony.gov/CivicAlerts.asp?AID=162"
+    },
+    "en-parkopedia-com-parking-garage-keybank-center-garage-14203-buffalo": {
+      "method": "search_snippet",
+      "name": "Parkopedia — KeyBank Center Garage",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://en.parkopedia.com/parking/garage/keybank_center_garage/14203/buffalo/"
+    },
+    "en-parkopedia-com-parking-garage-robert-b-adam-ramp-14203-buffalo": {
+      "method": "search_snippet",
+      "name": "Parkopedia — 343 Washington St (Adam Ramp)",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://en.parkopedia.com/parking/garage/robert_b_adam_ramp/14203/buffalo/"
+    },
+    "en-parkopedia-com-parking-lot-keybank-center-lot-14203-buffalo": {
+      "method": "search_snippet",
+      "name": "Parkopedia — KeyBank Center Lot",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://en.parkopedia.com/parking/lot/keybank_center_lot/14203/buffalo/"
+    },
+    "en-wikipedia-org-wiki-lecom-harborcenter": {
+      "method": "search_snippet",
+      "name": "Wikipedia — LECOM Harborcenter",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://en.wikipedia.org/wiki/LECOM_Harborcenter"
+    },
+    "gogriffs-com-facilities-lecom-harborcenter-1": {
+      "method": "search_snippet",
+      "name": "Canisius Golden Griffins — LECOM Harborcenter",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://gogriffs.com/facilities/lecom-harborcenter/1"
+    },
+    "koobit-com-sabres-vs-bruins-e215043-travel-parking-harborcenter-ramp-111820": {
+      "method": "search_snippet",
+      "name": "Koobit — Harborcenter Ramp parking listing",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://www.koobit.com/sabres-vs-bruins-e215043/travel-parking/harborcenter-ramp-111820"
+    },
+    "latlong-net-poi-one-seneca-ramp-488911": {
+      "method": "search_snippet",
+      "name": "LatLong.net — One Seneca Ramp",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://www.latlong.net/poi/one-seneca-ramp-488911"
+    },
+    "latlong-net-poi-seneca-one-ramp-488934": {
+      "method": "search_snippet",
+      "name": "LatLong.net — Seneca One Ramp",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://www.latlong.net/poi/seneca-one-ramp-488934"
+    },
+    "nhl-com-sabres-fans-a-z-guide": {
+      "method": "search_snippet",
+      "name": "Buffalo Sabres — A–Z Guide",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.nhl.com/sabres/fans/a-z-guide"
+    },
+    "nhl-com-sabres-news-buffalo-sabres-playoff-parking-traffic-information": {
+      "method": "search_snippet",
+      "name": "Buffalo Sabres — Playoff parking & traffic information",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://nhl.com/sabres/news/buffalo-sabres-playoff-parking-traffic-information"
+    },
+    "openchargemap-org-poi-details-112300": {
+      "method": "search_snippet",
+      "name": "Open Charge Map — Adam Ramp",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://openchargemap.org/poi/details/112300"
+    },
+    "thestadiumreviews-com-parking-keybank-center": {
+      "method": "search_snippet",
+      "name": "The Stadium Reviews — KeyBank Center parking",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://thestadiumreviews.com/parking/keybank-center/"
+    },
+    "wgrz-com-article-money-business-douglas-jemal-on-the-brink-of-owning-457-space-p": {
+      "method": "search_snippet",
+      "name": "WGRZ — Douglas Jemal on the brink of owning Seneca One parking ramp",
+      "retrievedAt": "2026-10-29",
+      "type": "media",
+      "url": "https://wgrz.com/article/money/business/douglas-jemal-on-the-brink-of-owning-457-space-parking-ramp-seneca-one-buffalo/71-4d750346-3fac-43e7-b913-6d2fd77f837c"
+    }
+  },
+  "venue": {
+    "fields": {
+      "summary": {
+        "confidence": "low",
+        "evidence": "Parking is available on a limited game-to-game basis in both the KeyBank Center parking ramp and surface lots.",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "nhl-com-sabres-fans-a-z-guide"
+        ],
+        "value": "Downtown Buffalo arena. Parking is in the arena's own ramp and surface lot, the LECOM Harborcenter ramp across the street, and city ramps a short walk away. Game-to-game parking at the arena is limited."
+      }
+    },
+    "policy": {
+      "Tailgating": {
+        "confidence": "medium",
+        "evidence": "tailgating is not permitted in any of our KeyBank Center parking lots or ramps",
+        "method": "search_snippet",
+        "notes": "From a Sabres playoff parking notice; confirm for regular-season games.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "nhl-com-sabres-news-buffalo-sabres-playoff-parking-traffic-information"
+        ],
+        "value": "Tailgating is not permitted in any KeyBank Center parking lots or ramps."
+      }
+    },
+    "transit": {
+      "NFTA Metro Rail": {
+        "confidence": "low",
+        "evidence": "NFTA Metro Rail (Canalside Station), NFTA Bus Routes 14, 16, 36",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "arenacapacity-com"
+        ],
+        "value": "Canalside Station is the closest Metro Rail stop."
+      }
+    }
+  },
+  "version": 1
+}
