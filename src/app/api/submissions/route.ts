@@ -2,12 +2,27 @@ import { NextResponse } from "next/server";
 import { submissionInputSchema, type Submission } from "@/lib/submissions/schema";
 import { preModerationFlags } from "@/lib/submissions/checks";
 import { getSubmissionStore } from "@/lib/submissions/store";
-import { rateLimit } from "@/lib/submissions/rate-limit";
+import { rateLimit, sharedRateLimit } from "@/lib/submissions/rate-limit";
+import { SUBMISSIONS_DISABLED_MESSAGE, submissionsStatus } from "@/lib/submissions/availability";
 import { facilityExists, getFacility, getVenue, listEvents } from "@/lib/data/repository";
 
 export async function POST(request: Request) {
+  // Enforced before anything else (rate limiting, parsing, honeypot): when submissions are off,
+  // nothing is read, validated or stored.
+  if (!submissionsStatus().enabled) {
+    return NextResponse.json(
+      { error: "submissions_disabled", message: SUBMISSIONS_DISABLED_MESSAGE },
+      { status: 503, headers: { "Cache-Control": "no-store" } },
+    );
+  }
+
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
-  if (!rateLimit(`submit:${ip}`)) {
+  const upstash =
+    process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
+      ? { url: process.env.UPSTASH_REDIS_REST_URL, token: process.env.UPSTASH_REDIS_REST_TOKEN }
+      : undefined;
+  const allowed = upstash ? await sharedRateLimit(`submit:${ip}`, upstash) : rateLimit(`submit:${ip}`);
+  if (!allowed) {
     return NextResponse.json({ error: "Too many submissions. Please try again later." }, { status: 429 });
   }
 
