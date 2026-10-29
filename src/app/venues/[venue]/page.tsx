@@ -31,6 +31,7 @@ import { FactCard, Section } from "@/components/Section";
 import { SourceList } from "@/components/SourceList";
 import { SponsoredSlot } from "@/components/SponsoredSlot";
 import { VenueExplorer } from "@/components/VenueExplorer";
+import { FOCUS_SEO, venueProfile } from "@/lib/featured";
 
 export async function generateStaticParams() {
   return (await listVenues()).map((v) => ({ venue: v.slug }));
@@ -42,9 +43,12 @@ export async function generateMetadata({ params }: PageProps<"/venues/[venue]">)
   const facilities = await listFacilities(venue.id);
   const where = `${venue.address.city}, ${venue.address.state}`;
   const team = venue.teams[0] ? `${venue.teams[0]} ` : "";
-  const title = `${venue.name} Parking Guide — ${team}lots, prices & tailgating`;
+  const profile = venueProfile(venue.slug);
+  const title = `${venue.name} Parking Guide — ${team}${FOCUS_SEO[profile?.focus ?? "tailgate_exit"]}`;
   const description =
-    venue.coverage === "pilot_detailed"
+    profile?.focus === "downtown"
+      ? `Compare ${venue.name} parking in ${where}: downtown garages and ramps by walking distance, access and payment — with sources and confidence levels.`
+      : venue.coverage === "pilot_detailed"
       ? `Compare ${venue.name} parking in ${where}: official and private lots, prices, walking distance, tailgating rules and exit routes — with sources and confidence levels.`
       : venue.coverage === "basic"
         ? `${venue.name} parking in ${where}: ${facilities.length} lots and options compared by price, payment and tailgating rules — with the source and confidence behind every fact.`
@@ -69,6 +73,7 @@ export default async function VenuePage({ params }: PageProps<"/venues/[venue]">
   if (!venue) notFound();
   const facilities = await listFacilities(venue.id);
   const events = await listEvents(venue.id);
+  const profile = venueProfile(venue.slug);
   const sources = await getSourcesFor(collectSourceIds(venue, facilities));
   const prediction = await getPredictor().predict({ venueSlug: venue.slug, facilitySlug: "*" });
   const detailed = facilities.length > 0;
@@ -109,6 +114,14 @@ export default async function VenuePage({ params }: PageProps<"/venues/[venue]">
         <span className="rounded-full bg-brand-100 px-2 py-0.5 font-semibold text-brand-700 dark:bg-brand-900 dark:text-brand-100">{COVERAGE_LABEL[venue.coverage]}</span>
         <ConfidenceBadge level={venue.attribution.confidence} />
       </div>
+      {profile && (
+        <p className="mt-2 flex flex-wrap items-center gap-1.5 text-sm">
+          {profile.eventTypes.map((t) => (
+            <span key={t} className="rounded-full bg-ink px-2 py-0.5 text-xs font-bold text-lizard">{t}</span>
+          ))}
+          <span className="font-medium">{profile.tagline}</span>
+        </p>
+      )}
       {venue.summary && <p className="mt-2 text-sm">{venue.summary}</p>}
       <div className="mt-2">
         <VerificationStatus summary={venueVerification} />
@@ -135,7 +148,7 @@ export default async function VenuePage({ params }: PageProps<"/venues/[venue]">
             </a>
           </div>
           <div className="min-h-0 flex-1">
-            <VenueExplorer venue={venue} facilities={facilities} events={events} />
+            <VenueExplorer venue={venue} facilities={facilities} events={events} defaultWeights={profile?.defaultWeights} />
           </div>
         </div>
       ) : null}

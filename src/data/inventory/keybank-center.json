@@ -185,6 +185,16 @@
           ],
           "value": "The arena's own parking ramp, between Perry Street and Illinois Street. Game-to-game spaces are limited; suite and club season-ticket holders also park here."
         },
+        "entrance_instructions": {
+          "confidence": "medium",
+          "evidence": "parking for Suite and 200 Club Seat Season Ticket holders for Buffalo Sabres games is located in the KeyBank Center parking ramp (Illinois Street)",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "nhl-com-sabres-fans-a-z-guide"
+          ],
+          "value": "The ramp is on Illinois Street. The exact driveway hasn't been verified."
+        },
         "name": {
           "confidence": "medium",
           "evidence": "Parking is available on a limited game-to-game basis in both the KeyBank Center parking ramp and surface lots.",
