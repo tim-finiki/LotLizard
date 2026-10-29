@@ -44,13 +44,20 @@ import { AccessBadges, AccessDetails } from "@/components/AccessInfo";
 import { LotFinder } from "@/components/LotFinder";
 import { ShareLotButton } from "@/components/ShareLotButton";
 import {
-  PARKING_TYPE_FILTERS,
-  PARKING_TYPE_FILTER_HINT,
-  PARKING_TYPE_FILTER_LABEL,
-  isParkingTypeFilter,
+  ACCESS_OPTIONS,
+  ACCESS_OPTION_LABEL,
+  EMPTY_PARKING_FILTER,
+  FORM_OPTIONS,
+  FORM_OPTION_LABEL,
+  OWNER_OPTIONS,
+  OWNER_OPTION_LABEL,
   isRestricted,
+  parkingFilterCount,
+  parkingFilterFromParams,
+  parkingForm,
+  writeParkingFilterParams,
   type AccessMatch,
-  type ParkingTypeFilter,
+  type ParkingFilter,
 } from "@/lib/access";
 import { lotPath, lotSearchEntry } from "@/lib/lot-search";
 
@@ -102,7 +109,7 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
   const [eventId, setEventId] = useState<string>(NO_EVENT);
   const [today, setToday] = useState<string>();
   const [hiddenTypes, setHiddenTypes] = useState<FacilityType[]>([]);
-  const [parkingType, setParkingType] = useState<ParkingTypeFilter>("all");
+  const [parking, setParking] = useState<ParkingFilter>(EMPTY_PARKING_FILTER);
   const [includeUnconfirmedAccess, setIncludeUnconfirmedAccess] = useState(false);
   const router = useRouter();
   const [selectedId, setActiveId] = useState<string>();
@@ -134,10 +141,10 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
     /* eslint-enable react-hooks/set-state-in-effect */
     const dir = q.get("dir");
     if (dir && (dir === "any" || approaches.some((a) => a.id === dir))) setPrefs({ ...prefs, direction: dir });
-    const parking = q.get("parking");
-    if (isParkingTypeFilter(parking)) setParkingType(parking);
+    // A lot link always shows its lot, so it doesn't restore filters that could hide it.
     const lot = q.get("lot");
     if (lot) focusLot(lot);
+    else setParking(parkingFilterFromParams(q));
     // eslint-disable-next-line react-hooks/exhaustive-deps -- run once on mount
   }, []);
 
@@ -148,13 +155,12 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
     url.searchParams.set("event", eventId);
     if (direction === "any") url.searchParams.delete("dir");
     else url.searchParams.set("dir", direction);
-    if (parkingType === "all") url.searchParams.delete("parking");
-    else url.searchParams.set("parking", parkingType);
+    writeParkingFilterParams(url, parking);
     const lot = facilities.find((f) => f.id === selectedId)?.slug;
     if (lot) url.searchParams.set("lot", lot);
     else url.searchParams.delete("lot");
     window.history.replaceState(null, "", url);
-  }, [eventId, direction, today, parkingType, selectedId, facilities]);
+  }, [eventId, direction, today, parking, selectedId, facilities]);
 
   useEffect(() => {
     const el = rootRef.current;
@@ -171,6 +177,9 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
     };
   }, []);
 
+  const venueOperators = useMemo(() => [venue.name, ...venue.teams], [venue]);
+  // Structures that actually occur here; the others are shown but disabled rather than silently missing.
+  const presentForms = useMemo(() => new Set(facilities.map(parkingForm).filter(Boolean)), [facilities]);
   // One filter pass feeds the ranking, the list AND the map, so they always agree.
   const filtered = useMemo(
     () =>
@@ -180,10 +189,11 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
         amenities: prefs.amenities,
         features: prefs.features,
         eventId: event?.id,
-        parkingType,
+        parking,
+        venueOperators,
         includeUnconfirmedAccess,
       }),
-    [facilities, hiddenTypes, prefs.payment, prefs.amenities, prefs.features, event?.id, parkingType, includeUnconfirmedAccess],
+    [facilities, hiddenTypes, prefs.payment, prefs.amenities, prefs.features, event?.id, parking, venueOperators, includeUnconfirmedAccess],
   );
   const ranked = useMemo(
     () => rankFacilities(venue, filtered.visible, { ...prefs, direction }, { eventKind: event?.kind }),
@@ -200,11 +210,17 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
   // A selection hidden by a filter is dropped, so the pin and card highlights never go stale.
   const activeId = selectedId && filtered.visible.some((f) => f.id === selectedId) ? selectedId : undefined;
   const setPayment = (payment: PaymentFilter) => setPrefs({ ...prefs, payment });
-  const filterCount = activeFilterCount(prefs, hiddenTypes, parkingType);
+  const filterCount = activeFilterCount(prefs, hiddenTypes, parking);
+  const parkingActive = parkingFilterCount(parking) > 0;
+  const parkingSummary = [
+    ...parking.access.map((o) => ACCESS_OPTION_LABEL[o]),
+    ...parking.owner.map((o) => OWNER_OPTION_LABEL[o]),
+    ...parking.form.map((o) => FORM_OPTION_LABEL[o]),
+  ];
   const resetFilters = () => {
     setPrefs(clearFilters(prefs));
     setHiddenTypes([]);
-    setParkingType("all");
+    setParking(EMPTY_PARKING_FILTER);
     setIncludeUnconfirmedAccess(false);
   };
   const lotEntries = useMemo(() => facilities.map((f) => lotSearchEntry(venue, f)), [venue, facilities]);
@@ -364,21 +380,8 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
               <LotFinder entries={lotEntries} onPick={focusLot} />
             </div>
           </div>
-          <div role="group" aria-label="Parking access" className="pointer-events-auto -mx-3 flex gap-2 overflow-x-auto px-3 pb-1 [scrollbar-width:none]">
-            {PARKING_TYPE_FILTERS.map((t) => (
-              <button
-                key={t}
-                type="button"
-                aria-pressed={parkingType === t}
-                title={PARKING_TYPE_FILTER_HINT[t]}
-                onClick={() => setParkingType(t)}
-                className={`h-9 shrink-0 rounded-full px-3 text-sm font-semibold shadow-md ${
-                  parkingType === t ? "bg-ink text-white dark:bg-lizard dark:text-ink" : "bg-white dark:bg-ink-soft"
-                }`}
-              >
-                {PARKING_TYPE_FILTER_LABEL[t]}
-              </button>
-            ))}
+          <div className="pointer-events-auto -mx-3 flex items-center gap-2 overflow-x-auto px-3 pb-1 [scrollbar-width:none]">
+            <ParkingFilterChips parking={parking} onChange={setParking} presentForms={presentForms} />
           </div>
           {direction !== "any" && !exitDirectionsAvailable && (
             <p role="status" className="pointer-events-auto w-fit max-w-full rounded-lg bg-amber-50 px-3 py-1.5 text-xs font-medium text-amber-900 shadow dark:bg-amber-900/80 dark:text-amber-50">
@@ -396,16 +399,17 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
 
       <BottomSheet snap={snap} onSnapChange={setSnap} containerHeight={containerHeight} header={header} label="Parking results">
         <div ref={listRef} className="relative flex flex-col gap-2">
-          {parkingType !== "all" && (
+          {parkingActive && (
             <p className="text-xs text-neutral-500">
-              <strong className="font-semibold text-ink dark:text-white">{PARKING_TYPE_FILTER_LABEL[parkingType]}:</strong> {PARKING_TYPE_FILTER_HINT[parkingType]}
+              <strong className="font-semibold text-ink dark:text-white">Parking:</strong> {parkingSummary.join(" · ")}. Each option needs a
+              confirmed fact; options in the same group are alternatives.
             </p>
           )}
           {filtered.hiddenUnknownAccess > 0 && (
             <p className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-amber-50 px-3 py-2 text-xs text-amber-900 dark:bg-amber-900/30 dark:text-amber-100">
               <span>
                 {filtered.hiddenUnknownAccess} {filtered.hiddenUnknownAccess === 1 ? "lot is" : "lots are"} hidden because we can&apos;t yet confirm
-                {parkingType === "public_owned" ? " who owns them" : parkingType === "private_open" ? " who owns them and who can park" : " who can park there"}.
+                {parking.access.length && parking.owner.length ? " who owns them or who can park" : parking.access.length ? " who can park there" : " who owns them"}.
               </span>
               <button type="button" onClick={() => setIncludeUnconfirmedAccess(true)} className="font-semibold underline">
                 Show unconfirmed
@@ -448,8 +452,8 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
             <p className="rounded-xl bg-mist p-3 text-sm dark:bg-neutral-800">
               {unrankedList.length > 0
                 ? "No lot has enough data for these priorities to rank it honestly. Try weighting walk or tailgating, where we have more data."
-                : parkingType !== "all"
-                  ? `No lot here is confirmed as “${PARKING_TYPE_FILTER_LABEL[parkingType]}” yet.`
+                : parkingActive
+                  ? `No lot here is confirmed as ${parkingSummary.join(" + ")} yet.`
                   : "No lots match your filters. Try relaxing the max price or vehicle type."}
             </p>
           )}
@@ -553,8 +557,9 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
             hiddenTypes={hiddenTypes}
             onToggleType={(t) => setHiddenTypes((h) => (h.includes(t) ? h.filter((x) => x !== t) : [...h, t]))}
             reportedAmenities={reportedAmenities}
-            parkingType={parkingType}
-            onParkingType={setParkingType}
+            parking={parking}
+            onParking={setParking}
+            presentForms={presentForms}
             includeUnconfirmedAccess={includeUnconfirmedAccess}
             onIncludeUnconfirmedAccess={setIncludeUnconfirmedAccess}
           />
@@ -832,6 +837,62 @@ function OtherCard({
   );
 }
 
+/** The three parking dimensions as toggle groups over the map. Same state as the Filters sheet. */
+function ParkingFilterChips({
+  parking,
+  onChange,
+  presentForms,
+}: {
+  parking: ParkingFilter;
+  onChange: (p: ParkingFilter) => void;
+  presentForms: Set<string | undefined>;
+}) {
+  const toggle = <T,>(list: T[], v: T) => (list.includes(v) ? list.filter((x) => x !== v) : [...list, v]);
+  const chip = (on: boolean, disabled = false) =>
+    `h-9 shrink-0 rounded-full px-3 text-sm font-semibold shadow-md disabled:opacity-50 ${
+      on ? "bg-ink text-white dark:bg-lizard dark:text-ink" : "bg-white dark:bg-ink-soft"
+    }${disabled ? " cursor-not-allowed" : ""}`;
+  const divider = <span aria-hidden className="h-6 w-px shrink-0 bg-black/20 dark:bg-white/30" />;
+  return (
+    <>
+      <div role="group" aria-label="Who can park" className="flex shrink-0 gap-2">
+        {ACCESS_OPTIONS.map((o) => (
+          <button key={o} type="button" aria-pressed={parking.access.includes(o)} onClick={() => onChange({ ...parking, access: toggle(parking.access, o) })} className={chip(parking.access.includes(o))}>
+            {ACCESS_OPTION_LABEL[o]}
+          </button>
+        ))}
+      </div>
+      {divider}
+      <div role="group" aria-label="Ownership and operator" className="flex shrink-0 gap-2">
+        {OWNER_OPTIONS.map((o) => (
+          <button key={o} type="button" aria-pressed={parking.owner.includes(o)} onClick={() => onChange({ ...parking, owner: toggle(parking.owner, o) })} className={chip(parking.owner.includes(o))}>
+            {OWNER_OPTION_LABEL[o]}
+          </button>
+        ))}
+      </div>
+      {divider}
+      <div role="group" aria-label="Structure" className="flex shrink-0 gap-2">
+        {FORM_OPTIONS.map((o) => {
+          const none = !presentForms.has(o);
+          return (
+            <button
+              key={o}
+              type="button"
+              aria-pressed={parking.form.includes(o)}
+              disabled={none}
+              title={none ? `No ${FORM_OPTION_LABEL[o].toLowerCase()} parking listed here yet` : undefined}
+              onClick={() => onChange({ ...parking, form: toggle(parking.form, o) })}
+              className={chip(parking.form.includes(o), none)}
+            >
+              {FORM_OPTION_LABEL[o]}
+            </button>
+          );
+        })}
+      </div>
+    </>
+  );
+}
+
 function UnconfirmedChip() {
   return (
     <span className="rounded-full bg-amber-50 px-2 py-0.5 text-[11px] font-semibold text-amber-900 ring-1 ring-inset ring-amber-300 dark:bg-amber-900/30 dark:text-amber-100">
@@ -840,13 +901,14 @@ function UnconfirmedChip() {
   );
 }
 
-function ChipToggle({ on, onClick, children }: { on: boolean; onClick: () => void; children: React.ReactNode }) {
+function ChipToggle({ on, onClick, disabled, children }: { on: boolean; onClick: () => void; disabled?: boolean; children: React.ReactNode }) {
   return (
     <button
       type="button"
       aria-pressed={on}
       onClick={onClick}
-      className={`h-9 rounded-full px-3 text-sm font-medium ring-1 ring-inset ${
+      disabled={disabled}
+      className={`h-9 rounded-full px-3 text-sm font-medium ring-1 ring-inset disabled:opacity-40 ${
         on ? "bg-brand-600 text-ink ring-brand-600" : "bg-white ring-black/10 dark:bg-ink-soft dark:ring-white/15"
       }`}
     >
@@ -888,8 +950,9 @@ function FiltersPanel({
   hiddenTypes,
   onToggleType,
   reportedAmenities,
-  parkingType,
-  onParkingType,
+  parking,
+  onParking,
+  presentForms,
   includeUnconfirmedAccess,
   onIncludeUnconfirmedAccess,
 }: {
@@ -899,8 +962,9 @@ function FiltersPanel({
   hiddenTypes: FacilityType[];
   onToggleType: (t: FacilityType) => void;
   reportedAmenities: Amenity[];
-  parkingType: ParkingTypeFilter;
-  onParkingType: (t: ParkingTypeFilter) => void;
+  parking: ParkingFilter;
+  onParking: (p: ParkingFilter) => void;
+  presentForms: Set<string | undefined>;
   includeUnconfirmedAccess: boolean;
   onIncludeUnconfirmedAccess: (v: boolean) => void;
 }) {
@@ -916,18 +980,39 @@ function FiltersPanel({
         <h3 id="filter-results-heading" className="text-xs font-bold uppercase tracking-wide text-neutral-500">Filter results</h3>
         <p className="mb-3 text-xs text-neutral-500">These hide options that don&apos;t fit.</p>
 
-        <FilterSection title="Parking access" hint="Who owns a lot and who can park there are separate. Lots reserved for specific people are never shown.">
+        <FilterSection title="Who can park" hint="Shows lots confirmed to allow any of these.">
           <ChipRow>
-            {PARKING_TYPE_FILTERS.map((t) => (
-              <ChipToggle key={t} on={parkingType === t} onClick={() => onParkingType(t)}>
-                {PARKING_TYPE_FILTER_LABEL[t]}
+            {ACCESS_OPTIONS.map((o) => (
+              <ChipToggle key={o} on={parking.access.includes(o)} onClick={() => onParking({ ...parking, access: toggle(parking.access, o) })}>
+                {ACCESS_OPTION_LABEL[o]}
               </ChipToggle>
             ))}
           </ChipRow>
-          <p className="-mt-1 text-xs text-neutral-500">{PARKING_TYPE_FILTER_HINT[parkingType]}</p>
-          {parkingType !== "all" && (
+        </FilterSection>
+
+        <FilterSection title="Ownership & operator" hint="Who owns a lot is separate from who can park there. Venue-operated means run by the venue or its team.">
+          <ChipRow>
+            {OWNER_OPTIONS.map((o) => (
+              <ChipToggle key={o} on={parking.owner.includes(o)} onClick={() => onParking({ ...parking, owner: toggle(parking.owner, o) })}>
+                {OWNER_OPTION_LABEL[o]}
+              </ChipToggle>
+            ))}
+          </ChipRow>
+        </FilterSection>
+
+        <FilterSection title="Structure">
+          <ChipRow>
+            {FORM_OPTIONS.map((o) => (
+              <ChipToggle key={o} on={parking.form.includes(o)} disabled={!presentForms.has(o)} onClick={() => onParking({ ...parking, form: toggle(parking.form, o) })}>
+                {FORM_OPTION_LABEL[o]}
+                {!presentForms.has(o) && " (none listed)"}
+              </ChipToggle>
+            ))}
+          </ChipRow>
+          {parkingFilterCount(parking) > 0 && (
             <Toggle label="Include lots we can't confirm yet" checked={includeUnconfirmedAccess} onChange={onIncludeUnconfirmedAccess} />
           )}
+          <p className="-mt-1 text-xs text-neutral-500">Lots reserved for specific people are never shown.</p>
         </FilterSection>
 
         <FilterSection title="Payment methods" hint="Shows lots known to accept any of these.">

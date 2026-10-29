@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Mobile smoke test for a deployed preview: homepage → search → venue parking map (real map tiles) →
- * parking-type filter → lot name search → lot details, on an emulated iPhone. Saves a screenshot of
+ * parking filters → lot name search → lot details, on an emulated iPhone. Saves a screenshot of
  * each step.
  *
  *   node scripts/preview-smoke.mjs <https://deployment-url> [out-dir]
@@ -82,11 +82,16 @@ try {
     if (tiles.failed.length) throw new Error(`tile errors: ${tiles.failed.slice(0, 3).join(", ")}`);
     if ((await page.locator(".leaflet-marker-icon").count()) === 0) throw new Error("no lot markers on the map");
   });
-  await step("parking type filter", async () => {
+  await step("parking filters", async () => {
     const before = await page.locator(".ll-marker").count();
-    await page.getByRole("group", { name: "Parking access" }).getByRole("button", { name: "Pass/permit required" }).click();
+    // Two dimensions combined: who can park + structure.
+    const pass = page.getByRole("group", { name: "Who can park" }).getByRole("button", { name: "Pass/permit required" });
+    const surface = page.getByRole("group", { name: "Structure" }).getByRole("button", { name: "Surface lot" });
+    await pass.click();
+    await surface.click();
     await page.waitForFunction((n) => document.querySelectorAll(".ll-marker").length !== n, before, { timeout: 10_000 });
-    await page.getByRole("group", { name: "Parking access" }).getByRole("button", { name: "All eligible parking" }).click();
+    await pass.click();
+    await surface.click();
   });
   await step("lot name search", async () => {
     await page.getByRole("combobox", { name: /Find a lot/ }).fill("gold");

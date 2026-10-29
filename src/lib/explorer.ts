@@ -1,7 +1,7 @@
 import type { Amenity, FacilityType, ParkingFacility, UniversalAmenity } from "@/lib/types";
 import { matchFeatures } from "@/lib/features";
 import { DEFAULT_PREFERENCES, type RankedFacility, type RankingPreferences } from "@/lib/ranking";
-import { isRestricted, matchParkingType, type AccessMatch, type ParkingTypeFilter } from "@/lib/access";
+import { isRestricted, matchParkingFilter, parkingFilterCount, type AccessMatch, type ParkingFilter } from "@/lib/access";
 import { effectivePayment, isPaymentFilterActive, matchPayment, type PaymentFilter, type PaymentMatch } from "@/lib/payment";
 
 export interface DisplayFilters {
@@ -13,9 +13,11 @@ export interface DisplayFilters {
   features?: UniversalAmenity[];
   /** Selected event, so event-specific payment policies apply. */
   eventId?: string;
-  /** Ownership/access filter. Restricted lots are always excluded, whatever this is. */
-  parkingType?: ParkingTypeFilter;
-  /** Also show lots whose ownership/access isn't confirmed for `parkingType` (flagged as unconfirmed). */
+  /** Access, ownership/operator and structure filters. Restricted lots are always excluded, whatever this is. */
+  parking?: ParkingFilter;
+  /** Operators that count as the venue itself (venue name, home teams), for "Venue-operated". */
+  venueOperators?: string[];
+  /** Also show lots whose access or ownership isn't confirmed for `parking` (flagged as unconfirmed). */
   includeUnconfirmedAccess?: boolean;
 }
 
@@ -30,7 +32,7 @@ export interface FilterResult {
   hiddenUnknownFeatures: number;
   /** Parking-type match per visible facility: "unknown" ones are shown only on request, flagged. */
   accessMatch: Map<string, AccessMatch>;
-  /** Lots hidden because their ownership or access isn't confirmed for the parking-type filter. */
+  /** Lots hidden because their ownership or access isn't confirmed for the parking filter. */
   hiddenUnknownAccess: number;
   /** Lots reserved for specific people; never shown or ranked as options. */
   restricted: ParkingFacility[];
@@ -49,7 +51,6 @@ export function applyDisplayFilters(facilities: ParkingFacility[], filters: Disp
   let hiddenUnknownAccess = 0;
   const accessMatch = new Map<string, AccessMatch>();
   const restricted: ParkingFacility[] = [];
-  const parkingType = filters.parkingType ?? "all";
   const amenities = filters.amenities ?? [];
   const features = filters.features ?? [];
   for (const f of facilities) {
@@ -58,7 +59,7 @@ export function applyDisplayFilters(facilities: ParkingFacility[], filters: Disp
       continue;
     }
     if (filters.hiddenTypes.includes(f.type)) continue;
-    const access = matchParkingType(f, parkingType);
+    const access = filters.parking ? matchParkingFilter(f, filters.parking, filters.venueOperators) : "match";
     if (access === "excluded") continue;
     if (access === "unknown" && !filters.includeUnconfirmedAccess) {
       hiddenUnknownAccess++;
@@ -116,9 +117,9 @@ export function buildMarkers(visible: ParkingFacility[], ranked: RankedFacility[
  * Number of active eligibility filters, shown on the Filters button. Sort priorities and the
  * "include unknown payment" option don't count: they never narrow the results on their own.
  */
-export function activeFilterCount(prefs: RankingPreferences, hiddenTypes: FacilityType[], parkingType: ParkingTypeFilter = "all"): number {
+export function activeFilterCount(prefs: RankingPreferences, hiddenTypes: FacilityType[], parking?: ParkingFilter): number {
   return (
-    (parkingType !== "all" ? 1 : 0) +
+    (parking ? parkingFilterCount(parking) : 0) +
     prefs.payment.methods.length +
     prefs.payment.timings.length +
     prefs.amenities.length +

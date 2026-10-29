@@ -13,30 +13,6 @@ export const ACCESS_LABEL: Record<AccessLevel, string> = {
   restricted: "Restricted",
 };
 
-export type ParkingTypeFilter = "all" | "open_to_public" | "public_owned" | "private_open" | "pass_required";
-
-export const PARKING_TYPE_FILTERS: ParkingTypeFilter[] = ["all", "open_to_public", "public_owned", "private_open", "pass_required"];
-
-export const PARKING_TYPE_FILTER_LABEL: Record<ParkingTypeFilter, string> = {
-  all: "All eligible parking",
-  open_to_public: "Open to public",
-  public_owned: "Publicly owned",
-  private_open: "Private, open to public",
-  pass_required: "Pass/permit required",
-};
-
-export const PARKING_TYPE_FILTER_HINT: Record<ParkingTypeFilter, string> = {
-  all: "Everything you can use, except lots reserved for specific people.",
-  open_to_public: "Confirmed open to anyone, whoever owns it.",
-  public_owned: "Confirmed owned by a city, county, state or public authority.",
-  private_open: "Confirmed privately owned and open to anyone.",
-  pass_required: "Confirmed to need a pass or permit issued in advance.",
-};
-
-export function isParkingTypeFilter(v: string | null | undefined): v is ParkingTypeFilter {
-  return !!v && (PARKING_TYPE_FILTERS as string[]).includes(v);
-}
-
 const CONFIRMED = new Set<Attribution["confidence"]>(["verified", "high", "medium"]);
 
 export type FactState = "confirmed" | "reported" | "unknown";
@@ -59,29 +35,91 @@ export function isRestricted(f: ParkingFacility): boolean {
   return f.access?.value === "restricted";
 }
 
-/** Shuttles and rideshare zones aren't parking, so ownership/access filters don't apply to them. */
+/**
+ * Three independent filter dimensions inside the normal parking search. Options within a dimension
+ * are alternatives (OR); dimensions combine (AND), e.g. "publicly owned" + "pass required" + "garage".
+ * An empty dimension doesn't filter.
+ */
+export type AccessOption = "public" | "pass_required";
+export type OwnerOption = "public" | "private" | "venue";
+export type FormOption = "surface" | "garage" | "street";
+
+export interface ParkingFilter {
+  access: AccessOption[];
+  owner: OwnerOption[];
+  form: FormOption[];
+}
+
+export const EMPTY_PARKING_FILTER: ParkingFilter = { access: [], owner: [], form: [] };
+
+export const ACCESS_OPTIONS: AccessOption[] = ["public", "pass_required"];
+export const OWNER_OPTIONS: OwnerOption[] = ["public", "private", "venue"];
+export const FORM_OPTIONS: FormOption[] = ["surface", "garage", "street"];
+
+export const ACCESS_OPTION_LABEL: Record<AccessOption, string> = { public: "Open to public", pass_required: "Pass/permit required" };
+export const OWNER_OPTION_LABEL: Record<OwnerOption, string> = { public: "Publicly owned", private: "Privately owned", venue: "Venue-operated" };
+export const FORM_OPTION_LABEL: Record<FormOption, string> = { surface: "Surface lot", garage: "Garage", street: "Street" };
+
+export const parkingFilterCount = (p: ParkingFilter) => p.access.length + p.owner.length + p.form.length;
+
+/** URL form: `access=public,pass_required&owner=venue&form=garage`. Unknown values are dropped. */
+export function parkingFilterFromParams(q: URLSearchParams): ParkingFilter {
+  const read = <T extends string>(key: string, allowed: T[]) =>
+    (q.get(key) ?? "").split(",").filter((v): v is T => (allowed as string[]).includes(v));
+  return { access: read("access", ACCESS_OPTIONS), owner: read("owner", OWNER_OPTIONS), form: read("form", FORM_OPTIONS) };
+}
+
+export function writeParkingFilterParams(url: URL, p: ParkingFilter) {
+  for (const [key, values] of Object.entries(p) as [keyof ParkingFilter, string[]][]) {
+    if (values.length) url.searchParams.set(key, values.join(","));
+    else url.searchParams.delete(key);
+  }
+}
+
+/** Shuttles and rideshare zones aren't parking, so these filters don't apply to them. */
 const NOT_PARKING: FacilityType[] = ["shuttle", "rideshare_zone"];
+
+/**
+ * Structure, derived from the lot's sourced type: garages are garages, and lots (official, private,
+ * independent, ADA) are surface lots. Residential spots (driveways, yards) are neither. No street
+ * parking is listed yet, so "street" matches nothing until street facilities exist.
+ */
+export function parkingForm(f: ParkingFacility): FormOption | undefined {
+  if (f.type === "garage") return "garage";
+  if (f.type === "official_lot" || f.type === "private_lot" || f.type === "independent" || f.type === "ada") return "surface";
+  return undefined;
+}
+
+/** Run by the venue or its team: an official lot, or a lot whose documented operator is the venue or a home team. */
+export function isVenueOperated(f: ParkingFacility, venueOperators: string[] = []): boolean {
+  return f.type === "official_lot" || (!!f.operator && venueOperators.includes(f.operator));
+}
 
 export type AccessMatch = "match" | "excluded" | "unknown";
 
-/** "unknown" means the lot could match but the deciding fact isn't confirmed (so it's hidden, and counted). */
-export function matchParkingType(f: ParkingFacility, filter: ParkingTypeFilter): AccessMatch {
+/** "unknown" means the lot could match but a deciding fact isn't confirmed (so it's hidden, and counted). */
+export function matchParkingFilter(f: ParkingFacility, p: ParkingFilter, venueOperators: string[] = []): AccessMatch {
   if (isRestricted(f)) return "excluded";
-  if (filter === "all") return "match";
+  if (parkingFilterCount(p) === 0) return "match";
   if (NOT_PARKING.includes(f.type)) return "excluded";
-  const owner = confirmed(f.ownership);
-  const access = confirmed(f.access);
-  switch (filter) {
-    case "open_to_public":
-      return access === undefined ? "unknown" : access === "public" ? "match" : "excluded";
-    case "pass_required":
-      return access === undefined ? "unknown" : access === "pass_required" ? "match" : "excluded";
-    case "public_owned":
-      return owner === undefined ? "unknown" : owner === "public" ? "match" : "excluded";
-    case "private_open":
-      if (owner === "public" || (access !== undefined && access !== "public")) return "excluded";
-      return owner === "private" && access === "public" ? "match" : "unknown";
+  const results: AccessMatch[] = [];
+
+  if (p.access.length) {
+    const access = confirmed(f.access);
+    results.push(access === undefined ? "unknown" : (p.access as string[]).includes(access) ? "match" : "excluded");
   }
+  if (p.owner.length) {
+    const owner = confirmed(f.ownership);
+    const venue = p.owner.includes("venue") && isVenueOperated(f, venueOperators);
+    const byOwner = owner !== undefined && (p.owner as string[]).includes(owner);
+    const ownerQuestion = p.owner.some((o) => o !== "venue");
+    results.push(venue || byOwner ? "match" : ownerQuestion && owner === undefined ? "unknown" : "excluded");
+  }
+  if (p.form.length) {
+    const form = parkingForm(f);
+    results.push(form && p.form.includes(form) ? "match" : "excluded");
+  }
+  return results.includes("excluded") ? "excluded" : results.includes("unknown") ? "unknown" : "match";
 }
 
 export interface FactDisplay {
