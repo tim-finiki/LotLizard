@@ -1,4 +1,4 @@
-import type { Amenity, Attribution, ConfidenceLevel, EventKind, FacilityType, ParkingFacility, PriceObservation, Venue, VehicleType } from "@/lib/types";
+import type { Amenity, UniversalAmenity, Attribution, ConfidenceLevel, EventKind, FacilityType, ParkingFacility, PriceObservation, Venue, VehicleType } from "@/lib/types";
 import { confidenceRank, lowestConfidence } from "@/lib/confidence";
 import { estimateWalk } from "@/lib/geo";
 import { EMPTY_PAYMENT_FILTER, type PaymentFilter } from "@/lib/payment";
@@ -11,7 +11,8 @@ export interface RankingPreferences {
   weights: Record<Factor, number>;
   vehicle: VehicleType;
   requireTailgating: boolean;
-  needsAda: boolean;
+  /** Universal amenities that must be confirmed available (AND). A display filter like `payment`. */
+  features: UniversalAmenity[];
   maxPrice?: number;
   /** Approach ID the user leaves toward after the event ("any" = no preference). */
   direction: string;
@@ -25,11 +26,28 @@ export const DEFAULT_PREFERENCES: RankingPreferences = {
   weights: { cost: 3, walk: 3, tailgate: 2, exit: 2 },
   vehicle: "car",
   requireTailgating: false,
-  needsAda: false,
+  features: [],
   direction: "any",
   payment: EMPTY_PAYMENT_FILTER,
   amenities: [],
 };
+
+/**
+ * Rebuild preferences saved by any earlier version: fill new fields with defaults and migrate the old
+ * `needsAda` toggle to the ADA universal-amenity filter.
+ */
+export function normalizePreferences(saved: unknown): RankingPreferences {
+  const parsed = (saved && typeof saved === "object" ? saved : {}) as Partial<RankingPreferences> & { needsAda?: boolean };
+  const { needsAda, ...rest } = parsed;
+  return {
+    ...DEFAULT_PREFERENCES,
+    ...rest,
+    weights: { ...DEFAULT_PREFERENCES.weights, ...rest.weights },
+    payment: { ...DEFAULT_PREFERENCES.payment, ...rest.payment },
+    features: rest.features ?? (needsAda ? ["ada"] : []),
+    amenities: rest.amenities ?? [],
+  };
+}
 
 /** Per-request context that is not a saved preference. */
 export interface RankingContext {
@@ -146,7 +164,8 @@ export function exitDirectionDataAvailable(facilities: ParkingFacility[], direct
 
 export function isRankable(facility: ParkingFacility, prefs: RankingPreferences): boolean {
   if (!PARKABLE.includes(facility.type)) return false;
-  if (facility.type === "ada" && !prefs.needsAda) return false;
+  // Dedicated ADA lots are reserved for permit holders: rank them only when ADA parking is requested.
+  if (facility.type === "ada" && !prefs.features.includes("ada")) return false;
   if (!facility.vehicleTypes.includes(prefs.vehicle)) return false;
   if (prefs.requireTailgating && facility.tailgating.allowed.value === false) return false;
   if (prefs.maxPrice !== undefined) {

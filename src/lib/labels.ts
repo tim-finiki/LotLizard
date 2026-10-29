@@ -24,9 +24,6 @@ export const FACILITY_TYPE_COLOR: Record<FacilityType, string> = {
 };
 
 export const AMENITY_LABEL: Record<Amenity, string> = {
-  restrooms: "Restrooms",
-  portable_toilets: "Portable toilets",
-  ada_spaces: "ADA spaces",
   lighting: "Lighting",
   paved: "Paved",
   grass: "Grass",
@@ -35,8 +32,6 @@ export const AMENITY_LABEL: Record<Amenity, string> = {
   food_vendors: "Food vendors",
   rv_friendly: "RV friendly",
   tailgate_area: "Tailgate space",
-  covered: "Covered",
-  ev_charging: "EV charging",
 };
 
 export const VENUE_TYPE_LABEL: Record<VenueType, string> = {

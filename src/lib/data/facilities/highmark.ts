@@ -107,7 +107,15 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
       notes: "First-come, first-served and exempt from the pre-purchase rule. Whether and how you pay on arrival isn't confirmed.",
       attribution: attr("medium", ["wgrz-opener-traffic", "bills-parking"]),
     },
-    amenities: fact<ParkingFacility["amenities"]["value"]>(["ada_spaces"], "medium", ["wgrz-opener-traffic"]),
+    amenities: fact<ParkingFacility["amenities"]["value"]>([], "unverified", ["lotlizard-editorial"]),
+    features: {
+      ada: {
+        state: "available",
+        reportedAt: "2026-09-15",
+        notes: "Designated accessible lot, first-come, first-served.",
+        attribution: attr("medium", ["wgrz-opener-traffic", "bills-parking"]),
+      },
+    },
     tailgating: { allowed: fact<boolean | "unknown">("unknown", "unverified", ["lotlizard-editorial"]) },
     exit: { routes: ["Fieldhouse Dr → Big Tree Rd"] },
     vehicleTypes: ["car"],
@@ -129,7 +137,15 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
       notes: "First-come, first-served and exempt from the pre-purchase rule. Whether and how you pay on arrival isn't confirmed.",
       attribution: attr("medium", ["wgrz-opener-traffic", "bills-parking"]),
     },
-    amenities: fact<ParkingFacility["amenities"]["value"]>(["ada_spaces"], "medium", ["wgrz-opener-traffic"]),
+    amenities: fact<ParkingFacility["amenities"]["value"]>([], "unverified", ["lotlizard-editorial"]),
+    features: {
+      ada: {
+        state: "available",
+        reportedAt: "2026-09-15",
+        notes: "Designated accessible lot, first-come, first-served.",
+        attribution: attr("medium", ["wgrz-opener-traffic", "bills-parking"]),
+      },
+    },
     tailgating: { allowed: fact<boolean | "unknown">("unknown", "unverified", ["lotlizard-editorial"]) },
     exit: { routes: ["Orange Dr → Southwestern Blvd (US-20)"] },
     vehicleTypes: ["car"],
@@ -219,7 +235,8 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
       notes: "$5 per person one way. Exact cash when boarding, or a Token Transit ticket. Metro passes and MetGo are not accepted.",
       attribution: attr("medium", ["nfta-gde"]),
     },
-    amenities: fact<ParkingFacility["amenities"]["value"]>(["shuttle_service", "covered"], "medium", ["nfta-gde", "wkbw-transit-hub"], "Transit hub has a 2,500 sq ft boarding canopy."),
+    // The transit hub's 2,500 sq ft canopy covers bus boarding, not parking, so "covered parking" stays unknown.
+    amenities: fact<ParkingFacility["amenities"]["value"]>(["shuttle_service"], "medium", ["nfta-gde", "wkbw-transit-hub"], "Transit hub has a 2,500 sq ft boarding canopy."),
     tailgating: { allowed: fact<boolean | "unknown">(false, "medium", ["nfta-gde"], "Shuttle — no vehicle at the stadium.") },
     exit: { notes: "Return buses depart from the Transit Center after the game." },
     vehicleTypes: [],

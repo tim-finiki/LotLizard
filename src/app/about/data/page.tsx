@@ -63,6 +63,15 @@ export default function DataPage() {
         </p>
       </section>
       <section className="flex flex-col gap-2">
+        <h2 className="text-lg font-bold">Parking amenities</h2>
+        <p>
+          Every lot at every venue is described by the same four amenities: covered parking, EV charging, accessible
+          (ADA) parking and on-site restrooms. Each is <em>available</em>, <em>not available</em> or <em>unknown</em>, with
+          a source and date. Amenity filters only match confirmed availability. A lot we know nothing about is hidden
+          from a filtered view, never shown as a match.
+        </p>
+      </section>
+      <section className="flex flex-col gap-2">
         <h2 className="text-lg font-bold">Payment information</h2>
         <p>
           We record <em>how</em> you can pay (cash, card, Venmo, PayPal, Zelle, Apple Pay/Google Pay, other) separately

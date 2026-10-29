@@ -33,6 +33,8 @@ import {
   type PaymentMatch,
 } from "@/lib/payment";
 import { PaymentBadges, PaymentDetails } from "@/components/PaymentInfo";
+import { FeatureBadges, FeatureDetails } from "@/components/AmenityInfo";
+import { UNIVERSAL_AMENITIES, UNIVERSAL_AMENITY_LABEL, featureState } from "@/lib/features";
 import { BottomSheet, snapHeight, type SheetSnap } from "@/components/BottomSheet";
 import { ConfidenceBadge } from "@/components/ConfidenceBadge";
 import { ReferralLink } from "@/components/ReferralLink";
@@ -138,8 +140,9 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
 
   // One filter pass feeds the ranking, the list AND the map, so they always agree.
   const filtered = useMemo(
-    () => applyDisplayFilters(facilities, { hiddenTypes, payment: prefs.payment, amenities: prefs.amenities, eventId: event?.id }),
-    [facilities, hiddenTypes, prefs.payment, prefs.amenities, event?.id],
+    () =>
+      applyDisplayFilters(facilities, { hiddenTypes, payment: prefs.payment, amenities: prefs.amenities, features: prefs.features, eventId: event?.id }),
+    [facilities, hiddenTypes, prefs.payment, prefs.amenities, prefs.features, event?.id],
   );
   const ranked = useMemo(
     () => rankFacilities(venue, filtered.visible, { ...prefs, direction }, { eventKind: event?.kind }),
@@ -312,6 +315,12 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
 
       <BottomSheet snap={snap} onSnapChange={setSnap} containerHeight={containerHeight} header={header} label="Parking results">
         <div ref={listRef} className="relative flex flex-col gap-2">
+          {filtered.hiddenUnknownFeatures > 0 && (
+            <p className="rounded-xl bg-amber-50 px-3 py-2 text-xs text-amber-900 dark:bg-amber-900/30 dark:text-amber-100">
+              {filtered.hiddenUnknownFeatures} {filtered.hiddenUnknownFeatures === 1 ? "lot is" : "lots are"} hidden because we can&apos;t yet
+              confirm {prefs.features.length === 1 ? "that amenity" : "those amenities"} there.
+            </p>
+          )}
           {filtered.hiddenUnknownPayment > 0 && (
             <p className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-amber-50 px-3 py-2 text-xs text-amber-900 dark:bg-amber-900/30 dark:text-amber-100">
               <span>
@@ -561,6 +570,9 @@ function ResultCard({
             <span className="sr-only">Payment: </span>
             <PaymentBadges policy={payment.policy} isEventOverride={payment.isEventOverride} match={paymentMatch} />
           </span>
+          <span className="mt-1 block empty:hidden">
+            <FeatureBadges facility={f} />
+          </span>
         </span>
       </button>
 
@@ -596,6 +608,10 @@ function ResultCard({
           </ul>
           <div className="rounded-xl bg-neutral-50 p-2 dark:bg-neutral-800">
             <PaymentDetails policy={payment.policy} heading={payment.isEventOverride ? "Payment (game-day policy)" : "Payment"} />
+          </div>
+          <div className="rounded-xl bg-neutral-50 p-2 dark:bg-neutral-800">
+            <p className="mb-1 text-sm font-semibold">Parking amenities</p>
+            <FeatureDetails facility={f} />
           </div>
           {f.amenities.value.length > 0 && (
             <p className="text-xs text-neutral-500">{f.amenities.value.map((a) => AMENITY_LABEL[a]).join(" · ")}</p>
@@ -764,7 +780,7 @@ function FiltersPanel({
           <p className="-mt-2 text-xs text-neutral-500">Shown as &ldquo;Unconfirmed for your filter&rdquo;. We never assume a lot accepts a method.</p>
         </FilterSection>
 
-        <FilterSection title="Vehicle & accessibility">
+        <FilterSection title="Vehicle">
           <ChipRow>
             {(Object.keys(VEHICLE_LABEL) as VehicleType[]).map((v) => (
               <ChipToggle key={v} on={prefs.vehicle === v} onClick={() => onChange({ ...prefs, vehicle: v })}>
@@ -772,10 +788,19 @@ function FiltersPanel({
               </ChipToggle>
             ))}
           </ChipRow>
-          <Toggle label="Accessible (ADA) parking" checked={prefs.needsAda} onChange={(v) => onChange({ ...prefs, needsAda: v })} />
         </FilterSection>
 
-        <FilterSection title="Tailgating & amenities" hint={reportedAmenities.length ? "Amenities only match where they've been reported." : undefined}>
+        <FilterSection title="Parking amenities" hint="Shows only lots where each selected amenity is confirmed available.">
+          <ChipRow>
+            {UNIVERSAL_AMENITIES.map((k) => (
+              <ChipToggle key={k} on={prefs.features.includes(k)} onClick={() => onChange({ ...prefs, features: toggle(prefs.features, k) })}>
+                {UNIVERSAL_AMENITY_LABEL[k]}
+              </ChipToggle>
+            ))}
+          </ChipRow>
+        </FilterSection>
+
+        <FilterSection title="Tailgating & extras" hint={reportedAmenities.length ? "Extras only match where they've been reported." : undefined}>
           <Toggle label="Allows tailgating" checked={prefs.requireTailgating} onChange={(v) => onChange({ ...prefs, requireTailgating: v })} />
           {reportedAmenities.length > 0 && (
             <ChipRow>
@@ -891,6 +916,15 @@ function CompareTable({ venue, items }: { venue: Venue; items: RankedFacility[] 
     { label: "Tailgating", render: (r) => r.factors.tailgate.detail },
     { label: "Exit", render: (r) => r.factors.exit.detail },
     { label: "Payment", render: (r) => <PaymentBadges policy={r.facility.payment} /> },
+    {
+      label: "Amenities",
+      render: (r) =>
+        UNIVERSAL_AMENITIES.some((k) => featureState(r.facility, k) !== "unknown") ? (
+          <FeatureBadges facility={r.facility} />
+        ) : (
+          <span className="italic text-neutral-400">Unknown</span>
+        ),
+    },
     { label: "Exit routes", render: (r) => r.facility.exit.routes?.join("; ") ?? "—" },
   ];
   return (
