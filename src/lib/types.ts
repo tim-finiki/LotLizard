@@ -160,6 +160,39 @@ export interface PriceObservation {
   attribution: Attribution;
 }
 
+export type PaymentMethod = "cash" | "card" | "venmo" | "paypal" | "zelle" | "mobile_wallet" | "other";
+
+/**
+ * When you pay. Kept separate from *how* you pay.
+ * - pay_on_arrival: pay at the lot on the day
+ * - advance_optional: you can reserve or pay ahead, but can also pay on arrival
+ * - prepay_required: you must buy a pass/permit before arriving
+ */
+export type PaymentTiming = "pay_on_arrival" | "advance_optional" | "prepay_required";
+
+/**
+ * Payment facts for a lot. A method is only "accepted" with explicit evidence; a method listed in
+ * neither `accepted` nor `notAccepted` is UNKNOWN, never assumed accepted or refused.
+ */
+export interface PaymentPolicy {
+  accepted: PaymentMethod[];
+  notAccepted?: PaymentMethod[];
+  /** Describes "other" methods, e.g. "Token Transit app". */
+  otherDescription?: string;
+  /** Undefined when unknown. */
+  timing?: PaymentTiming;
+  /** Date the source reported this (YYYY-MM-DD). Verification by LotLizard goes in attribution.lastVerifiedAt. */
+  reportedAt: string;
+  notes?: string;
+  attribution: Attribution;
+}
+
+/** A policy that applies to one event only and replaces the lot's general policy for that event. */
+export interface EventPaymentOverride {
+  eventId: string;
+  policy: PaymentPolicy;
+}
+
 export interface BookingLink {
   url: string;
   partner: string;
@@ -182,7 +215,10 @@ export interface ParkingFacility {
   /** Sourced walking time to the nearest gate; otherwise the UI derives an estimate from coordinates. */
   walkMinutes?: Attributed<number>;
   prices: PriceObservation[];
-  prepaidRequired?: Attributed<boolean>;
+  /** General payment policy. Undefined when nothing is known. */
+  payment?: PaymentPolicy;
+  /** Event-specific policies that replace `payment` for that event. */
+  paymentOverrides?: EventPaymentOverride[];
   amenities: Attributed<Amenity[]>;
   tailgating: {
     allowed: Attributed<boolean | "unknown">;

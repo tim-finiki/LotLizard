@@ -99,7 +99,8 @@ describe("map pins stay in sync with the current ranking", () => {
   });
 
   it("hides pins for filtered-out types", () => {
-    const markers = buildMarkers(HIGHMARK_FACILITIES, rank(), ["private_lot"]);
+    const visible = HIGHMARK_FACILITIES.filter((f) => f.type !== "private_lot");
+    const markers = buildMarkers(visible, rank());
     expect(markers.some((m) => m.type === "private_lot")).toBe(false);
   });
 });

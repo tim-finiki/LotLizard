@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import type { FacilityType, ParkingFacility, Venue, VehicleType, VenueEvent } from "@/lib/types";
 import {
   EXIT_DATA_UNAVAILABLE,
@@ -21,7 +21,17 @@ import { CONFIDENCE_LABEL } from "@/lib/confidence";
 import { directionsLinks, type DirectionsLinks } from "@/lib/directions";
 import { eventShortLabel, formatClock, formatEventDate, lotOpenTime, upcomingEvents } from "@/lib/events";
 import { formatDistance } from "@/lib/geo";
-import { buildMarkers } from "@/lib/explorer";
+import { applyDisplayFilters, buildMarkers } from "@/lib/explorer";
+import {
+  PAYMENT_METHODS,
+  PAYMENT_METHOD_LABEL,
+  PAYMENT_TIMINGS,
+  PAYMENT_TIMING_LABEL,
+  effectivePayment,
+  type PaymentFilter,
+  type PaymentMatch,
+} from "@/lib/payment";
+import { PaymentBadges, PaymentDetails } from "@/components/PaymentInfo";
 import { BottomSheet, snapHeight, type SheetSnap } from "@/components/BottomSheet";
 import { ConfidenceBadge } from "@/components/ConfidenceBadge";
 import { ReferralLink } from "@/components/ReferralLink";
@@ -116,21 +126,33 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
     return () => ro.disconnect();
   }, []);
 
+  // One filter pass feeds the ranking, the list AND the map, so they always agree.
+  const filtered = useMemo(
+    () => applyDisplayFilters(facilities, { hiddenTypes, payment: prefs.payment, eventId: event?.id }),
+    [facilities, hiddenTypes, prefs.payment, event?.id],
+  );
   const ranked = useMemo(
-    () => rankFacilities(venue, facilities, { ...prefs, direction }, { eventKind: event?.kind }),
-    [venue, facilities, prefs, direction, event?.kind],
+    () => rankFacilities(venue, filtered.visible, { ...prefs, direction }, { eventKind: event?.kind }),
+    [venue, filtered.visible, prefs, direction, event?.kind],
   );
   const rankById = useMemo(() => new Map(ranked.map((r) => [r.facility.id, r])), [ranked]);
   const presentTypes = useMemo(() => [...new Set(facilities.map((f) => f.type))], [facilities]);
-  const visible = useCallback((f: ParkingFacility) => !hiddenTypes.includes(f.type), [hiddenTypes]);
-  const rankedList = ranked.filter((r) => r.rank !== null && visible(r.facility));
-  const unrankedList = ranked.filter((r) => r.rank === null && visible(r.facility));
-  const others = facilities.filter((f) => !rankById.has(f.id) && visible(f));
-  const unmapped = facilities.filter((f) => !f.location && visible(f)).length;
+  const rankedList = ranked.filter((r) => r.rank !== null);
+  const unrankedList = ranked.filter((r) => r.rank === null);
+  const others = filtered.visible.filter((f) => !rankById.has(f.id));
+  const unmapped = filtered.visible.filter((f) => !f.location).length;
   const eventChoices = today ? upcomingEvents(events, today) : events;
-  const markers = buildMarkers(facilities, ranked, hiddenTypes);
+  const markers = buildMarkers(filtered.visible, ranked);
   // A selection hidden by a filter is dropped, so the pin and card highlights never go stale.
-  const activeId = selectedId && facilities.some((f) => f.id === selectedId && visible(f)) ? selectedId : undefined;
+  const activeId = selectedId && filtered.visible.some((f) => f.id === selectedId) ? selectedId : undefined;
+  const setPayment = (payment: PaymentFilter) => setPrefs({ ...prefs, payment });
+  const filterCount =
+    hiddenTypes.length +
+    (prefs.requireTailgating ? 1 : 0) +
+    (prefs.maxPrice !== undefined ? 1 : 0) +
+    (prefs.needsAda ? 1 : 0) +
+    prefs.payment.methods.length +
+    prefs.payment.timings.length;
   const directionLabel = approaches.find((a) => a.id === direction)?.label;
   const exitDirectionsAvailable = exitDirectionDataAvailable(facilities, direction);
   const priorityOrder = [...FACTORS].filter((f) => prefs.weights[f] > 0).sort((a, b) => prefs.weights[b] - prefs.weights[a]);
@@ -246,10 +268,8 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
               className="flex h-10 shrink-0 items-center gap-1.5 rounded-full bg-white px-4 text-sm font-semibold shadow-md dark:bg-neutral-900"
             >
               Filters
-              {hiddenTypes.length + (prefs.requireTailgating ? 1 : 0) + (prefs.maxPrice !== undefined ? 1 : 0) + (prefs.needsAda ? 1 : 0) > 0 && (
-                <span className="grid h-5 min-w-5 place-items-center rounded-full bg-brand-600 px-1 text-[11px] text-white">
-                  {hiddenTypes.length + (prefs.requireTailgating ? 1 : 0) + (prefs.maxPrice !== undefined ? 1 : 0) + (prefs.needsAda ? 1 : 0)}
-                </span>
+              {filterCount > 0 && (
+                <span className="grid h-5 min-w-5 place-items-center rounded-full bg-brand-600 px-1 text-[11px] text-white">{filterCount}</span>
               )}
             </button>
           </div>
@@ -269,12 +289,24 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
 
       <BottomSheet snap={snap} onSnapChange={setSnap} containerHeight={containerHeight} header={header} label="Parking results">
         <div ref={listRef} className="relative flex flex-col gap-2">
+          {filtered.hiddenUnknownPayment > 0 && (
+            <p className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-amber-50 px-3 py-2 text-xs text-amber-900 dark:bg-amber-900/30 dark:text-amber-100">
+              <span>
+                {filtered.hiddenUnknownPayment} {filtered.hiddenUnknownPayment === 1 ? "lot is" : "lots are"} hidden because their payment info is unknown.
+              </span>
+              <button type="button" onClick={() => setPayment({ ...prefs.payment, includeUnknown: true })} className="font-semibold underline">
+                Show them
+              </button>
+            </p>
+          )}
           {rankedList.map((r) => (
             <ResultCard
               key={r.facility.id}
               venue={venue}
               ranked={r}
               direction={direction}
+              eventId={event?.id}
+              paymentMatch={filtered.paymentMatch.get(r.facility.id)}
               active={activeId === r.facility.id}
               compared={compare.includes(r.facility.id)}
               compareDisabled={compare.length >= 3 && !compare.includes(r.facility.id)}
@@ -300,6 +332,8 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
                   venue={venue}
                   ranked={r}
                   direction={direction}
+                  eventId={event?.id}
+                  paymentMatch={filtered.paymentMatch.get(r.facility.id)}
                   active={activeId === r.facility.id}
                   compared={compare.includes(r.facility.id)}
                   compareDisabled={compare.length >= 3 && !compare.includes(r.facility.id)}
@@ -314,7 +348,7 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
             <>
               <h3 className="mt-3 text-sm font-bold">Other ways in</h3>
               {others.map((f) => (
-                <OtherCard key={f.id} venue={venue} facility={f} active={activeId === f.id} onSelect={() => selectFromList(f.id)} />
+                <OtherCard key={f.id} venue={venue} facility={f} eventId={event?.id} active={activeId === f.id} onSelect={() => selectFromList(f.id)} />
               ))}
             </>
           )}
@@ -362,6 +396,7 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
               })}
             </div>
           </fieldset>
+          <PaymentFilterForm filter={prefs.payment} onChange={setPayment} />
           <PreferencesForm prefs={prefs} onChange={setPrefs} />
         </Modal>
       )}
@@ -444,6 +479,8 @@ function ResultCard({
   venue,
   ranked: r,
   direction,
+  eventId,
+  paymentMatch,
   active,
   compared,
   compareDisabled,
@@ -453,6 +490,8 @@ function ResultCard({
   venue: Venue;
   ranked: RankedFacility;
   direction: string;
+  eventId?: string;
+  paymentMatch?: PaymentMatch;
   active: boolean;
   compared: boolean;
   compareDisabled: boolean;
@@ -460,6 +499,7 @@ function ResultCard({
   onToggleCompare: () => void;
 }) {
   const f = r.facility;
+  const payment = effectivePayment(f, eventId);
   return (
     <article
       id={`lot-${f.id}`}
@@ -486,11 +526,15 @@ function ResultCard({
             </span>
             <RecBadge rec={r.recommendation} />
           </span>
-          <span className="mt-2 grid grid-cols-4 gap-2">
+          <span className="mt-2 grid grid-cols-2 gap-x-2 gap-y-1.5 min-[370px]:grid-cols-4">
             <Stat label="Price" value={priceText(r)} note={priceNote(r)} />
             <Stat label="Walk" value={r.walk ? `${r.walk.estimated ? "~" : ""}${r.walk.minutes} min` : undefined} />
             <Stat label="Tailgate" value={tailgateText(f)} />
             <Stat label="Exit" value={exitText(r, direction)} missing="Not yet available" />
+          </span>
+          <span className="mt-2 block">
+            <span className="sr-only">Payment: </span>
+            <PaymentBadges policy={payment.policy} isEventOverride={payment.isEventOverride} match={paymentMatch} />
           </span>
         </span>
       </button>
@@ -525,9 +569,9 @@ function ResultCard({
               </li>
             )}
           </ul>
-          {f.prepaidRequired?.value && (
-            <p className="rounded-lg bg-amber-50 px-2 py-1 text-xs font-medium text-amber-800 dark:bg-amber-900/30 dark:text-amber-200">Pre-paid pass required</p>
-          )}
+          <div className="rounded-xl bg-neutral-50 p-2 dark:bg-neutral-800">
+            <PaymentDetails policy={payment.policy} heading={payment.isEventOverride ? "Payment (game-day policy)" : "Payment"} />
+          </div>
           {f.amenities.value.length > 0 && (
             <p className="text-xs text-neutral-500">{f.amenities.value.map((a) => AMENITY_LABEL[a]).join(" · ")}</p>
           )}
@@ -557,8 +601,21 @@ function ResultCard({
   );
 }
 
-function OtherCard({ venue, facility: f, active, onSelect }: { venue: Venue; facility: ParkingFacility; active: boolean; onSelect: () => void }) {
+function OtherCard({
+  venue,
+  facility: f,
+  eventId,
+  active,
+  onSelect,
+}: {
+  venue: Venue;
+  facility: ParkingFacility;
+  eventId?: string;
+  active: boolean;
+  onSelect: () => void;
+}) {
   const walk = walkInfo(f, venue);
+  const payment = effectivePayment(f, eventId);
   const price = f.prices[0];
   return (
     <article id={`lot-${f.id}`} className={`rounded-xl border bg-white dark:bg-neutral-900 ${active ? "border-brand-500 ring-2 ring-brand-500/30" : "border-black/5 dark:border-white/10"}`}>
@@ -577,6 +634,7 @@ function OtherCard({ venue, facility: f, active, onSelect }: { venue: Venue; fac
       {active && (
         <div className="flex flex-col gap-2 border-t border-black/5 px-3 pb-3 pt-2 text-xs dark:border-white/10">
           <p className="text-neutral-600 dark:text-neutral-300">{f.description}</p>
+          {payment.policy && <PaymentBadges policy={payment.policy} isEventOverride={payment.isEventOverride} />}
           <DirectionsRow links={directionsLinks(f)} />
           <Link href={`/venues/${venue.slug}/parking/${f.slug}`} className="font-semibold text-brand-700 underline dark:text-brand-100">
             Details &amp; sources
@@ -584,6 +642,56 @@ function OtherCard({ venue, facility: f, active, onSelect }: { venue: Venue; fac
         </div>
       )}
     </article>
+  );
+}
+
+function ChipToggle({ on, onClick, children }: { on: boolean; onClick: () => void; children: React.ReactNode }) {
+  return (
+    <button
+      type="button"
+      aria-pressed={on}
+      onClick={onClick}
+      className={`h-9 rounded-full px-3 text-sm font-medium ring-1 ring-inset ${
+        on ? "bg-brand-600 text-white ring-brand-600" : "bg-white ring-black/10 dark:bg-neutral-900 dark:ring-white/15"
+      }`}
+    >
+      {children}
+    </button>
+  );
+}
+
+function PaymentFilterForm({ filter, onChange }: { filter: PaymentFilter; onChange: (f: PaymentFilter) => void }) {
+  const toggle = <T,>(list: T[], v: T) => (list.includes(v) ? list.filter((x) => x !== v) : [...list, v]);
+  return (
+    <div className="mb-6 flex flex-col gap-4">
+      <fieldset>
+        <legend className="mb-1 text-sm font-medium">I can pay with</legend>
+        <p className="mb-2 text-xs text-neutral-500">Shows lots known to accept any of these.</p>
+        <div className="flex flex-wrap gap-2">
+          {PAYMENT_METHODS.map((m) => (
+            <ChipToggle key={m} on={filter.methods.includes(m)} onClick={() => onChange({ ...filter, methods: toggle(filter.methods, m) })}>
+              {PAYMENT_METHOD_LABEL[m]}
+            </ChipToggle>
+          ))}
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend className="mb-2 text-sm font-medium">When I pay</legend>
+        <div className="flex flex-wrap gap-2">
+          {PAYMENT_TIMINGS.map((t) => (
+            <ChipToggle key={t} on={filter.timings.includes(t)} onClick={() => onChange({ ...filter, timings: toggle(filter.timings, t) })}>
+              {PAYMENT_TIMING_LABEL[t]}
+            </ChipToggle>
+          ))}
+        </div>
+      </fieldset>
+      <Toggle
+        label="Also show lots with unknown payment info"
+        checked={filter.includeUnknown}
+        onChange={(v) => onChange({ ...filter, includeUnknown: v })}
+      />
+      <p className="-mt-2 text-xs text-neutral-500">They&apos;re labelled &ldquo;Unconfirmed for your filter&rdquo;. We never assume a lot accepts a method.</p>
+    </div>
   );
 }
 
@@ -664,7 +772,7 @@ function CompareTable({ venue, items }: { venue: Venue; items: RankedFacility[] 
     { label: "Walk", render: (r) => (r.walk ? `${r.walk.estimated ? "~" : ""}${r.walk.minutes} min` : <span className="italic text-neutral-400">No data</span>) },
     { label: "Tailgating", render: (r) => r.factors.tailgate.detail },
     { label: "Exit", render: (r) => r.factors.exit.detail },
-    { label: "Pre-pay", render: (r) => (r.facility.prepaidRequired ? (r.facility.prepaidRequired.value ? "Required" : "No") : "Unknown") },
+    { label: "Payment", render: (r) => <PaymentBadges policy={r.facility.payment} /> },
     { label: "Exit routes", render: (r) => r.facility.exit.routes?.join("; ") ?? "—" },
   ];
   return (

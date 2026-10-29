@@ -1,6 +1,7 @@
 import type { Attribution, ConfidenceLevel, EventKind, FacilityType, ParkingFacility, PriceObservation, Venue, VehicleType } from "@/lib/types";
 import { confidenceRank, lowestConfidence } from "@/lib/confidence";
 import { estimateWalk } from "@/lib/geo";
+import { EMPTY_PAYMENT_FILTER, type PaymentFilter } from "@/lib/payment";
 
 export type Factor = "cost" | "walk" | "tailgate" | "exit";
 export const FACTORS: Factor[] = ["cost", "walk", "tailgate", "exit"];
@@ -14,6 +15,8 @@ export interface RankingPreferences {
   maxPrice?: number;
   /** Approach ID the user leaves toward after the event ("any" = no preference). */
   direction: string;
+  /** Payment method/timing filter. A display filter: applied before ranking to map and list alike. */
+  payment: PaymentFilter;
 }
 
 export const DEFAULT_PREFERENCES: RankingPreferences = {
@@ -22,6 +25,7 @@ export const DEFAULT_PREFERENCES: RankingPreferences = {
   requireTailgating: false,
   needsAda: false,
   direction: "any",
+  payment: EMPTY_PAYMENT_FILTER,
 };
 
 /** Per-request context that is not a saved preference. */

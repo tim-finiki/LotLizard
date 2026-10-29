@@ -63,6 +63,17 @@ export default function DataPage() {
         </p>
       </section>
       <section className="flex flex-col gap-2">
+        <h2 className="text-lg font-bold">Payment information</h2>
+        <p>
+          We record <em>how</em> you can pay (cash, card, Venmo, PayPal, Zelle, Apple Pay/Google Pay, other) separately
+          from <em>when</em> (pay on arrival, optional reservation, or prepay required). A method is only shown as accepted
+          when a source says so. Anything not reported is &ldquo;unknown&rdquo;, never assumed. When you filter by payment,
+          lots with unknown payment info are hidden unless you choose to see them, and then they&apos;re labelled
+          &ldquo;unconfirmed&rdquo;. A game-day policy replaces a lot&apos;s general policy for that game. Lot owners and
+          fans can send updates. Owner claims are checked by a moderator before they appear.
+        </p>
+      </section>
+      <section className="flex flex-col gap-2">
         <h2 className="text-lg font-bold">Moderation</h2>
         <p>
           Every community submission goes to a moderation queue. Automated checks flag links, price outliers and

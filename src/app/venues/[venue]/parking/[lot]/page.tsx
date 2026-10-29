@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import type { Attribution } from "@/lib/types";
-import { facilitySourceIds, getFacility, getSourcesFor, listAllFacilityParams } from "@/lib/data/repository";
+import { facilitySourceIds, getFacility, listEvents, getSourcesFor, listAllFacilityParams } from "@/lib/data/repository";
 import { walkInfo } from "@/lib/ranking";
 import { directionsLinks } from "@/lib/directions";
 import { formatDistance } from "@/lib/geo";
@@ -15,6 +15,8 @@ import { ConfidenceBadge } from "@/components/ConfidenceBadge";
 import { JsonLd } from "@/components/JsonLd";
 import { ReferralLink } from "@/components/ReferralLink";
 import { Section } from "@/components/Section";
+import { PaymentDetails } from "@/components/PaymentInfo";
+import { eventLabel } from "@/lib/events";
 import { SourceList } from "@/components/SourceList";
 
 export async function generateStaticParams() {
@@ -55,6 +57,7 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
   const walk = walkInfo(f, venue);
   const allowed = f.tailgating.allowed.value;
   const directions = directionsLinks(f);
+  const events = await listEvents(venue.id);
 
   return (
     <div className="mx-auto max-w-3xl px-4 pb-16 pt-4">
@@ -120,6 +123,24 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
           )}
         </Section>
 
+        <Section
+          id="payment"
+          title="Payment"
+          aside={<Link href={`/submit?venue=${venue.slug}&lot=${f.slug}&kind=payment`} className="text-sm font-semibold text-brand-700 dark:text-brand-100">Update</Link>}
+        >
+          <div className="rounded-2xl bg-white p-4 ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+            <PaymentDetails policy={f.payment} heading="General policy" />
+          </div>
+          {f.paymentOverrides?.map((o) => {
+            const ev = events.find((e) => e.id === o.eventId);
+            return (
+              <div key={o.eventId} className="rounded-2xl bg-white p-4 ring-1 ring-brand-500/30 dark:bg-neutral-900">
+                <PaymentDetails policy={o.policy} heading={`Game-day policy: ${ev ? eventLabel(ev) : o.eventId} (replaces the general policy for this game)`} />
+              </div>
+            );
+          })}
+        </Section>
+
         <Section id="details" title="Details">
           <dl className="divide-y divide-black/5 rounded-2xl bg-white px-4 ring-1 ring-black/5 dark:divide-white/10 dark:bg-neutral-900 dark:ring-white/10">
             <Row label="Walk to stadium" attribution={walk && !walk.estimated ? f.walkMinutes?.attribution : undefined}>
@@ -133,11 +154,6 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
                 "Unknown — location not confirmed"
               )}
             </Row>
-            {f.prepaidRequired && (
-              <Row label="Pre-paid pass" attribution={f.prepaidRequired.attribution}>
-                {f.prepaidRequired.value ? "Required" : "Not required"}
-              </Row>
-            )}
             <Row label="Tailgating" attribution={f.tailgating.allowed.attribution}>
               {allowed === "unknown" ? "Unknown" : allowed ? "Allowed" : "Not allowed"}
             </Row>

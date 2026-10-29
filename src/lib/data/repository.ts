@@ -82,7 +82,8 @@ export function facilitySourceIds(f: ParkingFacility): string[] {
   return [
     f.attribution,
     f.amenities.attribution,
-    f.prepaidRequired?.attribution,
+    f.payment?.attribution,
+    ...(f.paymentOverrides ?? []).map((o) => o.policy.attribution),
     f.tailgating.allowed.attribution,
     f.tailgating.atmosphere?.attribution,
     f.exit.rating?.attribution,

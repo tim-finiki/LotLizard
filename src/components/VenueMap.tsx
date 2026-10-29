@@ -55,7 +55,7 @@ function FitBounds({ points, bottomInset }: { points: [number, number][]; bottom
   useEffect(() => {
     const fit = () => {
       const { points: pts, bottomInset: inset } = latest.current;
-      if (pts.length > 1) map.fitBounds(L.latLngBounds(pts), { paddingTopLeft: [24, 72], paddingBottomRight: [24, inset + 24], maxZoom: 16 });
+      if (pts.length > 1) map.fitBounds(L.latLngBounds(pts), { paddingTopLeft: [24, 190], paddingBottomRight: [24, inset + 24], maxZoom: 16 });
     };
     fit();
     // The container can change size after mount (layout settling, rotation, breakpoint changes):

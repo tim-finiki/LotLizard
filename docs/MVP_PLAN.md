@@ -35,6 +35,16 @@ _Last updated: 2026-10-29_
 - Google/Apple Maps links only for exact pins or sourced street addresses.
 - Match score averages known factors only, so missing data is neutral. Completeness and confidence are reported separately, and lots under 50% completeness are listed but not ranked. Area-wide price ranges don't count as lot prices.
 
+### Phase 3.1 — Payment methods & timing ✅
+- `PaymentPolicy` per lot (methods accepted / refused / unknown, timing, reported date, confidence) with
+  event-specific overrides.
+- Filters: payment methods (multi-select, OR) and payment timing, applied once and shared by map, ranking and list;
+  unknown-payment lots hidden by default with a "show them" option, labelled "unconfirmed" when shown.
+- Card badges, full lot-page detail, and a "Payment info" submission kind for fans and lot owners (owner claims
+  flagged for moderator verification).
+- Pilot data: only sourced claims (Hammer's Lot cash/Venmo per a single third-party report; NFTA cash/Token
+  Transit; official lots prepay-required with methods unknown).
+
 ## Phase 4 — Data hardening (next 2–4 weeks)
 - On-site verification of all pilot lots during remaining 2026 home games; upgrade confidence to `verified`
   with `lastVerifiedAt`.

@@ -30,7 +30,22 @@ export function preModerationFlags(input: SubmissionInput, facility?: ParkingFac
 
   if (input.kind === "exit_time" && input.minutes > 150) flags.push("exit_time_outlier");
 
-  const eventDate = "eventDate" in input ? input.eventDate : undefined;
+  if (input.kind === "payment") {
+    // Ownership can't be checked automatically: a moderator must verify it before trusting the claim.
+    if (input.role === "lot_owner") flags.push("owner_claim_unverified");
+    if (input.eventId) flags.push("event_specific");
+    const curated = facility?.payment;
+    if (curated) {
+      if (input.accepted.some((m) => curated.notAccepted?.includes(m)) || input.notAccepted.some((m) => curated.accepted.includes(m))) {
+        flags.push("contradicts_curated_methods");
+      }
+      if (!input.eventId && curated.timing && input.timing !== "unknown" && input.timing !== curated.timing) {
+        flags.push("contradicts_curated_timing");
+      }
+    }
+  }
+
+  const eventDate = "eventDate" in input ? input.eventDate : "observedDate" in input ? input.observedDate : undefined;
   if (eventDate && eventDate > new Date().toISOString().slice(0, 10)) flags.push("future_date");
 
   return flags;
