@@ -221,6 +221,37 @@ export type Ownership = "public" | "private";
  */
 export type AccessLevel = "public" | "pass_required" | "restricted";
 
+/**
+ * How entrance coordinates were obtained.
+ * - pin: exact coordinates someone dropped on a map
+ * - surveyed: recorded by LotLizard on site
+ * - geocoded: derived from an address; approximate, never treated as the actual driveway
+ */
+export type EntranceLocationMethod = "pin" | "surveyed" | "geocoded";
+
+/** Review state of entrance information. Only "verified" coordinates are used for navigation. */
+export type EntranceVerification = "unverified" | "needs_review" | "verified";
+
+/**
+ * The vehicle entrance, kept separate from the lot's official street address (`ParkingFacility.address`).
+ * Either an address or coordinates is enough; both are preferred.
+ */
+export interface VehicleEntrance {
+  /** Street address of the vehicle entrance, which may differ from the lot's official address. */
+  address?: string;
+  location?: { lat: number; lng: number; method: EntranceLocationMethod };
+  /** Context only, from reverse-geocoding a pin; never replaces the submitted coordinates. */
+  nearestAddress?: string;
+  /** e.g. "Enter from Fieldhouse Dr; the Abbott Rd gate is exit-only after games." */
+  instructions?: string;
+  verification: EntranceVerification;
+  /** When LotLizard verified it (YYYY-MM-DD). */
+  verifiedAt?: string;
+  /** When the source reported it (YYYY-MM-DD). */
+  reportedAt: string;
+  attribution: Attribution;
+}
+
 export interface BookingLink {
   url: string;
   partner: string;
@@ -242,7 +273,10 @@ export interface ParkingFacility {
   ownership?: Attributed<Ownership>;
   /** Sourced access eligibility. Absent means unknown; below medium confidence it is "reported", not confirmed. */
   access?: Attributed<AccessLevel>;
+  /** The lot's official street address (not necessarily where cars enter; see `entrance`). */
   address?: string;
+  /** Where vehicles enter, when known. */
+  entrance?: VehicleEntrance;
   /** Omitted when no source pins the lot down — such lots are listed but not mapped. */
   location?: GeoPoint;
   description: string;

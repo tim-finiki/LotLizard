@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Mobile smoke test for a deployed preview: homepage → search → venue parking map (real map tiles) →
- * parking filters → lot name search → lot details, on an emulated iPhone. Saves a screenshot of
+ * parking filters → lot name search → lot details and share image, on an emulated iPhone. Saves a screenshot of
  * each step.
  *
  *   node scripts/preview-smoke.mjs <https://deployment-url> [out-dir]
@@ -125,6 +125,15 @@ try {
     const lot = page.getByRole("link", { name: /Details, sources/ }).first();
     await Promise.all([page.waitForURL(/\/parking\/[^/]+$/), lot.click()]);
     await page.getByRole("heading", { level: 1 }).waitFor();
+  });
+  await step("lot share image", async () => {
+    // Each lot page names its own share image, which must render as a 1200x630 PNG.
+    const og = await page.locator('meta[property="og:image"]').getAttribute("content");
+    const lotPath = new URL(page.url()).pathname;
+    if (!og || !new URL(og).pathname.startsWith(`${lotPath}/opengraph-image`)) throw new Error(`og:image isn't this lot's image: ${og ? new URL(og).pathname : "missing"}`);
+    // Preview pages point og:image at the production host; fetch the same path from this deployment.
+    const res = await page.request.get(base + new URL(og).pathname);
+    if (res.status() !== 200 || res.headers()["content-type"] !== "image/png") throw new Error(`share image returned ${res.status()} ${res.headers()["content-type"]}`);
   });
   await step("share lot link", async () => {
     const lotName = await page.getByRole("heading", { level: 1 }).textContent();

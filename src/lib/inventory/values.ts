@@ -63,6 +63,22 @@ export function parseLocation(v: string): ParsedLocation {
   };
 }
 
+export interface ParsedEntranceLocation {
+  lat: number;
+  lng: number;
+  method: "pin" | "surveyed" | "geocoded";
+}
+
+/** `lat,lng,pin` / `lat,lng,surveyed` / `lat,lng,geocoded` (geocoded = approximate, never navigated to). */
+export function parseEntranceLocation(v: string): ParsedEntranceLocation {
+  const [lat, lng, method] = v.split(",").map((s) => s.trim());
+  return {
+    lat: number(18, 72, "latitude")(lat ?? ""),
+    lng: number(-180, -64, "longitude")(lng ?? ""),
+    method: oneOf(["pin", "surveyed", "geocoded"] as const, "entrance location method")(method ?? ""),
+  };
+}
+
 export interface ParsedPrice {
   min: number;
   max: number;
@@ -137,6 +153,10 @@ export const FIELD_READERS = {
   ownership: oneOf(["public", "private"] as const, "ownership"),
   access: oneOf(["public", "pass_required", "restricted"] as const, "access"),
   address: text("address", 200),
+  entrance_address: text("entrance address", 200),
+  entrance_location: parseEntranceLocation,
+  entrance_instructions: text("entrance instructions", 400),
+  entrance_verification: oneOf(["unverified", "needs_review", "verified"] as const, "entrance verification"),
   aliases: (v: string) => v.split(";").map((s) => s.trim()).filter(Boolean),
   description: text("description", 600),
   location: parseLocation,

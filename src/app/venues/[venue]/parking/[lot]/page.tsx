@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import type { Attribution } from "@/lib/types";
+import type { Attribution, VehicleEntrance } from "@/lib/types";
 import {
   facilityAttributions,
   facilitySourceIds,
@@ -13,7 +13,7 @@ import {
   listFacilities,
 } from "@/lib/data/repository";
 import { walkInfo } from "@/lib/ranking";
-import { directionsLinks } from "@/lib/directions";
+import { DIRECTIONS_BASIS_LABEL, directionsLinks } from "@/lib/directions";
 import { formatDistance } from "@/lib/geo";
 import { AMENITY_LABEL, FACILITY_TYPE_COLOR, FACILITY_TYPE_LABEL } from "@/lib/labels";
 import { NOINDEX_FOLLOW, facilityJsonLd, facilityPath, isIndexableVenue, venuePath } from "@/lib/seo";
@@ -52,6 +52,36 @@ export async function generateMetadata({ params }: PageProps<"/venues/[venue]/pa
     openGraph: { title, description, url: facilityPath(venue, facility) },
     ...(isIndexableVenue(venue, siblings) ? {} : { robots: NOINDEX_FOLLOW }),
   };
+}
+
+const ENTRANCE_POINT: Record<NonNullable<VehicleEntrance["location"]>["method"], string> = {
+  pin: "Map pin",
+  surveyed: "Surveyed on site",
+  geocoded: "Approximate (from the address, not the actual driveway)",
+};
+const ENTRANCE_STATUS: Record<VehicleEntrance["verification"], string> = {
+  verified: "Verified",
+  unverified: "Not yet verified",
+  needs_review: "Under review",
+};
+
+function EntranceInfo({ entrance: e }: { entrance: VehicleEntrance }) {
+  return (
+    <span className="flex flex-col gap-0.5 font-normal">
+      {e.address && <span className="font-medium">{e.address}</span>}
+      {e.location && (
+        <span className="text-xs text-neutral-500">
+          {ENTRANCE_POINT[e.location.method]}
+          {e.nearestAddress && ` · near ${e.nearestAddress}`}
+        </span>
+      )}
+      {e.instructions && <span>{e.instructions}</span>}
+      <span className="text-xs text-neutral-500">
+        {ENTRANCE_STATUS[e.verification]}
+        {e.verifiedAt ? ` ${e.verifiedAt}` : ""} · reported {e.reportedAt}
+      </span>
+    </span>
+  );
 }
 
 function Row({ label, children, attribution }: { label: string; children: React.ReactNode; attribution?: Attribution }) {
@@ -125,10 +155,25 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
             <a href={directions.apple} target="_blank" rel="noopener noreferrer" className="flex h-10 items-center rounded-lg bg-ink px-4 text-sm font-semibold text-white dark:bg-white dark:text-neutral-900">
               Apple Maps
             </a>
-            <span className="text-xs text-neutral-500">{directions.basis === "street_address" ? "Routes to the listed street address." : "Routes to the verified entrance."}</span>
+            <span className="text-xs text-neutral-500">Routes {DIRECTIONS_BASIS_LABEL[directions.basis]}.</span>
           </div>
         ) : (
-          <p className="text-xs text-neutral-500">No turn-by-turn directions yet: this lot&apos;s entrance hasn&apos;t been verified, and we won&apos;t route you to an approximate pin.</p>
+          !f.entrance?.instructions && (
+            <p className="text-xs text-neutral-500">No turn-by-turn directions yet: this lot&apos;s entrance hasn&apos;t been verified, and we won&apos;t route you to an approximate pin.</p>
+          )
+        )}
+        {f.entrance?.instructions && (
+          <div className="flex flex-col gap-1 rounded-2xl bg-white p-3 text-sm ring-1 ring-black/5 dark:bg-ink-soft dark:ring-white/10">
+            <p>
+              <strong className="font-semibold">How to get in:</strong> {f.entrance.instructions}
+            </p>
+            {!directions && (
+              <p className="text-xs text-neutral-500">
+                No navigation link: there&apos;s no published entrance address or verified entrance pin to route to yet, and the entrance road may
+                not appear in map apps. Head for the approach road above and follow the signs and traffic control.
+              </p>
+            )}
+          </div>
         )}
         <div className="flex flex-wrap items-start gap-2">
           <ShareLotButton path={facilityPath(venue, f)} title={`${f.name} — ${venue.name} parking`} />
@@ -194,6 +239,10 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
 
         <Section id="details" title="Details">
           <dl className="divide-y divide-black/5 rounded-2xl bg-white px-4 ring-1 ring-black/5 dark:divide-white/10 dark:bg-ink-soft dark:ring-white/10">
+            <Row label="Parking address">{f.address ?? "Unknown"}</Row>
+            <Row label="Vehicle entrance" attribution={f.entrance?.attribution}>
+              {f.entrance ? <EntranceInfo entrance={f.entrance} /> : "Unknown — not yet reported"}
+            </Row>
             <Row label="Who can park" attribution={access.attribution}>
               {access.text}
             </Row>

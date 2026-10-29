@@ -11,7 +11,11 @@ export interface VenueOption {
   events: { id: string; label: string }[];
 }
 
-const KIND_LABEL: Record<SubmissionKind, string> = {
+/** Kinds this form collects. Entrance reports (address and/or map pin) need a pin picker and aren't in the form yet. */
+type FormKind = Exclude<SubmissionKind, "entrance">;
+const FORM_KINDS = SUBMISSION_KINDS.filter((k): k is FormKind => k !== "entrance");
+
+const KIND_LABEL: Record<FormKind, string> = {
   price: "Price I paid",
   payment: "Payment info",
   review: "Lot review",
@@ -36,7 +40,7 @@ function Field({ label, children, hint }: { label: string; children: React.React
 }
 
 export function SubmitForm({ venues }: { venues: VenueOption[] }) {
-  const [kind, setKind] = useState<SubmissionKind>("price");
+  const [kind, setKind] = useState<FormKind>("price");
   const [venueSlug, setVenueSlug] = useState(venues[0]?.slug ?? "");
   const [lotSlug, setLotSlug] = useState("");
   const [state, setState] = useState<{ status: "idle" | "sending" | "done" | "error"; message?: string }>({ status: "idle" });
@@ -45,11 +49,11 @@ export function SubmitForm({ venues }: { venues: VenueOption[] }) {
 
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
-    const k = q.get("kind") as SubmissionKind | null;
+    const k = q.get("kind") as FormKind | null;
     const v = q.get("venue");
     const l = q.get("lot");
     /* eslint-disable react-hooks/set-state-in-effect -- one-time prefill from URL */
-    if (k && SUBMISSION_KINDS.includes(k)) setKind(k);
+    if (k && FORM_KINDS.includes(k)) setKind(k);
     if (v && venues.some((x) => x.slug === v)) setVenueSlug(v);
     if (l) setLotSlug(l);
     setToday(new Date().toISOString().slice(0, 10));
@@ -128,7 +132,7 @@ export function SubmitForm({ venues }: { venues: VenueOption[] }) {
       <fieldset className="flex flex-col gap-2">
         <legend className="mb-1 text-sm font-medium">What are you reporting?</legend>
         <div className="flex flex-wrap gap-2">
-          {SUBMISSION_KINDS.map((k) => (
+          {FORM_KINDS.map((k) => (
             <button
               key={k}
               type="button"

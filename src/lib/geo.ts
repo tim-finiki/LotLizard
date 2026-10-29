@@ -6,7 +6,7 @@ export const ROUTE_FACTOR = 1.3;
 /** ~4.8 km/h — a crowd-adjusted walking pace. */
 export const WALK_METERS_PER_MINUTE = 80;
 
-type LatLng = Pick<GeoPoint, "lat" | "lng">;
+export type LatLng = Pick<GeoPoint, "lat" | "lng">;
 
 export function haversineMeters(a: LatLng, b: LatLng): number {
   const toRad = (d: number) => (d * Math.PI) / 180;

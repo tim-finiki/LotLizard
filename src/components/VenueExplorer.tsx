@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
-import type { Amenity, FacilityType, ParkingFacility, Venue, VehicleType, VenueEvent } from "@/lib/types";
+import type { Amenity, FacilityType, ParkingFacility, Venue, VehicleEntrance, VehicleType, VenueEvent } from "@/lib/types";
 import {
   DEFAULT_PREFERENCES,
   EXIT_DATA_UNAVAILABLE,
@@ -20,7 +20,7 @@ import {
 } from "@/lib/ranking";
 import { AMENITY_LABEL, FACILITY_TYPE_COLOR, FACILITY_TYPE_LABEL } from "@/lib/labels";
 import { CONFIDENCE_LABEL } from "@/lib/confidence";
-import { directionsLinks, type DirectionsLinks } from "@/lib/directions";
+import { DIRECTIONS_BASIS_LABEL, directionsLinks, type DirectionsLinks } from "@/lib/directions";
 import { eventShortLabel, formatClock, formatEventDate, lotOpenTime, upcomingEvents } from "@/lib/events";
 import { formatDistance } from "@/lib/geo";
 import { activeFilterCount, applyDisplayFilters, buildMarkers, clearFilters } from "@/lib/explorer";
@@ -631,19 +631,34 @@ function exitText(r: RankedFacility, direction: string) {
   return undefined;
 }
 
-function DirectionsRow({ links }: { links: DirectionsLinks | null }) {
+function DirectionsRow({ links, entrance }: { links: DirectionsLinks | null; entrance?: VehicleEntrance }) {
+  const howToGetIn = entrance?.instructions && (
+    <p className="rounded-lg bg-mist p-2 text-xs dark:bg-neutral-800">
+      <strong className="font-semibold">How to get in:</strong> {entrance.instructions}
+    </p>
+  );
   if (!links) {
-    return <p className="text-xs text-neutral-500">No directions yet — this lot&apos;s entrance hasn&apos;t been verified.</p>;
+    return howToGetIn ? (
+      <div className="flex flex-col gap-1">
+        {howToGetIn}
+        <p className="text-[11px] text-neutral-500">No navigation link: there&apos;s no published entrance address or verified entrance pin to route to yet.</p>
+      </div>
+    ) : (
+      <p className="text-xs text-neutral-500">No directions yet — this lot&apos;s entrance hasn&apos;t been verified.</p>
+    );
   }
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      <a href={links.google} target="_blank" rel="noopener noreferrer" className="flex h-9 items-center rounded-lg bg-neutral-100 px-3 text-xs font-semibold dark:bg-neutral-800">
-        Google Maps
-      </a>
-      <a href={links.apple} target="_blank" rel="noopener noreferrer" className="flex h-9 items-center rounded-lg bg-neutral-100 px-3 text-xs font-semibold dark:bg-neutral-800">
-        Apple Maps
-      </a>
-      <span className="text-[11px] text-neutral-500">{links.basis === "street_address" ? "to the listed street address" : "to the verified entrance"}</span>
+    <div className="flex flex-col gap-1.5">
+      {howToGetIn}
+      <div className="flex flex-wrap items-center gap-2">
+        <a href={links.google} target="_blank" rel="noopener noreferrer" className="flex h-9 items-center rounded-lg bg-neutral-100 px-3 text-xs font-semibold dark:bg-neutral-800">
+          Google Maps
+        </a>
+        <a href={links.apple} target="_blank" rel="noopener noreferrer" className="flex h-9 items-center rounded-lg bg-neutral-100 px-3 text-xs font-semibold dark:bg-neutral-800">
+          Apple Maps
+        </a>
+        <span className="text-[11px] text-neutral-500">{DIRECTIONS_BASIS_LABEL[links.basis]}</span>
+      </div>
     </div>
   );
 }
@@ -771,7 +786,7 @@ function ResultCard({
               <span>Price: {r.price.attribution.notes}</span>
             </p>
           )}
-          <DirectionsRow links={directionsLinks(f)} />
+          <DirectionsRow links={directionsLinks(f)} entrance={f.entrance} />
           <div className="flex flex-wrap items-center gap-2">
             <label className={`flex h-9 items-center gap-2 rounded-lg border border-black/10 px-3 text-xs font-medium dark:border-white/15 ${compareDisabled ? "opacity-50" : ""}`}>
               <input type="checkbox" checked={compared} disabled={compareDisabled} onChange={onToggleCompare} className="h-4 w-4 accent-brand-600" />
@@ -832,7 +847,7 @@ function OtherCard({
             <AccessBadges facility={f} />
             {accessMatch === "unknown" && <UnconfirmedChip />}
           </span>
-          <DirectionsRow links={directionsLinks(f)} />
+          <DirectionsRow links={directionsLinks(f)} entrance={f.entrance} />
           <div className="flex flex-wrap items-center gap-3">
             <Link href={`/venues/${venue.slug}/parking/${f.slug}`} className="font-semibold text-brand-700 underline dark:text-brand-100">
               Details &amp; sources
