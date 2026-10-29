@@ -39,9 +39,12 @@ _Last updated: 2026-10-29_
 - `data/` — seed data (`sources.ts`, `venues.ts`, `facilities/*.ts`) and `repository.ts`, an async
   repository interface. Pages only talk to the repository, so moving to a database changes one module.
 - `geo.ts` — haversine distance, estimated walking time (straight-line × route factor), bounds.
-- `ranking.ts` — evidence-only personalized scoring. Returns a match score, data completeness, confidence of the
-  evidence used, and a recommendation tier (`top_pick`, `good_match`, `fair_match`, `limited_data`). Unknown
-  factors contribute 0, so missing data can never lift a lot; lots under 50% completeness are never recommended.
+- `ranking.ts` — personalized scoring. Returns a match score, data completeness, confidence of the evidence
+  used, and a recommendation tier (`top_pick`, `good_match`, `fair_match`, `limited_data`). The match is a
+  weighted average over *known* factors only, so missing data is neutral. Lots under 50% completeness are listed
+  but unranked (`rank: null`). Cost uses only lot-specific prices (`PriceObservation.scope`). Exit direction
+  counts only with documented routing (confidence ≥ medium).
+- `explorer.ts` — derives map pins from the current ranking so pin labels always match card ranks.
 - `events.ts`, `directions.ts` — event labels/lot opening times (pure string math, timezone-safe) and map links
   that only target exact pins or sourced street addresses.
 - `confidence.ts` — confidence ordering, labels, and community-report corroboration rules.

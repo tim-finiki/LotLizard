@@ -5,7 +5,10 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import type { FacilityType, ParkingFacility, Venue, VehicleType, VenueEvent } from "@/lib/types";
 import {
+  EXIT_DATA_UNAVAILABLE,
   FACTORS,
+  exitDirectionDataAvailable,
+  hasRankableExitDirections,
   rankFacilities,
   walkInfo,
   type Factor,
@@ -18,11 +21,11 @@ import { CONFIDENCE_LABEL } from "@/lib/confidence";
 import { directionsLinks, type DirectionsLinks } from "@/lib/directions";
 import { eventShortLabel, formatClock, formatEventDate, lotOpenTime, upcomingEvents } from "@/lib/events";
 import { formatDistance } from "@/lib/geo";
+import { buildMarkers } from "@/lib/explorer";
 import { BottomSheet, snapHeight, type SheetSnap } from "@/components/BottomSheet";
 import { ConfidenceBadge } from "@/components/ConfidenceBadge";
 import { ReferralLink } from "@/components/ReferralLink";
 import { usePreferences } from "@/components/usePreferences";
-import type { MapMarker } from "@/components/VenueMap";
 
 const VenueMap = dynamic(() => import("@/components/VenueMap"), {
   ssr: false,
@@ -30,7 +33,6 @@ const VenueMap = dynamic(() => import("@/components/VenueMap"), {
 });
 
 const FACTOR_LABEL: Record<Factor, string> = { cost: "Low cost", walk: "Short walk", tailgate: "Tailgating", exit: "Quick exit" };
-const NON_RANKED_INITIAL: Partial<Record<FacilityType, string>> = { shuttle: "S", rideshare_zone: "R", ada: "A" };
 const NO_EVENT = "none";
 
 const REC_STYLE: Record<Recommendation, { label: string; className: string }> = {
@@ -66,7 +68,7 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
   const [eventId, setEventId] = useState<string>(NO_EVENT);
   const [today, setToday] = useState<string>();
   const [hiddenTypes, setHiddenTypes] = useState<FacilityType[]>([]);
-  const [activeId, setActiveId] = useState<string>();
+  const [selectedId, setActiveId] = useState<string>();
   const [compare, setCompare] = useState<string[]>([]);
   const [modal, setModal] = useState<"filters" | "compare" | null>(null);
   const [snap, setSnap] = useState<SheetSnap>("peek");
@@ -121,21 +123,24 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
   const rankById = useMemo(() => new Map(ranked.map((r) => [r.facility.id, r])), [ranked]);
   const presentTypes = useMemo(() => [...new Set(facilities.map((f) => f.type))], [facilities]);
   const visible = useCallback((f: ParkingFacility) => !hiddenTypes.includes(f.type), [hiddenTypes]);
-  const visibleRanked = ranked.filter((r) => visible(r.facility));
+  const rankedList = ranked.filter((r) => r.rank !== null && visible(r.facility));
+  const unrankedList = ranked.filter((r) => r.rank === null && visible(r.facility));
   const others = facilities.filter((f) => !rankById.has(f.id) && visible(f));
   const unmapped = facilities.filter((f) => !f.location && visible(f)).length;
   const eventChoices = today ? upcomingEvents(events, today) : events;
+  const markers = buildMarkers(facilities, ranked, hiddenTypes);
+  // A selection hidden by a filter is dropped, so the pin and card highlights never go stale.
+  const activeId = selectedId && facilities.some((f) => f.id === selectedId && visible(f)) ? selectedId : undefined;
+  const directionLabel = approaches.find((a) => a.id === direction)?.label;
+  const exitDirectionsAvailable = exitDirectionDataAvailable(facilities, direction);
+  const priorityOrder = [...FACTORS].filter((f) => prefs.weights[f] > 0).sort((a, b) => prefs.weights[b] - prefs.weights[a]);
+  const rankingSummary = rankedList.slice(0, 3).map((r) => `${r.rank}. ${r.facility.name}`).join(", ");
 
-  const markers: MapMarker[] = facilities
-    .filter((f) => f.location && visible(f))
-    .map((f) => ({
-      id: f.id,
-      name: f.name,
-      type: f.type,
-      lat: f.location!.lat,
-      lng: f.location!.lng,
-      label: rankById.get(f.id)?.rank.toString() ?? NON_RANKED_INITIAL[f.type] ?? "•",
-    }));
+  // After any re-rank, keep the selected lot's card in view (its position may have changed).
+  useEffect(() => {
+    if (activeId) pendingScroll.current = activeId;
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- only when the ranking itself changes
+  }, [ranked]);
 
   // Scroll the selected card into view inside the sheet (not the page) once it has rendered.
   useEffect(() => {
@@ -174,7 +179,8 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
     <div className="flex items-start justify-between gap-2">
       <div className="min-w-0">
         <h2 className="text-base font-bold leading-tight">
-          {visibleRanked.length} parking {visibleRanked.length === 1 ? "option" : "options"} ranked for you
+          {rankedList.length} ranked for you
+          {unrankedList.length > 0 && <span className="font-normal text-neutral-500"> · {unrankedList.length} need more data</span>}
         </h2>
         <p className="truncate text-xs text-neutral-500">
           {event ? (
@@ -183,8 +189,15 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
               {opensAt && ` · Official lots open ${opensAt}`}
             </>
           ) : (
-            "No event selected — showing all known prices"
+            "No event selected"
           )}
+        </p>
+        <p className="truncate text-xs text-neutral-500">
+          Ranked by {priorityOrder.length ? priorityOrder.map((f) => FACTOR_LABEL[f]).join(" › ") : "all factors equally"}
+          {event && " · Prices aren't game-specific yet"}
+        </p>
+        <p className="sr-only" aria-live="polite">
+          {rankingSummary ? `Ranking updated: ${rankingSummary}` : "No lots have enough data to rank"}
         </p>
       </div>
       {compare.length > 0 && (
@@ -240,6 +253,12 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
               )}
             </button>
           </div>
+          {direction !== "any" && !exitDirectionsAvailable && (
+            <p role="status" className="pointer-events-auto w-fit max-w-full rounded-lg bg-amber-50 px-3 py-1.5 text-xs font-medium text-amber-900 shadow dark:bg-amber-900/80 dark:text-amber-50">
+              {EXIT_DATA_UNAVAILABLE} for {directionLabel}. Rankings aren&apos;t adjusted for direction.{" "}
+              <a href="#getting-there" className="underline">Traffic plan</a>
+            </p>
+          )}
           {activeId && !activeHasPin && (
             <p className="pointer-events-auto w-fit rounded-lg bg-white/95 px-3 py-1.5 text-xs shadow dark:bg-neutral-900/95">
               This option has no confirmed location, so it isn&apos;t on the map.
@@ -250,7 +269,7 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
 
       <BottomSheet snap={snap} onSnapChange={setSnap} containerHeight={containerHeight} header={header} label="Parking results">
         <div ref={listRef} className="relative flex flex-col gap-2">
-          {visibleRanked.map((r) => (
+          {rankedList.map((r) => (
             <ResultCard
               key={r.facility.id}
               venue={venue}
@@ -263,8 +282,32 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
               onToggleCompare={() => toggleCompare(r.facility.id)}
             />
           ))}
-          {visibleRanked.length === 0 && (
-            <p className="rounded-xl bg-neutral-50 p-3 text-sm dark:bg-neutral-800">No lots match your filters. Try relaxing the max price or vehicle type.</p>
+          {rankedList.length === 0 && (
+            <p className="rounded-xl bg-neutral-50 p-3 text-sm dark:bg-neutral-800">
+              {unrankedList.length > 0
+                ? "No lot has enough data for these priorities to rank it honestly. Try weighting walk or tailgating, where we have more data."
+                : "No lots match your filters. Try relaxing the max price or vehicle type."}
+            </p>
+          )}
+
+          {unrankedList.length > 0 && (
+            <>
+              <h3 className="mt-3 text-sm font-bold">Not enough data to rank</h3>
+              <p className="-mt-1 text-xs text-neutral-500">We know too little about these for your priorities, so we don&apos;t rank them either way.</p>
+              {unrankedList.map((r) => (
+                <ResultCard
+                  key={r.facility.id}
+                  venue={venue}
+                  ranked={r}
+                  direction={direction}
+                  active={activeId === r.facility.id}
+                  compared={compare.includes(r.facility.id)}
+                  compareDisabled={compare.length >= 3 && !compare.includes(r.facility.id)}
+                  onSelect={() => selectFromList(r.facility.id)}
+                  onToggleCompare={() => toggleCompare(r.facility.id)}
+                />
+              ))}
+            </>
           )}
 
           {others.length > 0 && (
@@ -278,8 +321,9 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
 
           <div className="mt-3 flex flex-col gap-2 rounded-xl bg-neutral-50 p-3 text-xs text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
             <p>
-              <strong>How to read this:</strong> the match only counts what we actually know, so missing data never helps a
-              lot. &ldquo;Limited data&rdquo; means we can&apos;t recommend it either way. Pins are approximate unless marked
+              <strong>How to read this:</strong> the match averages only what we actually know about a lot. Missing data
+              is neither a plus nor a minus, and lots with too little data aren&apos;t ranked. Official-lot prices are an
+              area-wide range, so they don&apos;t count toward &ldquo;Low cost&rdquo;. Pins are approximate unless marked
               exact{unmapped > 0 && `, and ${unmapped} option${unmapped > 1 ? "s have" : " has"} no confirmed location`}.
             </p>
             {stadiumDirections && (
@@ -347,17 +391,22 @@ function RecBadge({ rec }: { rec: Recommendation }) {
   return <span className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] font-bold ${s.className}`}>{s.label}</span>;
 }
 
-function Stat({ label, value }: { label: string; value?: string }) {
+function Stat({ label, value, missing = "No data", note }: { label: string; value?: string; missing?: string; note?: string }) {
   return (
     <div className="min-w-0">
       <div className="text-[10px] uppercase tracking-wide text-neutral-500">{label}</div>
-      <div className={`truncate text-sm ${value ? "font-semibold" : "italic text-neutral-400"}`}>{value ?? "No data"}</div>
+      <div className={value ? "truncate text-sm font-semibold" : "text-[11px] italic leading-tight text-neutral-400"}>{value ?? missing}</div>
+      {note && value && <div className="truncate text-[10px] text-neutral-500">{note}</div>}
     </div>
   );
 }
 
 function priceText(r: RankedFacility) {
   return r.price ? (r.price.min === r.price.max ? `$${r.price.min}` : `$${r.price.min}–${r.price.max}`) : undefined;
+}
+
+function priceNote(r: RankedFacility) {
+  return r.price && r.price.scope === "area" ? "area range" : undefined;
 }
 
 function tailgateText(f: ParkingFacility) {
@@ -369,7 +418,7 @@ function tailgateText(f: ParkingFacility) {
 
 function exitText(r: RankedFacility, direction: string) {
   const f = r.facility;
-  if (direction !== "any" && f.exit.directions) return f.exit.directions.value.includes(direction) ? "Your way" : "Other way";
+  if (direction !== "any" && hasRankableExitDirections(f)) return f.exit.directions!.value.includes(direction) ? "Your way" : "Other way";
   if (f.exit.rating) return `${f.exit.rating.value}/5`;
   return undefined;
 }
@@ -424,13 +473,13 @@ function ResultCard({
           className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full text-xs font-bold text-white"
           style={{ background: FACILITY_TYPE_COLOR[f.type] }}
         >
-          {r.rank}
+          {r.rank ?? "?"}
         </span>
         <span className="min-w-0 flex-1">
           <span className="flex items-start justify-between gap-2">
             <span className="min-w-0">
               <span className="block truncate font-semibold leading-tight">
-                <span className="sr-only">Rank {r.rank}: </span>
+                <span className="sr-only">{r.rank !== null ? `Rank ${r.rank}: ` : "Not ranked: "}</span>
                 {f.name}
               </span>
               <span className="block truncate text-xs text-neutral-500">{FACILITY_TYPE_LABEL[f.type]}</span>
@@ -438,10 +487,10 @@ function ResultCard({
             <RecBadge rec={r.recommendation} />
           </span>
           <span className="mt-2 grid grid-cols-4 gap-2">
-            <Stat label="Price" value={priceText(r)} />
+            <Stat label="Price" value={priceText(r)} note={priceNote(r)} />
             <Stat label="Walk" value={r.walk ? `${r.walk.estimated ? "~" : ""}${r.walk.minutes} min` : undefined} />
             <Stat label="Tailgate" value={tailgateText(f)} />
-            <Stat label="Exit" value={exitText(r, direction)} />
+            <Stat label="Exit" value={exitText(r, direction)} missing="Not yet available" />
           </span>
         </span>
       </button>
@@ -451,7 +500,7 @@ function ResultCard({
           <dl className="grid grid-cols-3 gap-2 rounded-xl bg-neutral-50 p-2 text-center dark:bg-neutral-800">
             <div>
               <dt className="text-[10px] uppercase tracking-wide text-neutral-500">Match</dt>
-              <dd className="text-lg font-extrabold tabular-nums">{r.score}</dd>
+              <dd className="text-lg font-extrabold tabular-nums">{r.rank !== null ? r.score : <span className="text-sm font-semibold text-neutral-400">Not ranked</span>}</dd>
             </div>
             <div>
               <dt className="text-[10px] uppercase tracking-wide text-neutral-500">Data</dt>
@@ -597,7 +646,7 @@ function Toggle({ label, checked, onChange }: { label: string; checked: boolean;
 function CompareTable({ venue, items }: { venue: Venue; items: RankedFacility[] }) {
   const rows: { label: string; render: (r: RankedFacility) => React.ReactNode }[] = [
     { label: "Recommendation", render: (r) => <RecBadge rec={r.recommendation} /> },
-    { label: "Match", render: (r) => <strong>{r.score}</strong> },
+    { label: "Match", render: (r) => (r.rank !== null ? <strong>{r.score}</strong> : "Not ranked") },
     { label: "Data / confidence", render: (r) => `${Math.round(r.completeness * 100)}% · ${CONFIDENCE_LABEL[r.confidence]}` },
     { label: "Type", render: (r) => FACILITY_TYPE_LABEL[r.facility.type] },
     {
@@ -627,7 +676,7 @@ function CompareTable({ venue, items }: { venue: Venue; items: RankedFacility[] 
             {items.map((r) => (
               <th key={r.facility.id} scope="col" className="p-2 text-left align-bottom">
                 <Link href={`/venues/${venue.slug}/parking/${r.facility.slug}`} className="font-bold hover:underline">
-                  #{r.rank} {r.facility.name}
+                  {r.rank !== null ? `#${r.rank} ` : ""}{r.facility.name}
                 </Link>
               </th>
             ))}

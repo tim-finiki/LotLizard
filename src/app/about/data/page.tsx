@@ -53,11 +53,13 @@ export default function DataPage() {
         <p>
           Personalized rankings weight cost, walking distance, tailgating and exit convenience by your priorities.
           We show three separate numbers: the <strong>match</strong> score, the share of your priorities backed by{" "}
-          <strong>data</strong>, and the <strong>confidence</strong> of the weakest evidence used. Missing data adds
-          nothing to a match, so it can never push a lot up the list. Lots with less than half their data are marked
-          &ldquo;Limited data&rdquo; and are never recommended. Exit direction is inferred from published traffic
-          plans and labelled low confidence. Sponsorships and referral partnerships never change rankings, and
-          sponsored content is always labelled.
+          <strong>data</strong>, and the <strong>confidence</strong> of the weakest evidence used. The match averages
+          only what we know, so missing data is neither a plus nor a minus. Lots with less than half the data your
+          priorities need aren&apos;t ranked at all. Area-wide price ranges (such as a range for all official lots) are
+          shown but don&apos;t count as a lot&apos;s price. Your departure direction only affects rankings when a lot&apos;s
+          exit routing is documented by an official or credible media source. Until then we say &ldquo;Exit data not
+          yet available&rdquo;. Sponsorships and referral partnerships never change rankings, and sponsored content is
+          always labelled.
         </p>
       </section>
       <section className="flex flex-col gap-2">

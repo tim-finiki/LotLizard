@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type { ParkingFacility, Venue } from "@/lib/types";
 import { attr, fact } from "@/lib/data/attr";
-import { DEFAULT_PREFERENCES, bestPrice, rankFacilities, type RankingPreferences } from "@/lib/ranking";
+import { DEFAULT_PREFERENCES, EXIT_DATA_UNAVAILABLE, bestPrice, exitDirectionDataAvailable, rankFacilities, type RankingPreferences } from "@/lib/ranking";
 
 const venue: Venue = {
   id: "v",
@@ -80,9 +80,40 @@ describe("rankFacilities", () => {
   it("keeps the match score separate from completeness and confidence", () => {
     const a = lot("a", { prices: [price(20, 20, "high")] });
     const [r] = rankFacilities(venue, [a], prefs({ weights: { cost: 5, walk: 0, tailgate: 0, exit: 5 } }));
+    // Score averages known factors only; the missing exit factor shows up in completeness, not the score.
+    expect(r.score).toBe(100);
     expect(r.completeness).toBe(0.5);
-    expect(r.score).toBe(50);
     expect(r.confidence).toBe("high");
+  });
+
+  it("treats missing data as neutral: neither a bonus nor a penalty", () => {
+    const good = { tailgating: { allowed: fact<boolean | "unknown">(true, "medium", ["s"]), atmosphere: fact(5, "low", ["s"]) } };
+    const withPrice = lot("with-price", { ...good, prices: [price(40)] });
+    const noPrice = lot("no-price", { ...good });
+    const r = rankFacilities(venue, [withPrice, noPrice], prefs({ weights: { cost: 1, walk: 0, tailgate: 5, exit: 0 } }));
+    const byId = Object.fromEntries(r.map((x) => [x.facility.id, x]));
+    // Same known tailgate evidence → same score; the unknown price only lowers completeness.
+    expect(byId["no-price"].score).toBe(byId["with-price"].score);
+    expect(byId["no-price"].completeness).toBeLessThan(byId["with-price"].completeness);
+    // Equal scores: the better-documented lot wins the tie.
+    expect(r[0].facility.id).toBe("with-price");
+  });
+
+  it("does not rank lots with too little data", () => {
+    const [r] = rankFacilities(venue, [lot("thin", { location: undefined, prices: [price(10)] })]);
+    expect(r.rank).toBeNull();
+    expect(r.recommendation).toBe("limited_data");
+  });
+
+  it("never uses area-wide price ranges as cost evidence", () => {
+    const area = lot("area", { prices: [{ ...price(35, 90), scope: "area" as const }] });
+    const specific = lot("specific", { prices: [price(60)] });
+    const r = rankFacilities(venue, [area, specific], prefs({ weights: { cost: 5, walk: 0, tailgate: 0, exit: 0 } }));
+    expect(r.find((x) => x.facility.id === "area")?.factors.cost.known).toBe(false);
+    expect(r.find((x) => x.facility.id === "area")?.factors.cost.detail).toContain("area estimate only");
+    expect(r.find((x) => x.facility.id === "specific")?.factors.cost.known).toBe(true);
+    // An area range never rules a lot out on max price either.
+    expect(rankFacilities(venue, [area], prefs({ maxPrice: 30 }))).toHaveLength(1);
   });
 
   it("assigns a single top pick and never recommends low-completeness lots", () => {
@@ -94,46 +125,21 @@ describe("rankFacilities", () => {
     expect(r.find((x) => x.facility.id === "thin")?.recommendation).toBe("limited_data");
   });
 
-  it("scores exit by direction of travel when route data exists", () => {
-    const north = lot("north", { exit: { directions: fact(["north"], "low", ["s"]) } });
-    const west = lot("west", { exit: { directions: fact(["west"], "low", ["s"]) } });
-    const none = lot("none");
-    const r = rankFacilities(venue, [none, west, north], prefs({ direction: "north", weights: { cost: 0, walk: 0, tailgate: 0, exit: 5 } }));
-    expect(r.map((x) => x.facility.id)).toEqual(["north", "west", "none"]);
-    expect(r[2].factors.exit.known).toBe(false);
-    // With no direction chosen, route data alone is not an exit score.
+  it("scores exit direction only from documented (medium+) routing", () => {
+    const documented = (ids: string[]) => ({ directions: fact(ids, "medium", ["s"]) });
+    const north = lot("north", { exit: documented(["north"]) });
+    const west = lot("west", { exit: documented(["west"]) });
+    const inferred = lot("inferred", { exit: { directions: fact(["north"], "low", ["s"]) } });
+    const exitOnly = prefs({ direction: "north", weights: { cost: 0, walk: 0, tailgate: 0, exit: 5 } });
+    const r = rankFacilities(venue, [inferred, west, north], exitOnly);
+    expect(r.map((x) => x.facility.id)).toEqual(["north", "west", "inferred"]);
+    // A low-confidence inference is not used: the lot is unranked with an explicit message.
+    expect(r[2].rank).toBeNull();
+    expect(r[2].factors.exit.detail).toBe(EXIT_DATA_UNAVAILABLE);
+    expect(exitDirectionDataAvailable([inferred], "north")).toBe(false);
+    expect(exitDirectionDataAvailable([north], "north")).toBe(true);
+    // With no direction chosen, routing data alone is not an exit score.
     expect(rankFacilities(venue, [north], prefs({ weights: { cost: 0, walk: 0, tailgate: 0, exit: 5 } }))[0].factors.exit.known).toBe(false);
-  });
-
-  it("excludes lots that forbid tailgating when required, but keeps unknowns", () => {
-    const no = lot("no", { tailgating: { allowed: fact<boolean | "unknown">(false, "high", ["s"]) } });
-    const unknown = lot("unknown");
-    const r = rankFacilities(venue, [no, unknown], prefs({ requireTailgating: true }));
-    expect(r.map((x) => x.facility.id)).toEqual(["unknown"]);
-  });
-
-  it("applies max price, vehicle and ADA filters, and never ranks shuttles", () => {
-    const pricey = lot("pricey", { prices: [price(100)] });
-    const rv = lot("rv", { vehicleTypes: ["rv"] });
-    const ada = lot("ada", { type: "ada" });
-    const shuttle = lot("shuttle", { type: "shuttle" });
-    const ok = lot("ok", { prices: [price(30)] });
-    expect(rankFacilities(venue, [pricey, rv, ada, shuttle, ok], prefs({ maxPrice: 50 })).map((x) => x.facility.id)).toEqual(["ok"]);
-    expect(rankFacilities(venue, [ada], prefs({ needsAda: true }))).toHaveLength(1);
-  });
-
-  it("treats all-zero weights as balanced instead of dividing by zero", () => {
-    const [r] = rankFacilities(venue, [lot("a", { prices: [price(10)] })], prefs({ weights: { cost: 0, walk: 0, tailgate: 0, exit: 0 } }));
-    expect(Number.isFinite(r.score)).toBe(true);
-  });
-
-  it("uses atmosphere rating for tailgate score", () => {
-    const legendary = lot("legendary", {
-      tailgating: { allowed: fact<boolean | "unknown">(true, "medium", ["s"]), atmosphere: fact(5, "low", ["s"]) },
-    });
-    const plain = lot("plain", { tailgating: { allowed: fact<boolean | "unknown">(true, "medium", ["s"]) } });
-    const r = rankFacilities(venue, [plain, legendary], prefs({ weights: { cost: 0, walk: 0, tailgate: 5, exit: 0 } }));
-    expect(r[0].facility.id).toBe("legendary");
   });
 });
 

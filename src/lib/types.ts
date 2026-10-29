@@ -152,6 +152,11 @@ export interface PriceObservation {
   season?: string;
   observedAt: string;
   paymentNotes?: string;
+  /**
+   * "lot" (default): a price reported for this specific lot. "area": a range reported for a group of
+   * lots or a street. Area ranges are shown for context but are not evidence for comparing lots.
+   */
+  scope?: "lot" | "area";
   attribution: Attribution;
 }
 
@@ -190,7 +195,10 @@ export interface ParkingFacility {
     rating?: Attributed<number>;
     routes?: string[];
     notes?: string;
-    /** Approach IDs this lot's post-event exit route leads toward. */
+    /**
+     * Approach IDs this lot's post-event exit route leads toward. Only used for ranking when backed
+     * by documented lot-level routing (confidence ≥ medium).
+     */
     directions?: Attributed<string[]>;
   };
   vehicleTypes: VehicleType[];
