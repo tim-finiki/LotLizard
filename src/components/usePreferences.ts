@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useSyncExternalStore } from "react";
-import { DEFAULT_PREFERENCES, type RankingPreferences } from "@/lib/ranking";
+import { DEFAULT_PREFERENCES, normalizePreferences, type RankingPreferences } from "@/lib/ranking";
 
 const KEY = "lotlizard:prefs:v1";
 const listeners = new Set<() => void>();
@@ -23,13 +23,7 @@ function read(): RankingPreferences {
   let value = DEFAULT_PREFERENCES;
   if (raw) {
     try {
-      const parsed = JSON.parse(raw) as Partial<RankingPreferences>;
-      value = {
-        ...DEFAULT_PREFERENCES,
-        ...parsed,
-        weights: { ...DEFAULT_PREFERENCES.weights, ...parsed.weights },
-        payment: { ...DEFAULT_PREFERENCES.payment, ...parsed.payment },
-      };
+      value = normalizePreferences(JSON.parse(raw));
     } catch {
       // Corrupt value: ignore.
     }

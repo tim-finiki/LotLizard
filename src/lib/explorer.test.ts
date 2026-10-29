@@ -39,7 +39,7 @@ describe("activeFilterCount", () => {
       payment: { methods: ["cash", "venmo"], timings: ["pay_on_arrival"], includeUnknown: false },
       amenities: ["tailgate_area"],
       vehicle: "rv",
-      needsAda: true,
+      features: ["ada"],
       requireTailgating: true,
       maxPrice: 50,
     });
@@ -51,7 +51,7 @@ describe("clearFilters", () => {
   it("resets filters but keeps sort priorities and direction", () => {
     const weights = { cost: 5, walk: 1, tailgate: 0, exit: 2 };
     const cleared = clearFilters(
-      prefs({ weights, direction: "west", vehicle: "rv", needsAda: true, requireTailgating: true, maxPrice: 20, amenities: ["paved"], payment: { methods: ["cash"], timings: [], includeUnknown: true } }),
+      prefs({ weights, direction: "west", vehicle: "rv", features: ["ada", "covered"], requireTailgating: true, maxPrice: 20, amenities: ["paved"], payment: { methods: ["cash"], timings: [], includeUnknown: true } }),
     );
     expect(activeFilterCount(cleared, [])).toBe(0);
     expect(cleared.weights).toEqual(weights);

@@ -16,6 +16,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { ReferralLink } from "@/components/ReferralLink";
 import { Section } from "@/components/Section";
 import { PaymentDetails } from "@/components/PaymentInfo";
+import { FeatureDetails } from "@/components/AmenityInfo";
 import { eventLabel } from "@/lib/events";
 import { SourceList } from "@/components/SourceList";
 
@@ -141,6 +142,15 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
           })}
         </Section>
 
+        <Section id="amenities" title="Parking amenities">
+          <div className="rounded-2xl bg-white p-4 ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+            <FeatureDetails facility={f} />
+          </div>
+          <p className="text-xs text-neutral-500">
+            &ldquo;Unknown&rdquo; means no source has confirmed it either way. We never assume an amenity is there.
+          </p>
+        </Section>
+
         <Section id="details" title="Details">
           <dl className="divide-y divide-black/5 rounded-2xl bg-white px-4 ring-1 ring-black/5 dark:divide-white/10 dark:bg-neutral-900 dark:ring-white/10">
             <Row label="Walk to stadium" attribution={walk && !walk.estimated ? f.walkMinutes?.attribution : undefined}>
@@ -167,7 +177,7 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
               {f.exit.rating ? `${f.exit.rating.value}/5` : "No exit-time data yet"}
             </Row>
             {f.exit.routes && f.exit.routes.length > 0 && <Row label="Exit routes">{f.exit.routes.join("; ")}</Row>}
-            <Row label="Amenities" attribution={f.amenities.attribution}>
+            <Row label="Other extras" attribution={f.amenities.attribution}>
               {f.amenities.value.length ? f.amenities.value.map((a) => AMENITY_LABEL[a]).join(", ") : "Unknown"}
             </Row>
             <Row label="Vehicles">{f.vehicleTypes.length ? f.vehicleTypes.join(", ") : "—"}</Row>

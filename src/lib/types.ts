@@ -126,9 +126,6 @@ export type FacilityType =
 export type VehicleType = "car" | "rv" | "bus" | "limo" | "motorcycle";
 
 export type Amenity =
-  | "restrooms"
-  | "portable_toilets"
-  | "ada_spaces"
   | "lighting"
   | "paved"
   | "grass"
@@ -136,9 +133,29 @@ export type Amenity =
   | "shuttle_service"
   | "food_vendors"
   | "rv_friendly"
-  | "tailgate_area"
-  | "covered"
-  | "ev_charging";
+  | "tailgate_area";
+
+/**
+ * Amenities every venue is described by, with the same filters everywhere. Unlike the free-form
+ * `Amenity` list, each has an explicit availability state so "no data" is never read as "no" or "yes".
+ */
+export type UniversalAmenity = "covered" | "ev_charging" | "ada" | "restrooms";
+
+export type AvailabilityState = "available" | "unavailable" | "unknown";
+
+/**
+ * One universal amenity's status at a lot. Absent (or state "unknown") means unknown.
+ * Designed for owner maintenance: a verified operator update is recorded with an "operator" source and
+ * `attribution.lastVerifiedAt` once LotLizard confirms it.
+ */
+export interface AmenityFact {
+  state: AvailabilityState;
+  /** Date the source reported this (YYYY-MM-DD). */
+  reportedAt: string;
+  /** e.g. "Level 2 chargers, 4 spaces" or "Portable toilets only". */
+  notes?: string;
+  attribution: Attribution;
+}
 
 export type EventKind = "nfl_regular" | "nfl_playoff" | "concert" | "college" | "other" | "any";
 
@@ -219,7 +236,10 @@ export interface ParkingFacility {
   payment?: PaymentPolicy;
   /** Event-specific policies that replace `payment` for that event. */
   paymentOverrides?: EventPaymentOverride[];
+  /** Free-form extras that were *reported* (e.g. tailgate space, paved). Absence means unknown. */
   amenities: Attributed<Amenity[]>;
+  /** The universal amenities, each Available / Unavailable / Unknown (missing key = unknown). */
+  features?: Partial<Record<UniversalAmenity, AmenityFact>>;
   tailgating: {
     allowed: Attributed<boolean | "unknown">;
     /** 1 (none) – 5 (legendary). Absent when we have no basis to rate it. */

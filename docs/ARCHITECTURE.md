@@ -46,6 +46,9 @@ _Last updated: 2026-10-29_
   counts only with documented routing (confidence ≥ medium).
 - `explorer.ts` — `applyDisplayFilters` (type + payment filters, event-aware) produces the single visible set
   that is ranked, listed and mapped; `buildMarkers` labels pins from the current ranking.
+- `features.ts` — the four universal amenities (covered, EV charging, ADA, restrooms) and `matchFeatures`
+  (AND; only confirmed "available" matches, unknown never does). Applied in `applyDisplayFilters`, so map, list
+  and ranking stay in sync; requesting ADA also makes dedicated ADA lots rankable.
 - `payment.ts` — payment labels, `effectivePayment` (event overrides) and `matchPayment` (OR across methods,
   separate timing filter, three-valued result: match / unknown / excluded).
 - `events.ts`, `directions.ts` — event labels/lot opening times (pure string math, timezone-safe) and map links
@@ -72,6 +75,9 @@ Venue (slug, type, teams[], address, location{lat,lng,precision}, timezone, cove
         └─ PaymentPolicy (accepted[], notAccepted[], otherDescription, timing: pay_on_arrival|advance_optional|
                           prepay_required, reportedAt, notes, attribution{confidence, lastVerifiedAt})
            A method in neither list is UNKNOWN. An event override replaces the general policy for that event.
+        └─ features: { covered | ev_charging | ada | restrooms → AmenityFact{state: available|unavailable|unknown,
+                       reportedAt, notes, attribution} }   (missing key = unknown; universal across venues;
+                       owner-maintainable via an "operator" source + lastVerifiedAt)
         └─ PriceObservation (min/max, vehicle, eventKind, season, observedAt, attribution)
 Event (venueId, startsAt, kind)                       ← future: schedule ingest
 TravelObservation (facilityId, eventId, kind: arrival|exit, minutes, source)   ← future model training
