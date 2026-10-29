@@ -99,14 +99,18 @@ try {
   });
   await step("parking filters", async () => {
     const before = await page.locator(".ll-marker").count();
-    // Two dimensions combined: who can park + structure.
-    const pass = page.getByRole("group", { name: "Access" }).getByRole("button", { name: "Pass/permit required" });
-    const surface = page.getByRole("group", { name: "Facility type" }).getByRole("button", { name: "Surface lot" });
-    await pass.click();
-    await surface.click();
+    // Two dimensions combined in the Filters panel: who can park + facility type.
+    const openFilters = () => page.getByRole("button", { name: /^Filters/ }).click();
+    const panel = page.getByRole("dialog", { name: "Filters" });
+    await openFilters();
+    await panel.getByRole("button", { name: "Pass/permit required" }).click();
+    await panel.getByRole("button", { name: "Surface lot" }).click();
+    await panel.getByRole("button", { name: /^Show \d+ option/ }).click();
     await page.waitForFunction((n) => document.querySelectorAll(".ll-marker").length !== n, before, { timeout: 10_000 });
-    await pass.click();
-    await surface.click();
+    await openFilters();
+    await panel.getByRole("button", { name: /^Clear all/ }).click();
+    await panel.getByRole("button", { name: /^Show \d+ option/ }).click();
+    await page.waitForFunction((n) => document.querySelectorAll(".ll-marker").length === n, before, { timeout: 10_000 });
   });
   await step("lot name search", async () => {
     await page.getByRole("combobox", { name: /Find a lot/ }).fill("gold");

@@ -383,9 +383,6 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
               <LotFinder entries={lotEntries} onPick={focusLot} />
             </div>
           </div>
-          <div className="pointer-events-auto -mx-3 flex items-center gap-2 overflow-x-auto px-3 pb-1 [scrollbar-width:none]">
-            <ParkingFilterChips parking={parking} onChange={setParking} presentForms={presentForms} />
-          </div>
           {direction !== "any" && !exitDirectionsAvailable && (
             <p role="status" className="pointer-events-auto w-fit max-w-full rounded-lg bg-amber-50 px-3 py-1.5 text-xs font-medium text-amber-900 shadow dark:bg-amber-900/80 dark:text-amber-50">
               {EXIT_DATA_UNAVAILABLE} for {directionLabel}. Rankings aren&apos;t adjusted for direction.{" "}
@@ -845,76 +842,6 @@ function OtherCard({
         </div>
       )}
     </article>
-  );
-}
-
-/** The three parking dimensions as toggle groups over the map. Same state as the Filters sheet. */
-function ParkingFilterChips({
-  parking,
-  onChange,
-  presentForms,
-}: {
-  parking: ParkingFilter;
-  onChange: (p: ParkingFilter) => void;
-  presentForms: Set<string | undefined>;
-}) {
-  const toggle = <T,>(list: T[], v: T) => (list.includes(v) ? list.filter((x) => x !== v) : [...list, v]);
-  const chip = (on: boolean, disabled = false) =>
-    `h-9 shrink-0 rounded-full px-3 text-sm font-semibold shadow-md disabled:opacity-50 ${
-      on ? "bg-ink text-white dark:bg-lizard dark:text-ink" : "bg-white dark:bg-ink-soft"
-    }${disabled ? " cursor-not-allowed" : ""}`;
-  const divider = <span aria-hidden className="h-6 w-px shrink-0 bg-black/20 dark:bg-white/30" />;
-  return (
-    <>
-      <div role="group" aria-label="Access" className="flex shrink-0 gap-2">
-        {ACCESS_OPTIONS.map((o) => (
-          <button key={o} type="button" aria-pressed={parking.access.includes(o)} onClick={() => onChange({ ...parking, access: toggle(parking.access, o) })} className={chip(parking.access.includes(o))}>
-            {ACCESS_OPTION_LABEL[o]}
-          </button>
-        ))}
-      </div>
-      {divider}
-      <div role="group" aria-label="Reservation" className="flex shrink-0 gap-2">
-        {RESERVATION_OPTIONS.map((o) => (
-          <button
-            key={o}
-            type="button"
-            aria-pressed={parking.reservation.includes(o)}
-            onClick={() => onChange({ ...parking, reservation: toggle(parking.reservation, o) })}
-            className={chip(parking.reservation.includes(o))}
-          >
-            {RESERVATION_OPTION_LABEL[o]}
-          </button>
-        ))}
-      </div>
-      {divider}
-      <div role="group" aria-label="Lot type" className="flex shrink-0 gap-2">
-        {OWNER_OPTIONS.map((o) => (
-          <button key={o} type="button" aria-pressed={parking.owner.includes(o)} onClick={() => onChange({ ...parking, owner: toggle(parking.owner, o) })} className={chip(parking.owner.includes(o))}>
-            {OWNER_OPTION_LABEL[o]}
-          </button>
-        ))}
-      </div>
-      {divider}
-      <div role="group" aria-label="Facility type" className="flex shrink-0 gap-2">
-        {FORM_OPTIONS.map((o) => {
-          const none = !presentForms.has(o);
-          return (
-            <button
-              key={o}
-              type="button"
-              aria-pressed={parking.form.includes(o)}
-              disabled={none}
-              title={none ? `No ${FORM_OPTION_LABEL[o].toLowerCase()} parking listed here yet` : undefined}
-              onClick={() => onChange({ ...parking, form: toggle(parking.form, o) })}
-              className={chip(parking.form.includes(o), none)}
-            >
-              {FORM_OPTION_LABEL[o]}
-            </button>
-          );
-        })}
-      </div>
-    </>
   );
 }
 
