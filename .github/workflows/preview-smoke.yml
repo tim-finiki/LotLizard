@@ -1,11 +1,11 @@
 name: Preview mobile smoke test
 
 # Walks homepage → search → parking map (real OpenStreetMap tiles) → lot details on an emulated iPhone
-# against each successful Vercel preview deployment, and uploads a screenshot of every step.
+# against the PR's Vercel preview, and uploads a screenshot of every step.
 # Previews sit behind Vercel Authentication: add the project's "Protection Bypass for Automation" secret
-# as the repository secret VERCEL_AUTOMATION_BYPASS_SECRET, or the test is skipped with a notice.
+# as the repository secret VERCEL_AUTOMATION_BYPASS_SECRET. Without it the test is skipped with a notice.
 on:
-  deployment_status:
+  pull_request:
   workflow_dispatch:
     inputs:
       url:
@@ -14,30 +14,58 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
+  statuses: read
 
 jobs:
   smoke:
-    if: github.event_name == 'workflow_dispatch' || (github.event.deployment_status.state == 'success' && github.event.deployment.environment != 'Production')
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     env:
-      URL: ${{ inputs.url || github.event.deployment_status.environment_url || github.event.deployment_status.target_url }}
       VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+      GH_TOKEN: ${{ github.token }}
     steps:
+      - name: Check for the bypass secret
+        id: gate
+        run: |
+          if [ -z "$VERCEL_AUTOMATION_BYPASS_SECRET" ]; then
+            echo "::notice::Skipped: previews require Vercel login and VERCEL_AUTOMATION_BYPASS_SECRET is not set."
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
+      # Vercel reports deployments as a commit status and a PR comment (not GitHub Deployments).
+      - name: Wait for the Vercel preview
+        id: preview
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          if [ -n "${{ inputs.url }}" ]; then echo "url=${{ inputs.url }}" >> "$GITHUB_OUTPUT"; exit 0; fi
+          sha="${{ github.event.pull_request.head.sha }}"
+          for i in $(seq 1 60); do
+            state=$(gh api "repos/${{ github.repository }}/commits/$sha/status" --jq '[.statuses[] | select(.context == "Vercel")][0].state // "pending"')
+            [ "$state" = "success" ] && break
+            [ "$state" = "failure" ] || [ "$state" = "error" ] && { echo "::error::Vercel deployment $state"; exit 1; }
+            sleep 10
+          done
+          [ "$state" = "success" ] || { echo "::error::Timed out waiting for the Vercel deployment"; exit 1; }
+          url=$(gh api "repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments" --paginate \
+            --jq '.[] | select(.user.login == "vercel[bot]") | .body' | grep -oE 'https://[a-z0-9-]+\.vercel\.app' | head -1)
+          [ -n "$url" ] || { echo "::error::No preview URL in the Vercel comment"; exit 1; }
+          echo "url=$url" >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@v5
+        if: steps.gate.outputs.run == 'true'
       - uses: actions/setup-node@v5
+        if: steps.gate.outputs.run == 'true'
         with:
           node-version: 22
       - name: Install Playwright
+        if: steps.gate.outputs.run == 'true'
         run: npm install --no-save --no-package-lock playwright@1 && npx playwright install --with-deps chromium
       - name: Smoke test
-        run: |
-          if [ -z "$VERCEL_AUTOMATION_BYPASS_SECRET" ]; then
-            echo "::notice::VERCEL_AUTOMATION_BYPASS_SECRET is not set, and the preview requires Vercel login; trying anyway."
-          fi
-          node scripts/preview-smoke.mjs "$URL" preview-smoke
+        if: steps.gate.outputs.run == 'true'
+        run: node scripts/preview-smoke.mjs "${{ steps.preview.outputs.url }}" preview-smoke
       - uses: actions/upload-artifact@v4
-        if: always()
+        if: always() && steps.gate.outputs.run == 'true'
         with:
           name: preview-smoke-screenshots
           path: preview-smoke/
