@@ -3,7 +3,7 @@ import { FACILITIES, VENUES } from "@/lib/data/catalog";
 import { listAllFacilityParams } from "@/lib/data/repository";
 import { facilityPath } from "@/lib/seo";
 import { searchVenues } from "@/lib/search";
-import { lotOnMapPath, lotPath, lotSearchEntry, searchLots } from "@/lib/lot-search";
+import { lotOnMapPath, lotPath, lotSearchEntry, matchNote, searchLots } from "@/lib/lot-search";
 
 const venueBySlug = new Map(VENUES.map((v) => [v.slug, v]));
 const ENTRIES = FACILITIES.map((f) => lotSearchEntry(VENUES.find((v) => v.id === f.venueId)!, f));
@@ -26,6 +26,15 @@ describe("lot name search", () => {
     expect(adams).toMatchObject({ matchedOn: "alias", matchedText: "Adams Ramp" });
     expect(adams.entry.lotSlug).toBe("adam-ramp");
     expect(found("seneca one")).toContain("keybank-center/one-seneca-ramp");
+  });
+
+  it("labels aliases by their source confidence; none is verified yet", () => {
+    const [adams] = searchLots(ENTRIES, "adams ramp");
+    expect(adams.entry.aliasesVerified).toBe(false);
+    expect(matchNote(adams)).toBe("listed as “Adams Ramp” (unverified)");
+    for (const f of FACILITIES.filter((x) => x.aliases?.length)) expect(f.aliasesAttribution?.sourceIds.length, f.id).toBeGreaterThan(0);
+    const verified = { ...adams, entry: { ...adams.entry, aliasesVerified: true } };
+    expect(matchNote(verified)).toBe("also called “Adams Ramp”");
   });
 
   it("keeps numbers and letters exact, so similar lot names don't collide", () => {

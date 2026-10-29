@@ -31,7 +31,7 @@ import { eventLabel } from "@/lib/events";
 import { submissionsStatus } from "@/lib/submissions/availability";
 import { SourceList } from "@/components/SourceList";
 import { ShareLotButton } from "@/components/ShareLotButton";
-import { accessDisplay, isRestricted, ownershipDisplay } from "@/lib/access";
+import { accessDisplay, factState, isRestricted, ownershipDisplay } from "@/lib/access";
 
 export async function generateStaticParams() {
   return listAllFacilityParams();
@@ -99,7 +99,13 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
           {FACILITY_TYPE_LABEL[f.type]}
         </span>
         <h1 className="text-2xl font-extrabold leading-tight">{f.name}</h1>
-        {f.aliases && f.aliases.length > 0 && <p className="text-sm text-neutral-600 dark:text-neutral-400">Also called {f.aliases.join(", ")}</p>}
+        {f.aliases && f.aliases.length > 0 && (
+          <p className="flex flex-wrap items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400">
+            {f.aliasesAttribution && factState({ value: null, attribution: f.aliasesAttribution }) !== "confirmed" ? "Also listed as" : "Also called"}{" "}
+            {f.aliases.join(", ")}
+            {f.aliasesAttribution && <ConfidenceBadge level={f.aliasesAttribution.confidence} compact />}
+          </p>
+        )}
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
           {venue.name} · {f.address ?? `${venue.address.city}, ${venue.address.state}`}
         </p>

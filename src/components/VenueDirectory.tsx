@@ -8,9 +8,8 @@ import { VENUE_TYPE_LABEL } from "@/lib/labels";
 import { stateName } from "@/lib/states";
 import { VenueCard } from "@/components/VenueCard";
 import { FACILITY_TYPE_COLOR, FACILITY_TYPE_LABEL } from "@/lib/labels";
-import { lotOnMapPath, lotPath, searchLots, type LotSearchEntry } from "@/lib/lot-search";
+import { lotOnMapPath, lotPath, matchNote, searchLots, type LotSearchEntry } from "@/lib/lot-search";
 
-const MATCH_LABEL = { alias: "also called", operator: "run by" } as const;
 const MAX_LOT_RESULTS = 8;
 
 export function VenueDirectory({ venues, lots = [] }: { venues: Venue[]; lots?: LotSearchEntry[] }) {
@@ -132,7 +131,7 @@ export function VenueDirectory({ venues, lots = [] }: { venues: Venue[]; lots?: 
                   </Link>
                   <span className="block truncate text-xs text-neutral-500">
                     {FACILITY_TYPE_LABEL[m.entry.type]} at {m.entry.venueName}, {m.entry.venueCity}
-                    {m.matchedOn !== "name" && ` · ${MATCH_LABEL[m.matchedOn]} “${m.matchedText}”`}
+                    {matchNote(m) && ` · ${matchNote(m)}`}
                   </span>
                 </span>
                 <Link href={lotPath(m.entry)} className="shrink-0 text-xs font-semibold text-brand-700 underline dark:text-brand-100">

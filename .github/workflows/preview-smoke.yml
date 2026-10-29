@@ -1,9 +1,12 @@
 name: Preview mobile smoke test
 
-# Walks homepage → search → parking map (real OpenStreetMap tiles) → lot details on an emulated iPhone
-# against the PR's Vercel preview, and uploads a screenshot of every step.
-# Previews sit behind Vercel Authentication: add the project's "Protection Bypass for Automation" secret
-# as the repository secret VERCEL_AUTOMATION_BYPASS_SECRET. Without it the test is skipped with a notice.
+# Walks homepage → search → parking map (real OpenStreetMap tiles) → parking filters → lot search → lot
+# details on an emulated iPhone against the PR's Vercel preview, and uploads a screenshot of every step.
+#
+# Previews sit behind Vercel Authentication. Add ONE repository secret:
+#   VERCEL_SHARE_TOKEN               the `_vercel_share` value from a preview's shareable link, or
+#   VERCEL_AUTOMATION_BYPASS_SECRET  the project's "Protection Bypass for Automation" secret.
+# Without either, the `smoke` job is SKIPPED (shown as skipped, never as passed).
 on:
   pull_request:
   workflow_dispatch:
@@ -18,26 +21,38 @@ permissions:
   statuses: read
 
 jobs:
+  access:
+    name: Preview access
+    runs-on: ubuntu-latest
+    outputs:
+      available: ${{ steps.gate.outputs.available }}
+    steps:
+      - id: gate
+        env:
+          SHARE: ${{ secrets.VERCEL_SHARE_TOKEN }}
+          BYPASS: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+        run: |
+          if [ -n "$SHARE" ] || [ -n "$BYPASS" ]; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::No preview access configured, so the mobile smoke test is skipped (not passed). Add VERCEL_SHARE_TOKEN or VERCEL_AUTOMATION_BYPASS_SECRET."
+            echo "available=false" >> "$GITHUB_OUTPUT"
+          fi
+
   smoke:
+    name: Mobile smoke test (deployed preview)
+    needs: access
+    if: needs.access.outputs.available == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
+      VERCEL_SHARE_TOKEN: ${{ secrets.VERCEL_SHARE_TOKEN }}
       VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
       GH_TOKEN: ${{ github.token }}
     steps:
-      - name: Check for the bypass secret
-        id: gate
-        run: |
-          if [ -z "$VERCEL_AUTOMATION_BYPASS_SECRET" ]; then
-            echo "::notice::Skipped: previews require Vercel login and VERCEL_AUTOMATION_BYPASS_SECRET is not set."
-            echo "run=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "run=true" >> "$GITHUB_OUTPUT"
-          fi
       # Vercel reports deployments as a commit status and a PR comment (not GitHub Deployments).
       - name: Wait for the Vercel preview
         id: preview
-        if: steps.gate.outputs.run == 'true'
         run: |
           if [ -n "${{ inputs.url }}" ]; then echo "url=${{ inputs.url }}" >> "$GITHUB_OUTPUT"; exit 0; fi
           sha="${{ github.event.pull_request.head.sha }}"
@@ -53,19 +68,15 @@ jobs:
           [ -n "$url" ] || { echo "::error::No preview URL in the Vercel comment"; exit 1; }
           echo "url=$url" >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@v5
-        if: steps.gate.outputs.run == 'true'
       - uses: actions/setup-node@v5
-        if: steps.gate.outputs.run == 'true'
         with:
           node-version: 22
       - name: Install Playwright
-        if: steps.gate.outputs.run == 'true'
         run: npm install --no-save --no-package-lock playwright@1 && npx playwright install --with-deps chromium
       - name: Smoke test
-        if: steps.gate.outputs.run == 'true'
         run: node scripts/preview-smoke.mjs "${{ steps.preview.outputs.url }}" preview-smoke
       - uses: actions/upload-artifact@v4
-        if: always() && steps.gate.outputs.run == 'true'
+        if: always()
         with:
           name: preview-smoke-screenshots
           path: preview-smoke/

@@ -345,6 +345,7 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     venueId: VENUE_ID,
     name: "Yellow Brick Parking “Lot 1”",
     aliases: ["Lot 1", "Yellow Brick Parking"],
+    aliasesAttribution: attr("low", ["coparking-yellowbrick"], "From the name on a parking aggregator listing."),
     type: "private_lot",
     ownership: fact<Ownership>("private", "low", ["coparking-yellowbrick"], "Listed as a private lot by a parking aggregator."),
     address: "5265 Big Tree Rd, Orchard Park, NY 14127",

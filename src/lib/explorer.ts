@@ -59,7 +59,7 @@ export function applyDisplayFilters(facilities: ParkingFacility[], filters: Disp
       continue;
     }
     if (filters.hiddenTypes.includes(f.type)) continue;
-    const access = filters.parking ? matchParkingFilter(f, filters.parking, filters.venueOperators) : "match";
+    const access = filters.parking ? matchParkingFilter(f, filters.parking, filters.venueOperators, filters.eventId) : "match";
     if (access === "excluded") continue;
     if (access === "unknown" && !filters.includeUnconfirmedAccess) {
       hiddenUnknownAccess++;

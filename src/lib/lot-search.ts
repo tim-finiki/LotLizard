@@ -1,6 +1,6 @@
 import type { FacilityType, ParkingFacility, Venue } from "@/lib/types";
 import { normalize } from "@/lib/search";
-import { isRestricted } from "@/lib/access";
+import { factState, isRestricted } from "@/lib/access";
 
 /**
  * Lot and garage search, separate from venue search. Matches only sourced text: the lot's name, its
@@ -16,6 +16,8 @@ export interface LotSearchEntry {
   lotSlug: string;
   name: string;
   aliases: string[];
+  /** True only when the aliases' source is confirmed (medium confidence or better). */
+  aliasesVerified: boolean;
   operator?: string;
   type: FacilityType;
   restricted: boolean;
@@ -40,6 +42,7 @@ export function lotSearchEntry(venue: Venue, f: ParkingFacility): LotSearchEntry
     lotSlug: f.slug,
     name: f.name,
     aliases: f.aliases ?? [],
+    aliasesVerified: !!f.aliasesAttribution && factState({ value: null, attribution: f.aliasesAttribution }) === "confirmed",
     ...(f.operator ? { operator: f.operator } : {}),
     type: f.type,
     restricted: isRestricted(f),
@@ -101,4 +104,11 @@ export function searchLots(entries: LotSearchEntry[], query: string, limit = Inf
   return out
     .sort((a, b) => b.score - a.score || a.entry.name.localeCompare(b.entry.name) || a.entry.venueName.localeCompare(b.entry.venueName))
     .slice(0, limit);
+}
+
+/** Why a result matched, when it wasn't the name: "also called “Lot 1”", flagged when the alias is unverified. */
+export function matchNote(m: LotMatch): string | undefined {
+  if (m.matchedOn === "operator") return `run by “${m.matchedText}”`;
+  if (m.matchedOn === "alias") return m.entry.aliasesVerified ? `also called “${m.matchedText}”` : `listed as “${m.matchedText}” (unverified)`;
+  return undefined;
 }

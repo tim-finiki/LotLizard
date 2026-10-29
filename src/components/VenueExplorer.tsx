@@ -51,6 +51,8 @@ import {
   FORM_OPTION_LABEL,
   OWNER_OPTIONS,
   OWNER_OPTION_LABEL,
+  RESERVATION_OPTIONS,
+  RESERVATION_OPTION_LABEL,
   isRestricted,
   parkingFilterCount,
   parkingFilterFromParams,
@@ -214,6 +216,7 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
   const parkingActive = parkingFilterCount(parking) > 0;
   const parkingSummary = [
     ...parking.access.map((o) => ACCESS_OPTION_LABEL[o]),
+    ...parking.reservation.map((o) => RESERVATION_OPTION_LABEL[o]),
     ...parking.owner.map((o) => OWNER_OPTION_LABEL[o]),
     ...parking.form.map((o) => FORM_OPTION_LABEL[o]),
   ];
@@ -409,7 +412,15 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
             <p className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-amber-50 px-3 py-2 text-xs text-amber-900 dark:bg-amber-900/30 dark:text-amber-100">
               <span>
                 {filtered.hiddenUnknownAccess} {filtered.hiddenUnknownAccess === 1 ? "lot is" : "lots are"} hidden because we can&apos;t yet confirm
-                {parking.access.length && parking.owner.length ? " who owns them or who can park" : parking.access.length ? " who can park there" : " who owns them"}.
+                {" "}
+                {[
+                  parking.access.length > 0 && "who can park there",
+                  parking.reservation.length > 0 && "whether you must book ahead",
+                  parking.owner.some((o) => o !== "venue") && "who owns them",
+                ]
+                  .filter(Boolean)
+                  .join(" or ")}
+                .
               </span>
               <button type="button" onClick={() => setIncludeUnconfirmedAccess(true)} className="font-semibold underline">
                 Show unconfirmed
@@ -855,7 +866,7 @@ function ParkingFilterChips({
   const divider = <span aria-hidden className="h-6 w-px shrink-0 bg-black/20 dark:bg-white/30" />;
   return (
     <>
-      <div role="group" aria-label="Who can park" className="flex shrink-0 gap-2">
+      <div role="group" aria-label="Access" className="flex shrink-0 gap-2">
         {ACCESS_OPTIONS.map((o) => (
           <button key={o} type="button" aria-pressed={parking.access.includes(o)} onClick={() => onChange({ ...parking, access: toggle(parking.access, o) })} className={chip(parking.access.includes(o))}>
             {ACCESS_OPTION_LABEL[o]}
@@ -863,7 +874,21 @@ function ParkingFilterChips({
         ))}
       </div>
       {divider}
-      <div role="group" aria-label="Ownership and operator" className="flex shrink-0 gap-2">
+      <div role="group" aria-label="Reservation" className="flex shrink-0 gap-2">
+        {RESERVATION_OPTIONS.map((o) => (
+          <button
+            key={o}
+            type="button"
+            aria-pressed={parking.reservation.includes(o)}
+            onClick={() => onChange({ ...parking, reservation: toggle(parking.reservation, o) })}
+            className={chip(parking.reservation.includes(o))}
+          >
+            {RESERVATION_OPTION_LABEL[o]}
+          </button>
+        ))}
+      </div>
+      {divider}
+      <div role="group" aria-label="Lot type" className="flex shrink-0 gap-2">
         {OWNER_OPTIONS.map((o) => (
           <button key={o} type="button" aria-pressed={parking.owner.includes(o)} onClick={() => onChange({ ...parking, owner: toggle(parking.owner, o) })} className={chip(parking.owner.includes(o))}>
             {OWNER_OPTION_LABEL[o]}
@@ -871,7 +896,7 @@ function ParkingFilterChips({
         ))}
       </div>
       {divider}
-      <div role="group" aria-label="Structure" className="flex shrink-0 gap-2">
+      <div role="group" aria-label="Facility type" className="flex shrink-0 gap-2">
         {FORM_OPTIONS.map((o) => {
           const none = !presentForms.has(o);
           return (
@@ -980,7 +1005,7 @@ function FiltersPanel({
         <h3 id="filter-results-heading" className="text-xs font-bold uppercase tracking-wide text-neutral-500">Filter results</h3>
         <p className="mb-3 text-xs text-neutral-500">These hide options that don&apos;t fit.</p>
 
-        <FilterSection title="Who can park" hint="Shows lots confirmed to allow any of these.">
+        <FilterSection title="Access" hint="Who can park, and whether you must book ahead. These are separate: a lot can need a pass and be bookable on the day, or be open to anyone but sold in advance.">
           <ChipRow>
             {ACCESS_OPTIONS.map((o) => (
               <ChipToggle key={o} on={parking.access.includes(o)} onClick={() => onParking({ ...parking, access: toggle(parking.access, o) })}>
@@ -988,9 +1013,17 @@ function FiltersPanel({
               </ChipToggle>
             ))}
           </ChipRow>
+          <ChipRow>
+            {RESERVATION_OPTIONS.map((o) => (
+              <ChipToggle key={o} on={parking.reservation.includes(o)} onClick={() => onParking({ ...parking, reservation: toggle(parking.reservation, o) })}>
+                {RESERVATION_OPTION_LABEL[o]}
+              </ChipToggle>
+            ))}
+          </ChipRow>
+          <p className="-mt-1 text-xs text-neutral-500">Reservation status comes from each lot&apos;s sourced payment timing (prepay required, pay on arrival, or either).</p>
         </FilterSection>
 
-        <FilterSection title="Ownership & operator" hint="Who owns a lot is separate from who can park there. Venue-operated means run by the venue or its team.">
+        <FilterSection title="Lot type" hint="Who owns or runs the lot — separate from who can park there. Venue-operated means run by the venue or its team.">
           <ChipRow>
             {OWNER_OPTIONS.map((o) => (
               <ChipToggle key={o} on={parking.owner.includes(o)} onClick={() => onParking({ ...parking, owner: toggle(parking.owner, o) })}>
@@ -1000,7 +1033,7 @@ function FiltersPanel({
           </ChipRow>
         </FilterSection>
 
-        <FilterSection title="Structure">
+        <FilterSection title="Facility type">
           <ChipRow>
             {FORM_OPTIONS.map((o) => (
               <ChipToggle key={o} on={parking.form.includes(o)} disabled={!presentForms.has(o)} onClick={() => onParking({ ...parking, form: toggle(parking.form, o) })}>
@@ -1092,7 +1125,7 @@ function FiltersPanel({
           </label>
         </FilterSection>
 
-        <FilterSection title="Parking types" hint="Tap to hide a type from the map and list.">
+        <FilterSection title="Map categories" hint="Tap to hide a category (including shuttles and rideshare) from the map and list.">
           <ChipRow>
             {presentTypes.map((t) => {
               // Types are shown by default, so "on" is the neutral state; hidden types are struck through.

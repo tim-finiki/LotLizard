@@ -6,8 +6,9 @@
  *
  *   node scripts/preview-smoke.mjs <https://deployment-url> [out-dir]
  *
- * A deployment behind Vercel Authentication needs VERCEL_AUTOMATION_BYPASS_SECRET (the project's
- * "Protection Bypass for Automation" secret); it is sent as a header and never printed.
+ * A deployment behind Vercel Authentication needs either VERCEL_SHARE_TOKEN (the `_vercel_share` value
+ * from a shareable link) or VERCEL_AUTOMATION_BYPASS_SECRET (the project's "Protection Bypass for
+ * Automation" secret). Both are sent only to the deployment's own host and never printed.
  * Runs in GitHub Actions (see .github/workflows/preview-smoke.yml) because *.vercel.app and the tile
  * server may not be reachable from every build or agent environment.
  */
@@ -25,12 +26,20 @@ if (!base) {
 mkdirSync(out, { recursive: true });
 
 const bypass = process.env.VERCEL_AUTOMATION_BYPASS_SECRET;
+const shareToken = process.env.VERCEL_SHARE_TOKEN;
 const browser = await chromium.launch();
-const context = await browser.newContext({
-  ...devices["iPhone 13"],
-  ...(bypass ? { extraHTTPHeaders: { "x-vercel-protection-bypass": bypass, "x-vercel-set-bypass-cookie": "true" } } : {}),
-});
+const context = await browser.newContext(devices["iPhone 13"]);
+const host = new URL(base).host;
+// The bypass header goes to the deployment only, never to the tile server or other third parties.
+if (bypass) {
+  await context.route(
+    (url) => url.host === host,
+    (route) => route.continue({ headers: { ...route.request().headers(), "x-vercel-protection-bypass": bypass, "x-vercel-set-bypass-cookie": "true" } }),
+  );
+}
 const page = await context.newPage();
+// A shareable link sets an access cookie for this deployment on first visit.
+if (shareToken) await page.goto(`${base}/?_vercel_share=${encodeURIComponent(shareToken)}`, { waitUntil: "domcontentloaded" });
 
 const tiles = { ok: 0, failed: [] };
 page.on("response", (res) => {
@@ -64,7 +73,9 @@ try {
   await step("homepage", async () => {
     const res = await page.goto(base + "/", { waitUntil: "domcontentloaded" });
     if (!res || res.status() !== 200 || !page.url().startsWith(base)) {
-      throw new Error(`got ${res?.status()} at ${page.url()} — the deployment is protected (Vercel Authentication) or down`);
+      const at = new URL(page.url());
+      // Origin and path only: query strings can carry access tokens and logs may be public.
+      throw new Error(`got ${res?.status()} at ${at.origin}${at.pathname} — the deployment is protected (Vercel Authentication) or down`);
     }
     await page.getByRole("heading", { level: 1 }).waitFor();
     await page.locator('img[alt="LotLizard"]').first().waitFor();
@@ -85,8 +96,8 @@ try {
   await step("parking filters", async () => {
     const before = await page.locator(".ll-marker").count();
     // Two dimensions combined: who can park + structure.
-    const pass = page.getByRole("group", { name: "Who can park" }).getByRole("button", { name: "Pass/permit required" });
-    const surface = page.getByRole("group", { name: "Structure" }).getByRole("button", { name: "Surface lot" });
+    const pass = page.getByRole("group", { name: "Access" }).getByRole("button", { name: "Pass/permit required" });
+    const surface = page.getByRole("group", { name: "Facility type" }).getByRole("button", { name: "Surface lot" });
     await pass.click();
     await surface.click();
     await page.waitForFunction((n) => document.querySelectorAll(".ll-marker").length !== n, before, { timeout: 10_000 });

@@ -234,6 +234,8 @@ export interface ParkingFacility {
   venueId: string;
   name: string;
   aliases?: string[];
+  /** Where the aliases come from. Below medium confidence they're shown as unverified. */
+  aliasesAttribution?: Attribution;
   type: FacilityType;
   operator?: string;
   /** Sourced ownership. Absent means unknown; below medium confidence it is "reported", not confirmed. */

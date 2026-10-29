@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { AccessLevel, ConfidenceLevel, FacilityType, Ownership, ParkingFacility } from "@/lib/types";
+import type { AccessLevel, ConfidenceLevel, FacilityType, Ownership, ParkingFacility, PaymentTiming } from "@/lib/types";
 import { attr, fact } from "@/lib/data/attr";
 import { FACILITIES, SOURCES, VENUES } from "@/lib/data/catalog";
 import { DEFAULT_PREFERENCES, rankFacilities } from "@/lib/ranking";
@@ -17,7 +17,13 @@ import {
 
 function lot(
   id: string,
-  o: { owner?: [Ownership, ConfidenceLevel]; access?: [AccessLevel, ConfidenceLevel]; type?: FacilityType; operator?: string } = {},
+  o: {
+    owner?: [Ownership, ConfidenceLevel];
+    access?: [AccessLevel, ConfidenceLevel];
+    type?: FacilityType;
+    operator?: string;
+    timing?: [PaymentTiming, ConfidenceLevel];
+  } = {},
 ): ParkingFacility {
   return {
     id,
@@ -31,6 +37,7 @@ function lot(
     location: { lat: 42.77, lng: -78.79, precision: "approximate" },
     description: "",
     prices: [],
+    ...(o.timing ? { payment: { accepted: [], timing: o.timing[0], reportedAt: "2026-10-01", attribution: attr(o.timing[1], ["s"]) } } : {}),
     amenities: fact([], "low", ["s"]),
     tailgating: { allowed: fact<boolean | "unknown">(true, "medium", ["s"]) },
     exit: {},
@@ -78,6 +85,31 @@ describe("parking filter dimensions", () => {
     expect(ids(shown(p({ form: ["garage", "surface"], access: ["public"] })).visible)).toEqual(["city-garage", "private-open"]);
   });
 
+  it("keep reservation separate from passes and permits", () => {
+    const passBookAhead = lot("pass-prepay", { access: ["pass_required", "medium"], timing: ["prepay_required", "medium"] });
+    const passOnTheDay = lot("pass-on-day", { access: ["pass_required", "medium"], timing: ["advance_optional", "high"] });
+    const openBooked = lot("open-booked", { access: ["public", "medium"], timing: ["prepay_required", "medium"] });
+    const openDriveUp = lot("open-driveup", { access: ["public", "medium"], timing: ["pay_on_arrival", "medium"] });
+    const weakTiming = lot("weak-timing", { access: ["public", "medium"], timing: ["pay_on_arrival", "low"] });
+    const lots = [passBookAhead, passOnTheDay, openBooked, openDriveUp, weakTiming];
+    const vis = (f: ParkingFilter) => ids(applyDisplayFilters(lots, { hiddenTypes: [], payment: EMPTY_PAYMENT_FILTER, parking: f }).visible);
+    expect(vis(p({ reservation: ["required"] }))).toEqual(["open-booked", "pass-prepay"]);
+    expect(vis(p({ reservation: ["not_required"] }))).toEqual(["open-driveup", "pass-on-day"]);
+    expect(vis(p({ access: ["pass_required"], reservation: ["not_required"] }))).toEqual(["pass-on-day"]);
+    expect(vis(p({ access: ["public"], reservation: ["required"] }))).toEqual(["open-booked"]);
+    // Weakly sourced timing never confirms a reservation status.
+    expect(matchParkingFilter(weakTiming, p({ reservation: ["not_required"] }))).toBe("unknown");
+    expect(matchParkingFilter(unknown, p({ reservation: ["required"] }))).toBe("unknown");
+  });
+
+  it("combine all four dimensions", () => {
+    const garage = lot("garage", { type: "garage", owner: ["public", "medium"], access: ["public", "medium"], timing: ["pay_on_arrival", "medium"] });
+    const booked = lot("booked-garage", { type: "garage", owner: ["public", "medium"], access: ["public", "medium"], timing: ["prepay_required", "medium"] });
+    const lotSurface = lot("surface", { owner: ["public", "medium"], access: ["public", "medium"], timing: ["pay_on_arrival", "medium"] });
+    const f = p({ access: ["public"], reservation: ["not_required"], owner: ["public"], form: ["garage"] });
+    expect(ids(applyDisplayFilters([garage, booked, lotSurface], { hiddenTypes: [], payment: EMPTY_PAYMENT_FILTER, parking: f }).visible)).toEqual(["garage"]);
+  });
+
   it("keep ownership separate from access", () => {
     // A publicly owned lot can be pass-only; a private lot can be open to anyone.
     expect(matchParkingFilter(venuePassLot, p({ owner: ["public"], access: ["public"] }))).toBe("excluded");
@@ -120,14 +152,14 @@ describe("parking filter dimensions", () => {
 
   it("count one active filter per selected option", () => {
     expect(activeFilterCount(DEFAULT_PREFERENCES, [], EMPTY_PARKING_FILTER)).toBe(0);
-    expect(activeFilterCount(DEFAULT_PREFERENCES, [], p({ owner: ["private"], access: ["public"], form: ["garage"] }))).toBe(3);
+    expect(activeFilterCount(DEFAULT_PREFERENCES, [], p({ owner: ["private"], access: ["public"], reservation: ["required"], form: ["garage"] }))).toBe(4);
   });
 
   it("round-trip through the URL", () => {
     const url = new URL("https://x.test/venues/v");
-    const f = p({ access: ["pass_required"], owner: ["public", "venue"], form: ["garage"] });
+    const f = p({ access: ["pass_required"], reservation: ["not_required"], owner: ["public", "venue"], form: ["garage"] });
     writeParkingFilterParams(url, f);
-    expect(url.search).toBe("?access=pass_required&owner=public%2Cvenue&form=garage");
+    expect(url.search).toBe("?access=pass_required&reservation=not_required&owner=public%2Cvenue&form=garage");
     expect(parkingFilterFromParams(url.searchParams)).toEqual(f);
     expect(parkingFilterFromParams(new URLSearchParams("owner=bogus,private&form=moon"))).toEqual(p({ owner: ["private"] }));
     writeParkingFilterParams(url, EMPTY_PARKING_FILTER);
@@ -189,6 +221,10 @@ describe("published ownership and access data", () => {
     // Private lots are reported private and open, but not confirmed open, so they aren't a match yet.
     expect(visible("highmark-stadium", p({ owner: ["private"], access: ["public"] }))).toEqual([]);
     expect(visible("highmark-stadium", p({ form: ["garage"] }))).toEqual([]);
+    // Official passes are prepay-only (medium), so they're also "reservation required".
+    expect(visible("highmark-stadium", p({ access: ["pass_required"], reservation: ["required"] }))).toEqual(officialPass);
+    // Hammer's Lot is reported pay-on-arrival from a single low-confidence listing, so it isn't confirmed.
+    expect(visible("highmark-stadium", p({ reservation: ["not_required"] }))).toEqual([]);
   });
 
   it("KeyBank Center: garages vs surface lot, city ramp publicly owned, disputed ownership left unconfirmed", () => {

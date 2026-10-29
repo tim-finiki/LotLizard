@@ -2,9 +2,7 @@
 
 import { useId, useMemo, useState } from "react";
 import { FACILITY_TYPE_COLOR, FACILITY_TYPE_LABEL } from "@/lib/labels";
-import { searchLots, type LotMatch, type LotSearchEntry } from "@/lib/lot-search";
-
-const MATCH_LABEL = { alias: "also called", operator: "run by" } as const;
+import { matchNote, searchLots, type LotMatch, type LotSearchEntry } from "@/lib/lot-search";
 
 /** Find a lot or garage at this venue by name, alias or operator. Picking one focuses its pin and card. */
 export function LotFinder({ entries, onPick }: { entries: LotSearchEntry[]; onPick: (lotSlug: string) => void }) {
@@ -77,7 +75,7 @@ export function LotFinder({ entries, onPick }: { entries: LotSearchEntry[]; onPi
                 <span className="block truncate font-semibold">{m.entry.name}</span>
                 <span className="block truncate text-xs text-neutral-500">
                   {FACILITY_TYPE_LABEL[m.entry.type]}
-                  {m.matchedOn !== "name" && ` · ${MATCH_LABEL[m.matchedOn]} “${m.matchedText}”`}
+                  {matchNote(m) && ` · ${matchNote(m)}`}
                   {m.entry.restricted && " · restricted"}
                 </span>
               </span>

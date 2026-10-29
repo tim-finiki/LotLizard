@@ -83,6 +83,7 @@ export function facilityAttributions(f: ParkingFacility): Attribution[] {
   return [
     f.attribution,
     f.amenities.attribution,
+    f.aliasesAttribution,
     f.ownership?.attribution,
     f.access?.attribution,
     f.payment?.attribution,
