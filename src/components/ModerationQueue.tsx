@@ -74,10 +74,10 @@ export function ModerationQueue() {
           placeholder="Admin token"
           value={token}
           onChange={(e) => setToken(e.target.value)}
-          className="h-11 min-w-0 flex-1 rounded-lg border border-black/10 bg-white px-3 dark:border-white/15 dark:bg-neutral-900"
+          className="h-11 min-w-0 flex-1 rounded-lg border border-black/10 bg-white px-3 dark:border-white/15 dark:bg-ink-soft"
           autoComplete="current-password"
         />
-        <button className="h-11 rounded-lg bg-brand-600 px-4 text-sm font-semibold text-white">Load</button>
+        <button className="h-11 rounded-lg bg-brand-600 px-4 text-sm font-semibold text-ink">Load</button>
       </form>
 
       <div className="flex gap-2" role="tablist">
@@ -87,7 +87,7 @@ export function ModerationQueue() {
             role="tab"
             aria-selected={status === s}
             onClick={() => setStatus(s)}
-            className={`h-9 rounded-full px-3 text-sm capitalize ${status === s ? "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900" : "bg-white ring-1 ring-black/10 dark:bg-neutral-900"}`}
+            className={`h-9 rounded-full px-3 text-sm capitalize ${status === s ? "bg-ink text-white dark:bg-white dark:text-neutral-900" : "bg-white ring-1 ring-black/10 dark:bg-ink-soft"}`}
           >
             {s}
           </button>
@@ -109,9 +109,9 @@ export function ModerationQueue() {
            
           const { kind, venueSlug, facilitySlug, displayName, email, ...rest } = s.input;
           return (
-            <li key={s.id} className="rounded-2xl bg-white p-4 text-sm ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+            <li key={s.id} className="rounded-2xl bg-white p-4 text-sm ring-1 ring-black/5 dark:bg-ink-soft dark:ring-white/10">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="rounded bg-neutral-900 px-1.5 py-0.5 text-xs font-semibold uppercase text-white dark:bg-white dark:text-neutral-900">{kind}</span>
+                <span className="rounded bg-ink px-1.5 py-0.5 text-xs font-semibold uppercase text-white dark:bg-white dark:text-neutral-900">{kind}</span>
                 <span className="font-semibold">{venueSlug}{facilitySlug && ` / ${facilitySlug}`}</span>
                 <span className="text-xs text-neutral-500">{new Date(s.createdAt).toLocaleString()}</span>
               </div>
@@ -122,7 +122,7 @@ export function ModerationQueue() {
                   ))}
                 </div>
               )}
-              <pre className="mt-2 overflow-x-auto whitespace-pre-wrap rounded-lg bg-neutral-50 p-2 text-xs dark:bg-neutral-950">{JSON.stringify(rest, null, 2)}</pre>
+              <pre className="mt-2 overflow-x-auto whitespace-pre-wrap rounded-lg bg-mist p-2 text-xs dark:bg-ink">{JSON.stringify(rest, null, 2)}</pre>
               <p className="mt-1 text-xs text-neutral-500">
                 By {displayName || "anonymous"}
                 {email && ` · ${email}`}
@@ -134,10 +134,10 @@ export function ModerationQueue() {
                     placeholder="Moderator note (optional)"
                     value={notes[s.id] ?? ""}
                     onChange={(e) => setNotes((n) => ({ ...n, [s.id]: e.target.value }))}
-                    className="h-10 flex-1 rounded-lg border border-black/10 bg-white px-3 dark:border-white/15 dark:bg-neutral-950"
+                    className="h-10 flex-1 rounded-lg border border-black/10 bg-white px-3 dark:border-white/15 dark:bg-ink"
                   />
                   <div className="flex gap-2">
-                    <button onClick={() => decide(s.id, "approved")} className="h-10 flex-1 rounded-lg bg-brand-600 px-4 font-semibold text-white">Approve</button>
+                    <button onClick={() => decide(s.id, "approved")} className="h-10 flex-1 rounded-lg bg-brand-600 px-4 font-semibold text-ink">Approve</button>
                     <button onClick={() => decide(s.id, "rejected")} className="h-10 flex-1 rounded-lg bg-red-600 px-4 font-semibold text-white">Reject</button>
                   </div>
                 </div>

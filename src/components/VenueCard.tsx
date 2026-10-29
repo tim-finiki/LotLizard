@@ -8,7 +8,7 @@ export function VenueCard({ venue }: { venue: Venue }) {
   return (
     <Link
       href={venuePath(venue)}
-      className="flex flex-col gap-1 rounded-2xl border border-black/5 bg-white p-4 shadow-sm transition active:scale-[0.99] hover:border-brand-500/40 dark:border-white/10 dark:bg-neutral-900"
+      className="flex flex-col gap-1 rounded-2xl border border-black/5 bg-white p-4 shadow-sm transition active:scale-[0.99] hover:border-brand-500/40 dark:border-white/10 dark:bg-ink-soft"
     >
       <div className="flex items-start justify-between gap-2">
         <h3 className="font-bold leading-tight">{venue.name}</h3>

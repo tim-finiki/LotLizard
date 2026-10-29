@@ -21,7 +21,7 @@ export function ParkingOptionsList({
       {facilities.map((f) => {
         const s = summarizeFacility(f, venue);
         return (
-          <li key={f.id} className="rounded-2xl bg-white p-4 ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+          <li key={f.id} className="rounded-2xl bg-white p-4 ring-1 ring-black/5 dark:bg-ink-soft dark:ring-white/10">
             <h3 className="font-bold leading-tight">
               <Link href={facilityPath(venue, f)} className="text-brand-700 hover:underline dark:text-brand-100">
                 {f.name}

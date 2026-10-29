@@ -90,8 +90,8 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
       <JsonLd data={facilityJsonLd(venue, f)} />
       <Breadcrumbs items={crumbs} />
       <header className="mt-2 flex flex-col gap-2">
-        <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-white px-2.5 py-1 text-xs font-semibold ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
-          <span aria-hidden className="h-2.5 w-2.5 rounded-full" style={{ background: FACILITY_TYPE_COLOR[f.type] }} />
+        <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-white px-2.5 py-1 text-xs font-semibold ring-1 ring-black/5 dark:bg-ink-soft dark:ring-white/10">
+          <span aria-hidden className="h-2.5 w-2.5 rounded-full ring-1 ring-black/10 dark:ring-white/40" style={{ background: FACILITY_TYPE_COLOR[f.type] }} />
           {FACILITY_TYPE_LABEL[f.type]}
         </span>
         <h1 className="text-2xl font-extrabold leading-tight">{f.name}</h1>
@@ -103,10 +103,10 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
         {f.booking && <ReferralLink booking={f.booking} />}
         {directions ? (
           <div className="flex flex-wrap items-center gap-2">
-            <a href={directions.google} target="_blank" rel="noopener noreferrer" className="flex h-10 items-center rounded-lg bg-brand-600 px-4 text-sm font-semibold text-white">
+            <a href={directions.google} target="_blank" rel="noopener noreferrer" className="flex h-10 items-center rounded-lg bg-brand-600 px-4 text-sm font-semibold text-ink">
               Google Maps directions
             </a>
-            <a href={directions.apple} target="_blank" rel="noopener noreferrer" className="flex h-10 items-center rounded-lg bg-neutral-900 px-4 text-sm font-semibold text-white dark:bg-white dark:text-neutral-900">
+            <a href={directions.apple} target="_blank" rel="noopener noreferrer" className="flex h-10 items-center rounded-lg bg-ink px-4 text-sm font-semibold text-white dark:bg-white dark:text-neutral-900">
               Apple Maps
             </a>
             <span className="text-xs text-neutral-500">{directions.basis === "street_address" ? "Routes to the listed street address." : "Routes to the verified entrance."}</span>
@@ -123,7 +123,7 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
           ) : (
             <ul className="flex flex-col gap-2">
               {f.prices.map((p) => (
-                <li key={p.id} className="rounded-xl bg-white p-3 ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+                <li key={p.id} className="rounded-xl bg-white p-3 ring-1 ring-black/5 dark:bg-ink-soft dark:ring-white/10">
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <span className="text-lg font-bold">
                       {p.min === p.max ? `$${p.min}` : `$${p.min}–$${p.max}`}
@@ -146,13 +146,13 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
           title="Payment"
           aside={<Link href={`/submit?venue=${venue.slug}&lot=${f.slug}&kind=payment`} className="text-sm font-semibold text-brand-700 dark:text-brand-100">Update</Link>}
         >
-          <div className="rounded-2xl bg-white p-4 ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+          <div className="rounded-2xl bg-white p-4 ring-1 ring-black/5 dark:bg-ink-soft dark:ring-white/10">
             <PaymentDetails policy={f.payment} heading="General policy" />
           </div>
           {f.paymentOverrides?.map((o) => {
             const ev = events.find((e) => e.id === o.eventId);
             return (
-              <div key={o.eventId} className="rounded-2xl bg-white p-4 ring-1 ring-brand-500/30 dark:bg-neutral-900">
+              <div key={o.eventId} className="rounded-2xl bg-white p-4 ring-1 ring-brand-500/30 dark:bg-ink-soft">
                 <PaymentDetails policy={o.policy} heading={`Game-day policy: ${ev ? eventLabel(ev) : o.eventId} (replaces the general policy for this game)`} />
               </div>
             );
@@ -160,7 +160,7 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
         </Section>
 
         <Section id="amenities" title="Parking amenities">
-          <div className="rounded-2xl bg-white p-4 ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+          <div className="rounded-2xl bg-white p-4 ring-1 ring-black/5 dark:bg-ink-soft dark:ring-white/10">
             <FeatureDetails facility={f} />
           </div>
           <p className="text-xs text-neutral-500">
@@ -169,7 +169,7 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
         </Section>
 
         <Section id="details" title="Details">
-          <dl className="divide-y divide-black/5 rounded-2xl bg-white px-4 ring-1 ring-black/5 dark:divide-white/10 dark:bg-neutral-900 dark:ring-white/10">
+          <dl className="divide-y divide-black/5 rounded-2xl bg-white px-4 ring-1 ring-black/5 dark:divide-white/10 dark:bg-ink-soft dark:ring-white/10">
             <Row label="Walk to stadium" attribution={walk && !walk.estimated ? f.walkMinutes?.attribution : undefined}>
               {walk ? (
                 <>
@@ -220,14 +220,14 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
         </Section>
 
         <Section id="sources" title="Sources">
-          <div className="rounded-2xl bg-white px-4 ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+          <div className="rounded-2xl bg-white px-4 ring-1 ring-black/5 dark:bg-ink-soft dark:ring-white/10">
             <SourceList sources={sources} />
           </div>
         </Section>
 
         <div className="flex flex-wrap gap-2">
-          <Link href={`/submit?venue=${venue.slug}&lot=${f.slug}&kind=price`} className="flex h-11 items-center rounded-lg bg-brand-600 px-4 text-sm font-semibold text-white">Report a price</Link>
-          <Link href={`/submit?venue=${venue.slug}&lot=${f.slug}&kind=review`} className="flex h-11 items-center rounded-lg bg-neutral-900 px-4 text-sm font-semibold text-white dark:bg-white dark:text-neutral-900">Write a review</Link>
+          <Link href={`/submit?venue=${venue.slug}&lot=${f.slug}&kind=price`} className="flex h-11 items-center rounded-lg bg-brand-600 px-4 text-sm font-semibold text-ink">Report a price</Link>
+          <Link href={`/submit?venue=${venue.slug}&lot=${f.slug}&kind=review`} className="flex h-11 items-center rounded-lg bg-ink px-4 text-sm font-semibold text-white dark:bg-white dark:text-neutral-900">Write a review</Link>
           <Link href={`/submit?venue=${venue.slug}&lot=${f.slug}&kind=correction`} className="flex h-11 items-center rounded-lg px-4 text-sm font-semibold text-brand-700 ring-1 ring-brand-500/40 dark:text-brand-100">Suggest a correction</Link>
         </div>
         {others.length > 0 && (

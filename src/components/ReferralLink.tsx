@@ -8,7 +8,7 @@ export function ReferralLink({ booking, className = "" }: { booking: BookingLink
         href={booking.url}
         target="_blank"
         rel={booking.isAffiliate ? "sponsored noopener" : "noopener noreferrer"}
-        className={`inline-flex h-10 items-center justify-center rounded-lg bg-brand-600 px-4 text-sm font-semibold text-white hover:bg-brand-700 ${className}`}
+        className={`inline-flex h-10 items-center justify-center rounded-lg bg-brand-600 px-4 text-sm font-semibold text-ink hover:bg-lizard-strong ${className}`}
       >
         Reserve on {booking.partner}
       </a>

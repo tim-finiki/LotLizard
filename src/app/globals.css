@@ -1,13 +1,57 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-50: #ecfdf3;
-  --color-brand-100: #d1fadf;
-  --color-brand-500: #22a55a;
-  --color-brand-600: #16834a;
-  --color-brand-700: #11673b;
-  --color-brand-900: #0b3d24;
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* LotLizard brand (approved A2 board). Lime is a background/accent colour: text on lime is charcoal,
+     never white (white on lime is 1.9:1). Text-coloured green uses forest (5.1:1 on white). */
+  --color-ink: #0f1412; /* charcoal */
+  --color-ink-soft: #1c2420;
+  --color-lizard: #7ed321; /* lime */
+  --color-lizard-strong: #6cbb1a;
+  --color-forest: #2e7d32;
+  --color-mist: #f8faf8; /* page background */
+  --color-line: #e2e6e0; /* surfaces and borders */
+  --color-mascot-blue: #1e67d2; /* mascot accent only */
+
+  /* Existing brand-* utilities mapped onto the new palette. */
+  --color-brand-50: #f1fae6;
+  --color-brand-100: #dff3c4;
+  --color-brand-500: #7ed321;
+  --color-brand-600: #7ed321;
+  --color-brand-700: #2e7d32;
+  --color-brand-900: #0f1412;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-display: var(--font-sora), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-lizard);
+    outline-offset: 2px;
+  }
+}
+
+/* Header wordmark (approved Header B): Sora, white "Lot" + lime "Lizard", dark edge, thin lime outline. */
+.ll-wordmark {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  -webkit-text-stroke: 0.16em #021528;
+  paint-order: stroke fill;
+  filter: drop-shadow(1px 0 0 var(--color-lizard)) drop-shadow(-1px 0 0 var(--color-lizard)) drop-shadow(0 1px 0 var(--color-lizard)) drop-shadow(0 -1px 0 var(--color-lizard));
+}
+.ll-wordmark__lot {
+  color: #fff;
+}
+.ll-wordmark__lizard {
+  color: var(--color-lizard);
 }
 
 :root {
@@ -39,15 +83,15 @@ body {
 
 .ll-marker--active {
   transform: scale(1.25);
-  box-shadow: 0 0 0 3px rgb(255 255 255 / 0.9), 0 2px 8px rgb(0 0 0 / 0.45);
+  box-shadow: 0 0 0 3px var(--color-lizard), 0 2px 8px rgb(0 0 0 / 0.45);
 }
 
 .ll-venue {
   width: 34px;
   height: 34px;
   border-radius: 8px;
-  background: #111827;
-  border: 2px solid #fff;
+  background: var(--color-ink);
+  border: 2px solid var(--color-lizard);
   color: #fff;
   display: grid;
   place-items: center;
