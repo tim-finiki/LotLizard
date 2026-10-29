@@ -1,0 +1,35 @@
+name: Production SEO check
+
+# Verifies the live deployment: robots.txt, sitemap, indexing headers/tags, canonicals and JSON-LD.
+# Set the repository variable PRODUCTION_URL once a custom domain is chosen.
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "Site to check (defaults to vars.PRODUCTION_URL or the Vercel production alias)"
+        required: false
+  schedule:
+    - cron: "17 10 * * *"
+  push:
+    branches: [main]
+  # A PR that changes the checker runs it against current production, so it is proven before merge.
+  pull_request:
+    paths: ["scripts/check-production.mjs", ".github/workflows/production-check.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - name: Wait for the production deployment after a push to main
+        if: github.event_name == 'push'
+        run: sleep 180
+      - name: Check production
+        run: node scripts/check-production.mjs "${{ inputs.url || vars.PRODUCTION_URL || 'https://lotlizard.vercel.app' }}"
