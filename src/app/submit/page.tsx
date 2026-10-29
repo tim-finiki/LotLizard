@@ -45,7 +45,7 @@ export default async function SubmitPage() {
 function ComingSoon() {
   return (
     <div className="mx-auto max-w-xl px-4 py-10">
-      <div className="rounded-3xl bg-white p-6 text-center ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+      <div className="rounded-3xl bg-white p-6 text-center ring-1 ring-black/5 dark:bg-ink-soft dark:ring-white/10">
         <p aria-hidden className="text-4xl">🦎</p>
         <h1 className="mt-2 text-2xl font-extrabold">Community reporting coming soon</h1>
         <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-400">{SUBMISSIONS_DISABLED_REASON}</p>
@@ -53,7 +53,7 @@ function ComingSoon() {
           Soon you&apos;ll be able to share what you paid, how you paid, how the tailgate was and how long it took to get out.
         </p>
         <div className="mt-5 flex flex-wrap justify-center gap-2">
-          <Link href="/venues/highmark-stadium" className="flex h-11 items-center rounded-xl bg-brand-600 px-4 text-sm font-semibold text-white">
+          <Link href="/venues/highmark-stadium" className="flex h-11 items-center rounded-xl bg-brand-600 px-4 text-sm font-semibold text-ink">
             Explore Highmark parking
           </Link>
           <Link href="/about/data" className="flex h-11 items-center rounded-xl px-4 text-sm font-semibold text-brand-700 ring-1 ring-brand-500/40 dark:text-brand-100">

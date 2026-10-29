@@ -119,7 +119,7 @@ export default async function MetroPage({ params }: PageProps<"/cities/[metro]">
         <Section id="compare" title={`${metro.name} venues side by side`}>
           <div className="grid gap-3 md:grid-cols-2">
             {comparisons.map(({ venue, c }) => (
-              <div key={venue.id} className="rounded-2xl bg-white p-4 ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+              <div key={venue.id} className="rounded-2xl bg-white p-4 ring-1 ring-black/5 dark:bg-ink-soft dark:ring-white/10">
                 <h3 className="text-base font-bold">
                   <Link href={venuePath(venue)} className="text-brand-700 underline-offset-2 hover:underline dark:text-brand-100">
                     {venue.name}
@@ -150,7 +150,7 @@ export default async function MetroPage({ params }: PageProps<"/cities/[metro]">
             </p>
             <ul className="flex flex-col gap-2">
               {shared.map((s) => (
-                <li key={s.name} className="rounded-xl bg-white px-4 py-3 text-sm ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+                <li key={s.name} className="rounded-xl bg-white px-4 py-3 text-sm ring-1 ring-black/5 dark:bg-ink-soft dark:ring-white/10">
                   <span className="font-semibold">{s.name}</span>
                   <span className="text-neutral-500"> · </span>
                   {s.at.map((x, i) => (
@@ -191,7 +191,7 @@ export default async function MetroPage({ params }: PageProps<"/cities/[metro]">
             <ul className="flex flex-wrap gap-2 text-sm">
               {others.map(({ venue }) => (
                 <li key={venue.id}>
-                  <Link href={venuePath(venue)} className="rounded-full bg-white px-3 py-1 ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+                  <Link href={venuePath(venue)} className="rounded-full bg-white px-3 py-1 ring-1 ring-black/5 dark:bg-ink-soft dark:ring-white/10">
                     {venue.name}
                   </Link>
                 </li>
@@ -208,7 +208,7 @@ export default async function MetroPage({ params }: PageProps<"/cities/[metro]">
           <p className="text-sm text-neutral-600 dark:text-neutral-400">
             Compiled from the sources below as of their dates. Always confirm with the venue or operator before you go.
           </p>
-          <div className="rounded-2xl bg-white px-4 ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+          <div className="rounded-2xl bg-white px-4 ring-1 ring-black/5 dark:bg-ink-soft dark:ring-white/10">
             <SourceList sources={sources} />
           </div>
         </Section>

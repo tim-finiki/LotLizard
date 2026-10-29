@@ -42,14 +42,21 @@ import { usePreferences } from "@/components/usePreferences";
 
 const VenueMap = dynamic(() => import("@/components/VenueMap"), {
   ssr: false,
-  loading: () => <div className="grid h-full w-full place-items-center bg-neutral-200 text-sm text-neutral-500 dark:bg-neutral-800">Loading map…</div>,
+  loading: () => (
+    <div role="status" className="grid h-full w-full place-items-center bg-line text-sm text-neutral-600 dark:bg-ink-soft dark:text-neutral-300">
+      <span className="flex items-center gap-2">
+        <span aria-hidden className="h-4 w-4 animate-spin rounded-full border-2 border-lizard border-t-transparent" />
+        Loading map…
+      </span>
+    </div>
+  ),
 });
 
 const FACTOR_LABEL: Record<Factor, string> = { cost: "Low cost", walk: "Short walk", tailgate: "Tailgating", exit: "Quick exit" };
 const NO_EVENT = "none";
 
 const REC_STYLE: Record<Recommendation, { label: string; className: string }> = {
-  top_pick: { label: "Top pick", className: "bg-brand-600 text-white" },
+  top_pick: { label: "Top pick", className: "bg-brand-600 text-ink" },
   good_match: { label: "Good match", className: "bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-100" },
   fair_match: { label: "Fair match", className: "bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-200" },
   limited_data: { label: "Limited data", className: "bg-amber-50 text-amber-800 ring-1 ring-inset ring-amber-300 dark:bg-amber-900/30 dark:text-amber-200 dark:ring-amber-700" },
@@ -249,7 +256,7 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
           type="button"
           onClick={() => setModal("compare")}
           disabled={compare.length < 2}
-          className="h-9 shrink-0 rounded-full bg-neutral-900 px-3 text-xs font-semibold text-white disabled:opacity-50 dark:bg-white dark:text-neutral-900"
+          className="h-9 shrink-0 rounded-full bg-ink px-3 text-xs font-semibold text-white disabled:opacity-50 dark:bg-white dark:text-neutral-900"
         >
           Compare {compare.length}
         </button>
@@ -290,12 +297,12 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
               onClick={() => setModal("filters")}
               aria-label={filterCount > 0 ? `Filters, ${filterCount} active` : "Filters"}
               className={`flex h-10 shrink-0 items-center gap-1.5 rounded-full px-4 text-sm font-semibold shadow-md ${
-                filterCount > 0 ? "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900" : "bg-white dark:bg-neutral-900"
+                filterCount > 0 ? "bg-ink text-white dark:bg-white dark:text-neutral-900" : "bg-white dark:bg-ink-soft"
               }`}
             >
               Filters
               {filterCount > 0 && (
-                <span aria-hidden className="grid h-5 min-w-5 place-items-center rounded-full bg-brand-500 px-1 text-[11px] text-white">{filterCount}</span>
+                <span aria-hidden className="grid h-5 min-w-5 place-items-center rounded-full bg-lizard px-1 text-[11px] text-ink">{filterCount}</span>
               )}
             </button>
           </div>
@@ -306,7 +313,7 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
             </p>
           )}
           {activeId && !activeHasPin && (
-            <p className="pointer-events-auto w-fit rounded-lg bg-white/95 px-3 py-1.5 text-xs shadow dark:bg-neutral-900/95">
+            <p className="pointer-events-auto w-fit rounded-lg bg-white/95 px-3 py-1.5 text-xs shadow dark:bg-ink-soft/95">
               This option has no confirmed location, so it isn&apos;t on the map.
             </p>
           )}
@@ -347,7 +354,7 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
             />
           ))}
           {rankedList.length === 0 && (
-            <p className="rounded-xl bg-neutral-50 p-3 text-sm dark:bg-neutral-800">
+            <p className="rounded-xl bg-mist p-3 text-sm dark:bg-neutral-800">
               {unrankedList.length > 0
                 ? "No lot has enough data for these priorities to rank it honestly. Try weighting walk or tailgating, where we have more data."
                 : "No lots match your filters. Try relaxing the max price or vehicle type."}
@@ -385,7 +392,7 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
             </>
           )}
 
-          <div className="mt-3 flex flex-col gap-2 rounded-xl bg-neutral-50 p-3 text-xs text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
+          <div className="mt-3 flex flex-col gap-2 rounded-xl bg-mist p-3 text-xs text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
             <p>
               <strong>How to read this:</strong> the match averages only what we actually know about a lot. Missing data
               is neither a plus nor a minus, and lots with too little data aren&apos;t ranked. Official-lot prices are an
@@ -419,7 +426,7 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
             </button>
           }
           footer={
-            <button type="button" onClick={() => setModal(null)} className="h-12 w-full rounded-xl bg-brand-600 text-base font-semibold text-white">
+            <button type="button" onClick={() => setModal(null)} className="h-12 w-full rounded-xl bg-brand-600 text-base font-semibold text-ink">
               Show {shownCount} {shownCount === 1 ? "option" : "options"}
             </button>
           }
@@ -445,7 +452,7 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
 
 function PillSelect({ label, value, onChange, children }: { label: string; value: string; onChange: (v: string) => void; children: React.ReactNode }) {
   return (
-    <label className="relative flex h-10 min-w-0 max-w-[calc(50%-0.25rem)] shrink items-center rounded-full bg-white pl-3 pr-7 shadow-md min-[400px]:max-w-[13rem] min-[400px]:shrink-0 min-[400px]:pl-4 min-[400px]:pr-8 dark:bg-neutral-900 lg:max-w-[22rem]">
+    <label className="relative flex h-10 min-w-0 max-w-[calc(50%-0.25rem)] shrink items-center rounded-full bg-white pl-3 pr-7 shadow-md min-[400px]:max-w-[13rem] min-[400px]:shrink-0 min-[400px]:pl-4 min-[400px]:pr-8 dark:bg-ink-soft lg:max-w-[22rem]">
       <span className="sr-only">{label}</span>
       <select value={value} onChange={(e) => onChange(e.target.value)} className="w-full min-w-0 appearance-none truncate bg-transparent text-sm font-semibold outline-none">
         {children}
@@ -537,7 +544,7 @@ function ResultCard({
   return (
     <article
       id={`lot-${f.id}`}
-      className={`rounded-2xl border bg-white transition dark:bg-neutral-900 ${
+      className={`rounded-2xl border bg-white transition dark:bg-ink-soft ${
         active ? "border-brand-500 ring-2 ring-brand-500/30" : "border-black/5 dark:border-white/10"
       }`}
     >
@@ -578,7 +585,7 @@ function ResultCard({
 
       {active && (
         <div className="flex flex-col gap-3 border-t border-black/5 px-3 pb-3 pt-3 text-sm dark:border-white/10">
-          <dl className="grid grid-cols-3 gap-2 rounded-xl bg-neutral-50 p-2 text-center dark:bg-neutral-800">
+          <dl className="grid grid-cols-3 gap-2 rounded-xl bg-mist p-2 text-center dark:bg-neutral-800">
             <div>
               <dt className="text-[10px] uppercase tracking-wide text-neutral-500">Match</dt>
               <dd className="text-lg font-extrabold tabular-nums">{r.rank !== null ? r.score : <span className="text-sm font-semibold text-neutral-400">Not ranked</span>}</dd>
@@ -606,10 +613,10 @@ function ResultCard({
               </li>
             )}
           </ul>
-          <div className="rounded-xl bg-neutral-50 p-2 dark:bg-neutral-800">
+          <div className="rounded-xl bg-mist p-2 dark:bg-neutral-800">
             <PaymentDetails policy={payment.policy} heading={payment.isEventOverride ? "Payment (game-day policy)" : "Payment"} />
           </div>
-          <div className="rounded-xl bg-neutral-50 p-2 dark:bg-neutral-800">
+          <div className="rounded-xl bg-mist p-2 dark:bg-neutral-800">
             <p className="mb-1 text-sm font-semibold">Parking amenities</p>
             <FeatureDetails facility={f} />
           </div>
@@ -630,7 +637,7 @@ function ResultCard({
             </label>
             <Link
               href={`/venues/${venue.slug}/parking/${f.slug}`}
-              className="flex h-9 items-center rounded-lg bg-neutral-900 px-3 text-xs font-semibold text-white dark:bg-white dark:text-neutral-900"
+              className="flex h-9 items-center rounded-lg bg-ink px-3 text-xs font-semibold text-white dark:bg-white dark:text-neutral-900"
             >
               Details, sources &amp; reviews
             </Link>
@@ -659,9 +666,9 @@ function OtherCard({
   const payment = effectivePayment(f, eventId);
   const price = f.prices[0];
   return (
-    <article id={`lot-${f.id}`} className={`rounded-xl border bg-white dark:bg-neutral-900 ${active ? "border-brand-500 ring-2 ring-brand-500/30" : "border-black/5 dark:border-white/10"}`}>
+    <article id={`lot-${f.id}`} className={`rounded-xl border bg-white dark:bg-ink-soft ${active ? "border-brand-500 ring-2 ring-brand-500/30" : "border-black/5 dark:border-white/10"}`}>
       <button type="button" onClick={onSelect} aria-expanded={active} className="flex w-full items-center gap-3 p-3 text-left">
-        <span aria-hidden className="h-3 w-3 shrink-0 rounded-full" style={{ background: FACILITY_TYPE_COLOR[f.type] }} />
+        <span aria-hidden className="h-3 w-3 shrink-0 rounded-full ring-1 ring-black/10 dark:ring-white/40" style={{ background: FACILITY_TYPE_COLOR[f.type] }} />
         <span className="min-w-0 flex-1">
           <span className="block truncate text-sm font-semibold">{f.name}</span>
           <span className="block truncate text-xs text-neutral-500">
@@ -693,7 +700,7 @@ function ChipToggle({ on, onClick, children }: { on: boolean; onClick: () => voi
       aria-pressed={on}
       onClick={onClick}
       className={`h-9 rounded-full px-3 text-sm font-medium ring-1 ring-inset ${
-        on ? "bg-brand-600 text-white ring-brand-600" : "bg-white ring-black/10 dark:bg-neutral-900 dark:ring-white/15"
+        on ? "bg-brand-600 text-ink ring-brand-600" : "bg-white ring-black/10 dark:bg-ink-soft dark:ring-white/15"
       }`}
     >
       {children}
@@ -843,10 +850,10 @@ function FiltersPanel({
                   aria-pressed={shown}
                   onClick={() => onToggleType(t)}
                   className={`flex h-9 items-center gap-1.5 rounded-full px-3 text-sm font-medium ring-1 ring-inset ${
-                    shown ? "bg-white ring-black/10 dark:bg-neutral-900 dark:ring-white/15" : "bg-neutral-100 text-neutral-400 line-through ring-transparent dark:bg-neutral-800"
+                    shown ? "bg-white ring-black/10 dark:bg-ink-soft dark:ring-white/15" : "bg-neutral-100 text-neutral-400 line-through ring-transparent dark:bg-neutral-800"
                   }`}
                 >
-                  <span aria-hidden className="h-2.5 w-2.5 rounded-full" style={{ background: shown ? FACILITY_TYPE_COLOR[t] : "#a3a3a3" }} />
+                  <span aria-hidden className="h-2.5 w-2.5 rounded-full ring-1 ring-black/10 dark:ring-white/40" style={{ background: shown ? FACILITY_TYPE_COLOR[t] : "#a3a3a3" }} />
                   {FACILITY_TYPE_LABEL[t]}
                 </button>
               );
@@ -855,7 +862,7 @@ function FiltersPanel({
         </FilterSection>
       </section>
 
-      <section aria-labelledby="sort-results-heading" className="rounded-2xl bg-neutral-50 p-4 dark:bg-neutral-800/60">
+      <section aria-labelledby="sort-results-heading" className="rounded-2xl bg-mist p-4 dark:bg-neutral-800/60">
         <div className="flex items-baseline justify-between gap-2">
           <h3 id="sort-results-heading" className="text-xs font-bold uppercase tracking-wide text-neutral-500">Sort results</h3>
           <button
@@ -978,7 +985,7 @@ function Modal({
   return (
     <div className="fixed inset-0 z-[1000] flex items-end justify-center bg-black/40 sm:items-center" role="dialog" aria-modal="true" aria-label={title} onClick={onClose}>
       <div
-        className="flex max-h-[85dvh] w-full flex-col rounded-t-3xl bg-white shadow-xl sm:max-w-2xl sm:rounded-3xl dark:bg-neutral-900"
+        className="flex max-h-[85dvh] w-full flex-col rounded-t-3xl bg-white shadow-xl sm:max-w-2xl sm:rounded-3xl dark:bg-ink-soft"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex shrink-0 items-center justify-between gap-2 border-b border-black/5 px-4 py-2 dark:border-white/10">

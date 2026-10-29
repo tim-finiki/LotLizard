@@ -13,14 +13,15 @@ export const FACILITY_TYPE_LABEL: Record<FacilityType, string> = {
 
 /** Marker/legend colors. Hex so they work in both Tailwind classes and Leaflet divIcons. */
 export const FACILITY_TYPE_COLOR: Record<FacilityType, string> = {
-  official_lot: "#2563eb",
-  private_lot: "#16a34a",
-  garage: "#7c3aed",
-  independent: "#ea580c",
-  residential: "#d97706",
-  shuttle: "#0891b2",
-  rideshare_zone: "#db2777",
-  ada: "#4f46e5",
+  // Brand charcoal/forest for the common types; every colour keeps ≥4.5:1 with the pin's white label.
+  official_lot: "#0f1412",
+  private_lot: "#2e7d32",
+  garage: "#6d28d9",
+  independent: "#c2410c",
+  residential: "#a16207",
+  shuttle: "#0e7490",
+  rideshare_zone: "#be185d",
+  ada: "#1e67d2",
 };
 
 export const AMENITY_LABEL: Record<Amenity, string> = {

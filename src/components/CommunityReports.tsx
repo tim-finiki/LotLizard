@@ -25,7 +25,7 @@ export async function CommunityReports({ venueSlug, facilitySlug }: { venueSlug:
   return (
     <div className="flex flex-col gap-3">
       {carPrices.length > 0 && (
-        <div className="flex items-center justify-between rounded-xl bg-white p-3 text-sm ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+        <div className="flex items-center justify-between rounded-xl bg-white p-3 text-sm ring-1 ring-black/5 dark:bg-ink-soft dark:ring-white/10">
           <span>
             Fans reported paying <strong>${median(carPrices)}</strong> (median of {carPrices.length})
           </span>
@@ -33,7 +33,7 @@ export async function CommunityReports({ venueSlug, facilitySlug }: { venueSlug:
         </div>
       )}
       {c.exitTimes.length > 0 && (
-        <div className="flex items-center justify-between rounded-xl bg-white p-3 text-sm ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+        <div className="flex items-center justify-between rounded-xl bg-white p-3 text-sm ring-1 ring-black/5 dark:bg-ink-soft dark:ring-white/10">
           <span>
             Reported time to get out: <strong>{median(c.exitTimes.map((e) => e.minutes))} min</strong> (median of {c.exitTimes.length})
           </span>
@@ -41,7 +41,7 @@ export async function CommunityReports({ venueSlug, facilitySlug }: { venueSlug:
         </div>
       )}
       {c.payments.map((p) => (
-        <div key={p.id} className="rounded-xl bg-white p-3 text-sm ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+        <div key={p.id} className="rounded-xl bg-white p-3 text-sm ring-1 ring-black/5 dark:bg-ink-soft dark:ring-white/10">
           <div className="flex items-center justify-between gap-2">
             <span className="font-semibold">
               Payment report
@@ -61,7 +61,7 @@ export async function CommunityReports({ venueSlug, facilitySlug }: { venueSlug:
         </div>
       ))}
       {c.reviews.map((r) => (
-        <article key={r.id} className="rounded-xl bg-white p-3 text-sm ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+        <article key={r.id} className="rounded-xl bg-white p-3 text-sm ring-1 ring-black/5 dark:bg-ink-soft dark:ring-white/10">
           <header className="flex flex-wrap items-center gap-x-3 gap-y-1">
             <span className="font-semibold">{"★".repeat(r.rating)}<span className="text-neutral-300">{"★".repeat(5 - r.rating)}</span></span>
             {r.tailgateRating && <span className="text-xs text-neutral-500">Tailgate {r.tailgateRating}/5</span>}

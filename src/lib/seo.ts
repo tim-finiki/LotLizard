@@ -164,11 +164,11 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
   };
 }
 
-/** Site identity for the home page. Logo is added once the approved mascot asset exists. */
+/** Site identity for the home page, with the approved primary logo. */
 export function siteJsonLd() {
   const url = absolute("/");
   return [
     { "@context": "https://schema.org", "@type": "WebSite", name: SITE_NAME, url, description: SITE_DESCRIPTION },
-    { "@context": "https://schema.org", "@type": "Organization", name: SITE_NAME, url },
+    { "@context": "https://schema.org", "@type": "Organization", name: SITE_NAME, url, logo: absolute("/brand/lotlizard-logo-full.png") },
   ];
 }

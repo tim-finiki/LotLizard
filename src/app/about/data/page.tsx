@@ -22,7 +22,7 @@ export default function DataPage() {
         <h2 className="text-lg font-bold">Confidence levels</h2>
         <ul className="flex flex-col gap-2">
           {levels.map((l) => (
-            <li key={l} className="flex flex-col gap-1 rounded-xl bg-white p-3 ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+            <li key={l} className="flex flex-col gap-1 rounded-xl bg-white p-3 ring-1 ring-black/5 dark:bg-ink-soft dark:ring-white/10">
               <ConfidenceBadge level={l} />
               <span className="text-neutral-600 dark:text-neutral-400">{CONFIDENCE_DESCRIPTION[l]}</span>
             </li>

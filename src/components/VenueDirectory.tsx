@@ -35,7 +35,7 @@ export function VenueDirectory({ venues }: { venues: Venue[] }) {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="sticky top-14 z-20 -mx-4 flex flex-col gap-2 bg-neutral-50/95 px-4 py-3 backdrop-blur dark:bg-neutral-950/95">
+      <div className="sticky top-14 z-20 -mx-4 flex flex-col gap-2 bg-mist/95 px-4 py-3 backdrop-blur dark:bg-ink/95">
         <label className="sr-only" htmlFor="venue-search">Search venues</label>
         <input
           id="venue-search"
@@ -45,14 +45,14 @@ export function VenueDirectory({ venues }: { venues: Venue[] }) {
           placeholder="Search by venue, team, city or state"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="h-12 w-full rounded-xl border border-black/10 bg-white px-4 text-base shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 dark:border-white/15 dark:bg-neutral-900"
+          className="h-12 w-full rounded-xl border border-black/10 bg-white px-4 text-base shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 dark:border-white/15 dark:bg-ink-soft"
         />
         <div className="flex gap-2">
           <select
             aria-label="Venue type"
             value={type}
             onChange={(e) => setType(e.target.value as VenueType | "all")}
-            className="h-10 flex-1 rounded-lg border border-black/10 bg-white px-2 text-sm dark:border-white/15 dark:bg-neutral-900"
+            className="h-10 flex-1 rounded-lg border border-black/10 bg-white px-2 text-sm dark:border-white/15 dark:bg-ink-soft"
           >
             <option value="all">All types</option>
             {types.map((t) => (
@@ -63,7 +63,7 @@ export function VenueDirectory({ venues }: { venues: Venue[] }) {
             aria-label="State"
             value={state}
             onChange={(e) => setState(e.target.value)}
-            className="h-10 flex-1 rounded-lg border border-black/10 bg-white px-2 text-sm dark:border-white/15 dark:bg-neutral-900"
+            className="h-10 flex-1 rounded-lg border border-black/10 bg-white px-2 text-sm dark:border-white/15 dark:bg-ink-soft"
           >
             <option value="all">All states</option>
             {states.map((s) => (
@@ -75,13 +75,30 @@ export function VenueDirectory({ venues }: { venues: Venue[] }) {
       <p className="text-sm text-neutral-500" aria-live="polite">
         {results.length} {results.length === 1 ? "venue" : "venues"}
       </p>
+      {results.length === 0 && (
+        <div className="rounded-2xl bg-white p-6 text-center ring-1 ring-line dark:bg-ink-soft dark:ring-white/10">
+          <p className="font-display font-bold">No venues match that search</p>
+          <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">Try a team, city or state — or clear the filters.</p>
+          <button
+            type="button"
+            onClick={() => {
+              setQuery("");
+              setType("all");
+              setState("all");
+            }}
+            className="mt-3 h-10 rounded-lg bg-lizard px-4 text-sm font-semibold text-ink hover:bg-lizard-strong"
+          >
+            Clear search
+          </button>
+        </div>
+      )}
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {results.map((v) => (
           <VenueCard key={v.id} venue={v} />
         ))}
       </div>
       {results.length === 0 && (
-        <p className="rounded-xl bg-white p-4 text-sm dark:bg-neutral-900">
+        <p className="rounded-xl bg-white p-4 text-sm dark:bg-ink-soft">
           No venues match. Missing a venue? <a href="/submit" className="font-semibold text-brand-700 underline dark:text-brand-100">Tell us about it</a>.
         </p>
       )}

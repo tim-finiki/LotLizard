@@ -23,7 +23,7 @@ const KIND_LABEL: Record<SubmissionKind, string> = {
 const NEEDS_LOT: SubmissionKind[] = ["price", "review", "payment", "exit_time"];
 
 const inputCls =
-  "h-12 w-full rounded-xl border border-black/10 bg-white px-3 text-base outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 dark:border-white/15 dark:bg-neutral-900";
+  "h-12 w-full rounded-xl border border-black/10 bg-white px-3 text-base outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 dark:border-white/15 dark:bg-ink-soft";
 
 function Field({ label, children, hint }: { label: string; children: React.ReactNode; hint?: string }) {
   return (
@@ -134,7 +134,7 @@ export function SubmitForm({ venues }: { venues: VenueOption[] }) {
               type="button"
               aria-pressed={kind === k}
               onClick={() => setKind(k)}
-              className={`h-10 rounded-full px-4 text-sm font-medium ring-1 ${kind === k ? "bg-brand-600 text-white ring-brand-600" : "bg-white ring-black/10 dark:bg-neutral-900 dark:ring-white/15"}`}
+              className={`h-10 rounded-full px-4 text-sm font-medium ring-1 ${kind === k ? "bg-brand-600 text-ink ring-brand-600" : "bg-white ring-black/10 dark:bg-ink-soft dark:ring-white/15"}`}
             >
               {KIND_LABEL[k]}
             </button>
@@ -261,7 +261,7 @@ export function SubmitForm({ venues }: { venues: VenueOption[] }) {
             <legend className="mb-2 text-sm font-medium">Accepted payment methods</legend>
             <div className="grid grid-cols-2 gap-2 text-sm">
               {PAYMENT_METHODS.map((m) => (
-                <label key={m} className="flex min-h-11 items-center gap-2 rounded-xl bg-white px-3 ring-1 ring-black/10 dark:bg-neutral-900 dark:ring-white/15">
+                <label key={m} className="flex min-h-11 items-center gap-2 rounded-xl bg-white px-3 ring-1 ring-black/10 dark:bg-ink-soft dark:ring-white/15">
                   <input type="checkbox" name="accepted" value={m} className="h-5 w-5 accent-brand-600" />
                   {PAYMENT_METHOD_LABEL[m]}
                 </label>
@@ -273,7 +273,7 @@ export function SubmitForm({ venues }: { venues: VenueOption[] }) {
             <summary className="cursor-pointer font-medium">Methods they definitely don&apos;t accept (optional)</summary>
             <div className="mt-2 grid grid-cols-2 gap-2">
               {PAYMENT_METHODS.map((m) => (
-                <label key={m} className="flex min-h-11 items-center gap-2 rounded-xl bg-white px-3 ring-1 ring-black/10 dark:bg-neutral-900 dark:ring-white/15">
+                <label key={m} className="flex min-h-11 items-center gap-2 rounded-xl bg-white px-3 ring-1 ring-black/10 dark:bg-ink-soft dark:ring-white/15">
                   <input type="checkbox" name="notAccepted" value={m} className="h-5 w-5 accent-brand-600" />
                   {PAYMENT_METHOD_LABEL[m]}
                 </label>
@@ -340,7 +340,7 @@ export function SubmitForm({ venues }: { venues: VenueOption[] }) {
       <button
         type="submit"
         disabled={state.status === "sending" || lotUnavailable}
-        className="h-12 rounded-xl bg-brand-600 text-base font-semibold text-white disabled:opacity-50"
+        className="h-12 rounded-xl bg-brand-600 text-base font-semibold text-ink disabled:opacity-50"
       >
         {state.status === "sending" ? "Sending…" : "Submit for review"}
       </button>

@@ -122,7 +122,7 @@ export default async function VenuePage({ params }: PageProps<"/venues/[venue]">
       {mapFirst ? (
         // Map-first layout: compact title bar + full-height explorer; details follow below.
         <div className="flex h-[calc(100dvh-3.5rem)] min-h-[520px] flex-col">
-          <div className="flex shrink-0 items-center justify-between gap-3 border-b border-black/5 bg-white px-4 py-2 dark:border-white/10 dark:bg-neutral-900">
+          <div className="flex shrink-0 items-center justify-between gap-3 border-b border-black/5 bg-white px-4 py-2 dark:border-white/10 dark:bg-ink-soft">
             <div className="min-w-0">
               <h1 className="truncate text-base font-extrabold leading-tight">{venue.name} parking</h1>
               <p className="truncate text-xs text-neutral-500">
@@ -150,7 +150,7 @@ export default async function VenuePage({ params }: PageProps<"/venues/[venue]">
         <div className="mt-1">{overview}</div>
 
         {!detailed && (
-          <div className="mt-6 rounded-2xl bg-white p-5 ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+          <div className="mt-6 rounded-2xl bg-white p-5 ring-1 ring-black/5 dark:bg-ink-soft dark:ring-white/10">
             <h2 className="text-lg font-bold">Parking data coming soon</h2>
             <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
               We haven&apos;t verified parking for {venue.name} yet, so we&apos;re not showing any.
@@ -158,7 +158,7 @@ export default async function VenuePage({ params }: PageProps<"/venues/[venue]">
                 ? " Know a lot, a price or a tailgate spot? Your report goes to our moderators and helps launch this guide."
                 : " Community reporting is coming soon."}
             </p>
-            <Link href="/venues" className="mt-3 inline-flex h-11 items-center rounded-lg bg-brand-600 px-4 text-sm font-semibold text-white">
+            <Link href="/venues" className="mt-3 inline-flex h-11 items-center rounded-lg bg-brand-600 px-4 text-sm font-semibold text-ink">
               Browse venues with parking guides
             </Link>
           </div>
@@ -174,7 +174,7 @@ export default async function VenuePage({ params }: PageProps<"/venues/[venue]">
               {mapFirst ? (
                 // Collapsed under the map to keep the mobile page short; the content is still in the HTML for crawlers.
                 <details className="group">
-                  <summary className="flex h-11 cursor-pointer list-none items-center rounded-lg bg-white px-4 text-sm font-semibold text-brand-700 ring-1 ring-black/5 dark:bg-neutral-900 dark:text-brand-100 dark:ring-white/10">
+                  <summary className="flex h-11 cursor-pointer list-none items-center rounded-lg bg-white px-4 text-sm font-semibold text-brand-700 ring-1 ring-black/5 dark:bg-ink-soft dark:text-brand-100 dark:ring-white/10">
                     <span className="group-open:hidden">Show all {facilities.length} with details</span>
                     <span className="hidden group-open:inline">Hide details</span>
                   </summary>
@@ -203,7 +203,7 @@ export default async function VenuePage({ params }: PageProps<"/venues/[venue]">
                 {events.map((e) => {
                   const opens = openHours !== undefined ? lotOpenTime(e, openHours) : undefined;
                   return (
-                    <li key={e.id} className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-white px-4 py-3 text-sm ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+                    <li key={e.id} className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-white px-4 py-3 text-sm ring-1 ring-black/5 dark:bg-ink-soft dark:ring-white/10">
                       <span>
                         <span className="font-semibold">{eventLabel(e)}</span>
                         {!e.startLocal && <span className="text-neutral-500"> · kickoff time TBA</span>}
@@ -287,7 +287,7 @@ export default async function VenuePage({ params }: PageProps<"/venues/[venue]">
               {venue.attribution.notes} Information reflects sources listed below as of their dates. Always confirm with
               official sources before you go.
             </p>
-            <div className="rounded-2xl bg-white px-4 ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+            <div className="rounded-2xl bg-white px-4 ring-1 ring-black/5 dark:bg-ink-soft dark:ring-white/10">
               <SourceList sources={sources} />
             </div>
             <Link href={`/submit?venue=${venue.slug}&kind=correction`} className="text-sm font-semibold text-brand-700 underline dark:text-brand-100">

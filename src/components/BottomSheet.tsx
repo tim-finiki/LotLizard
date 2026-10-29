@@ -112,7 +112,7 @@ export function BottomSheet({
       ref={ref}
       aria-label={label}
       style={{ height }}
-      className={`absolute inset-x-0 bottom-0 z-[600] flex flex-col rounded-t-3xl bg-white shadow-[0_-8px_30px_rgba(0,0,0,0.18)] dark:bg-neutral-900 ${
+      className={`absolute inset-x-0 bottom-0 z-[600] flex flex-col rounded-t-3xl bg-white shadow-[0_-8px_30px_rgba(0,0,0,0.18)] dark:bg-ink-soft ${
         dragHeight === null ? "transition-[height] duration-300 ease-out" : ""
       } lg:static lg:z-auto lg:h-full! lg:rounded-none lg:shadow-none lg:transition-none`}
     >
