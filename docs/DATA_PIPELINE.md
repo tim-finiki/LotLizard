@@ -46,6 +46,8 @@ facts CSV / JSON  ──►  npm run inventory -- import <file>  ──►  src/
 | `name` | Display name |
 | `type` | `official_lot` `private_lot` `garage` `independent` `residential` `shuttle` `rideshare_zone` `ada` |
 | `operator` | Operator name |
+| `ownership` | `public` (city, county, state or public authority) or `private`. Omit when no source says. |
+| `access` | `public` (anyone can park), `pass_required` (pass/permit issued in advance), `restricted` (reserved for specific people, e.g. season-ticket holders; never recommended). Omit when no source says. Ownership and access are independent. |
 | `address` | Street address as published |
 | `aliases` | `;`-separated |
 | `description` | One or two factual sentences |

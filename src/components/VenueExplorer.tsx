@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import type { Amenity, FacilityType, ParkingFacility, Venue, VehicleType, VenueEvent } from "@/lib/types";
 import {
@@ -39,6 +40,19 @@ import { BottomSheet, snapHeight, type SheetSnap } from "@/components/BottomShee
 import { ConfidenceBadge } from "@/components/ConfidenceBadge";
 import { ReferralLink } from "@/components/ReferralLink";
 import { usePreferences } from "@/components/usePreferences";
+import { AccessBadges, AccessDetails } from "@/components/AccessInfo";
+import { LotFinder } from "@/components/LotFinder";
+import { ShareLotButton } from "@/components/ShareLotButton";
+import {
+  PARKING_TYPE_FILTERS,
+  PARKING_TYPE_FILTER_HINT,
+  PARKING_TYPE_FILTER_LABEL,
+  isParkingTypeFilter,
+  isRestricted,
+  type AccessMatch,
+  type ParkingTypeFilter,
+} from "@/lib/access";
+import { lotPath, lotSearchEntry } from "@/lib/lot-search";
 
 const VenueMap = dynamic(() => import("@/components/VenueMap"), {
   ssr: false,
@@ -88,6 +102,9 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
   const [eventId, setEventId] = useState<string>(NO_EVENT);
   const [today, setToday] = useState<string>();
   const [hiddenTypes, setHiddenTypes] = useState<FacilityType[]>([]);
+  const [parkingType, setParkingType] = useState<ParkingTypeFilter>("all");
+  const [includeUnconfirmedAccess, setIncludeUnconfirmedAccess] = useState(false);
+  const router = useRouter();
   const [selectedId, setActiveId] = useState<string>();
   const [compare, setCompare] = useState<string[]>([]);
   const [modal, setModal] = useState<"filters" | "compare" | null>(null);
@@ -117,6 +134,10 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
     /* eslint-enable react-hooks/set-state-in-effect */
     const dir = q.get("dir");
     if (dir && (dir === "any" || approaches.some((a) => a.id === dir))) setPrefs({ ...prefs, direction: dir });
+    const parking = q.get("parking");
+    if (isParkingTypeFilter(parking)) setParkingType(parking);
+    const lot = q.get("lot");
+    if (lot) focusLot(lot);
     // eslint-disable-next-line react-hooks/exhaustive-deps -- run once on mount
   }, []);
 
@@ -127,8 +148,13 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
     url.searchParams.set("event", eventId);
     if (direction === "any") url.searchParams.delete("dir");
     else url.searchParams.set("dir", direction);
+    if (parkingType === "all") url.searchParams.delete("parking");
+    else url.searchParams.set("parking", parkingType);
+    const lot = facilities.find((f) => f.id === selectedId)?.slug;
+    if (lot) url.searchParams.set("lot", lot);
+    else url.searchParams.delete("lot");
     window.history.replaceState(null, "", url);
-  }, [eventId, direction, today]);
+  }, [eventId, direction, today, parkingType, selectedId, facilities]);
 
   useEffect(() => {
     const el = rootRef.current;
@@ -148,8 +174,16 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
   // One filter pass feeds the ranking, the list AND the map, so they always agree.
   const filtered = useMemo(
     () =>
-      applyDisplayFilters(facilities, { hiddenTypes, payment: prefs.payment, amenities: prefs.amenities, features: prefs.features, eventId: event?.id }),
-    [facilities, hiddenTypes, prefs.payment, prefs.amenities, prefs.features, event?.id],
+      applyDisplayFilters(facilities, {
+        hiddenTypes,
+        payment: prefs.payment,
+        amenities: prefs.amenities,
+        features: prefs.features,
+        eventId: event?.id,
+        parkingType,
+        includeUnconfirmedAccess,
+      }),
+    [facilities, hiddenTypes, prefs.payment, prefs.amenities, prefs.features, event?.id, parkingType, includeUnconfirmedAccess],
   );
   const ranked = useMemo(
     () => rankFacilities(venue, filtered.visible, { ...prefs, direction }, { eventKind: event?.kind }),
@@ -166,11 +200,14 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
   // A selection hidden by a filter is dropped, so the pin and card highlights never go stale.
   const activeId = selectedId && filtered.visible.some((f) => f.id === selectedId) ? selectedId : undefined;
   const setPayment = (payment: PaymentFilter) => setPrefs({ ...prefs, payment });
-  const filterCount = activeFilterCount(prefs, hiddenTypes);
+  const filterCount = activeFilterCount(prefs, hiddenTypes, parkingType);
   const resetFilters = () => {
     setPrefs(clearFilters(prefs));
     setHiddenTypes([]);
+    setParkingType("all");
+    setIncludeUnconfirmedAccess(false);
   };
+  const lotEntries = useMemo(() => facilities.map((f) => lotSearchEntry(venue, f)), [venue, facilities]);
   const shownCount = filtered.visible.length;
   // Only offer amenities that some lot here actually reports.
   const reportedAmenities = useMemo(() => [...new Set(facilities.flatMap((f) => f.amenities.value))], [facilities]);
@@ -203,6 +240,24 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
     if (snap === "peek") setSnap("half");
     pendingScroll.current = id;
   };
+
+  /**
+   * Select a lot found by name (or linked with ?lot=): highlight and centre its pin and open its card.
+   * If the current filters hide it, they are cleared so the lot can be shown. Restricted lots are never
+   * listed as options, so they open their own page instead.
+   */
+  function focusLot(slug: string) {
+    const f = facilities.find((x) => x.slug === slug);
+    if (!f) return;
+    if (isRestricted(f)) {
+      router.push(lotPath({ venueSlug: venue.slug, lotSlug: f.slug }));
+      return;
+    }
+    if (!filtered.visible.some((x) => x.id === f.id)) resetFilters();
+    setActiveId(f.id);
+    setSnap((s) => (s === "peek" ? "half" : s));
+    pendingScroll.current = f.id;
+  }
 
   const selectFromList = (id: string) => {
     setActiveId((cur) => (cur === id ? undefined : id));
@@ -305,6 +360,25 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
                 <span aria-hidden className="grid h-5 min-w-5 place-items-center rounded-full bg-lizard px-1 text-[11px] text-ink">{filterCount}</span>
               )}
             </button>
+            <div className="min-w-[9rem] flex-1">
+              <LotFinder entries={lotEntries} onPick={focusLot} />
+            </div>
+          </div>
+          <div role="group" aria-label="Parking access" className="pointer-events-auto -mx-3 flex gap-2 overflow-x-auto px-3 pb-1 [scrollbar-width:none]">
+            {PARKING_TYPE_FILTERS.map((t) => (
+              <button
+                key={t}
+                type="button"
+                aria-pressed={parkingType === t}
+                title={PARKING_TYPE_FILTER_HINT[t]}
+                onClick={() => setParkingType(t)}
+                className={`h-9 shrink-0 rounded-full px-3 text-sm font-semibold shadow-md ${
+                  parkingType === t ? "bg-ink text-white dark:bg-lizard dark:text-ink" : "bg-white dark:bg-ink-soft"
+                }`}
+              >
+                {PARKING_TYPE_FILTER_LABEL[t]}
+              </button>
+            ))}
           </div>
           {direction !== "any" && !exitDirectionsAvailable && (
             <p role="status" className="pointer-events-auto w-fit max-w-full rounded-lg bg-amber-50 px-3 py-1.5 text-xs font-medium text-amber-900 shadow dark:bg-amber-900/80 dark:text-amber-50">
@@ -322,6 +396,22 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
 
       <BottomSheet snap={snap} onSnapChange={setSnap} containerHeight={containerHeight} header={header} label="Parking results">
         <div ref={listRef} className="relative flex flex-col gap-2">
+          {parkingType !== "all" && (
+            <p className="text-xs text-neutral-500">
+              <strong className="font-semibold text-ink dark:text-white">{PARKING_TYPE_FILTER_LABEL[parkingType]}:</strong> {PARKING_TYPE_FILTER_HINT[parkingType]}
+            </p>
+          )}
+          {filtered.hiddenUnknownAccess > 0 && (
+            <p className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-amber-50 px-3 py-2 text-xs text-amber-900 dark:bg-amber-900/30 dark:text-amber-100">
+              <span>
+                {filtered.hiddenUnknownAccess} {filtered.hiddenUnknownAccess === 1 ? "lot is" : "lots are"} hidden because we can&apos;t yet confirm
+                {parkingType === "public_owned" ? " who owns them" : parkingType === "private_open" ? " who owns them and who can park" : " who can park there"}.
+              </span>
+              <button type="button" onClick={() => setIncludeUnconfirmedAccess(true)} className="font-semibold underline">
+                Show unconfirmed
+              </button>
+            </p>
+          )}
           {filtered.hiddenUnknownFeatures > 0 && (
             <p className="rounded-xl bg-amber-50 px-3 py-2 text-xs text-amber-900 dark:bg-amber-900/30 dark:text-amber-100">
               {filtered.hiddenUnknownFeatures} {filtered.hiddenUnknownFeatures === 1 ? "lot is" : "lots are"} hidden because we can&apos;t yet
@@ -346,6 +436,7 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
               direction={direction}
               eventId={event?.id}
               paymentMatch={filtered.paymentMatch.get(r.facility.id)}
+              accessMatch={filtered.accessMatch.get(r.facility.id)}
               active={activeId === r.facility.id}
               compared={compare.includes(r.facility.id)}
               compareDisabled={compare.length >= 3 && !compare.includes(r.facility.id)}
@@ -357,7 +448,9 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
             <p className="rounded-xl bg-mist p-3 text-sm dark:bg-neutral-800">
               {unrankedList.length > 0
                 ? "No lot has enough data for these priorities to rank it honestly. Try weighting walk or tailgating, where we have more data."
-                : "No lots match your filters. Try relaxing the max price or vehicle type."}
+                : parkingType !== "all"
+                  ? `No lot here is confirmed as “${PARKING_TYPE_FILTER_LABEL[parkingType]}” yet.`
+                  : "No lots match your filters. Try relaxing the max price or vehicle type."}
             </p>
           )}
 
@@ -373,6 +466,7 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
                   direction={direction}
                   eventId={event?.id}
                   paymentMatch={filtered.paymentMatch.get(r.facility.id)}
+                  accessMatch={filtered.accessMatch.get(r.facility.id)}
                   active={activeId === r.facility.id}
                   compared={compare.includes(r.facility.id)}
                   compareDisabled={compare.length >= 3 && !compare.includes(r.facility.id)}
@@ -387,9 +481,30 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
             <>
               <h3 className="mt-3 text-sm font-bold">Other ways in</h3>
               {others.map((f) => (
-                <OtherCard key={f.id} venue={venue} facility={f} eventId={event?.id} active={activeId === f.id} onSelect={() => selectFromList(f.id)} />
+                <OtherCard
+                  key={f.id}
+                  venue={venue}
+                  facility={f}
+                  eventId={event?.id}
+                  accessMatch={filtered.accessMatch.get(f.id)}
+                  active={activeId === f.id}
+                  onSelect={() => selectFromList(f.id)}
+                />
               ))}
             </>
+          )}
+
+          {filtered.restricted.length > 0 && (
+            <p className="mt-3 rounded-xl bg-mist p-3 text-xs text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
+              Not shown as options because they&apos;re reserved for specific people:{" "}
+              {filtered.restricted.map((f, i) => (
+                <span key={f.id}>
+                  {i > 0 && ", "}
+                  <Link href={lotPath({ venueSlug: venue.slug, lotSlug: f.slug })} className="font-semibold underline">{f.name}</Link>
+                </span>
+              ))}
+              .
+            </p>
           )}
 
           <div className="mt-3 flex flex-col gap-2 rounded-xl bg-mist p-3 text-xs text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
@@ -438,6 +553,10 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
             hiddenTypes={hiddenTypes}
             onToggleType={(t) => setHiddenTypes((h) => (h.includes(t) ? h.filter((x) => x !== t) : [...h, t]))}
             reportedAmenities={reportedAmenities}
+            parkingType={parkingType}
+            onParkingType={setParkingType}
+            includeUnconfirmedAccess={includeUnconfirmedAccess}
+            onIncludeUnconfirmedAccess={setIncludeUnconfirmedAccess}
           />
         </Modal>
       )}
@@ -522,6 +641,7 @@ function ResultCard({
   direction,
   eventId,
   paymentMatch,
+  accessMatch,
   active,
   compared,
   compareDisabled,
@@ -533,6 +653,7 @@ function ResultCard({
   direction: string;
   eventId?: string;
   paymentMatch?: PaymentMatch;
+  accessMatch?: AccessMatch;
   active: boolean;
   compared: boolean;
   compareDisabled: boolean;
@@ -580,6 +701,11 @@ function ResultCard({
           <span className="mt-1 block empty:hidden">
             <FeatureBadges facility={f} />
           </span>
+          <span className="mt-1 flex flex-wrap items-center gap-1">
+            <span className="sr-only">Access and ownership: </span>
+            <AccessBadges facility={f} />
+            {accessMatch === "unknown" && <UnconfirmedChip />}
+          </span>
         </span>
       </button>
 
@@ -620,6 +746,9 @@ function ResultCard({
             <p className="mb-1 text-sm font-semibold">Parking amenities</p>
             <FeatureDetails facility={f} />
           </div>
+          <div className="rounded-xl bg-mist p-2 dark:bg-neutral-800">
+            <AccessDetails facility={f} />
+          </div>
           {f.amenities.value.length > 0 && (
             <p className="text-xs text-neutral-500">{f.amenities.value.map((a) => AMENITY_LABEL[a]).join(" · ")}</p>
           )}
@@ -641,6 +770,7 @@ function ResultCard({
             >
               Details, sources &amp; reviews
             </Link>
+            <ShareLotButton path={lotPath({ venueSlug: venue.slug, lotSlug: f.slug })} title={`${f.name} — ${venue.name} parking`} />
           </div>
           {f.booking && <ReferralLink booking={f.booking} />}
         </div>
@@ -653,12 +783,14 @@ function OtherCard({
   venue,
   facility: f,
   eventId,
+  accessMatch,
   active,
   onSelect,
 }: {
   venue: Venue;
   facility: ParkingFacility;
   eventId?: string;
+  accessMatch?: AccessMatch;
   active: boolean;
   onSelect: () => void;
 }) {
@@ -683,13 +815,28 @@ function OtherCard({
         <div className="flex flex-col gap-2 border-t border-black/5 px-3 pb-3 pt-2 text-xs dark:border-white/10">
           <p className="text-neutral-600 dark:text-neutral-300">{f.description}</p>
           {payment.policy && <PaymentBadges policy={payment.policy} isEventOverride={payment.isEventOverride} />}
+          <span className="flex flex-wrap items-center gap-1">
+            <AccessBadges facility={f} />
+            {accessMatch === "unknown" && <UnconfirmedChip />}
+          </span>
           <DirectionsRow links={directionsLinks(f)} />
-          <Link href={`/venues/${venue.slug}/parking/${f.slug}`} className="font-semibold text-brand-700 underline dark:text-brand-100">
-            Details &amp; sources
-          </Link>
+          <div className="flex flex-wrap items-center gap-3">
+            <Link href={`/venues/${venue.slug}/parking/${f.slug}`} className="font-semibold text-brand-700 underline dark:text-brand-100">
+              Details &amp; sources
+            </Link>
+            <ShareLotButton path={lotPath({ venueSlug: venue.slug, lotSlug: f.slug })} title={`${f.name} — ${venue.name} parking`} />
+          </div>
         </div>
       )}
     </article>
+  );
+}
+
+function UnconfirmedChip() {
+  return (
+    <span className="rounded-full bg-amber-50 px-2 py-0.5 text-[11px] font-semibold text-amber-900 ring-1 ring-inset ring-amber-300 dark:bg-amber-900/30 dark:text-amber-100">
+      Unconfirmed for this filter
+    </span>
   );
 }
 
@@ -741,6 +888,10 @@ function FiltersPanel({
   hiddenTypes,
   onToggleType,
   reportedAmenities,
+  parkingType,
+  onParkingType,
+  includeUnconfirmedAccess,
+  onIncludeUnconfirmedAccess,
 }: {
   prefs: RankingPreferences;
   onChange: (p: RankingPreferences) => void;
@@ -748,6 +899,10 @@ function FiltersPanel({
   hiddenTypes: FacilityType[];
   onToggleType: (t: FacilityType) => void;
   reportedAmenities: Amenity[];
+  parkingType: ParkingTypeFilter;
+  onParkingType: (t: ParkingTypeFilter) => void;
+  includeUnconfirmedAccess: boolean;
+  onIncludeUnconfirmedAccess: (v: boolean) => void;
 }) {
   const toggle = <T,>(list: T[], v: T) => (list.includes(v) ? list.filter((x) => x !== v) : [...list, v]);
   const payment = prefs.payment;
@@ -760,6 +915,20 @@ function FiltersPanel({
       <section aria-labelledby="filter-results-heading">
         <h3 id="filter-results-heading" className="text-xs font-bold uppercase tracking-wide text-neutral-500">Filter results</h3>
         <p className="mb-3 text-xs text-neutral-500">These hide options that don&apos;t fit.</p>
+
+        <FilterSection title="Parking access" hint="Who owns a lot and who can park there are separate. Lots reserved for specific people are never shown.">
+          <ChipRow>
+            {PARKING_TYPE_FILTERS.map((t) => (
+              <ChipToggle key={t} on={parkingType === t} onClick={() => onParkingType(t)}>
+                {PARKING_TYPE_FILTER_LABEL[t]}
+              </ChipToggle>
+            ))}
+          </ChipRow>
+          <p className="-mt-1 text-xs text-neutral-500">{PARKING_TYPE_FILTER_HINT[parkingType]}</p>
+          {parkingType !== "all" && (
+            <Toggle label="Include lots we can't confirm yet" checked={includeUnconfirmedAccess} onChange={onIncludeUnconfirmedAccess} />
+          )}
+        </FilterSection>
 
         <FilterSection title="Payment methods" hint="Shows lots known to accept any of these.">
           <ChipRow>

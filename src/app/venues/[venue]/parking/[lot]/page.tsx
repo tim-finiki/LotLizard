@@ -30,6 +30,8 @@ import { FeatureDetails } from "@/components/AmenityInfo";
 import { eventLabel } from "@/lib/events";
 import { submissionsStatus } from "@/lib/submissions/availability";
 import { SourceList } from "@/components/SourceList";
+import { ShareLotButton } from "@/components/ShareLotButton";
+import { accessDisplay, isRestricted, ownershipDisplay } from "@/lib/access";
 
 export async function generateStaticParams() {
   return listAllFacilityParams();
@@ -76,6 +78,8 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
   const walk = walkInfo(f, venue);
   const allowed = f.tailgating.allowed.value;
   const directions = directionsLinks(f);
+  const access = accessDisplay(f);
+  const ownership = ownershipDisplay(f);
   const events = await listEvents(venue.id);
   const others = (await listFacilities(venue.id)).filter((o) => o.id !== f.id);
   const verification = verificationSummary(facilityAttributions(f), sources, f.attribution.confidence);
@@ -95,11 +99,17 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
           {FACILITY_TYPE_LABEL[f.type]}
         </span>
         <h1 className="text-2xl font-extrabold leading-tight">{f.name}</h1>
+        {f.aliases && f.aliases.length > 0 && <p className="text-sm text-neutral-600 dark:text-neutral-400">Also called {f.aliases.join(", ")}</p>}
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
           {venue.name} · {f.address ?? `${venue.address.city}, ${venue.address.state}`}
         </p>
         <VerificationStatus summary={verification} />
         <p className="text-sm">{f.description}</p>
+        {isRestricted(f) && (
+          <p className="rounded-xl bg-amber-50 px-3 py-2 text-sm text-amber-900 dark:bg-amber-900/30 dark:text-amber-100">
+            Reserved for specific people, so it isn&apos;t listed as a parking option for {venue.name}.
+          </p>
+        )}
         {f.booking && <ReferralLink booking={f.booking} />}
         {directions ? (
           <div className="flex flex-wrap items-center gap-2">
@@ -114,6 +124,14 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
         ) : (
           <p className="text-xs text-neutral-500">No turn-by-turn directions yet: this lot&apos;s entrance hasn&apos;t been verified, and we won&apos;t route you to an approximate pin.</p>
         )}
+        <div className="flex flex-wrap items-start gap-2">
+          <ShareLotButton path={facilityPath(venue, f)} title={`${f.name} — ${venue.name} parking`} />
+          {!isRestricted(f) && (
+            <Link href={`${venuePath(venue)}?lot=${f.slug}`} className="flex h-9 items-center rounded-lg bg-neutral-100 px-3 text-xs font-semibold dark:bg-neutral-800">
+              Show on the parking map
+            </Link>
+          )}
+        </div>
       </header>
 
       <div className="mt-8 flex flex-col gap-10">
@@ -170,6 +188,12 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
 
         <Section id="details" title="Details">
           <dl className="divide-y divide-black/5 rounded-2xl bg-white px-4 ring-1 ring-black/5 dark:divide-white/10 dark:bg-ink-soft dark:ring-white/10">
+            <Row label="Who can park" attribution={access.attribution}>
+              {access.text}
+            </Row>
+            <Row label="Ownership" attribution={ownership.attribution}>
+              {ownership.text}
+            </Row>
             <Row label="Walk to stadium" attribution={walk && !walk.estimated ? f.walkMinutes?.attribution : undefined}>
               {walk ? (
                 <>

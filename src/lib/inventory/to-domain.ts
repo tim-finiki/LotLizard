@@ -182,6 +182,8 @@ export function inventoryFacility(inv: VenueInventory, lotSlug: string, lot: Inv
     ...(f.aliases ? { aliases: read(f.aliases, "aliases") } : {}),
     type,
     ...(f.operator ? { operator: f.operator.value } : {}),
+    ...(f.ownership ? { ownership: { value: readField("ownership", f.ownership.value), attribution: attribution(v, f.ownership) } } : {}),
+    ...(f.access ? { access: { value: readField("access", f.access.value), attribution: attribution(v, f.access) } } : {}),
     ...(f.address ? { address: f.address.value } : {}),
     ...(location ? { location } : {}),
     description: f.description?.value ?? "",

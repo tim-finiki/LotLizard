@@ -1,6 +1,7 @@
 import type { Amenity, FacilityType, ParkingFacility, UniversalAmenity } from "@/lib/types";
 import { matchFeatures } from "@/lib/features";
 import { DEFAULT_PREFERENCES, type RankedFacility, type RankingPreferences } from "@/lib/ranking";
+import { isRestricted, matchParkingType, type AccessMatch, type ParkingTypeFilter } from "@/lib/access";
 import { effectivePayment, isPaymentFilterActive, matchPayment, type PaymentFilter, type PaymentMatch } from "@/lib/payment";
 
 export interface DisplayFilters {
@@ -12,6 +13,10 @@ export interface DisplayFilters {
   features?: UniversalAmenity[];
   /** Selected event, so event-specific payment policies apply. */
   eventId?: string;
+  /** Ownership/access filter. Restricted lots are always excluded, whatever this is. */
+  parkingType?: ParkingTypeFilter;
+  /** Also show lots whose ownership/access isn't confirmed for `parkingType` (flagged as unconfirmed). */
+  includeUnconfirmedAccess?: boolean;
 }
 
 export interface FilterResult {
@@ -23,6 +28,12 @@ export interface FilterResult {
   hiddenUnknownPayment: number;
   /** Lots hidden because a required universal amenity isn't confirmed there (never shown as a match). */
   hiddenUnknownFeatures: number;
+  /** Parking-type match per visible facility: "unknown" ones are shown only on request, flagged. */
+  accessMatch: Map<string, AccessMatch>;
+  /** Lots hidden because their ownership or access isn't confirmed for the parking-type filter. */
+  hiddenUnknownAccess: number;
+  /** Lots reserved for specific people; never shown or ranked as options. */
+  restricted: ParkingFacility[];
 }
 
 /**
@@ -35,10 +46,24 @@ export function applyDisplayFilters(facilities: ParkingFacility[], filters: Disp
   const paymentMatch = new Map<string, PaymentMatch>();
   let hiddenUnknownPayment = 0;
   let hiddenUnknownFeatures = 0;
+  let hiddenUnknownAccess = 0;
+  const accessMatch = new Map<string, AccessMatch>();
+  const restricted: ParkingFacility[] = [];
+  const parkingType = filters.parkingType ?? "all";
   const amenities = filters.amenities ?? [];
   const features = filters.features ?? [];
   for (const f of facilities) {
+    if (isRestricted(f)) {
+      restricted.push(f);
+      continue;
+    }
     if (filters.hiddenTypes.includes(f.type)) continue;
+    const access = matchParkingType(f, parkingType);
+    if (access === "excluded") continue;
+    if (access === "unknown" && !filters.includeUnconfirmedAccess) {
+      hiddenUnknownAccess++;
+      continue;
+    }
     if (amenities.some((a) => !f.amenities.value.includes(a))) continue;
     if (features.length > 0) {
       const fm = matchFeatures(f, features);
@@ -55,8 +80,9 @@ export function applyDisplayFilters(facilities: ParkingFacility[], filters: Disp
     }
     visible.push(f);
     paymentMatch.set(f.id, match);
+    accessMatch.set(f.id, access);
   }
-  return { visible, paymentMatch, hiddenUnknownPayment, hiddenUnknownFeatures };
+  return { visible, paymentMatch, accessMatch, hiddenUnknownPayment, hiddenUnknownFeatures, hiddenUnknownAccess, restricted };
 }
 
 export interface MarkerSpec {
@@ -90,8 +116,9 @@ export function buildMarkers(visible: ParkingFacility[], ranked: RankedFacility[
  * Number of active eligibility filters, shown on the Filters button. Sort priorities and the
  * "include unknown payment" option don't count: they never narrow the results on their own.
  */
-export function activeFilterCount(prefs: RankingPreferences, hiddenTypes: FacilityType[]): number {
+export function activeFilterCount(prefs: RankingPreferences, hiddenTypes: FacilityType[], parkingType: ParkingTypeFilter = "all"): number {
   return (
+    (parkingType !== "all" ? 1 : 0) +
     prefs.payment.methods.length +
     prefs.payment.timings.length +
     prefs.amenities.length +

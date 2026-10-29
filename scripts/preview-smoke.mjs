@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
  * Mobile smoke test for a deployed preview: homepage → search → venue parking map (real map tiles) →
- * lot details, on an emulated iPhone. Saves a screenshot of each step.
+ * parking-type filter → lot name search → lot details, on an emulated iPhone. Saves a screenshot of
+ * each step.
  *
  *   node scripts/preview-smoke.mjs <https://deployment-url> [out-dir]
  *
@@ -38,7 +39,9 @@ page.on("response", (res) => {
   else tiles.failed.push(`${res.status()} ${res.url()}`);
 });
 page.on("requestfailed", (req) => {
-  if (req.resourceType() === "image" && req.url().includes("tile")) tiles.failed.push(`${req.failure()?.errorText} ${req.url()}`);
+  // Requests cancelled by navigating away aren't failures.
+  const error = req.failure()?.errorText ?? "";
+  if (req.resourceType() === "image" && req.url().includes("tile") && !error.includes("ERR_ABORTED")) tiles.failed.push(`${error} ${req.url()}`);
 });
 const consoleErrors = [];
 page.on("console", (m) => m.type() === "error" && !m.text().includes("/_vercel/") && consoleErrors.push(m.text()));
@@ -78,6 +81,19 @@ try {
     await page.waitForFunction(() => document.querySelectorAll("img.leaflet-tile-loaded").length >= 4, null, { timeout: 30_000 });
     if (tiles.failed.length) throw new Error(`tile errors: ${tiles.failed.slice(0, 3).join(", ")}`);
     if ((await page.locator(".leaflet-marker-icon").count()) === 0) throw new Error("no lot markers on the map");
+  });
+  await step("parking type filter", async () => {
+    const before = await page.locator(".ll-marker").count();
+    await page.getByRole("group", { name: "Parking access" }).getByRole("button", { name: "Pass/permit required" }).click();
+    await page.waitForFunction((n) => document.querySelectorAll(".ll-marker").length !== n, before, { timeout: 10_000 });
+    await page.getByRole("group", { name: "Parking access" }).getByRole("button", { name: "All eligible parking" }).click();
+  });
+  await step("lot name search", async () => {
+    await page.getByRole("combobox", { name: /Find a lot/ }).fill("gold");
+    await page.getByRole("listbox", { name: "Matching lots" }).getByRole("option", { name: /Gold Lot/ }).click();
+    await page.waitForURL(/[?&]lot=gold-lot/);
+    await page.locator(".ll-marker--active").waitFor();
+    await page.locator("#lot-highmark-gold-lot button[aria-expanded=true]").waitFor();
   });
   await step("lot details", async () => {
     // Tapping the top-ranked card opens it (and highlights its map marker); its link leads to the lot page.

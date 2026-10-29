@@ -210,6 +210,17 @@ export interface EventPaymentOverride {
   policy: PaymentPolicy;
 }
 
+/** Who owns the lot or garage. Kept separate from who may park there. */
+export type Ownership = "public" | "private";
+
+/**
+ * Who may park.
+ * - public: anyone can park, paying at the lot or booking ahead
+ * - pass_required: needs a pass or permit issued in advance (e.g. a team lot pass, a disability placard, a bus permit)
+ * - restricted: limited to specific people (season-ticket holders, staff, residents) and not sold to the general public
+ */
+export type AccessLevel = "public" | "pass_required" | "restricted";
+
 export interface BookingLink {
   url: string;
   partner: string;
@@ -225,6 +236,10 @@ export interface ParkingFacility {
   aliases?: string[];
   type: FacilityType;
   operator?: string;
+  /** Sourced ownership. Absent means unknown; below medium confidence it is "reported", not confirmed. */
+  ownership?: Attributed<Ownership>;
+  /** Sourced access eligibility. Absent means unknown; below medium confidence it is "reported", not confirmed. */
+  access?: Attributed<AccessLevel>;
   address?: string;
   /** Omitted when no source pins the lot down — such lots are listed but not mapped. */
   location?: GeoPoint;
