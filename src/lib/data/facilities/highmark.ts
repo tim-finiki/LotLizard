@@ -1,4 +1,4 @@
-import type { ParkingFacility, PriceObservation } from "@/lib/types";
+import type { Attributed, ParkingFacility, PriceObservation } from "@/lib/types";
 import { attr, fact } from "@/lib/data/attr";
 
 /**
@@ -19,6 +19,17 @@ const PIN_NOTE = "Approximate editorial pin — entrance not surveyed.";
 const prepaid = fact(true, "medium", ["bills-parking", "bills-gameday"], "Bills lots require a pass bought in advance; passes are valid only for the lot printed on them.");
 const officialTailgate = fact<boolean | "unknown">(true, "medium", ["bills-parking"], "Tailgating allowed from lot opening (4 hours before kickoff) until kickoff. No post-game tailgating.");
 const officialAmenities = fact<ParkingFacility["amenities"]["value"]>(["tailgate_area", "paved"], "low", ["bills-parking", "lotlizard-editorial"], "Each space is 9×18 ft with a 9×10 ft tailgate area. Surface and other amenities not yet verified.");
+
+const DIRECTION_NOTE =
+  "LotLizard inference from the sheriff's published post-game traffic plan (Big Tree Rd one-way east to US-219, west to Southwestern Blvd). Not an official routing.";
+/** Exit-direction inference shared by lots that leave via the same corridor. */
+function exitToward(...ids: string[]): Attributed<string[]> {
+  return fact(ids, "low", ["wnymedia-traffic", "wgrz-opener-traffic", "lotlizard-editorial"], DIRECTION_NOTE);
+}
+/** Lots that drain east on Big Tree Rd to US-219 (north to Buffalo, south to the Southern Tier). */
+const VIA_219 = () => exitToward("north", "south");
+/** Lots that drain to Southwestern Blvd (US-20) westbound. */
+const VIA_US20 = () => exitToward("west");
 
 function officialPriceRange(lot: string): PriceObservation {
   return {
@@ -65,6 +76,7 @@ function officialLot(
         side === "west"
           ? ["Southwestern Blvd (US-20)", "Big Tree Rd westbound (one-way post-game)"]
           : ["Big Tree Rd eastbound to Route 219 (one-way post-game)", "Southwestern Blvd (US-20)"],
+      directions: side === "west" ? VIA_US20() : VIA_219(),
     },
     vehicleTypes: ["car"],
     attribution: attr("low", ["arenacapacity", "parkingaccess", "buffnews-lots", "lotlizard-editorial"], `Lot name/side from third-party guides. ${PIN_NOTE}`),
@@ -110,7 +122,7 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     prepaidRequired: fact(false, "medium", ["wgrz-opener-traffic", "bills-parking"], "ADA lots are first-come, first-served."),
     amenities: fact<ParkingFacility["amenities"]["value"]>(["ada_spaces"], "medium", ["wgrz-opener-traffic"]),
     tailgating: { allowed: fact<boolean | "unknown">("unknown", "unverified", ["lotlizard-editorial"]) },
-    exit: { routes: ["Orange Dr → Southwestern Blvd (US-20)"] },
+    exit: { routes: ["Orange Dr → Southwestern Blvd (US-20)"], directions: VIA_US20() },
     vehicleTypes: ["car"],
     attribution: attr("medium", ["wgrz-opener-traffic"], `Erie County Sheriff release for the 2026 home opener. ${PIN_NOTE}`),
   },
@@ -143,7 +155,7 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     prepaidRequired: fact(true, "medium", ["bills-parking"], "Advance permit required."),
     amenities: fact<ParkingFacility["amenities"]["value"]>([], "unverified", ["lotlizard-editorial"]),
     tailgating: { allowed: fact<boolean | "unknown">(true, "medium", ["bills-parking"], "Limos with 11 or fewer passengers only.") },
-    exit: { routes: ["Southwestern Blvd (US-20)"] },
+    exit: { routes: ["Southwestern Blvd (US-20)"], directions: VIA_US20() },
     vehicleTypes: ["bus", "limo"],
     attribution: attr("low", ["bills-parking", "wgrz-opener-traffic"], `Location from a 2025 report. ${PIN_NOTE}`),
   },
@@ -234,7 +246,7 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
       allowed: fact<boolean | "unknown">(true, "medium", ["audacy-hammers", "wkbw-hammers-2024"]),
       atmosphere: fact(5, "low", ["audacy-hammers", "wkbw-hammers-2024", "lotlizard-editorial"], "Editorial rating based on media coverage of a long-running, famous tailgate lot. Not a measured score."),
     },
-    exit: { routes: ["Abbott Rd → Big Tree Rd (one-way post-game)"] },
+    exit: { routes: ["Abbott Rd → Big Tree Rd (one-way post-game)"], directions: VIA_219() },
     vehicleTypes: ["car"],
     attribution: attr("medium", ["audacy-hammers", "wkbw-hammers-2024", "prked-patriots"], `Address from a third-party listing. ${PIN_NOTE}`),
   },
@@ -278,7 +290,7 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     prices: [],
     amenities: fact<ParkingFacility["amenities"]["value"]>([], "unverified", ["lotlizard-editorial"]),
     tailgating: { allowed: fact<boolean | "unknown">("unknown", "unverified", ["lotlizard-editorial"]) },
-    exit: { routes: ["Big Tree Rd eastbound to Route 219 (one-way post-game)"] },
+    exit: { routes: ["Big Tree Rd eastbound to Route 219 (one-way post-game)"], directions: VIA_219() },
     vehicleTypes: ["car"],
     attribution: attr("low", ["coparking-yellowbrick"], PIN_NOTE),
   },
@@ -304,7 +316,7 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     ],
     amenities: fact<ParkingFacility["amenities"]["value"]>([], "unverified", ["lotlizard-editorial"]),
     tailgating: { allowed: fact<boolean | "unknown">("unknown", "unverified", ["lotlizard-editorial"]) },
-    exit: { routes: ["Southwestern Blvd (US-20)"] },
+    exit: { routes: ["Southwestern Blvd (US-20)"], directions: VIA_US20() },
     vehicleTypes: ["car"],
     attribution: attr("low", ["arenacapacity"]),
   },

@@ -1,5 +1,5 @@
-import type { ConfidenceLevel, FacilityType, ParkingFacility, PriceObservation, Venue, VehicleType } from "@/lib/types";
-import { confidenceRank } from "@/lib/confidence";
+import type { Attribution, ConfidenceLevel, EventKind, FacilityType, ParkingFacility, PriceObservation, Venue, VehicleType } from "@/lib/types";
+import { confidenceRank, lowestConfidence } from "@/lib/confidence";
 import { estimateWalk } from "@/lib/geo";
 
 export type Factor = "cost" | "walk" | "tailgate" | "exit";
@@ -12,6 +12,8 @@ export interface RankingPreferences {
   requireTailgating: boolean;
   needsAda: boolean;
   maxPrice?: number;
+  /** Approach ID the user leaves toward after the event ("any" = no preference). */
+  direction: string;
 }
 
 export const DEFAULT_PREFERENCES: RankingPreferences = {
@@ -19,16 +21,33 @@ export const DEFAULT_PREFERENCES: RankingPreferences = {
   vehicle: "car",
   requireTailgating: false,
   needsAda: false,
+  direction: "any",
 };
+
+/** Per-request context that is not a saved preference. */
+export interface RankingContext {
+  eventKind?: EventKind;
+}
+
+/**
+ * How strongly we recommend a lot, kept separate from how much we know about it.
+ * "limited_data" means we can't make a recommendation either way.
+ */
+export type Recommendation = "top_pick" | "good_match" | "fair_match" | "limited_data";
+
+/** Below this share of weighted factors backed by data, we decline to recommend. */
+export const MIN_COMPLETENESS_TO_RECOMMEND = 0.5;
 
 /** Facility types that are places to leave a vehicle — the only ones we rank. */
 const PARKABLE: FacilityType[] = ["official_lot", "private_lot", "garage", "independent", "residential", "ada"];
 
 export interface FactorScore {
-  /** 0–1. Unknown factors score a neutral 0.5 and are flagged. */
+  /** 0–1 when known. Unknown factors contribute nothing to the match score. */
   score: number;
   known: boolean;
   detail: string;
+  /** Attributions behind a known score, used for the confidence summary. */
+  evidence: Attribution[];
 }
 
 export interface WalkInfo {
@@ -42,25 +61,36 @@ export interface WalkInfo {
 export interface RankedFacility {
   facility: ParkingFacility;
   rank: number;
-  /** 0–100 */
+  /**
+   * 0–100 match score built only from known factors: missing data adds nothing, so it can
+   * never push a lot up. Read it together with completeness and confidence.
+   */
   score: number;
   /** Share (0–1) of the user's weighting backed by actual data. */
   completeness: number;
+  /** Weakest confidence among the evidence the score used ("unverified" when there is none). */
+  confidence: ConfidenceLevel;
+  recommendation: Recommendation;
   factors: Record<Factor, FactorScore>;
   price?: PriceObservation;
   walk?: WalkInfo;
 }
 
-const NEUTRAL = 0.5;
+const UNKNOWN = 0;
 const WALK_BEST_MIN = 5;
 const WALK_WORST_MIN = 35;
 
-/** The most trustworthy, then most recent, price observation for a vehicle type. */
-export function bestPrice(facility: ParkingFacility, vehicle: VehicleType): PriceObservation | undefined {
+/**
+ * The most relevant price for a vehicle: observations for the selected event kind first (or
+ * "any"), then most trustworthy, then most recent.
+ */
+export function bestPrice(facility: ParkingFacility, vehicle: VehicleType, eventKind?: EventKind): PriceObservation | undefined {
+  const relevant = (p: PriceObservation) => (!eventKind || p.eventKind === eventKind || p.eventKind === "any" ? 1 : 0);
   return facility.prices
     .filter((p) => p.vehicle === vehicle)
     .sort(
       (a, b) =>
+        relevant(b) - relevant(a) ||
         confidenceRank(b.attribution.confidence) - confidenceRank(a.attribution.confidence) ||
         b.observedAt.localeCompare(a.observedAt),
     )[0];
@@ -93,31 +123,53 @@ export function isRankable(facility: ParkingFacility, prefs: RankingPreferences)
 }
 
 function tailgateScore(f: ParkingFacility): FactorScore {
-  const allowed = f.tailgating.allowed.value;
-  if (allowed === false) return { score: 0, known: true, detail: "Tailgating not allowed" };
+  const allowed = f.tailgating.allowed;
+  if (allowed.value === false) return { score: 0, known: true, detail: "Tailgating not allowed", evidence: [allowed.attribution] };
   if (f.tailgating.atmosphere) {
     const a = f.tailgating.atmosphere.value;
-    return { score: (a - 1) / 4, known: true, detail: `Atmosphere ${a}/5` };
+    return { score: (a - 1) / 4, known: true, detail: `Atmosphere ${a}/5`, evidence: [f.tailgating.atmosphere.attribution] };
   }
-  if (allowed === true) return { score: 0.6, known: true, detail: "Tailgating allowed; atmosphere not rated" };
-  return { score: NEUTRAL, known: false, detail: "Tailgating rules unknown" };
+  if (allowed.value === true) return { score: 0.6, known: true, detail: "Tailgating allowed", evidence: [allowed.attribution] };
+  return { score: UNKNOWN, known: false, detail: "Tailgating rules unknown", evidence: [] };
 }
 
-function exitScore(f: ParkingFacility): FactorScore {
+/** Score for a lot whose exit route doesn't lead toward the user's direction. */
+const WRONG_DIRECTION = 0.25;
+
+function exitScore(f: ParkingFacility, direction: string): FactorScore {
+  const parts: { score: number; detail: string; evidence: Attribution }[] = [];
   if (f.exit.rating) {
     const r = f.exit.rating.value;
-    return { score: (r - 1) / 4, known: true, detail: `Exit ${r}/5` };
+    parts.push({ score: (r - 1) / 4, detail: `Exit ${r}/5`, evidence: f.exit.rating.attribution });
   }
-  return { score: NEUTRAL, known: false, detail: "No exit-time data yet" };
+  if (direction !== "any" && f.exit.directions) {
+    const toward = f.exit.directions.value.includes(direction);
+    parts.push({
+      score: toward ? 1 : WRONG_DIRECTION,
+      detail: toward ? "Exits toward your direction" : "Exit route heads elsewhere",
+      evidence: f.exit.directions.attribution,
+    });
+  }
+  if (parts.length === 0) {
+    return { score: UNKNOWN, known: false, detail: direction === "any" ? "No exit data yet" : "No route data for your direction", evidence: [] };
+  }
+  return {
+    score: parts.reduce((s, p) => s + p.score, 0) / parts.length,
+    known: true,
+    detail: parts.map((p) => p.detail).join(" · "),
+    evidence: parts.map((p) => p.evidence),
+  };
 }
 
-function walkScore(walk: WalkInfo | undefined): FactorScore {
-  if (!walk) return { score: NEUTRAL, known: false, detail: "Location unknown" };
+function walkScore(walk: WalkInfo | undefined, attribution: Attribution | undefined): FactorScore {
+  if (!walk) return { score: UNKNOWN, known: false, detail: "Location unknown", evidence: [] };
   const s = 1 - (walk.minutes - WALK_BEST_MIN) / (WALK_WORST_MIN - WALK_BEST_MIN);
   return {
     score: Math.min(1, Math.max(0, s)),
     known: true,
     detail: `${walk.estimated ? "~" : ""}${walk.minutes} min walk`,
+    // An estimated walk inherits the pin's confidence, which we report as the walk confidence.
+    evidence: [attribution ?? { sourceIds: [], confidence: walk.confidence }],
   };
 }
 
@@ -125,9 +177,10 @@ export function rankFacilities(
   venue: Venue,
   facilities: ParkingFacility[],
   prefs: RankingPreferences = DEFAULT_PREFERENCES,
+  context: RankingContext = {},
 ): RankedFacility[] {
   const candidates = facilities.filter((f) => isRankable(f, prefs));
-  const prices = candidates.map((f) => bestPrice(f, prefs.vehicle));
+  const prices = candidates.map((f) => bestPrice(f, prefs.vehicle, context.eventKind));
   const mids = prices.filter((p): p is PriceObservation => !!p).map(midpoint);
   const minMid = Math.min(...mids);
   const maxMid = Math.max(...mids);
@@ -144,22 +197,47 @@ export function rankFacilities(
           score: maxMid === minMid ? 1 : (maxMid - midpoint(price)) / (maxMid - minMid),
           known: true,
           detail: price.min === price.max ? `$${price.min}` : `$${price.min}–$${price.max}`,
+          evidence: [price.attribution],
         }
-      : { score: NEUTRAL, known: false, detail: "No price data" };
+      : { score: UNKNOWN, known: false, detail: "No price data", evidence: [] };
     const factors: Record<Factor, FactorScore> = {
       cost,
-      walk: walkScore(walk),
+      walk: walkScore(walk, facility.walkMinutes?.attribution),
       tailgate: tailgateScore(facility),
-      exit: exitScore(facility),
+      exit: exitScore(facility, prefs.direction),
     };
-    const score = FACTORS.reduce((sum, k) => sum + weights[k] * factors[k].score, 0) / weightSum;
+    // Unknown factors contribute 0: missing data is never evidence in a lot's favour.
+    const score = FACTORS.reduce((sum, k) => sum + weights[k] * (factors[k].known ? factors[k].score : 0), 0) / weightSum;
     const completeness = FACTORS.reduce((sum, k) => sum + (factors[k].known ? weights[k] : 0), 0) / weightSum;
-    return { facility, rank: 0, score: Math.round(score * 100), completeness, factors, price, walk };
+    const evidence = FACTORS.filter((k) => weights[k] > 0).flatMap((k) => factors[k].evidence);
+    return {
+      facility,
+      rank: 0,
+      score: Math.round(score * 100),
+      completeness,
+      confidence: lowestConfidence(evidence),
+      recommendation: "limited_data" as Recommendation,
+      factors,
+      price,
+      walk,
+    };
   });
 
   ranked.sort(
     (a, b) => b.score - a.score || b.completeness - a.completeness || a.facility.name.localeCompare(b.facility.name),
   );
-  ranked.forEach((r, i) => (r.rank = i + 1));
+  let topAssigned = false;
+  ranked.forEach((r, i) => {
+    r.rank = i + 1;
+    r.recommendation = recommend(r, topAssigned);
+    if (r.recommendation === "top_pick") topAssigned = true;
+  });
   return ranked;
+}
+
+/** Recommendation tier. Lots without enough data are never recommended, however they score. */
+function recommend(r: Pick<RankedFacility, "score" | "completeness">, topAssigned: boolean): Recommendation {
+  if (r.completeness < MIN_COMPLETENESS_TO_RECOMMEND) return "limited_data";
+  if (!topAssigned && r.score >= 50) return "top_pick";
+  return r.score >= 50 ? "good_match" : "fair_match";
 }

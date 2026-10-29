@@ -2,8 +2,8 @@
 
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { useEffect, useMemo } from "react";
-import { MapContainer, Marker, TileLayer, Tooltip, useMap } from "react-leaflet";
+import { useEffect, useMemo, useRef } from "react";
+import { MapContainer, Marker, TileLayer, Tooltip, ZoomControl, useMap } from "react-leaflet";
 import type { FacilityType } from "@/lib/types";
 import { FACILITY_TYPE_COLOR, FACILITY_TYPE_LABEL } from "@/lib/labels";
 
@@ -21,6 +21,8 @@ export interface VenueMapProps {
   markers: MapMarker[];
   activeId?: string;
   onSelect?: (id: string) => void;
+  /** Pixels of map covered by an overlay at the bottom (the results sheet), so pins aren't hidden behind it. */
+  bottomInset?: number;
 }
 
 const TILE_URL = process.env.NEXT_PUBLIC_MAP_TILE_URL || "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
@@ -42,33 +44,61 @@ function markerIcon(m: MapMarker, active: boolean) {
 
 const venueIcon = L.divIcon({ className: "", html: '<div class="ll-venue" aria-hidden="true">🏟</div>', iconSize: [34, 34], iconAnchor: [17, 17] });
 
-function FitBounds({ points }: { points: [number, number][] }) {
+function FitBounds({ points, bottomInset }: { points: [number, number][]; bottomInset: number }) {
   const map = useMap();
   const key = points.map((p) => p.join(",")).join("|");
+  const latest = useRef({ points, bottomInset });
   useEffect(() => {
-    if (points.length > 1) map.fitBounds(L.latLngBounds(points), { padding: [24, 24], maxZoom: 16 });
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- refit only when the point set changes
+    latest.current = { points, bottomInset };
+  });
+
+  useEffect(() => {
+    const fit = () => {
+      const { points: pts, bottomInset: inset } = latest.current;
+      if (pts.length > 1) map.fitBounds(L.latLngBounds(pts), { paddingTopLeft: [24, 72], paddingBottomRight: [24, inset + 24], maxZoom: 16 });
+    };
+    fit();
+    // The container can change size after mount (layout settling, rotation, breakpoint changes):
+    // re-measure and refit until the user starts moving the map themselves.
+    let userMoved = false;
+    const onUserMove = () => (userMoved = true);
+    map.on("dragstart zoomstart", onUserMove);
+    const ro = new ResizeObserver(() => {
+      map.invalidateSize();
+      if (!userMoved) fit();
+    });
+    ro.observe(map.getContainer());
+    return () => {
+      ro.disconnect();
+      map.off("dragstart zoomstart", onUserMove);
+    };
   }, [map, key]);
   return null;
 }
 
-function PanToActive({ marker }: { marker?: MapMarker }) {
+/** Centre the selected pin in the part of the map not covered by the sheet. */
+function PanToActive({ marker, bottomInset }: { marker?: MapMarker; bottomInset: number }) {
   const map = useMap();
+  const id = marker?.id;
   useEffect(() => {
-    if (marker) map.panTo([marker.lat, marker.lng], { animate: true });
-  }, [map, marker]);
+    if (!marker) return;
+    const point = map.project([marker.lat, marker.lng], map.getZoom()).add([0, bottomInset / 2]);
+    map.panTo(map.unproject(point, map.getZoom()), { animate: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- pan only when the selection changes
+  }, [map, id]);
   return null;
 }
 
-export default function VenueMap({ venue, markers, activeId, onSelect }: VenueMapProps) {
+export default function VenueMap({ venue, markers, activeId, onSelect, bottomInset = 0 }: VenueMapProps) {
   const points = useMemo<[number, number][]>(() => [[venue.lat, venue.lng], ...markers.map((m) => [m.lat, m.lng] as [number, number])], [venue, markers]);
   const active = markers.find((m) => m.id === activeId);
 
   return (
-    <MapContainer center={[venue.lat, venue.lng]} zoom={15} scrollWheelZoom={false} className="h-full w-full" attributionControl>
+    <MapContainer center={[venue.lat, venue.lng]} zoom={15} scrollWheelZoom={false} zoomControl={false} className="h-full w-full" attributionControl>
       <TileLayer url={TILE_URL} attribution={TILE_ATTRIBUTION} maxZoom={19} />
-      <FitBounds points={points} />
-      <PanToActive marker={active} />
+      <ZoomControl position="topright" />
+      <FitBounds points={points} bottomInset={bottomInset} />
+      <PanToActive marker={active} bottomInset={bottomInset} />
       <Marker position={[venue.lat, venue.lng]} icon={venueIcon} keyboard={false}>
         <Tooltip direction="top" offset={[0, -14]}>{venue.name}</Tooltip>
       </Marker>
@@ -80,6 +110,7 @@ export default function VenueMap({ venue, markers, activeId, onSelect }: VenueMa
           zIndexOffset={m.id === activeId ? 1000 : 0}
           eventHandlers={{ click: () => onSelect?.(m.id) }}
           title={`${m.name} (${FACILITY_TYPE_LABEL[m.type]})`}
+          alt={`${m.name}, ${FACILITY_TYPE_LABEL[m.type]}`}
         >
           <Tooltip direction="top" offset={[0, -12]}>
             {m.name} · {FACILITY_TYPE_LABEL[m.type]}

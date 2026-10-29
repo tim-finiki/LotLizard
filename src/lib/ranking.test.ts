@@ -60,11 +60,49 @@ describe("rankFacilities", () => {
     expect(r[0].facility.id).toBe("near");
   });
 
-  it("scores unknown data neutrally and reports completeness", () => {
+  it("gives no credit for unknown data and declines to recommend", () => {
     const [r] = rankFacilities(venue, [lot("a", { location: undefined })], prefs({ weights: { cost: 1, walk: 1, tailgate: 1, exit: 1 } }));
-    expect(r.score).toBe(50);
+    expect(r.score).toBe(0);
     expect(r.completeness).toBe(0);
+    expect(r.confidence).toBe("unverified");
+    expect(r.recommendation).toBe("limited_data");
     expect(r.factors.cost.known).toBe(false);
+  });
+
+  it("never ranks missing data above known-but-mediocre data", () => {
+    const farKnown = lot("far", { location: { lat: 42.785, lng: -78.79, precision: "exact" } });
+    const unknown = lot("unknown", { location: undefined });
+    const r = rankFacilities(venue, [unknown, farKnown], prefs({ weights: { cost: 0, walk: 5, tailgate: 0, exit: 0 } }));
+    expect(r[0].facility.id).toBe("far");
+    expect(r[0].factors.walk.score).toBeLessThan(0.5);
+  });
+
+  it("keeps the match score separate from completeness and confidence", () => {
+    const a = lot("a", { prices: [price(20, 20, "high")] });
+    const [r] = rankFacilities(venue, [a], prefs({ weights: { cost: 5, walk: 0, tailgate: 0, exit: 5 } }));
+    expect(r.completeness).toBe(0.5);
+    expect(r.score).toBe(50);
+    expect(r.confidence).toBe("high");
+  });
+
+  it("assigns a single top pick and never recommends low-completeness lots", () => {
+    const strong = lot("strong", { prices: [price(20)], tailgating: { allowed: fact<boolean | "unknown">(true, "medium", ["s"]) } });
+    const alsoStrong = lot("also", { prices: [price(25)], tailgating: { allowed: fact<boolean | "unknown">(true, "medium", ["s"]) } });
+    const thin = lot("thin", { location: undefined, prices: [price(10)] });
+    const r = rankFacilities(venue, [thin, strong, alsoStrong]);
+    expect(r.filter((x) => x.recommendation === "top_pick")).toHaveLength(1);
+    expect(r.find((x) => x.facility.id === "thin")?.recommendation).toBe("limited_data");
+  });
+
+  it("scores exit by direction of travel when route data exists", () => {
+    const north = lot("north", { exit: { directions: fact(["north"], "low", ["s"]) } });
+    const west = lot("west", { exit: { directions: fact(["west"], "low", ["s"]) } });
+    const none = lot("none");
+    const r = rankFacilities(venue, [none, west, north], prefs({ direction: "north", weights: { cost: 0, walk: 0, tailgate: 0, exit: 5 } }));
+    expect(r.map((x) => x.facility.id)).toEqual(["north", "west", "none"]);
+    expect(r[2].factors.exit.known).toBe(false);
+    // With no direction chosen, route data alone is not an exit score.
+    expect(rankFacilities(venue, [north], prefs({ weights: { cost: 0, walk: 0, tailgate: 0, exit: 5 } }))[0].factors.exit.known).toBe(false);
   });
 
   it("excludes lots that forbid tailgating when required, but keeps unknowns", () => {
@@ -100,6 +138,13 @@ describe("rankFacilities", () => {
 });
 
 describe("bestPrice", () => {
+  it("prefers prices for the selected event kind", () => {
+    const concert = { ...price(80, 80, "high"), id: "concert", eventKind: "concert" as const };
+    const f = lot("a", { prices: [concert, price(40)] });
+    expect(bestPrice(f, "car", "nfl_regular")?.min).toBe(40);
+    expect(bestPrice(f, "car", "concert")?.min).toBe(80);
+  });
+
   it("prefers higher confidence, then recency", () => {
     const f = lot("a", { prices: [price(10, 10, "low", "2026-10-01"), price(20, 20, "high", "2025-01-01"), price(30, 30, "low", "2026-10-20")] });
     expect(bestPrice(f, "car")?.min).toBe(20);

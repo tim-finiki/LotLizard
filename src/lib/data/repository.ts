@@ -1,4 +1,5 @@
-import type { ParkingFacility, Sponsorship, SponsorshipPlacement, Venue } from "@/lib/types";
+import type { ParkingFacility, Sponsorship, SponsorshipPlacement, Venue, VenueEvent } from "@/lib/types";
+import { EVENTS } from "@/lib/data/events";
 import { VENUES } from "@/lib/data/venues";
 import { HIGHMARK_FACILITIES } from "@/lib/data/facilities/highmark";
 import { SOURCES } from "@/lib/data/sources";
@@ -27,6 +28,11 @@ export async function getVenue(slug: string): Promise<Venue | undefined> {
 export async function listFacilities(venueId: string): Promise<ParkingFacility[]> {
   "use cache";
   return FACILITIES.filter((f) => f.venueId === venueId);
+}
+
+export async function listEvents(venueId: string): Promise<VenueEvent[]> {
+  "use cache";
+  return EVENTS.filter((e) => e.venueId === venueId).sort((a, b) => a.date.localeCompare(b.date));
 }
 
 export async function getFacility(venueSlug: string, facilitySlug: string) {
@@ -80,6 +86,7 @@ export function facilitySourceIds(f: ParkingFacility): string[] {
     f.tailgating.allowed.attribution,
     f.tailgating.atmosphere?.attribution,
     f.exit.rating?.attribution,
+    f.exit.directions?.attribution,
     f.walkMinutes?.attribution,
     ...f.prices.map((p) => p.attribution),
   ].flatMap((a) => a?.sourceIds ?? []);
@@ -93,6 +100,8 @@ export function collectSourceIds(venue: Venue, facilities: ParkingFacility[]): s
     ...(venue.policies ?? []).map((p) => p.attribution),
     ...(venue.transit ?? []).map((t) => t.attribution),
     ...(venue.trafficNotes ?? []).map((t) => t.attribution),
+    venue.lotOpenHoursBefore?.attribution,
+    ...EVENTS.filter((e) => e.venueId === venue.id).map((e) => e.attribution),
   ];
   return [...new Set([...venueAttributions.flatMap((a) => a?.sourceIds ?? []), ...facilities.flatMap(facilitySourceIds)])];
 }

@@ -83,6 +83,13 @@ export interface Gate {
   location: GeoPoint;
 }
 
+/** A direction fans leave toward after the event, e.g. "North — Buffalo / I-90". */
+export interface Approach {
+  id: string;
+  label: string;
+  description: string;
+}
+
 export interface Venue {
   id: string;
   slug: string;
@@ -100,6 +107,9 @@ export interface Venue {
   policies?: VenuePolicy[];
   transit?: TransitOption[];
   trafficNotes?: VenuePolicy[];
+  approaches?: Approach[];
+  /** How many hours before the event official lots open. */
+  lotOpenHoursBefore?: Attributed<number>;
   attribution: Attribution;
 }
 
@@ -180,19 +190,24 @@ export interface ParkingFacility {
     rating?: Attributed<number>;
     routes?: string[];
     notes?: string;
+    /** Approach IDs this lot's post-event exit route leads toward. */
+    directions?: Attributed<string[]>;
   };
   vehicleTypes: VehicleType[];
   booking?: BookingLink;
   attribution: Attribution;
 }
 
-/** Future: event schedule ingestion. */
 export interface VenueEvent {
   id: string;
   venueId: string;
   name: string;
   kind: EventKind;
-  startsAt: string;
+  /** Local date, YYYY-MM-DD. */
+  date: string;
+  /** Local kickoff/start time, HH:MM (24h). Absent when not yet announced. */
+  startLocal?: string;
+  attribution: Attribution;
 }
 
 /** Future: historical arrival/exit times used to train predictions. */

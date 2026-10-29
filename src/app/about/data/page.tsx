@@ -52,9 +52,12 @@ export default function DataPage() {
         <h2 className="text-lg font-bold">Rankings</h2>
         <p>
           Personalized rankings weight cost, walking distance, tailgating and exit convenience by your priorities.
-          When we have no data for a factor, it scores neutral and lowers the &ldquo;data&rdquo; meter shown with
-          each score. Sponsorships and referral partnerships never change rankings, and sponsored content is
-          always labelled.
+          We show three separate numbers: the <strong>match</strong> score, the share of your priorities backed by{" "}
+          <strong>data</strong>, and the <strong>confidence</strong> of the weakest evidence used. Missing data adds
+          nothing to a match, so it can never push a lot up the list. Lots with less than half their data are marked
+          &ldquo;Limited data&rdquo; and are never recommended. Exit direction is inferred from published traffic
+          plans and labelled low confidence. Sponsorships and referral partnerships never change rankings, and
+          sponsored content is always labelled.
         </p>
       </section>
       <section className="flex flex-col gap-2">

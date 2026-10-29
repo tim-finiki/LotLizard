@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import type { Attribution } from "@/lib/types";
 import { facilitySourceIds, getFacility, getSourcesFor, listAllFacilityParams } from "@/lib/data/repository";
 import { walkInfo } from "@/lib/ranking";
+import { directionsLinks } from "@/lib/directions";
 import { formatDistance } from "@/lib/geo";
 import { AMENITY_LABEL, FACILITY_TYPE_COLOR, FACILITY_TYPE_LABEL } from "@/lib/labels";
 import { facilityJsonLd, facilityPath, venuePath } from "@/lib/seo";
@@ -53,6 +54,7 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
   const sources = await getSourcesFor([...new Set(facilitySourceIds(f))]);
   const walk = walkInfo(f, venue);
   const allowed = f.tailgating.allowed.value;
+  const directions = directionsLinks(f);
 
   return (
     <div className="mx-auto max-w-3xl px-4 pb-16 pt-4">
@@ -78,6 +80,19 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
         </div>
         <p className="text-sm">{f.description}</p>
         {f.booking && <ReferralLink booking={f.booking} />}
+        {directions ? (
+          <div className="flex flex-wrap items-center gap-2">
+            <a href={directions.google} target="_blank" rel="noopener noreferrer" className="flex h-10 items-center rounded-lg bg-brand-600 px-4 text-sm font-semibold text-white">
+              Google Maps directions
+            </a>
+            <a href={directions.apple} target="_blank" rel="noopener noreferrer" className="flex h-10 items-center rounded-lg bg-neutral-900 px-4 text-sm font-semibold text-white dark:bg-white dark:text-neutral-900">
+              Apple Maps
+            </a>
+            <span className="text-xs text-neutral-500">{directions.basis === "street_address" ? "Routes to the listed street address." : "Routes to the verified entrance."}</span>
+          </div>
+        ) : (
+          <p className="text-xs text-neutral-500">No turn-by-turn directions yet: this lot&apos;s entrance hasn&apos;t been verified, and we won&apos;t route you to an approximate pin.</p>
+        )}
       </header>
 
       <div className="mt-8 flex flex-col gap-10">

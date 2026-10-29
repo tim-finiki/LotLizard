@@ -81,6 +81,12 @@ const highmark: Venue = {
       attribution: attr("medium", ["wnymedia-traffic", "wgrz-opener-traffic"]),
     },
   ],
+  approaches: [
+    { id: "north", label: "North (Buffalo, I-90)", description: "Toward downtown Buffalo and the Thruway (I-90), typically via US-219 north." },
+    { id: "south", label: "South (Southern Tier)", description: "Toward Boston, Springville and the Southern Tier via US-219 south." },
+    { id: "west", label: "West (Hamburg)", description: "Toward Hamburg and the lakeshore via Southwestern Blvd (US-20)." },
+  ],
+  lotOpenHoursBefore: fact(4, "medium", ["bills-parking"], "Official lots open 4 hours before kickoff."),
   attribution: attr("medium", ["wxxi-first-game", "wikipedia-highmark", "latlong-highmark"], "Bills' first regular-season game at the new stadium was Sept 17, 2026. Coordinates are approximate."),
 };
 
