@@ -120,6 +120,21 @@ describe("navigation", () => {
     expect(directionsLinks({ address: lot.address, entrance: { ...e, verification: "needs_review" } })?.basis).toBe("street_address");
   });
 
+  it("gives the Bills ADA lots their sourced approach, with no invented address or pin", () => {
+    const blue = FACILITIES.find((f) => f.id === "highmark-blue-ada")!;
+    const white = FACILITIES.find((f) => f.id === "highmark-white-ada")!;
+    expect(blue.entrance?.instructions).toMatch(/Big Tree Rd .*from the east.*Fieldhouse Dr/);
+    expect(white.entrance?.instructions).toMatch(/Southwestern Blvd .*from the east.*Orange Dr/);
+    for (const f of [blue, white]) {
+      expect(f.entrance?.instructions).toMatch(/no access from Abbott Rd/);
+      expect(f.entrance?.address).toBeUndefined();
+      expect(f.entrance?.location).toBeUndefined();
+      expect(f.access).toMatchObject({ value: "pass_required" });
+      // Nothing reliable to route to yet, so no directions link is offered.
+      expect(directionsLinks(f)).toBeNull();
+    }
+  });
+
   it("keeps the lot's official address separate from the entrance", () => {
     const blue = FACILITIES.find((f) => f.id === "highmark-blue-ada")!;
     expect(blue.entrance?.instructions).toMatch(/Fieldhouse Dr/);

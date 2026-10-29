@@ -215,8 +215,11 @@ describe("published ownership and access data", () => {
 
   it("Bills: official lots are venue-operated and pass-only; public ownership isn't confirmed", () => {
     const officialPass = ["blue-lot", "bronze-lot", "bus-limo-lot", "gold-lot", "gray-lot", "green-lot", "orange-lot", "platinum-lot", "white-lot"];
-    expect(visible("highmark-stadium", p({ access: ["pass_required"] }))).toEqual(officialPass);
-    expect(visible("highmark-stadium", p({ owner: ["venue"], access: ["pass_required"], form: ["surface"] }))).toEqual(officialPass);
+    // The ADA lots need a disability placard, which counts as a permit.
+    const withAda = [...officialPass, "blue-ada-lot", "white-ada-lot"].sort();
+    expect(visible("highmark-stadium", p({ access: ["pass_required"] }))).toEqual(withAda);
+    // Bills-run ADA lots are venue-operated surface lots too.
+    expect(visible("highmark-stadium", p({ access: ["pass_required"], owner: ["venue"], form: ["surface"] }))).toEqual(withAda);
     expect(visible("highmark-stadium", p({ owner: ["public"] }))).toEqual([]);
     // Private lots are reported private and open, but not confirmed open, so they aren't a match yet.
     expect(visible("highmark-stadium", p({ owner: ["private"], access: ["public"] }))).toEqual([]);

@@ -12,6 +12,7 @@ export const SOURCES: DataSource[] = [
   { id: "bills-parking", type: "official", name: "Buffalo Bills — Stadium Parking", url: "https://www.buffalobills.com/stadium/parking", retrievedAt: "2026-10-29", notes: SNIPPET },
   { id: "bills-gameday", type: "official", name: "Buffalo Bills — Game Day Guide", url: "https://www.buffalobills.com/game-day/", retrievedAt: "2026-10-29", notes: SNIPPET },
   { id: "erie-county-stadium-transfer", type: "official", name: "Erie County — Ownership of new Highmark Stadium transferred to New York State", url: "https://www4.erie.gov/exec/press/ownership-new-highmark-stadium-officially-transferred-erie-county-new-york-state", retrievedAt: "2026-10-29", notes: SNIPPET },
+  { id: "bills-accessibility", type: "official", name: "Buffalo Bills — A–Z Guide: Accessible Services (Parking)", url: "https://www.buffalobills.com/stadium/a-z-guide", retrievedAt: "2026-10-29", notes: SNIPPET },
   { id: "nfta-gde", type: "official", name: "NFTA Metro — Game Day Express", url: "https://metro.nfta.com/getting-around/special-services/game-day-express", retrievedAt: "2026-10-29", notes: SNIPPET },
 
   // Media
@@ -23,6 +24,7 @@ export const SOURCES: DataSource[] = [
   { id: "buffnews-lots", type: "media", name: "The Buffalo News — New Highmark Stadium lot configurations and prices", url: "https://buffalonews.com/news/local/business/article_ab569655-6f46-4911-87df-9cce51097f53.html", retrievedAt: "2026-10-29", notes: SNIPPET },
   { id: "buffnews-permits", type: "media", name: "The Buffalo News — Orchard Park private event-parking permits", url: "https://buffalonews.com/news/local/article_d83950a0-d2ce-409f-8ea7-54f7515023f6.html", retrievedAt: "2026-10-29", notes: SNIPPET },
   { id: "wskg-cost", type: "media", name: "WSKG — Study ranks new Highmark Stadium NFL's most expensive to attend", url: "https://wskg.org/2026-08-18/study-new-highmark-stadium-ranks-as-nfls-most-expensive-to-attend", retrievedAt: "2026-08-18" },
+  { id: "wgrz-ravens-traffic", type: "media", name: "Erie County Sheriff's Office traffic information for the Bills–Ravens game (via Yahoo Sports/WGRZ)", url: "https://sports.yahoo.com/articles/erie-county-sheriffs-office-releases-181716497.html", retrievedAt: "2026-10-29", notes: SNIPPET },
   { id: "wamc-stadium-transfer", type: "media", name: "WAMC — Erie County transfers ownership of Highmark Stadium to New York State", url: "https://www.wamc.org/2026-08-03/erie-county-transfers-ownership-of-highmark-stadium-to-new-york-state", retrievedAt: "2026-10-29", notes: SNIPPET },
   { id: "audacy-hammers", type: "media", name: "WBEN/Audacy — Tailgating at the new Bills stadium", url: "https://www.audacy.com/wben/news/local/tailgate-bills-stadium", retrievedAt: "2026-09-17" },
   { id: "wkbw-hammers-2024", type: "media", name: "WKBW — Owner of popular tailgate lot on Highmark Stadium parking map", url: "https://www.wkbw.com/news/local-news/owner-of-popular-buffalo-bills-tailgate-lot-voices-concerns-over-highmark-stadium-parking-map", retrievedAt: "2024-09-01" },

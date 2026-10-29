@@ -108,11 +108,13 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     name: "Blue ADA Lot",
     type: "ada",
     operator: "Buffalo Bills",
+    access: fact<AccessLevel>("pass_required", "medium", ["bills-accessibility", "wgrz-opener-traffic"], "A valid disability parking placard is required (the Bills' accessible-parking guide, written for the same ADA lots before they were renamed for 2026)."),
     entrance: {
-      instructions: "Access only from Fieldhouse Dr via Big Tree Rd.",
+      instructions:
+        "Approach on Big Tree Rd (Route 20A) from the east and turn right onto Fieldhouse Dr, following traffic control. There is no access from Abbott Rd. First-come, first-served for vehicles with a valid disability parking placard.",
       verification: "unverified",
       reportedAt: "2026-09-15",
-      attribution: attr("medium", ["wgrz-opener-traffic", "bills-parking"], "Erie County Sheriff release for the 2026 home opener."),
+      attribution: attr("medium", ["wgrz-opener-traffic", "wgrz-ravens-traffic", "bills-parking", "bills-accessibility"], "2026 Erie County Sheriff game releases and the Bills' parking page agree on this route; the ADA lots are the former Lot 2 ADA (reached from Route 20A), renamed for 2026. An earlier open-practice notice gave the reverse. Fieldhouse Dr is a stadium road that map apps may not show. Placard rule from the Bills' accessible-parking guide."),
     },
     location: { lat: 42.7714, lng: -78.7862, precision: "approximate" },
     description: "Accessible parking, first-come, first-served. Access only from Fieldhouse Dr via Big Tree Rd. ADA lots are the exception to pre-purchase.",
@@ -144,11 +146,13 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     name: "White ADA Lot",
     type: "ada",
     operator: "Buffalo Bills",
+    access: fact<AccessLevel>("pass_required", "medium", ["bills-accessibility", "wgrz-opener-traffic"], "A valid disability parking placard is required (the Bills' accessible-parking guide, written for the same ADA lots before they were renamed for 2026)."),
     entrance: {
-      instructions: "Access only from Orange Dr via Southwestern Blvd.",
+      instructions:
+        "Approach on Southwestern Blvd (Route 20) from the east, then turn onto Orange Dr, following traffic control. There is no access from Abbott Rd. First-come, first-served for vehicles with a valid disability parking placard.",
       verification: "unverified",
       reportedAt: "2026-09-15",
-      attribution: attr("medium", ["wgrz-opener-traffic", "bills-parking"], "Erie County Sheriff release for the 2026 home opener."),
+      attribution: attr("medium", ["wgrz-opener-traffic", "wgrz-ravens-traffic", "bills-parking", "bills-accessibility"], "2026 Erie County Sheriff game releases and the Bills' parking page agree on this route; the ADA lots are the former Lot 6 ADA (reached from Route 20), renamed for 2026. An earlier open-practice notice gave the reverse. Orange Dr is a stadium road that map apps may not show. Placard rule from the Bills' accessible-parking guide."),
     },
     location: { lat: 42.7774, lng: -78.7870, precision: "approximate" },
     description: "Accessible parking, first-come, first-served. Access only from Orange Dr via Southwestern Blvd.",

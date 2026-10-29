@@ -158,7 +158,22 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
             <span className="text-xs text-neutral-500">Routes {DIRECTIONS_BASIS_LABEL[directions.basis]}.</span>
           </div>
         ) : (
-          <p className="text-xs text-neutral-500">No turn-by-turn directions yet: this lot&apos;s entrance hasn&apos;t been verified, and we won&apos;t route you to an approximate pin.</p>
+          !f.entrance?.instructions && (
+            <p className="text-xs text-neutral-500">No turn-by-turn directions yet: this lot&apos;s entrance hasn&apos;t been verified, and we won&apos;t route you to an approximate pin.</p>
+          )
+        )}
+        {f.entrance?.instructions && (
+          <div className="flex flex-col gap-1 rounded-2xl bg-white p-3 text-sm ring-1 ring-black/5 dark:bg-ink-soft dark:ring-white/10">
+            <p>
+              <strong className="font-semibold">How to get in:</strong> {f.entrance.instructions}
+            </p>
+            {!directions && (
+              <p className="text-xs text-neutral-500">
+                No navigation link: there&apos;s no published entrance address or verified entrance pin to route to yet, and the entrance road may
+                not appear in map apps. Head for the approach road above and follow the signs and traffic control.
+              </p>
+            )}
+          </div>
         )}
         <div className="flex flex-wrap items-start gap-2">
           <ShareLotButton path={facilityPath(venue, f)} title={`${f.name} — ${venue.name} parking`} />
