@@ -2,6 +2,11 @@
 
 **Approved direction:** A2. Approved by the owner on October 29, 2026, from the A1/A2 proof package.
 
+**Precedence:**
+- The **A2 production artwork** (`public/brand`, built from the original) is the source of truth for the mascot, stadium, primary logo, compact logo and icons. It is displayed exactly as approved: never recreated, recoloured or reinterpreted.
+- The **Final Approved Brand Handoff** (`reference/`) governs the broader visual direction: colours, typography and website styling.
+- If the two conflict, the A2 artwork wins.
+
 ## Source of truth
 - `source/ORIGINAL_APPROVED_MASCOT.png` is the original artwork. It is never edited; a test pins its SHA-256 (`src/lib/brand.test.ts`).
 - `reference/` holds the approved brand board and handoff notes. They are the styling reference only; nothing is cropped from the board.
@@ -10,10 +15,10 @@
 ## Approved set (A2)
 | Asset | File | Notes |
 |---|---|---|
-| Primary logo | `public/brand/lotlizard-logo-full.png` | Original stadium, cars, lot lines, dark wordmark backing and arched lettering. Brighter-lime mascot grade. Lime "Lizard". Dark edge plus restrained lime outline. |
+| Primary logo | `public/brand/lotlizard-logo-full.png` (+ `-520`/`-760` web sizes) | The main brand mark, shown prominently in the homepage hero (and in the footer). Original stadium, cars, lot lines, dark wordmark backing and arched lettering. Brighter-lime mascot grade. Lime "Lizard". Dark edge plus restrained lime outline. |
 | Compact logo | `public/brand/lotlizard-logo-compact.png` | Mascot plus the original wordmark badge, no stadium or cars. |
 | Mascot / head | `public/brand/lotlizard-mascot.png`, `lotlizard-mascot-head.png` | Cut from the original pixels. |
-| Website header | `src/components/Brand.tsx` (`HeaderLogo`) | Header B: A2 mascot head plus live Sora wordmark (white "Lot", lime "Lizard", dark edge, lime outline). |
+| Website header | `src/components/Brand.tsx` (`HeaderLogo`) | Website navigation only. Header B: A2 mascot head plus live Sora wordmark (white "Lot", lime "Lizard", dark edge, lime outline). |
 | App icon | `src/app/icon.png`, `public/brand/icon-192.png`, `icon-512.png`, `icon-maskable-512.png`, `src/app/apple-icon.png` | A2 head on charcoal `#0F1412`. |
 | Favicon | `src/app/favicon.ico` | 32 and 48 px from the app icon. The 16 px image is a tighter crop of the same head pixels (dark edge only, light sharpening), for legibility. |
 | Social image | `src/app/opengraph-image.png`, `twitter-image.png` | Full logo on charcoal, plus headline. |
@@ -27,6 +32,11 @@ python3 scripts/brand/build_assets.py         # A2 (approved)
 python3 scripts/brand/build_assets.py --a1    # A1 reference: original mascot colours
 ```
 This needs Python 3 with Pillow and NumPy. The fonts are in `brand/fonts` (SIL Open Font License). The website itself loads Sora and Inter through `next/font`, self-hosted at build time.
+
+## How the site displays the art
+- The logo and header head are served as pre-sized lossless PNGs: straight resamples of the A2 files, made by the build script.
+- They do not go through the image optimiser, whose WebP re-encoding adds slight colour fringing at sharp edges.
+- What the browser receives is byte-identical to the files in `public/brand`.
 
 ## Design tokens (`src/app/globals.css`)
 | Token | Value | Use |

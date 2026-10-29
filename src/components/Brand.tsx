@@ -1,11 +1,9 @@
-import Image from "next/image";
-import head from "../../public/brand/lotlizard-mascot-head.png";
-import fullLogo from "../../public/brand/lotlizard-logo-full.png";
-import mascot from "../../public/brand/lotlizard-mascot.png";
+/* eslint-disable @next/next/no-img-element -- brand art is served as pre-sized lossless PNGs, not re-encoded */
 
 /**
- * Approved brand marks (A2). The illustrated assets are derived from the original artwork by
- * scripts/brand/build_assets.py; never redraw them here.
+ * Approved brand marks. The A2 artwork in public/brand is the source of truth and is displayed exactly
+ * as approved: pre-sized lossless PNGs (straight resamples made by scripts/brand/build_assets.py), never
+ * re-encoded, recreated or recoloured here.
  */
 
 /** Header B wordmark: live Sora text, white "Lot" + lime "Lizard" with dark edge and lime outline. */
@@ -18,23 +16,29 @@ export function Wordmark({ className = "" }: { className?: string }) {
   );
 }
 
-/** Mascot head + wordmark lockup used in the site header and footer. */
-export function HeaderLogo({ size = "md" }: { size?: "md" | "sm" }) {
-  const h = size === "md" ? "h-9 sm:h-10" : "h-8";
+/** Header B: A2 mascot head + wordmark. Website navigation only. */
+export function HeaderLogo() {
   return (
     <span className="flex items-center gap-1.5">
-      <Image src={head} alt="" priority className={`${h} w-auto`} sizes="64px" />
-      <Wordmark className={size === "md" ? "text-[22px] sm:text-2xl" : "text-xl"} />
+      <img src="/brand/lotlizard-mascot-head-160.png" alt="" width={160} height={123} className="h-9 w-auto sm:h-10" fetchPriority="high" />
+      <Wordmark className="text-[22px] sm:text-2xl" />
     </span>
   );
 }
 
-/** Full primary logo (stadium scene) — the brand's hero mark. */
-export function PrimaryLogo({ className = "", priority = false, sizes = "320px" }: { className?: string; priority?: boolean; sizes?: string }) {
-  return <Image src={fullLogo} alt="LotLizard" className={className} priority={priority} sizes={sizes} />;
-}
-
-/** Mascot bust (no wordmark), for the homepage hero. */
-export function Mascot({ className = "", sizes = "420px" }: { className?: string; sizes?: string }) {
-  return <Image src={mascot} alt="" className={className} sizes={sizes} priority />;
+/** Full A2 primary logo (stadium scene): the main brand mark. */
+export function PrimaryLogo({ className = "", priority = false, sizes = "260px" }: { className?: string; priority?: boolean; sizes?: string }) {
+  return (
+    <img
+      src="/brand/lotlizard-logo-full-520.png"
+      srcSet="/brand/lotlizard-logo-full-520.png 520w, /brand/lotlizard-logo-full-760.png 760w, /brand/lotlizard-logo-full.png 1254w"
+      sizes={sizes}
+      alt="LotLizard"
+      width={1254}
+      height={989}
+      className={className}
+      {...(priority ? { fetchPriority: "high" as const } : { loading: "lazy" as const })}
+      decoding="async"
+    />
+  );
 }

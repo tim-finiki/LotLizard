@@ -347,6 +347,11 @@ def main(lime: bool) -> None:
     head = trim(compose_outlined(h_rgb, soft_alpha(head_m), dark_px=4, lime_px=9), 6)
     save(head, PUBLIC / "lotlizard-mascot-head.png")
 
+    # Web sizes, served as lossless PNG (no re-encoding) so the approved art is shown exactly.
+    for width in (520, 760):
+        save(full.resize((width, round(full.height * width / full.width)), Image.LANCZOS), PUBLIC / f"lotlizard-logo-full-{width}.png")
+    save(head.resize((160, round(head.height * 160 / head.width)), Image.LANCZOS), PUBLIC / "lotlizard-mascot-head-160.png")
+
     # 5. Background versions (light and dark) of the logos.
     for name, im in (("full", full), ("compact", compact)):
         save(on_background(im, (255, 255, 255), 40).convert("RGB"), PRODUCTION / f"lotlizard-logo-{name}-on-white.png")

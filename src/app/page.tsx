@@ -4,7 +4,7 @@ import { listVenues } from "@/lib/data/repository";
 import { siteJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { VenueCard } from "@/components/VenueCard";
-import { Mascot } from "@/components/Brand";
+import { PrimaryLogo } from "@/components/Brand";
 
 export const metadata: Metadata = { alternates: { canonical: "/" } };
 
@@ -26,7 +26,13 @@ export default async function Home() {
     <div>
       <JsonLd data={siteJsonLd()} />
       <section className="relative overflow-hidden bg-ink px-4 pb-10 pt-9 text-white sm:pb-14 sm:pt-12">
-        <div className="mx-auto grid max-w-5xl grid-cols-[minmax(0,1fr)] items-center gap-6 md:grid-cols-[minmax(0,1fr)_320px]">
+        <div className="mx-auto grid max-w-5xl grid-cols-[minmax(0,1fr)] items-center gap-6 md:grid-cols-[minmax(0,1fr)_380px] md:gap-10">
+          {/* The full A2 stadium logo is the primary brand mark: first on phones, beside the headline on desktop. */}
+          <PrimaryLogo
+            priority
+            sizes="(min-width: 768px) 380px, 260px"
+            className="mx-auto h-auto w-[260px] max-w-full md:order-last md:w-[380px]"
+          />
           <div className="flex min-w-0 flex-col gap-5">
             <h1 className="text-[2.1rem] font-extrabold leading-[1.05] tracking-tight min-[400px]:text-4xl sm:text-5xl">
               Find the <span className="text-lizard">best parking</span> for every event.
@@ -67,7 +73,6 @@ export default async function Home() {
               </div>
             )}
           </div>
-          <Mascot className="hidden h-auto w-full max-w-[320px] justify-self-end md:block" sizes="320px" />
         </div>
       </section>
 
