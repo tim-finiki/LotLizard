@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import "./globals.css";
 import { SITE_NAME, siteUrl } from "@/lib/seo";
+import { buildInfo } from "@/lib/build-info";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
   applicationName: SITE_NAME,
   openGraph: { siteName: SITE_NAME, type: "website", locale: "en_US" },
   twitter: { card: "summary" },
+  other: { "lotlizard-build": buildInfo().commit },
 };
 
 export const viewport: Viewport = {
@@ -54,7 +56,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               LotLizard is independent and not affiliated with any team, league, venue or parking operator. Information
               may be incomplete or out of date — always check official sources before you go.
             </p>
-            <p>© 2026 LotLizard</p>
+            <p className="flex flex-wrap justify-between gap-2">
+              <span>© 2026 LotLizard</span>
+              <span className="font-mono text-xs text-neutral-400" data-build={buildInfo().commit}>
+                Build {buildInfo().commit}
+                {buildInfo().environment !== "production" && ` · ${buildInfo().environment}`}
+              </span>
+            </p>
           </div>
         </footer>
       </body>

@@ -39,7 +39,17 @@ _Last updated: 2026-10-29_
 - `data/` — seed data (`sources.ts`, `venues.ts`, `facilities/*.ts`) and `repository.ts`, an async
   repository interface. Pages only talk to the repository, so moving to a database changes one module.
 - `geo.ts` — haversine distance, estimated walking time (straight-line × route factor), bounds.
-- `ranking.ts` — personalized scoring with transparent per-factor breakdown and completeness.
+- `ranking.ts` — personalized scoring. Returns a match score, data completeness, confidence of the evidence
+  used, and a recommendation tier (`top_pick`, `good_match`, `fair_match`, `limited_data`). The match is a
+  weighted average over *known* factors only, so missing data is neutral. Lots under 50% completeness are listed
+  but unranked (`rank: null`). Cost uses only lot-specific prices (`PriceObservation.scope`). Exit direction
+  counts only with documented routing (confidence ≥ medium).
+- `explorer.ts` — `applyDisplayFilters` (type + payment filters, event-aware) produces the single visible set
+  that is ranked, listed and mapped; `buildMarkers` labels pins from the current ranking.
+- `payment.ts` — payment labels, `effectivePayment` (event overrides) and `matchPayment` (OR across methods,
+  separate timing filter, three-valued result: match / unknown / excluded).
+- `events.ts`, `directions.ts` — event labels/lot opening times (pure string math, timezone-safe) and map links
+  that only target exact pins or sourced street addresses.
 - `confidence.ts` — confidence ordering, labels, and community-report corroboration rules.
 - `submissions/` — zod schemas, automated pre-moderation checks, store interface + adapters.
 - `predictions/` — `ArrivalExitPredictor` interface and the MVP `UnavailablePredictor`.
@@ -56,8 +66,12 @@ Venue (slug, type, teams[], address, location{lat,lng,precision}, timezone, cove
        transit[], attribution)
   └─ ParkingFacility (slug, venueId, type: official_lot|private_lot|garage|independent|residential|shuttle|
                       rideshare_zone|ada, operator, location, walk{minutes?: Attributed}, prices: PriceObservation[],
-                      amenities[], tailgating{allowed, atmosphere 1–5}, exit{rating 1–5, routes, notes},
-                      prepaidRequired, vehicleTypes[], booking{url, partner, isAffiliate}, attribution)
+                      amenities[], tailgating{allowed, atmosphere 1–5}, exit{rating 1–5, routes, directions, notes},
+                      payment: PaymentPolicy, paymentOverrides[{eventId, policy}],
+                      vehicleTypes[], booking{url, partner, isAffiliate}, attribution)
+        └─ PaymentPolicy (accepted[], notAccepted[], otherDescription, timing: pay_on_arrival|advance_optional|
+                          prepay_required, reportedAt, notes, attribution{confidence, lastVerifiedAt})
+           A method in neither list is UNKNOWN. An event override replaces the general policy for that event.
         └─ PriceObservation (min/max, vehicle, eventKind, season, observedAt, attribution)
 Event (venueId, startsAt, kind)                       ← future: schedule ingest
 TravelObservation (facilityId, eventId, kind: arrival|exit, minutes, source)   ← future model training
@@ -75,6 +89,9 @@ GIN trigram index for search). `Attributed<T>` becomes value + attribution colum
   at build via `generateStaticParams`; data access goes through `'use cache'` repository functions.
 - Community content (approved reviews/prices) is request-time data rendered inside `<Suspense>` so the static
   shell is served from the CDN instantly and the dynamic hole streams in.
+- The venue explorer is map-first: a full-height map with a draggable results sheet (`BottomSheet`) that turns
+  into a side panel at the `lg` breakpoint. Event and direction selections live in the URL (`?event=&dir=`) so
+  views are shareable; detailed rules and sources render server-side below the map for SEO.
 - The map is a client-only island (`next/dynamic`, `ssr: false`) with a fixed-height placeholder to avoid
   layout shift. Leaflet CSS/JS is only loaded on venue pages.
 - System font stack (no web-font download), SVG icon, no client analytics in MVP.
@@ -99,7 +116,7 @@ GIN trigram index for search). `Attributed<T>` becomes value + attribution colum
 
 ## 7. Submissions & moderation
 
-1. `POST /api/submissions` — zod validation, honeypot field, per-IP rate limit, automated flags
+1. `POST /api/submissions` — kinds: price, review, payment, lot_info, correction, exit_time. zod validation, honeypot field, per-IP rate limit, automated flags
    (price outlier vs known range, links, shouting, very short text).
 2. Stored with `status: pending`.
 3. `/admin` moderation UI → `GET/PATCH /api/admin/submissions` authorized by `ADMIN_TOKEN` (Bearer).

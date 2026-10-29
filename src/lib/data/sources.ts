@@ -25,6 +25,9 @@ export const SOURCES: DataSource[] = [
   { id: "audacy-hammers", type: "media", name: "WBEN/Audacy — Tailgating at the new Bills stadium", url: "https://www.audacy.com/wben/news/local/tailgate-bills-stadium", retrievedAt: "2026-09-17" },
   { id: "wkbw-hammers-2024", type: "media", name: "WKBW — Owner of popular tailgate lot on Highmark Stadium parking map", url: "https://www.wkbw.com/news/local-news/owner-of-popular-buffalo-bills-tailgate-lot-voices-concerns-over-highmark-stadium-parking-map", retrievedAt: "2024-09-01" },
 
+  { id: "13wham-schedule", type: "media", name: "13WHAM — 2026 Bills schedule features Thanksgiving and Christmas games", url: "https://13wham.com/sports/buffalo-bills/2026-buffalo-bills-schedule-features-games-on-thanksgiving-and-christmas-nfl-release-highmark-stadium-first-season", retrievedAt: "2026-05-14" },
+  { id: "wivb-schedule", type: "media", name: "WIVB — 4 takeaways on the 2026 Bills schedule", url: "https://www.wivb.com/sports/buffalo-bills/4-takeaways-on-the-2026-bills-schedule-new-stadium-opening-thanksgiving-and-christmas-games/amp/", retrievedAt: "2026-05-14" },
+
   // Third party
   { id: "arenacapacity", type: "third_party", name: "ArenaCapacity — Highmark Stadium parking guide", url: "https://www.arenacapacity.com/highmark-stadium-parking/", retrievedAt: "2026-07-10" },
   { id: "parkingaccess", type: "third_party", name: "ParkingAccess — Highmark Stadium parking", url: "https://parkingaccess.com/highmark-stadium-parking", retrievedAt: "2026-10-29" },

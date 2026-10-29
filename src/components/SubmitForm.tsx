@@ -2,22 +2,25 @@
 
 import { useEffect, useState } from "react";
 import { SUBMISSION_KINDS, type SubmissionKind } from "@/lib/submissions/schema";
+import { PAYMENT_METHODS, PAYMENT_METHOD_LABEL, PAYMENT_TIMINGS, PAYMENT_TIMING_LABEL } from "@/lib/payment";
 
 export interface VenueOption {
   slug: string;
   name: string;
   lots: { slug: string; name: string }[];
+  events: { id: string; label: string }[];
 }
 
 const KIND_LABEL: Record<SubmissionKind, string> = {
   price: "Price I paid",
+  payment: "Payment info",
   review: "Lot review",
   exit_time: "Time to get out",
   lot_info: "New lot",
   correction: "Correction",
 };
 
-const NEEDS_LOT: SubmissionKind[] = ["price", "review", "exit_time"];
+const NEEDS_LOT: SubmissionKind[] = ["price", "review", "payment", "exit_time"];
 
 const inputCls =
   "h-12 w-full rounded-xl border border-black/10 bg-white px-3 text-base outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 dark:border-white/15 dark:bg-neutral-900";
@@ -79,6 +82,19 @@ export function SubmitForm({ venues }: { venues: VenueOption[] }) {
     if (kind === "exit_time") Object.assign(payload, { minutes: num("minutes"), eventDate: str("eventDate"), notes: str("notes") });
     if (kind === "lot_info") Object.assign(payload, { lotName: str("lotName"), address: str("address"), body: str("body") });
     if (kind === "correction") Object.assign(payload, { body: str("body") });
+    if (kind === "payment") {
+      const methods = (k: string) => fd.getAll(k).filter((v): v is string => typeof v === "string");
+      Object.assign(payload, {
+        role: str("role") ?? "community",
+        accepted: methods("accepted"),
+        notAccepted: methods("notAccepted"),
+        otherDescription: str("otherDescription"),
+        timing: str("timing") ?? "unknown",
+        eventId: str("eventId"),
+        observedDate: str("observedDate"),
+        notes: str("notes"),
+      });
+    }
 
     setState({ status: "sending" });
     try {
@@ -223,6 +239,73 @@ export function SubmitForm({ venues }: { venues: VenueOption[] }) {
           </Field>
           <Field label="What should fans know?" hint="Price, payment, tailgating, walk, exit…">
             <textarea name="body" minLength={10} maxLength={2000} rows={5} required className={`${inputCls} h-auto py-2`} />
+          </Field>
+        </>
+      )}
+
+      {kind === "payment" && (
+        <>
+          <fieldset className="flex flex-col gap-2">
+            <legend className="mb-1 text-sm font-medium">I am</legend>
+            <div className="flex flex-wrap gap-4 text-sm">
+              <label className="flex items-center gap-2">
+                <input type="radio" name="role" value="community" defaultChecked className="h-5 w-5 accent-brand-600" /> A fan who parked here
+              </label>
+              <label className="flex items-center gap-2">
+                <input type="radio" name="role" value="lot_owner" className="h-5 w-5 accent-brand-600" /> The lot owner / operator
+              </label>
+            </div>
+            <span className="text-xs text-neutral-500">Owner reports are verified by a moderator before they&apos;re published.</span>
+          </fieldset>
+          <fieldset>
+            <legend className="mb-2 text-sm font-medium">Accepted payment methods</legend>
+            <div className="grid grid-cols-2 gap-2 text-sm">
+              {PAYMENT_METHODS.map((m) => (
+                <label key={m} className="flex min-h-11 items-center gap-2 rounded-xl bg-white px-3 ring-1 ring-black/10 dark:bg-neutral-900 dark:ring-white/15">
+                  <input type="checkbox" name="accepted" value={m} className="h-5 w-5 accent-brand-600" />
+                  {PAYMENT_METHOD_LABEL[m]}
+                </label>
+              ))}
+            </div>
+            <span className="mt-1 block text-xs text-neutral-500">Only tick what you saw or used. Leave the rest blank if you don&apos;t know.</span>
+          </fieldset>
+          <details className="text-sm">
+            <summary className="cursor-pointer font-medium">Methods they definitely don&apos;t accept (optional)</summary>
+            <div className="mt-2 grid grid-cols-2 gap-2">
+              {PAYMENT_METHODS.map((m) => (
+                <label key={m} className="flex min-h-11 items-center gap-2 rounded-xl bg-white px-3 ring-1 ring-black/10 dark:bg-neutral-900 dark:ring-white/15">
+                  <input type="checkbox" name="notAccepted" value={m} className="h-5 w-5 accent-brand-600" />
+                  {PAYMENT_METHOD_LABEL[m]}
+                </label>
+              ))}
+            </div>
+          </details>
+          <Field label="Other method (optional)" hint="e.g. Cash App, a parking app">
+            <input name="otherDescription" maxLength={100} className={inputCls} />
+          </Field>
+          <Field label="When do you pay?">
+            <select name="timing" defaultValue="unknown" className={inputCls}>
+              <option value="unknown">Not sure</option>
+              {PAYMENT_TIMINGS.map((t) => (
+                <option key={t} value={t}>{PAYMENT_TIMING_LABEL[t]}</option>
+              ))}
+            </select>
+          </Field>
+          {venue && venue.events.length > 0 && (
+            <Field label="Applies to" hint="Pick a game if the policy was different that day (e.g. cash only for a playoff game).">
+              <select name="eventId" defaultValue="" className={inputCls}>
+                <option value="">This lot in general</option>
+                {venue.events.map((e) => (
+                  <option key={e.id} value={e.id}>Only {e.label}</option>
+                ))}
+              </select>
+            </Field>
+          )}
+          <Field label="Date you saw this">
+            <input key={today} name="observedDate" type="date" max={today} defaultValue={today} required className={inputCls} />
+          </Field>
+          <Field label="Notes (optional)" hint="Card minimum? Cash only after kickoff? Venmo handle posted at the gate?">
+            <textarea name="notes" maxLength={500} rows={3} className={`${inputCls} h-auto py-2`} />
           </Field>
         </>
       )}

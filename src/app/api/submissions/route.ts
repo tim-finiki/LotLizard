@@ -3,7 +3,7 @@ import { submissionInputSchema, type Submission } from "@/lib/submissions/schema
 import { preModerationFlags } from "@/lib/submissions/checks";
 import { getSubmissionStore } from "@/lib/submissions/store";
 import { rateLimit } from "@/lib/submissions/rate-limit";
-import { facilityExists, getFacility } from "@/lib/data/repository";
+import { facilityExists, getFacility, getVenue, listEvents } from "@/lib/data/repository";
 
 export async function POST(request: Request) {
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
@@ -30,6 +30,14 @@ export async function POST(request: Request) {
   const input = parsed.data;
   if (!facilityExists(input.venueSlug, input.facilitySlug)) {
     return NextResponse.json({ error: "Unknown venue or lot" }, { status: 400 });
+  }
+
+  if (input.kind === "payment" && input.eventId) {
+    const venue = await getVenue(input.venueSlug);
+    const events = venue ? await listEvents(venue.id) : [];
+    if (!events.some((e) => e.id === input.eventId)) {
+      return NextResponse.json({ error: "Unknown event" }, { status: 400 });
+    }
   }
 
   const facility = input.facilitySlug ? (await getFacility(input.venueSlug, input.facilitySlug))?.facility : undefined;

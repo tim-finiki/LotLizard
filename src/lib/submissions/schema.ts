@@ -1,6 +1,8 @@
 import { z } from "zod";
+import { PAYMENT_METHODS, PAYMENT_TIMINGS } from "@/lib/payment";
 
-export const SUBMISSION_KINDS = ["price", "review", "lot_info", "correction", "exit_time"] as const;
+export const SUBMISSION_KINDS = ["price", "review", "payment", "lot_info", "correction", "exit_time"] as const;
+export const SUBMITTER_ROLES = ["community", "lot_owner"] as const;
 export type SubmissionKind = (typeof SUBMISSION_KINDS)[number];
 
 const base = {
@@ -13,6 +15,33 @@ const base = {
 };
 
 const isoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Use YYYY-MM-DD");
+const paymentMethod = z.enum(PAYMENT_METHODS);
+
+/** Payment update from a fan or a lot owner. Owner claims are flagged for verification. */
+const paymentSubmission = z
+  .object({
+    ...base,
+    kind: z.literal("payment"),
+    facilitySlug: base.facilitySlug.unwrap(),
+    role: z.enum(SUBMITTER_ROLES),
+    accepted: z.array(paymentMethod).max(PAYMENT_METHODS.length).default([]),
+    notAccepted: z.array(paymentMethod).max(PAYMENT_METHODS.length).default([]),
+    otherDescription: z.string().trim().max(100).optional(),
+    /** "unknown" lets someone report methods without claiming a timing. */
+    timing: z.enum([...PAYMENT_TIMINGS, "unknown"]),
+    /** Set when the policy applies to one event only. */
+    eventId: z.string().max(80).optional(),
+    observedDate: isoDate,
+    notes: z.string().trim().max(500).optional(),
+  })
+  .refine((p) => p.accepted.length + p.notAccepted.length > 0 || p.timing !== "unknown", {
+    message: "Report at least one payment method or the payment timing",
+    path: ["accepted"],
+  })
+  .refine((p) => !p.accepted.some((m) => p.notAccepted.includes(m)), {
+    message: "A method can't be both accepted and not accepted",
+    path: ["notAccepted"],
+  });
 
 export const submissionInputSchema = z.discriminatedUnion("kind", [
   z.object({
@@ -33,6 +62,7 @@ export const submissionInputSchema = z.discriminatedUnion("kind", [
     exitRating: z.number().int().min(1).max(5).optional(),
     body: z.string().trim().min(20).max(2000),
   }),
+  paymentSubmission,
   z.object({
     ...base,
     kind: z.literal("lot_info"),

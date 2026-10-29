@@ -24,7 +24,12 @@ function read(): RankingPreferences {
   if (raw) {
     try {
       const parsed = JSON.parse(raw) as Partial<RankingPreferences>;
-      value = { ...DEFAULT_PREFERENCES, ...parsed, weights: { ...DEFAULT_PREFERENCES.weights, ...parsed.weights } };
+      value = {
+        ...DEFAULT_PREFERENCES,
+        ...parsed,
+        weights: { ...DEFAULT_PREFERENCES.weights, ...parsed.weights },
+        payment: { ...DEFAULT_PREFERENCES.payment, ...parsed.payment },
+      };
     } catch {
       // Corrupt value: ignore.
     }

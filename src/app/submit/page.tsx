@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { listFacilities, listVenues } from "@/lib/data/repository";
+import { listEvents, listFacilities, listVenues } from "@/lib/data/repository";
+import { eventLabel } from "@/lib/events";
 import { SubmitForm, type VenueOption } from "@/components/SubmitForm";
 
 export const metadata: Metadata = {
@@ -15,6 +16,7 @@ export default async function SubmitPage() {
       slug: v.slug,
       name: v.name,
       lots: (await listFacilities(v.id)).map((f) => ({ slug: f.slug, name: f.name })),
+      events: (await listEvents(v.id)).map((e) => ({ id: e.id, label: eventLabel(e) })),
     })),
   );
   return (

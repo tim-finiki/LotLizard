@@ -83,6 +83,13 @@ export interface Gate {
   location: GeoPoint;
 }
 
+/** A direction fans leave toward after the event, e.g. "North — Buffalo / I-90". */
+export interface Approach {
+  id: string;
+  label: string;
+  description: string;
+}
+
 export interface Venue {
   id: string;
   slug: string;
@@ -100,6 +107,9 @@ export interface Venue {
   policies?: VenuePolicy[];
   transit?: TransitOption[];
   trafficNotes?: VenuePolicy[];
+  approaches?: Approach[];
+  /** How many hours before the event official lots open. */
+  lotOpenHoursBefore?: Attributed<number>;
   attribution: Attribution;
 }
 
@@ -142,7 +152,45 @@ export interface PriceObservation {
   season?: string;
   observedAt: string;
   paymentNotes?: string;
+  /**
+   * "lot" (default): a price reported for this specific lot. "area": a range reported for a group of
+   * lots or a street. Area ranges are shown for context but are not evidence for comparing lots.
+   */
+  scope?: "lot" | "area";
   attribution: Attribution;
+}
+
+export type PaymentMethod = "cash" | "card" | "venmo" | "paypal" | "zelle" | "mobile_wallet" | "other";
+
+/**
+ * When you pay. Kept separate from *how* you pay.
+ * - pay_on_arrival: pay at the lot on the day
+ * - advance_optional: you can reserve or pay ahead, but can also pay on arrival
+ * - prepay_required: you must buy a pass/permit before arriving
+ */
+export type PaymentTiming = "pay_on_arrival" | "advance_optional" | "prepay_required";
+
+/**
+ * Payment facts for a lot. A method is only "accepted" with explicit evidence; a method listed in
+ * neither `accepted` nor `notAccepted` is UNKNOWN, never assumed accepted or refused.
+ */
+export interface PaymentPolicy {
+  accepted: PaymentMethod[];
+  notAccepted?: PaymentMethod[];
+  /** Describes "other" methods, e.g. "Token Transit app". */
+  otherDescription?: string;
+  /** Undefined when unknown. */
+  timing?: PaymentTiming;
+  /** Date the source reported this (YYYY-MM-DD). Verification by LotLizard goes in attribution.lastVerifiedAt. */
+  reportedAt: string;
+  notes?: string;
+  attribution: Attribution;
+}
+
+/** A policy that applies to one event only and replaces the lot's general policy for that event. */
+export interface EventPaymentOverride {
+  eventId: string;
+  policy: PaymentPolicy;
 }
 
 export interface BookingLink {
@@ -167,7 +215,10 @@ export interface ParkingFacility {
   /** Sourced walking time to the nearest gate; otherwise the UI derives an estimate from coordinates. */
   walkMinutes?: Attributed<number>;
   prices: PriceObservation[];
-  prepaidRequired?: Attributed<boolean>;
+  /** General payment policy. Undefined when nothing is known. */
+  payment?: PaymentPolicy;
+  /** Event-specific policies that replace `payment` for that event. */
+  paymentOverrides?: EventPaymentOverride[];
   amenities: Attributed<Amenity[]>;
   tailgating: {
     allowed: Attributed<boolean | "unknown">;
@@ -180,19 +231,27 @@ export interface ParkingFacility {
     rating?: Attributed<number>;
     routes?: string[];
     notes?: string;
+    /**
+     * Approach IDs this lot's post-event exit route leads toward. Only used for ranking when backed
+     * by documented lot-level routing (confidence ≥ medium).
+     */
+    directions?: Attributed<string[]>;
   };
   vehicleTypes: VehicleType[];
   booking?: BookingLink;
   attribution: Attribution;
 }
 
-/** Future: event schedule ingestion. */
 export interface VenueEvent {
   id: string;
   venueId: string;
   name: string;
   kind: EventKind;
-  startsAt: string;
+  /** Local date, YYYY-MM-DD. */
+  date: string;
+  /** Local kickoff/start time, HH:MM (24h). Absent when not yet announced. */
+  startLocal?: string;
+  attribution: Attribution;
 }
 
 /** Future: historical arrival/exit times used to train predictions. */

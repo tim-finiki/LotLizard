@@ -1,4 +1,4 @@
-import type { ParkingFacility, PriceObservation } from "@/lib/types";
+import type { ParkingFacility, PaymentPolicy, PriceObservation } from "@/lib/types";
 import { attr, fact } from "@/lib/data/attr";
 
 /**
@@ -16,7 +16,17 @@ import { attr, fact } from "@/lib/data/attr";
 const VENUE_ID = "highmark-stadium";
 const PIN_NOTE = "Approximate editorial pin — entrance not surveyed.";
 
-const prepaid = fact(true, "medium", ["bills-parking", "bills-gameday"], "Bills lots require a pass bought in advance; passes are valid only for the lot printed on them.");
+/**
+ * Payment: only what sources state. Official lots are documented as prepay-only, but how passes can be
+ * paid for isn't, so methods stay unknown (accepted: []).
+ */
+const officialPrepay: PaymentPolicy = {
+  accepted: [],
+  timing: "prepay_required",
+  reportedAt: "2026-10-29",
+  notes: "Pass must be bought in advance and is valid only for the lot printed on it. No cash or card sales at the lot on game day. Accepted payment methods for passes not yet documented.",
+  attribution: attr("medium", ["bills-parking", "bills-gameday"]),
+};
 const officialTailgate = fact<boolean | "unknown">(true, "medium", ["bills-parking"], "Tailgating allowed from lot opening (4 hours before kickoff) until kickoff. No post-game tailgating.");
 const officialAmenities = fact<ParkingFacility["amenities"]["value"]>(["tailgate_area", "paved"], "low", ["bills-parking", "lotlizard-editorial"], "Each space is 9×18 ft with a 9×10 ft tailgate area. Surface and other amenities not yet verified.");
 
@@ -30,6 +40,7 @@ function officialPriceRange(lot: string): PriceObservation {
     season: "2026",
     observedAt: "2026-07-10",
     paymentNotes: "Pre-purchased pass only. Season passes were reported sold out for 2026; resale prices vary by opponent.",
+    scope: "area",
     attribution: attr("low", ["arenacapacity", "buffnews-lots"], "Third-party range for Bills lots generally — not specific to this lot. Official 2026 per-lot prices not yet found."),
   };
 }
@@ -54,7 +65,7 @@ function officialLot(
     location: { ...location, precision: "approximate" },
     description: `Official Bills lot ${sideText}, per the 2026 lot configuration reported by third-party guides. Pass must be bought in advance.`,
     prices: [officialPriceRange(slug)],
-    prepaidRequired: prepaid,
+    payment: officialPrepay,
     amenities: officialAmenities,
     tailgating: {
       allowed: officialTailgate,
@@ -90,7 +101,12 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     location: { lat: 42.7714, lng: -78.7862, precision: "approximate" },
     description: "Accessible parking, first-come, first-served. Access only from Fieldhouse Dr via Big Tree Rd. ADA lots are the exception to pre-purchase.",
     prices: [],
-    prepaidRequired: fact(false, "medium", ["wgrz-opener-traffic", "bills-parking"], "ADA lots are first-come, first-served."),
+    payment: {
+      accepted: [],
+      reportedAt: "2026-09-15",
+      notes: "First-come, first-served and exempt from the pre-purchase rule. Whether and how you pay on arrival isn't confirmed.",
+      attribution: attr("medium", ["wgrz-opener-traffic", "bills-parking"]),
+    },
     amenities: fact<ParkingFacility["amenities"]["value"]>(["ada_spaces"], "medium", ["wgrz-opener-traffic"]),
     tailgating: { allowed: fact<boolean | "unknown">("unknown", "unverified", ["lotlizard-editorial"]) },
     exit: { routes: ["Fieldhouse Dr → Big Tree Rd"] },
@@ -107,7 +123,12 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     location: { lat: 42.7774, lng: -78.7870, precision: "approximate" },
     description: "Accessible parking, first-come, first-served. Access only from Orange Dr via Southwestern Blvd.",
     prices: [],
-    prepaidRequired: fact(false, "medium", ["wgrz-opener-traffic", "bills-parking"], "ADA lots are first-come, first-served."),
+    payment: {
+      accepted: [],
+      reportedAt: "2026-09-15",
+      notes: "First-come, first-served and exempt from the pre-purchase rule. Whether and how you pay on arrival isn't confirmed.",
+      attribution: attr("medium", ["wgrz-opener-traffic", "bills-parking"]),
+    },
     amenities: fact<ParkingFacility["amenities"]["value"]>(["ada_spaces"], "medium", ["wgrz-opener-traffic"]),
     tailgating: { allowed: fact<boolean | "unknown">("unknown", "unverified", ["lotlizard-editorial"]) },
     exit: { routes: ["Orange Dr → Southwestern Blvd (US-20)"] },
@@ -123,7 +144,7 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     operator: "Buffalo Bills",
     description: "Opens at 8:00 AM the day before home games. No RV entry on game day. Location not yet confirmed, so it is not pinned on the map.",
     prices: [],
-    prepaidRequired: prepaid,
+    payment: officialPrepay,
     amenities: fact<ParkingFacility["amenities"]["value"]>(["rv_friendly", "tailgate_area"], "medium", ["bills-parking"]),
     tailgating: { allowed: officialTailgate },
     exit: {},
@@ -140,7 +161,13 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     location: { lat: 42.7801, lng: -78.7893, precision: "approximate" },
     description: "Advance permit from the Bills Ticket Office required; vehicles without a permit are turned away. Only limos carrying 11 or fewer may tailgate. Location reported along Southwestern Blvd in 2025 and may have changed.",
     prices: [],
-    prepaidRequired: fact(true, "medium", ["bills-parking"], "Advance permit required."),
+    payment: {
+      accepted: [],
+      timing: "prepay_required",
+      reportedAt: "2026-10-29",
+      notes: "Advance permit from the Bills Ticket Office required; vehicles without one are turned away. Accepted payment methods not documented.",
+      attribution: attr("medium", ["bills-parking"]),
+    },
     amenities: fact<ParkingFacility["amenities"]["value"]>([], "unverified", ["lotlizard-editorial"]),
     tailgating: { allowed: fact<boolean | "unknown">(true, "medium", ["bills-parking"], "Limos with 11 or fewer passengers only.") },
     exit: { routes: ["Southwestern Blvd (US-20)"] },
@@ -184,6 +211,14 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
         attribution: attr("medium", ["nfta-gde"]),
       },
     ],
+    payment: {
+      accepted: ["cash", "other"],
+      otherDescription: "Token Transit mobile ticket",
+      timing: "pay_on_arrival",
+      reportedAt: "2026-10-29",
+      notes: "$5 per person one way. Exact cash when boarding, or a Token Transit ticket. Metro passes and MetGo are not accepted.",
+      attribution: attr("medium", ["nfta-gde"]),
+    },
     amenities: fact<ParkingFacility["amenities"]["value"]>(["shuttle_service", "covered"], "medium", ["nfta-gde", "wkbw-transit-hub"], "Transit hub has a 2,500 sq ft boarding canopy."),
     tailgating: { allowed: fact<boolean | "unknown">(false, "medium", ["nfta-gde"], "Shuttle — no vehicle at the stadium.") },
     exit: { notes: "Return buses depart from the Transit Center after the game." },
@@ -228,7 +263,13 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
         attribution: attr("low", ["prked-patriots"], "Single third-party report."),
       },
     ],
-    prepaidRequired: fact(false, "low", ["prked-patriots"], "Reported first-come, first-served."),
+    payment: {
+      accepted: ["cash", "venmo"],
+      timing: "pay_on_arrival",
+      reportedAt: "2026-10-04",
+      notes: "Reported first-come, first-served, paid at the lot.",
+      attribution: attr("low", ["prked-patriots"], "Single third-party report; not yet verified by LotLizard or the owner."),
+    },
     amenities: fact<ParkingFacility["amenities"]["value"]>(["tailgate_area"], "low", ["audacy-hammers"]),
     tailgating: {
       allowed: fact<boolean | "unknown">(true, "medium", ["audacy-hammers", "wkbw-hammers-2024"]),
@@ -257,6 +298,7 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
         season: "2026",
         observedAt: "2026-10-04",
         paymentNotes: "Cash typical for private lots.",
+        scope: "area",
         attribution: attr("low", ["prked-patriots", "arenacapacity"], "Area range for private lots on Abbott Rd — not specific to this lot."),
       },
     ],

@@ -52,9 +52,25 @@ export default function DataPage() {
         <h2 className="text-lg font-bold">Rankings</h2>
         <p>
           Personalized rankings weight cost, walking distance, tailgating and exit convenience by your priorities.
-          When we have no data for a factor, it scores neutral and lowers the &ldquo;data&rdquo; meter shown with
-          each score. Sponsorships and referral partnerships never change rankings, and sponsored content is
+          We show three separate numbers: the <strong>match</strong> score, the share of your priorities backed by{" "}
+          <strong>data</strong>, and the <strong>confidence</strong> of the weakest evidence used. The match averages
+          only what we know, so missing data is neither a plus nor a minus. Lots with less than half the data your
+          priorities need aren&apos;t ranked at all. Area-wide price ranges (such as a range for all official lots) are
+          shown but don&apos;t count as a lot&apos;s price. Your departure direction only affects rankings when a lot&apos;s
+          exit routing is documented by an official or credible media source. Until then we say &ldquo;Exit data not
+          yet available&rdquo;. Sponsorships and referral partnerships never change rankings, and sponsored content is
           always labelled.
+        </p>
+      </section>
+      <section className="flex flex-col gap-2">
+        <h2 className="text-lg font-bold">Payment information</h2>
+        <p>
+          We record <em>how</em> you can pay (cash, card, Venmo, PayPal, Zelle, Apple Pay/Google Pay, other) separately
+          from <em>when</em> (pay on arrival, optional reservation, or prepay required). A method is only shown as accepted
+          when a source says so. Anything not reported is &ldquo;unknown&rdquo;, never assumed. When you filter by payment,
+          lots with unknown payment info are hidden unless you choose to see them, and then they&apos;re labelled
+          &ldquo;unconfirmed&rdquo;. A game-day policy replaces a lot&apos;s general policy for that game. Lot owners and
+          fans can send updates. Owner claims are checked by a moderator before they appear.
         </p>
       </section>
       <section className="flex flex-col gap-2">
