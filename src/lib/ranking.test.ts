@@ -143,6 +143,25 @@ describe("rankFacilities", () => {
   });
 });
 
+describe("exit direction for each cardinal direction", () => {
+  const documented = (ids: string[]) => ({ directions: fact(ids, "medium", ["s"]) });
+  const CARDINALS = ["north", "east", "south", "west"] as const;
+  const lots = CARDINALS.map((d) => lot(d, { exit: documented([d]) }));
+
+  it.each(CARDINALS)("ranks the lot that exits %s first when leaving that way", (d) => {
+    const r = rankFacilities(venue, lots, prefs({ direction: d, weights: { cost: 0, walk: 0, tailgate: 0, exit: 5 } }));
+    expect(r[0].facility.id).toBe(d);
+    expect(r[0].factors.exit.detail).toBe("Exits toward your direction");
+    for (const other of r.slice(1)) expect(other.factors.exit.detail).toBe("Exit route heads elsewhere");
+    expect(exitDirectionDataAvailable(lots, d)).toBe(true);
+  });
+
+  it("changes the order when the direction changes", () => {
+    const top = (d: string) => rankFacilities(venue, lots, prefs({ direction: d, weights: { cost: 0, walk: 0, tailgate: 0, exit: 5 } }))[0].facility.id;
+    expect(CARDINALS.map(top)).toEqual([...CARDINALS]);
+  });
+});
+
 describe("bestPrice", () => {
   it("prefers prices for the selected event kind", () => {
     const concert = { ...price(80, 80, "high"), id: "concert", eventKind: "concert" as const };

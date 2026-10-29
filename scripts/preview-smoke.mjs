@@ -112,6 +112,21 @@ try {
     await panel.getByRole("button", { name: /^Show \d+ option/ }).click();
     await page.waitForFunction((n) => document.querySelectorAll(".ll-marker").length === n, before, { timeout: 10_000 });
   });
+  await step("leaving direction", async () => {
+    // Every cardinal direction is offered; with no documented lot-level exit routing yet, choosing one
+    // must say so rather than silently re-ranking.
+    const leaving = page.getByRole("combobox", { name: "Leaving toward" });
+    const options = await leaving.locator("option").allTextContents();
+    for (const d of ["North", "East", "South", "West"]) if (!options.some((o) => o.includes(d))) throw new Error(`"Leaving" has no ${d} option`);
+    const topLot = () => page.getByRole("button", { name: /^Rank 1:/ }).first().textContent();
+    const topBefore = await topLot();
+    await leaving.selectOption({ label: "Leaving: East (East Aurora)" });
+    await page.waitForURL(/[?&]dir=east/);
+    await page.getByText(/Exit data not yet available for East/).waitFor();
+    const topAfter = await topLot();
+    if (topAfter !== topBefore) throw new Error("ranking changed without documented exit routing");
+    await leaving.selectOption({ label: "Leaving: any way" });
+  });
   await step("lot name search", async () => {
     await page.getByRole("combobox", { name: /Find a lot/ }).fill("gold");
     await page.getByRole("listbox", { name: "Matching lots" }).getByRole("option", { name: /Gold Lot/ }).click();

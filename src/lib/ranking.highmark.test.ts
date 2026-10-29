@@ -57,8 +57,16 @@ describe("Highmark ranking responds to priorities", () => {
 });
 
 describe("Highmark exit direction", () => {
-  it("has no documented lot-level exit routing yet, so direction never changes the ranking", () => {
-    for (const d of ["north", "south", "west"]) {
+  const CARDINALS = ["north", "east", "south", "west"];
+
+  it("offers all four cardinal directions, in compass order", () => {
+    const highmark = VENUES.find((v) => v.slug === "highmark-stadium")!;
+    expect(highmark.approaches?.map((a) => a.id)).toEqual(CARDINALS);
+    expect(highmark.approaches?.find((a) => a.id === "east")?.label).toBe("East (East Aurora)");
+  });
+
+  it("has no documented lot-level exit routing yet, so no direction changes the ranking", () => {
+    for (const d of CARDINALS) {
       expect(exitDirectionDataAvailable(HIGHMARK_FACILITIES, d)).toBe(false);
       expect(order(rank({ direction: d }))).toEqual(order(rank()));
     }
