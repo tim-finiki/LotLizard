@@ -122,6 +122,9 @@ GIN trigram index for search). `Attributed<T>` becomes value + attribution colum
 
 ## 7. Submissions & moderation
 
+0. Gate: `submissionsStatus()` (`lib/submissions/availability.ts`) refuses every submission with 503 on any
+   deployment unless `SUBMISSIONS_ENABLED=true`, Upstash storage + shared rate limiting, and a 32+ character
+   `ADMIN_TOKEN` are all configured. Local development stays enabled.
 1. `POST /api/submissions` — kinds: price, review, payment, lot_info, correction, exit_time. zod validation, honeypot field, per-IP rate limit, automated flags
    (price outlier vs known range, links, shouting, very short text).
 2. Stored with `status: pending`.

@@ -61,6 +61,21 @@ and third-party sources, which are listed on each page. Nothing is marked `verif
 have been checked in the field. Map pins are approximate editorial placements, and lots with no locating
 source are listed but not mapped. Unit tests enforce some of these rules.
 
+## Community submissions (off by default)
+
+Public submissions are **disabled on every deployment** (production and previews) until all of these are configured
+in Vercel's environment variables, then redeployed:
+
+| Requirement | Variable |
+| --- | --- |
+| Explicit opt-in | `SUBMISSIONS_ENABLED=true` |
+| Persistent storage | `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` |
+| Secure moderation | `ADMIN_TOKEN` with 32+ characters |
+| Abuse protection | Shared rate limiting (uses the same Upstash database) |
+
+While disabled, `POST /api/submissions` returns `503 {"error":"submissions_disabled"}` before reading the request,
+and `/submit` shows "Community reporting coming soon". Local `npm run dev` keeps submissions on, using the in-memory store.
+
 ## Deploying to Vercel
 
 1. Import the GitHub repo in Vercel. The framework is detected automatically, so no build settings are needed.

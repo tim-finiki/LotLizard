@@ -102,7 +102,7 @@ export function SubmitForm({ venues }: { venues: VenueOption[] }) {
       const json = await res.json().catch(() => ({}));
       if (!res.ok) {
         const issue = json.issues?.[0];
-        setState({ status: "error", message: issue ? `${issue.path || "Form"}: ${issue.message}` : json.error ?? "Something went wrong." });
+        setState({ status: "error", message: issue ? `${issue.path || "Form"}: ${issue.message}` : (json.message ?? json.error ?? "Something went wrong.") });
         return;
       }
       setState({ status: "done" });
