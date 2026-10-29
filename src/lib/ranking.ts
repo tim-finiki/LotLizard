@@ -1,4 +1,4 @@
-import type { Attribution, ConfidenceLevel, EventKind, FacilityType, ParkingFacility, PriceObservation, Venue, VehicleType } from "@/lib/types";
+import type { Amenity, Attribution, ConfidenceLevel, EventKind, FacilityType, ParkingFacility, PriceObservation, Venue, VehicleType } from "@/lib/types";
 import { confidenceRank, lowestConfidence } from "@/lib/confidence";
 import { estimateWalk } from "@/lib/geo";
 import { EMPTY_PAYMENT_FILTER, type PaymentFilter } from "@/lib/payment";
@@ -17,6 +17,8 @@ export interface RankingPreferences {
   direction: string;
   /** Payment method/timing filter. A display filter: applied before ranking to map and list alike. */
   payment: PaymentFilter;
+  /** Amenities a lot must have *reported* (AND). A display filter like `payment`. */
+  amenities: Amenity[];
 }
 
 export const DEFAULT_PREFERENCES: RankingPreferences = {
@@ -26,6 +28,7 @@ export const DEFAULT_PREFERENCES: RankingPreferences = {
   needsAda: false,
   direction: "any",
   payment: EMPTY_PAYMENT_FILTER,
+  amenities: [],
 };
 
 /** Per-request context that is not a saved preference. */

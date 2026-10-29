@@ -1,10 +1,12 @@
-import type { FacilityType, ParkingFacility } from "@/lib/types";
-import type { RankedFacility } from "@/lib/ranking";
+import type { Amenity, FacilityType, ParkingFacility } from "@/lib/types";
+import { DEFAULT_PREFERENCES, type RankedFacility, type RankingPreferences } from "@/lib/ranking";
 import { effectivePayment, isPaymentFilterActive, matchPayment, type PaymentFilter, type PaymentMatch } from "@/lib/payment";
 
 export interface DisplayFilters {
   hiddenTypes: FacilityType[];
   payment: PaymentFilter;
+  /** Required amenities (AND). Only *reported* amenities count; unreported is not assumed present. */
+  amenities?: Amenity[];
   /** Selected event, so event-specific payment policies apply. */
   eventId?: string;
 }
@@ -27,8 +29,10 @@ export function applyDisplayFilters(facilities: ParkingFacility[], filters: Disp
   const visible: ParkingFacility[] = [];
   const paymentMatch = new Map<string, PaymentMatch>();
   let hiddenUnknownPayment = 0;
+  const amenities = filters.amenities ?? [];
   for (const f of facilities) {
     if (filters.hiddenTypes.includes(f.type)) continue;
+    if (amenities.some((a) => !f.amenities.value.includes(a))) continue;
     const match = active ? matchPayment(effectivePayment(f, filters.eventId).policy, filters.payment) : "match";
     if (match === "excluded") continue;
     if (match === "unknown" && !filters.payment.includeUnknown) {
@@ -66,4 +70,34 @@ export function buildMarkers(visible: ParkingFacility[], ranked: RankedFacility[
       const label = r ? (r.rank !== null ? String(r.rank) : "?") : (NON_PARKING_LABEL[f.type] ?? "•");
       return { id: f.id, name: f.name, type: f.type, lat: f.location!.lat, lng: f.location!.lng, label };
     });
+}
+
+/**
+ * Number of active eligibility filters, shown on the Filters button. Sort priorities and the
+ * "include unknown payment" option don't count: they never narrow the results on their own.
+ */
+export function activeFilterCount(prefs: RankingPreferences, hiddenTypes: FacilityType[]): number {
+  return (
+    prefs.payment.methods.length +
+    prefs.payment.timings.length +
+    prefs.amenities.length +
+    hiddenTypes.length +
+    (prefs.vehicle !== DEFAULT_PREFERENCES.vehicle ? 1 : 0) +
+    (prefs.needsAda ? 1 : 0) +
+    (prefs.requireTailgating ? 1 : 0) +
+    (prefs.maxPrice !== undefined ? 1 : 0)
+  );
+}
+
+/** Reset every eligibility filter while keeping sort priorities and departure direction. */
+export function clearFilters(prefs: RankingPreferences): RankingPreferences {
+  return {
+    ...prefs,
+    vehicle: DEFAULT_PREFERENCES.vehicle,
+    needsAda: false,
+    requireTailgating: false,
+    maxPrice: undefined,
+    payment: DEFAULT_PREFERENCES.payment,
+    amenities: [],
+  };
 }

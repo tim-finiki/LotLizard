@@ -3,8 +3,9 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
-import type { FacilityType, ParkingFacility, Venue, VehicleType, VenueEvent } from "@/lib/types";
+import type { Amenity, FacilityType, ParkingFacility, Venue, VehicleType, VenueEvent } from "@/lib/types";
 import {
+  DEFAULT_PREFERENCES,
   EXIT_DATA_UNAVAILABLE,
   FACTORS,
   exitDirectionDataAvailable,
@@ -21,7 +22,7 @@ import { CONFIDENCE_LABEL } from "@/lib/confidence";
 import { directionsLinks, type DirectionsLinks } from "@/lib/directions";
 import { eventShortLabel, formatClock, formatEventDate, lotOpenTime, upcomingEvents } from "@/lib/events";
 import { formatDistance } from "@/lib/geo";
-import { applyDisplayFilters, buildMarkers } from "@/lib/explorer";
+import { activeFilterCount, applyDisplayFilters, buildMarkers, clearFilters } from "@/lib/explorer";
 import {
   PAYMENT_METHODS,
   PAYMENT_METHOD_LABEL,
@@ -80,7 +81,7 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
   const [hiddenTypes, setHiddenTypes] = useState<FacilityType[]>([]);
   const [selectedId, setActiveId] = useState<string>();
   const [compare, setCompare] = useState<string[]>([]);
-  const [modal, setModal] = useState<"filters" | "payment" | "compare" | null>(null);
+  const [modal, setModal] = useState<"filters" | "compare" | null>(null);
   const [snap, setSnap] = useState<SheetSnap>("peek");
   const [containerHeight, setContainerHeight] = useState(640);
   const [controlsHeight, setControlsHeight] = useState(120);
@@ -137,8 +138,8 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
 
   // One filter pass feeds the ranking, the list AND the map, so they always agree.
   const filtered = useMemo(
-    () => applyDisplayFilters(facilities, { hiddenTypes, payment: prefs.payment, eventId: event?.id }),
-    [facilities, hiddenTypes, prefs.payment, event?.id],
+    () => applyDisplayFilters(facilities, { hiddenTypes, payment: prefs.payment, amenities: prefs.amenities, eventId: event?.id }),
+    [facilities, hiddenTypes, prefs.payment, prefs.amenities, event?.id],
   );
   const ranked = useMemo(
     () => rankFacilities(venue, filtered.visible, { ...prefs, direction }, { eventKind: event?.kind }),
@@ -155,14 +156,14 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
   // A selection hidden by a filter is dropped, so the pin and card highlights never go stale.
   const activeId = selectedId && filtered.visible.some((f) => f.id === selectedId) ? selectedId : undefined;
   const setPayment = (payment: PaymentFilter) => setPrefs({ ...prefs, payment });
-  const paymentFilterCount = prefs.payment.methods.length + prefs.payment.timings.length;
-  const filterCount =
-    hiddenTypes.length +
-    (prefs.requireTailgating ? 1 : 0) +
-    (prefs.maxPrice !== undefined ? 1 : 0) +
-    (prefs.needsAda ? 1 : 0) +
-    prefs.payment.methods.length +
-    prefs.payment.timings.length;
+  const filterCount = activeFilterCount(prefs, hiddenTypes);
+  const resetFilters = () => {
+    setPrefs(clearFilters(prefs));
+    setHiddenTypes([]);
+  };
+  const shownCount = filtered.visible.length;
+  // Only offer amenities that some lot here actually reports.
+  const reportedAmenities = useMemo(() => [...new Set(facilities.flatMap((f) => f.amenities.value))], [facilities]);
   const directionLabel = approaches.find((a) => a.id === direction)?.label;
   const exitDirectionsAvailable = exitDirectionDataAvailable(facilities, direction);
   const priorityOrder = [...FACTORS].filter((f) => prefs.weights[f] > 0).sort((a, b) => prefs.weights[b] - prefs.weights[a]);
@@ -225,9 +226,17 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
           )}
         </p>
         <p className="truncate text-xs text-neutral-500">
-          Ranked by {priorityOrder.length ? priorityOrder.map((f) => FACTOR_LABEL[f]).join(" › ") : "all factors equally"}
+          Sorted by {priorityOrder.length ? priorityOrder.map((f) => SORT_LABEL[f].toLowerCase()).join(" › ") : "all factors equally"}
           {event && " · Prices aren't game-specific yet"}
         </p>
+        {filterCount > 0 && (
+          <p className="text-xs text-neutral-500">
+            {filterCount} {filterCount === 1 ? "filter" : "filters"} on · {shownCount} of {facilities.length} shown ·{" "}
+            <button type="button" onClick={resetFilters} className="font-semibold text-brand-700 underline dark:text-brand-100">
+              Clear filters
+            </button>
+          </p>
+        )}
         <p className="sr-only" aria-live="polite">
           {rankingSummary ? `Ranking updated: ${rankingSummary}` : "No lots have enough data to rank"}
         </p>
@@ -276,21 +285,14 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
             <button
               type="button"
               onClick={() => setModal("filters")}
-              className="flex h-10 shrink-0 items-center gap-1.5 rounded-full bg-white px-4 text-sm font-semibold shadow-md dark:bg-neutral-900"
+              aria-label={filterCount > 0 ? `Filters, ${filterCount} active` : "Filters"}
+              className={`flex h-10 shrink-0 items-center gap-1.5 rounded-full px-4 text-sm font-semibold shadow-md ${
+                filterCount > 0 ? "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900" : "bg-white dark:bg-neutral-900"
+              }`}
             >
               Filters
               {filterCount > 0 && (
-                <span className="grid h-5 min-w-5 place-items-center rounded-full bg-brand-600 px-1 text-[11px] text-white">{filterCount}</span>
-              )}
-            </button>
-            <button
-              type="button"
-              onClick={() => setModal("payment")}
-              className="flex h-10 shrink-0 items-center gap-1.5 rounded-full bg-white px-4 text-sm font-semibold shadow-md dark:bg-neutral-900"
-            >
-              Payment
-              {paymentFilterCount > 0 && (
-                <span className="grid h-5 min-w-5 place-items-center rounded-full bg-brand-600 px-1 text-[11px] text-white">{paymentFilterCount}</span>
+                <span aria-hidden className="grid h-5 min-w-5 place-items-center rounded-full bg-brand-500 px-1 text-[11px] text-white">{filterCount}</span>
               )}
             </button>
           </div>
@@ -394,41 +396,33 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
       </BottomSheet>
 
       {modal === "filters" && (
-        <Modal title="Filters & priorities" onClose={() => setModal(null)}>
-          <fieldset className="mb-6">
-            <legend className="mb-2 text-sm font-medium">Show on map and list</legend>
-            <div className="flex flex-wrap gap-2">
-              {presentTypes.map((t) => {
-                const on = !hiddenTypes.includes(t);
-                return (
-                  <button
-                    key={t}
-                    type="button"
-                    aria-pressed={on}
-                    onClick={() => setHiddenTypes((h) => (h.includes(t) ? h.filter((x) => x !== t) : [...h, t]))}
-                    className={`flex h-9 items-center gap-1.5 rounded-full border px-3 text-sm font-medium ${
-                      on ? "border-transparent bg-neutral-100 dark:bg-neutral-800" : "border-black/10 text-neutral-400 line-through dark:border-white/10"
-                    }`}
-                  >
-                    <span aria-hidden className="h-2.5 w-2.5 rounded-full" style={{ background: FACILITY_TYPE_COLOR[t] }} />
-                    {FACILITY_TYPE_LABEL[t]}
-                  </button>
-                );
-              })}
-            </div>
-          </fieldset>
-          <h3 className="mb-2 text-base font-bold">Payment</h3>
-          <PaymentFilterForm filter={prefs.payment} onChange={setPayment} />
-          <h3 className="mb-2 text-base font-bold">Priorities</h3>
-          <PreferencesForm prefs={prefs} onChange={setPrefs} />
-        </Modal>
-      )}
-      {modal === "payment" && (
-        <Modal title="Payment" onClose={() => setModal(null)}>
-          <PaymentFilterForm filter={prefs.payment} onChange={setPayment} />
-          <p className="text-xs text-neutral-500">
-            Showing {rankedList.length + unrankedList.length + others.length} of {facilities.length} options.
-          </p>
+        <Modal
+          title="Filters"
+          onClose={() => setModal(null)}
+          headerAction={
+            <button
+              type="button"
+              onClick={resetFilters}
+              disabled={filterCount === 0}
+              className="h-10 rounded-lg px-3 text-sm font-semibold text-neutral-600 disabled:opacity-40 dark:text-neutral-300"
+            >
+              Clear all{filterCount > 0 ? ` (${filterCount})` : ""}
+            </button>
+          }
+          footer={
+            <button type="button" onClick={() => setModal(null)} className="h-12 w-full rounded-xl bg-brand-600 text-base font-semibold text-white">
+              Show {shownCount} {shownCount === 1 ? "option" : "options"}
+            </button>
+          }
+        >
+          <FiltersPanel
+            prefs={prefs}
+            onChange={setPrefs}
+            presentTypes={presentTypes}
+            hiddenTypes={hiddenTypes}
+            onToggleType={(t) => setHiddenTypes((h) => (h.includes(t) ? h.filter((x) => x !== t) : [...h, t]))}
+            reportedAmenities={reportedAmenities}
+          />
         </Modal>
       )}
       {modal === "compare" && (
@@ -691,84 +685,177 @@ function ChipToggle({ on, onClick, children }: { on: boolean; onClick: () => voi
   );
 }
 
-function PaymentFilterForm({ filter, onChange }: { filter: PaymentFilter; onChange: (f: PaymentFilter) => void }) {
-  const toggle = <T,>(list: T[], v: T) => (list.includes(v) ? list.filter((x) => x !== v) : [...list, v]);
+const VEHICLE_LABEL: Record<VehicleType, string> = { car: "Car / SUV", rv: "RV", bus: "Bus", limo: "Limo", motorcycle: "Motorcycle" };
+
+/** Plain-language labels for the sort sliders (the factor names stay short on cards). */
+const SORT_LABEL: Record<Factor, string> = {
+  cost: "Lower price",
+  walk: "Shorter walk",
+  tailgate: "Better tailgate scene",
+  exit: "Faster exit",
+};
+const WEIGHT_WORDS = ["Ignore", "A little", "Some", "Matters", "A lot", "Top priority"];
+
+function FilterSection({ title, hint, children }: { title: string; hint?: string; children: React.ReactNode }) {
   return (
-    <div className="mb-6 flex flex-col gap-4">
-      <fieldset>
-        <legend className="mb-1 text-sm font-medium">I can pay with</legend>
-        <p className="mb-2 text-xs text-neutral-500">Shows lots known to accept any of these.</p>
-        <div className="flex flex-wrap gap-2">
-          {PAYMENT_METHODS.map((m) => (
-            <ChipToggle key={m} on={filter.methods.includes(m)} onClick={() => onChange({ ...filter, methods: toggle(filter.methods, m) })}>
-              {PAYMENT_METHOD_LABEL[m]}
-            </ChipToggle>
-          ))}
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend className="mb-2 text-sm font-medium">When I pay</legend>
-        <div className="flex flex-wrap gap-2">
-          {PAYMENT_TIMINGS.map((t) => (
-            <ChipToggle key={t} on={filter.timings.includes(t)} onClick={() => onChange({ ...filter, timings: toggle(filter.timings, t) })}>
-              {PAYMENT_TIMING_LABEL[t]}
-            </ChipToggle>
-          ))}
-        </div>
-      </fieldset>
-      <Toggle
-        label="Also show lots with unknown payment info"
-        checked={filter.includeUnknown}
-        onChange={(v) => onChange({ ...filter, includeUnknown: v })}
-      />
-      <p className="-mt-2 text-xs text-neutral-500">They&apos;re labelled &ldquo;Unconfirmed for your filter&rdquo;. We never assume a lot accepts a method.</p>
-    </div>
+    <fieldset className="border-t border-black/5 py-4 first:border-t-0 first:pt-0 dark:border-white/10">
+      <legend className="sr-only">{title}</legend>
+      <h4 aria-hidden className="text-sm font-bold">{title}</h4>
+      {hint && <p className="mt-0.5 text-xs text-neutral-500">{hint}</p>}
+      <div className="mt-3 flex flex-col gap-3">{children}</div>
+    </fieldset>
   );
 }
 
-function PreferencesForm({ prefs, onChange }: { prefs: RankingPreferences; onChange: (p: RankingPreferences) => void }) {
+function ChipRow({ children }: { children: React.ReactNode }) {
+  return <div className="flex flex-wrap gap-2">{children}</div>;
+}
+
+function FiltersPanel({
+  prefs,
+  onChange,
+  presentTypes,
+  hiddenTypes,
+  onToggleType,
+  reportedAmenities,
+}: {
+  prefs: RankingPreferences;
+  onChange: (p: RankingPreferences) => void;
+  presentTypes: FacilityType[];
+  hiddenTypes: FacilityType[];
+  onToggleType: (t: FacilityType) => void;
+  reportedAmenities: Amenity[];
+}) {
+  const toggle = <T,>(list: T[], v: T) => (list.includes(v) ? list.filter((x) => x !== v) : [...list, v]);
+  const payment = prefs.payment;
+  const setPayment = (p: PaymentFilter) => onChange({ ...prefs, payment: p });
   const setWeight = (f: Factor, v: number) => onChange({ ...prefs, weights: { ...prefs.weights, [f]: v } });
+  const balanced = FACTORS.every((f) => prefs.weights[f] === DEFAULT_PREFERENCES.weights[f]);
+
   return (
-    <div className="flex flex-col gap-5">
-      <p className="text-sm font-medium">What matters most?</p>
-      {FACTORS.map((f) => (
-        <label key={f} className="flex flex-col gap-1">
-          <span className="flex justify-between text-sm">
-            {FACTOR_LABEL[f]}
-            <span className="text-neutral-500">{["Don't care", "A little", "Some", "Matters", "A lot", "Most"][prefs.weights[f]]}</span>
-          </span>
-          <input type="range" min={0} max={5} step={1} value={prefs.weights[f]} onChange={(e) => setWeight(f, Number(e.target.value))} className="h-8 w-full accent-brand-600" />
-        </label>
-      ))}
-      <label className="flex items-center justify-between gap-3 text-sm font-medium">
-        Vehicle
-        <select
-          value={prefs.vehicle}
-          onChange={(e) => onChange({ ...prefs, vehicle: e.target.value as VehicleType })}
-          className="h-10 rounded-lg border border-black/10 bg-white px-2 dark:border-white/15 dark:bg-neutral-800"
-        >
-          <option value="car">Car / SUV</option>
-          <option value="rv">RV</option>
-          <option value="bus">Bus</option>
-          <option value="limo">Limo</option>
-          <option value="motorcycle">Motorcycle</option>
-        </select>
-      </label>
-      <label className="flex items-center justify-between gap-3 text-sm font-medium">
-        Max price (USD)
-        <input
-          type="number"
-          inputMode="numeric"
-          min={0}
-          placeholder="Any"
-          value={prefs.maxPrice ?? ""}
-          onChange={(e) => onChange({ ...prefs, maxPrice: e.target.value === "" ? undefined : Math.max(0, Number(e.target.value)) })}
-          className="h-10 w-28 rounded-lg border border-black/10 bg-white px-2 text-right dark:border-white/15 dark:bg-neutral-800"
-        />
-      </label>
-      <Toggle label="Must allow tailgating" checked={prefs.requireTailgating} onChange={(v) => onChange({ ...prefs, requireTailgating: v })} />
-      <Toggle label="I need ADA parking" checked={prefs.needsAda} onChange={(v) => onChange({ ...prefs, needsAda: v })} />
-      <p className="text-xs text-neutral-500">Saved on this device. Missing data never counts in a lot&apos;s favour.</p>
+    <div className="flex flex-col gap-6">
+      <section aria-labelledby="filter-results-heading">
+        <h3 id="filter-results-heading" className="text-xs font-bold uppercase tracking-wide text-neutral-500">Filter results</h3>
+        <p className="mb-3 text-xs text-neutral-500">These hide options that don&apos;t fit.</p>
+
+        <FilterSection title="Payment methods" hint="Shows lots known to accept any of these.">
+          <ChipRow>
+            {PAYMENT_METHODS.map((m) => (
+              <ChipToggle key={m} on={payment.methods.includes(m)} onClick={() => setPayment({ ...payment, methods: toggle(payment.methods, m) })}>
+                {PAYMENT_METHOD_LABEL[m]}
+              </ChipToggle>
+            ))}
+          </ChipRow>
+        </FilterSection>
+
+        <FilterSection title="Payment timing">
+          <ChipRow>
+            {PAYMENT_TIMINGS.map((t) => (
+              <ChipToggle key={t} on={payment.timings.includes(t)} onClick={() => setPayment({ ...payment, timings: toggle(payment.timings, t) })}>
+                {PAYMENT_TIMING_LABEL[t]}
+              </ChipToggle>
+            ))}
+          </ChipRow>
+          <Toggle
+            label="Include lots with unknown payment info"
+            checked={payment.includeUnknown}
+            onChange={(v) => setPayment({ ...payment, includeUnknown: v })}
+          />
+          <p className="-mt-2 text-xs text-neutral-500">Shown as &ldquo;Unconfirmed for your filter&rdquo;. We never assume a lot accepts a method.</p>
+        </FilterSection>
+
+        <FilterSection title="Vehicle & accessibility">
+          <ChipRow>
+            {(Object.keys(VEHICLE_LABEL) as VehicleType[]).map((v) => (
+              <ChipToggle key={v} on={prefs.vehicle === v} onClick={() => onChange({ ...prefs, vehicle: v })}>
+                {VEHICLE_LABEL[v]}
+              </ChipToggle>
+            ))}
+          </ChipRow>
+          <Toggle label="Accessible (ADA) parking" checked={prefs.needsAda} onChange={(v) => onChange({ ...prefs, needsAda: v })} />
+        </FilterSection>
+
+        <FilterSection title="Tailgating & amenities" hint={reportedAmenities.length ? "Amenities only match where they've been reported." : undefined}>
+          <Toggle label="Allows tailgating" checked={prefs.requireTailgating} onChange={(v) => onChange({ ...prefs, requireTailgating: v })} />
+          {reportedAmenities.length > 0 && (
+            <ChipRow>
+              {reportedAmenities.map((a) => (
+                <ChipToggle key={a} on={prefs.amenities.includes(a)} onClick={() => onChange({ ...prefs, amenities: toggle(prefs.amenities, a) })}>
+                  {AMENITY_LABEL[a]}
+                </ChipToggle>
+              ))}
+            </ChipRow>
+          )}
+        </FilterSection>
+
+        <FilterSection title="Price">
+          <label className="flex items-center justify-between gap-3 text-sm font-medium">
+            Max price per vehicle
+            <span className="flex items-center gap-1">
+              $
+              <input
+                type="number"
+                inputMode="numeric"
+                min={0}
+                placeholder="Any"
+                value={prefs.maxPrice ?? ""}
+                onChange={(e) => onChange({ ...prefs, maxPrice: e.target.value === "" ? undefined : Math.max(0, Number(e.target.value)) })}
+                className="h-10 w-24 rounded-lg border border-black/10 bg-white px-2 text-right dark:border-white/15 dark:bg-neutral-800"
+              />
+            </span>
+          </label>
+        </FilterSection>
+
+        <FilterSection title="Parking types" hint="Tap to hide a type from the map and list.">
+          <ChipRow>
+            {presentTypes.map((t) => {
+              // Types are shown by default, so "on" is the neutral state; hidden types are struck through.
+              const shown = !hiddenTypes.includes(t);
+              return (
+                <button
+                  key={t}
+                  type="button"
+                  aria-pressed={shown}
+                  onClick={() => onToggleType(t)}
+                  className={`flex h-9 items-center gap-1.5 rounded-full px-3 text-sm font-medium ring-1 ring-inset ${
+                    shown ? "bg-white ring-black/10 dark:bg-neutral-900 dark:ring-white/15" : "bg-neutral-100 text-neutral-400 line-through ring-transparent dark:bg-neutral-800"
+                  }`}
+                >
+                  <span aria-hidden className="h-2.5 w-2.5 rounded-full" style={{ background: shown ? FACILITY_TYPE_COLOR[t] : "#a3a3a3" }} />
+                  {FACILITY_TYPE_LABEL[t]}
+                </button>
+              );
+            })}
+          </ChipRow>
+        </FilterSection>
+      </section>
+
+      <section aria-labelledby="sort-results-heading" className="rounded-2xl bg-neutral-50 p-4 dark:bg-neutral-800/60">
+        <div className="flex items-baseline justify-between gap-2">
+          <h3 id="sort-results-heading" className="text-xs font-bold uppercase tracking-wide text-neutral-500">Sort results</h3>
+          <button
+            type="button"
+            disabled={balanced}
+            onClick={() => onChange({ ...prefs, weights: DEFAULT_PREFERENCES.weights })}
+            className="text-xs font-semibold text-brand-700 underline disabled:no-underline disabled:opacity-40 dark:text-brand-100"
+          >
+            Reset to balanced
+          </button>
+        </div>
+        <p className="mb-3 text-xs text-neutral-500">How much each matters to you. This changes the order, never what&apos;s shown.</p>
+        <div className="flex flex-col gap-4">
+          {FACTORS.map((f) => (
+            <label key={f} className="flex flex-col gap-1">
+              <span className="flex justify-between text-sm font-medium">
+                {SORT_LABEL[f]}
+                <span className="font-normal text-neutral-500">{WEIGHT_WORDS[prefs.weights[f]]}</span>
+              </span>
+              <input type="range" min={0} max={5} step={1} value={prefs.weights[f]} onChange={(e) => setWeight(f, Number(e.target.value))} className="h-8 w-full accent-brand-600" />
+            </label>
+          ))}
+        </div>
+        <p className="mt-3 text-xs text-neutral-500">Saved on this device. Missing data never counts in a lot&apos;s favour.</p>
+      </section>
     </div>
   );
 }
@@ -836,7 +923,19 @@ function CompareTable({ venue, items }: { venue: Venue; items: RankedFacility[] 
   );
 }
 
-function Modal({ title, onClose, children }: { title: string; onClose: () => void; children: React.ReactNode }) {
+function Modal({
+  title,
+  onClose,
+  children,
+  headerAction,
+  footer,
+}: {
+  title: string;
+  onClose: () => void;
+  children: React.ReactNode;
+  headerAction?: React.ReactNode;
+  footer?: React.ReactNode;
+}) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
@@ -845,16 +944,22 @@ function Modal({ title, onClose, children }: { title: string; onClose: () => voi
   return (
     <div className="fixed inset-0 z-[1000] flex items-end justify-center bg-black/40 sm:items-center" role="dialog" aria-modal="true" aria-label={title} onClick={onClose}>
       <div
-        className="max-h-[85vh] w-full overflow-y-auto rounded-t-3xl bg-white p-4 pb-[calc(1.5rem+env(safe-area-inset-bottom))] shadow-xl sm:max-w-2xl sm:rounded-3xl dark:bg-neutral-900"
+        className="flex max-h-[85dvh] w-full flex-col rounded-t-3xl bg-white shadow-xl sm:max-w-2xl sm:rounded-3xl dark:bg-neutral-900"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="mb-4 flex items-center justify-between">
+        <div className="flex shrink-0 items-center justify-between gap-2 border-b border-black/5 px-4 py-2 dark:border-white/10">
           <h2 className="text-lg font-bold">{title}</h2>
-          <button type="button" onClick={onClose} className="h-10 rounded-lg px-3 text-sm font-semibold text-brand-700 dark:text-brand-100" autoFocus>
-            Done
-          </button>
+          <div className="flex items-center gap-1">
+            {headerAction}
+            <button type="button" onClick={onClose} className="h-10 rounded-lg px-3 text-sm font-semibold text-brand-700 dark:text-brand-100" autoFocus>
+              Done
+            </button>
+          </div>
         </div>
-        {children}
+        <div className={`min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pt-4 ${footer ? "pb-4" : "pb-[calc(1.5rem+env(safe-area-inset-bottom))]"}`}>{children}</div>
+        {footer && (
+          <div className="shrink-0 border-t border-black/5 px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 dark:border-white/10">{footer}</div>
+        )}
       </div>
     </div>
   );
