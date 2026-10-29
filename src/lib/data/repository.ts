@@ -1,4 +1,4 @@
-import type { ParkingFacility, Sponsorship, SponsorshipPlacement, Venue, VenueEvent } from "@/lib/types";
+import type { Attribution, ParkingFacility, Sponsorship, SponsorshipPlacement, Venue, VenueEvent } from "@/lib/types";
 import { EVENTS } from "@/lib/data/events";
 import { VENUES } from "@/lib/data/venues";
 import { HIGHMARK_FACILITIES } from "@/lib/data/facilities/highmark";
@@ -64,6 +64,11 @@ export async function getSourcesFor(ids: string[]) {
   return SOURCES.filter((s) => wanted.has(s.id));
 }
 
+/** True when any sponsorship could ever show for this placement; lets pages skip a request-time render. */
+export function hasSponsorships(placement: SponsorshipPlacement, venueId?: string): boolean {
+  return SPONSORSHIPS.some((s) => s.placement === placement && (!s.venueId || s.venueId === venueId));
+}
+
 export async function getSponsorships(placement: SponsorshipPlacement, venueId?: string, now = new Date().toISOString()) {
   return SPONSORSHIPS.filter(
     (s) => s.placement === placement && (!s.venueId || s.venueId === venueId) && s.startsAt <= now && now <= s.endsAt,
@@ -77,8 +82,8 @@ export function facilityExists(venueSlug: string, facilitySlug?: string): boolea
   return !facilitySlug || FACILITIES.some((f) => f.venueId === venue.id && f.slug === facilitySlug);
 }
 
-/** Every source ID referenced by one facility. */
-export function facilitySourceIds(f: ParkingFacility): string[] {
+/** Every attribution attached to one facility's facts. */
+export function facilityAttributions(f: ParkingFacility): Attribution[] {
   return [
     f.attribution,
     f.amenities.attribution,
@@ -91,7 +96,12 @@ export function facilitySourceIds(f: ParkingFacility): string[] {
     f.exit.directions?.attribution,
     f.walkMinutes?.attribution,
     ...f.prices.map((p) => p.attribution),
-  ].flatMap((a) => a?.sourceIds ?? []);
+  ].filter((a): a is Attribution => !!a);
+}
+
+/** Every source ID referenced by one facility. */
+export function facilitySourceIds(f: ParkingFacility): string[] {
+  return facilityAttributions(f).flatMap((a) => a.sourceIds);
 }
 
 /** Every source ID referenced by a venue and its facilities, deduplicated. */

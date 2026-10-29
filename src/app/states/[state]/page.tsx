@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { listStatesWithVenues, listVenuesByState } from "@/lib/data/repository";
+import { listFacilities, listStatesWithVenues, listVenuesByState } from "@/lib/data/repository";
 import { stateName, US_STATES } from "@/lib/states";
-import { statePath } from "@/lib/seo";
+import { NOINDEX_FOLLOW, isIndexableVenue, statePath } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { VenueCard } from "@/components/VenueCard";
 
@@ -14,10 +14,16 @@ export async function generateMetadata({ params }: PageProps<"/states/[state]">)
   const code = (await params).state.toUpperCase();
   if (!US_STATES[code]) return {};
   const name = stateName(code);
+  let indexable = false;
+  for (const v of await listVenuesByState(code)) {
+    if (isIndexableVenue(v, (await listFacilities(v.id)).length)) indexable = true;
+  }
   return {
     title: `${name} stadium & event parking`,
     description: `Parking guides for stadiums, arenas and concert venues in ${name}. Compare lots, prices, tailgating and walking distance.`,
     alternates: { canonical: statePath(code) },
+    // A state page that only lists directory venues is thin; keep it crawlable but out of the index.
+    ...(indexable ? {} : { robots: NOINDEX_FOLLOW }),
   };
 }
 

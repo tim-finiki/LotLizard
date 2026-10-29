@@ -1,6 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { listVenues } from "@/lib/data/repository";
+import { siteJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import { VenueCard } from "@/components/VenueCard";
+
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 export default async function Home() {
   const venues = await listVenues();
@@ -9,6 +14,7 @@ export default async function Home() {
 
   return (
     <div>
+      <JsonLd data={siteJsonLd()} />
       <section className="bg-brand-600 px-4 pb-10 pt-8 text-white dark:bg-brand-900">
         <div className="mx-auto flex max-w-5xl flex-col gap-4">
           <h1 className="text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl">

@@ -3,12 +3,22 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import type { Attribution } from "@/lib/types";
-import { facilitySourceIds, getFacility, listEvents, getSourcesFor, listAllFacilityParams } from "@/lib/data/repository";
+import {
+  facilityAttributions,
+  facilitySourceIds,
+  getFacility,
+  getSourcesFor,
+  listAllFacilityParams,
+  listEvents,
+  listFacilities,
+} from "@/lib/data/repository";
 import { walkInfo } from "@/lib/ranking";
 import { directionsLinks } from "@/lib/directions";
 import { formatDistance } from "@/lib/geo";
 import { AMENITY_LABEL, FACILITY_TYPE_COLOR, FACILITY_TYPE_LABEL } from "@/lib/labels";
-import { facilityJsonLd, facilityPath, venuePath } from "@/lib/seo";
+import { NOINDEX_FOLLOW, facilityJsonLd, facilityPath, isIndexableVenue, venuePath } from "@/lib/seo";
+import { verificationSummary } from "@/lib/verification";
+import { VerificationStatus } from "@/components/VerificationStatus";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CommunityReports } from "@/components/CommunityReports";
 import { ConfidenceBadge } from "@/components/ConfidenceBadge";
@@ -18,6 +28,7 @@ import { Section } from "@/components/Section";
 import { PaymentDetails } from "@/components/PaymentInfo";
 import { FeatureDetails } from "@/components/AmenityInfo";
 import { eventLabel } from "@/lib/events";
+import { submissionsStatus } from "@/lib/submissions/availability";
 import { SourceList } from "@/components/SourceList";
 
 export async function generateStaticParams() {
@@ -31,7 +42,14 @@ export async function generateMetadata({ params }: PageProps<"/venues/[venue]/pa
   const { venue, facility } = found;
   const title = `${facility.name} — ${venue.name} parking`;
   const description = `${facility.name} (${FACILITY_TYPE_LABEL[facility.type].toLowerCase()}) at ${venue.name}: prices, walking distance, tailgating and exit info with sources. ${facility.description}`.slice(0, 300);
-  return { title, description, alternates: { canonical: facilityPath(venue, facility) }, openGraph: { title, description } };
+  const siblings = await listFacilities(venue.id);
+  return {
+    title,
+    description,
+    alternates: { canonical: facilityPath(venue, facility) },
+    openGraph: { title, description, url: facilityPath(venue, facility) },
+    ...(isIndexableVenue(venue, siblings.length) ? {} : { robots: NOINDEX_FOLLOW }),
+  };
 }
 
 function Row({ label, children, attribution }: { label: string; children: React.ReactNode; attribution?: Attribution }) {
@@ -59,17 +77,18 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
   const allowed = f.tailgating.allowed.value;
   const directions = directionsLinks(f);
   const events = await listEvents(venue.id);
+  const others = (await listFacilities(venue.id)).filter((o) => o.id !== f.id);
+  const verification = verificationSummary(facilityAttributions(f), sources, f.attribution.confidence);
+  const crumbs = [
+    { name: "Venues", path: "/venues" },
+    { name: venue.name, path: venuePath(venue) },
+    { name: f.name, path: facilityPath(venue, f) },
+  ];
 
   return (
     <div className="mx-auto max-w-3xl px-4 pb-16 pt-4">
       <JsonLd data={facilityJsonLd(venue, f)} />
-      <Breadcrumbs
-        items={[
-          { name: "Venues", path: "/venues" },
-          { name: venue.name, path: venuePath(venue) },
-          { name: f.name, path: facilityPath(venue, f) },
-        ]}
-      />
+      <Breadcrumbs items={crumbs} />
       <header className="mt-2 flex flex-col gap-2">
         <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-white px-2.5 py-1 text-xs font-semibold ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
           <span aria-hidden className="h-2.5 w-2.5 rounded-full" style={{ background: FACILITY_TYPE_COLOR[f.type] }} />
@@ -79,9 +98,7 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
           {venue.name} · {f.address ?? `${venue.address.city}, ${venue.address.state}`}
         </p>
-        <div className="flex items-center gap-2 text-xs text-neutral-500">
-          Overall data confidence <ConfidenceBadge level={f.attribution.confidence} />
-        </div>
+        <VerificationStatus summary={verification} />
         <p className="text-sm">{f.description}</p>
         {f.booking && <ReferralLink booking={f.booking} />}
         {directions ? (
@@ -192,9 +209,14 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
           title="Community reports"
           aside={<Link href={`/submit?venue=${venue.slug}&lot=${f.slug}`} className="text-sm font-semibold text-brand-700 dark:text-brand-100">Add yours</Link>}
         >
-          <Suspense fallback={<p className="text-sm text-neutral-500">Loading community reports…</p>}>
-            <CommunityReports venueSlug={venue.slug} facilitySlug={f.slug} />
-          </Suspense>
+          {/* While reporting is off there is nothing to read at request time, so the page stays static. */}
+          {submissionsStatus().enabled ? (
+            <Suspense fallback={<p className="text-sm text-neutral-500">Loading community reports…</p>}>
+              <CommunityReports venueSlug={venue.slug} facilitySlug={f.slug} />
+            </Suspense>
+          ) : (
+            <p className="text-sm text-neutral-500">Community reporting is coming soon.</p>
+          )}
         </Section>
 
         <Section id="sources" title="Sources">
@@ -208,6 +230,20 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
           <Link href={`/submit?venue=${venue.slug}&lot=${f.slug}&kind=review`} className="flex h-11 items-center rounded-lg bg-neutral-900 px-4 text-sm font-semibold text-white dark:bg-white dark:text-neutral-900">Write a review</Link>
           <Link href={`/submit?venue=${venue.slug}&lot=${f.slug}&kind=correction`} className="flex h-11 items-center rounded-lg px-4 text-sm font-semibold text-brand-700 ring-1 ring-brand-500/40 dark:text-brand-100">Suggest a correction</Link>
         </div>
+        {others.length > 0 && (
+          <Section id="other-parking" title={`Other parking at ${venue.name}`}>
+            <ul className="grid gap-x-4 gap-y-1 text-sm sm:grid-cols-2">
+              {others.map((o) => (
+                <li key={o.id}>
+                  <Link href={facilityPath(venue, o)} className="font-medium text-brand-700 underline-offset-2 hover:underline dark:text-brand-100">
+                    {o.name}
+                  </Link>
+                  <span className="text-neutral-500"> · {FACILITY_TYPE_LABEL[o.type]}</span>
+                </li>
+              ))}
+            </ul>
+          </Section>
+        )}
         <Link href={venuePath(venue)} className="text-sm font-semibold text-brand-700 dark:text-brand-100">← All {venue.name} parking</Link>
       </div>
     </div>

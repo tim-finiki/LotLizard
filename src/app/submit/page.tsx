@@ -5,11 +5,15 @@ import { SubmitForm, type VenueOption } from "@/components/SubmitForm";
 import { SUBMISSIONS_DISABLED_REASON, submissionsStatus } from "@/lib/submissions/availability";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Report parking prices, reviews & lot info",
-  description: "Share what you paid, how the tailgate was and how long it took to get out. Every report is moderated.",
-  alternates: { canonical: "/submit" },
-};
+export function generateMetadata(): Metadata {
+  return {
+    title: "Report parking prices, reviews & lot info",
+    description: "Share what you paid, how the tailgate was and how long it took to get out. Every report is moderated.",
+    alternates: { canonical: "/submit" },
+    // The form page has no standalone search value, and while reporting is off it's just a placeholder.
+    robots: { index: false, follow: true },
+  };
+}
 
 export default async function SubmitPage() {
   // The API enforces this on every request; the page just avoids showing a form that can't be sent.
