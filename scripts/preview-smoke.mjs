@@ -28,7 +28,8 @@ mkdirSync(out, { recursive: true });
 const bypass = process.env.VERCEL_AUTOMATION_BYPASS_SECRET;
 const shareToken = process.env.VERCEL_SHARE_TOKEN;
 const browser = await chromium.launch();
-const context = await browser.newContext(devices["iPhone 13"]);
+// Clipboard access lets the test read the link "Share lot" copies (headless Chromium has no share sheet).
+const context = await browser.newContext({ ...devices["iPhone 13"], permissions: ["clipboard-read", "clipboard-write"] });
 const host = new URL(base).host;
 // The bypass header goes to the deployment only, never to the tile server or other third parties.
 if (bypass) {
@@ -117,6 +118,27 @@ try {
     const lot = page.getByRole("link", { name: /Details, sources/ }).first();
     await Promise.all([page.waitForURL(/\/parking\/[^/]+$/), lot.click()]);
     await page.getByRole("heading", { level: 1 }).waitFor();
+  });
+  await step("share lot link", async () => {
+    const lotName = await page.getByRole("heading", { level: 1 }).textContent();
+    await page.getByRole("button", { name: "Share lot" }).first().click();
+    await page.getByText("Link copied").waitFor();
+    const shared = await page.evaluate(() => navigator.clipboard.readText());
+    const u = new URL(shared);
+    if (u.host !== host || !/^\/venues\/[a-z0-9-]+\/parking\/[a-z0-9-]+$/.test(u.pathname) || u.search) {
+      throw new Error(`share link isn't a clean direct lot URL: ${u.origin}${u.pathname}${u.search ? " (has a query string)" : ""}`);
+    }
+    // A friend opening the link: a fresh tab lands on the same lot page.
+    const friend = await context.newPage();
+    const res = await friend.goto(shared, { waitUntil: "domcontentloaded" });
+    if (res?.status() !== 200) throw new Error(`shared link returned ${res?.status()}`);
+    const heading = await friend.getByRole("heading", { level: 1 }).textContent();
+    if (heading !== lotName) throw new Error(`shared link opened "${heading}", expected "${lotName}"`);
+    await friend.close();
+    // The map link from the lot page selects the lot and its pin.
+    await Promise.all([page.waitForURL(/[?&]lot=/), page.getByRole("link", { name: "Show on the parking map" }).click()]);
+    // Its pin is highlighted, or the page says it has no confirmed location to pin.
+    await page.locator(".ll-marker--active").or(page.getByText("no confirmed location")).first().waitFor();
   });
 } catch {
   ok = false;
