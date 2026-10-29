@@ -23,6 +23,8 @@ export interface VenueMapProps {
   onSelect?: (id: string) => void;
   /** Pixels of map covered by an overlay at the bottom (the results sheet), so pins aren't hidden behind it. */
   bottomInset?: number;
+  /** Pixels covered by floating controls at the top. */
+  topInset?: number;
 }
 
 const TILE_URL = process.env.NEXT_PUBLIC_MAP_TILE_URL || "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
@@ -44,18 +46,18 @@ function markerIcon(m: MapMarker, active: boolean) {
 
 const venueIcon = L.divIcon({ className: "", html: '<div class="ll-venue" aria-hidden="true">🏟</div>', iconSize: [34, 34], iconAnchor: [17, 17] });
 
-function FitBounds({ points, bottomInset }: { points: [number, number][]; bottomInset: number }) {
+function FitBounds({ points, bottomInset, topInset }: { points: [number, number][]; bottomInset: number; topInset: number }) {
   const map = useMap();
   const key = points.map((p) => p.join(",")).join("|");
-  const latest = useRef({ points, bottomInset });
+  const latest = useRef({ points, bottomInset, topInset });
   useEffect(() => {
-    latest.current = { points, bottomInset };
+    latest.current = { points, bottomInset, topInset };
   });
 
   useEffect(() => {
     const fit = () => {
-      const { points: pts, bottomInset: inset } = latest.current;
-      if (pts.length > 1) map.fitBounds(L.latLngBounds(pts), { paddingTopLeft: [24, 190], paddingBottomRight: [24, inset + 24], maxZoom: 16 });
+      const { points: pts, bottomInset: bottom, topInset: top } = latest.current;
+      if (pts.length > 1) map.fitBounds(L.latLngBounds(pts), { paddingTopLeft: [24, top + 16], paddingBottomRight: [24, bottom + 24], maxZoom: 16 });
     };
     fit();
     // The container can change size after mount (layout settling, rotation, breakpoint changes):
@@ -76,29 +78,29 @@ function FitBounds({ points, bottomInset }: { points: [number, number][]; bottom
   return null;
 }
 
-/** Centre the selected pin in the part of the map not covered by the sheet. */
-function PanToActive({ marker, bottomInset }: { marker?: MapMarker; bottomInset: number }) {
+/** Centre the selected pin in the part of the map not covered by the controls or the sheet. */
+function PanToActive({ marker, bottomInset, topInset }: { marker?: MapMarker; bottomInset: number; topInset: number }) {
   const map = useMap();
   const id = marker?.id;
   useEffect(() => {
     if (!marker) return;
-    const point = map.project([marker.lat, marker.lng], map.getZoom()).add([0, bottomInset / 2]);
+    const point = map.project([marker.lat, marker.lng], map.getZoom()).add([0, (bottomInset - topInset) / 2]);
     map.panTo(map.unproject(point, map.getZoom()), { animate: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps -- pan only when the selection changes
   }, [map, id]);
   return null;
 }
 
-export default function VenueMap({ venue, markers, activeId, onSelect, bottomInset = 0 }: VenueMapProps) {
+export default function VenueMap({ venue, markers, activeId, onSelect, bottomInset = 0, topInset = 0 }: VenueMapProps) {
   const points = useMemo<[number, number][]>(() => [[venue.lat, venue.lng], ...markers.map((m) => [m.lat, m.lng] as [number, number])], [venue, markers]);
   const active = markers.find((m) => m.id === activeId);
 
   return (
-    <MapContainer center={[venue.lat, venue.lng]} zoom={15} scrollWheelZoom={false} zoomControl={false} className="h-full w-full" attributionControl>
+    <MapContainer center={[venue.lat, venue.lng]} zoom={15} scrollWheelZoom={false} zoomControl={false} zoomSnap={0.25} className="h-full w-full" attributionControl>
       <TileLayer url={TILE_URL} attribution={TILE_ATTRIBUTION} maxZoom={19} />
       <ZoomControl position="topright" />
-      <FitBounds points={points} bottomInset={bottomInset} />
-      <PanToActive marker={active} bottomInset={bottomInset} />
+      <FitBounds points={points} bottomInset={bottomInset} topInset={topInset} />
+      <PanToActive marker={active} bottomInset={bottomInset} topInset={topInset} />
       <Marker position={[venue.lat, venue.lng]} icon={venueIcon} keyboard={false}>
         <Tooltip direction="top" offset={[0, -14]}>{venue.name}</Tooltip>
       </Marker>

@@ -80,9 +80,11 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
   const [hiddenTypes, setHiddenTypes] = useState<FacilityType[]>([]);
   const [selectedId, setActiveId] = useState<string>();
   const [compare, setCompare] = useState<string[]>([]);
-  const [modal, setModal] = useState<"filters" | "compare" | null>(null);
+  const [modal, setModal] = useState<"filters" | "payment" | "compare" | null>(null);
   const [snap, setSnap] = useState<SheetSnap>("peek");
   const [containerHeight, setContainerHeight] = useState(640);
+  const [controlsHeight, setControlsHeight] = useState(120);
+  const controlsRef = useRef<HTMLDivElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const pendingScroll = useRef<string | null>(null);
@@ -123,7 +125,14 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
     if (!el) return;
     const ro = new ResizeObserver(([entry]) => setContainerHeight(entry.contentRect.height));
     ro.observe(el);
-    return () => ro.disconnect();
+    // The floating controls wrap onto more rows on narrow phones; keep pins clear of them.
+    const controls = controlsRef.current;
+    const ro2 = new ResizeObserver(([entry]) => setControlsHeight(entry.borderBoxSize?.[0]?.blockSize ?? entry.contentRect.height));
+    if (controls) ro2.observe(controls);
+    return () => {
+      ro.disconnect();
+      ro2.disconnect();
+    };
   }, []);
 
   // One filter pass feeds the ranking, the list AND the map, so they always agree.
@@ -146,6 +155,7 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
   // A selection hidden by a filter is dropped, so the pin and card highlights never go stale.
   const activeId = selectedId && filtered.visible.some((f) => f.id === selectedId) ? selectedId : undefined;
   const setPayment = (payment: PaymentFilter) => setPrefs({ ...prefs, payment });
+  const paymentFilterCount = prefs.payment.methods.length + prefs.payment.timings.length;
   const filterCount =
     hiddenTypes.length +
     (prefs.requireTailgating ? 1 : 0) +
@@ -245,8 +255,9 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
           activeId={activeId}
           onSelect={selectFromMap}
           bottomInset={isDesktop ? 0 : snapHeight(snap, containerHeight)}
+          topInset={controlsHeight}
         />
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-[650] flex flex-col gap-2 p-3 pr-14">
+        <div ref={controlsRef} className="pointer-events-none absolute inset-x-0 top-0 z-[650] flex flex-col gap-2 p-3 pr-14">
           <div className="pointer-events-auto flex flex-wrap gap-2">
             <PillSelect label="Event" value={eventId} onChange={setEventId}>
               {eventChoices.map((e) => (
@@ -270,6 +281,16 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
               Filters
               {filterCount > 0 && (
                 <span className="grid h-5 min-w-5 place-items-center rounded-full bg-brand-600 px-1 text-[11px] text-white">{filterCount}</span>
+              )}
+            </button>
+            <button
+              type="button"
+              onClick={() => setModal("payment")}
+              className="flex h-10 shrink-0 items-center gap-1.5 rounded-full bg-white px-4 text-sm font-semibold shadow-md dark:bg-neutral-900"
+            >
+              Payment
+              {paymentFilterCount > 0 && (
+                <span className="grid h-5 min-w-5 place-items-center rounded-full bg-brand-600 px-1 text-[11px] text-white">{paymentFilterCount}</span>
               )}
             </button>
           </div>
@@ -396,8 +417,18 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
               })}
             </div>
           </fieldset>
+          <h3 className="mb-2 text-base font-bold">Payment</h3>
           <PaymentFilterForm filter={prefs.payment} onChange={setPayment} />
+          <h3 className="mb-2 text-base font-bold">Priorities</h3>
           <PreferencesForm prefs={prefs} onChange={setPrefs} />
+        </Modal>
+      )}
+      {modal === "payment" && (
+        <Modal title="Payment" onClose={() => setModal(null)}>
+          <PaymentFilterForm filter={prefs.payment} onChange={setPayment} />
+          <p className="text-xs text-neutral-500">
+            Showing {rankedList.length + unrankedList.length + others.length} of {facilities.length} options.
+          </p>
         </Modal>
       )}
       {modal === "compare" && (
@@ -411,7 +442,7 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
 
 function PillSelect({ label, value, onChange, children }: { label: string; value: string; onChange: (v: string) => void; children: React.ReactNode }) {
   return (
-    <label className="relative flex h-10 max-w-[13rem] shrink-0 items-center rounded-full bg-white pl-4 pr-8 shadow-md dark:bg-neutral-900 lg:max-w-[22rem]">
+    <label className="relative flex h-10 min-w-0 max-w-[calc(50%-0.25rem)] shrink items-center rounded-full bg-white pl-3 pr-7 shadow-md min-[400px]:max-w-[13rem] min-[400px]:shrink-0 min-[400px]:pl-4 min-[400px]:pr-8 dark:bg-neutral-900 lg:max-w-[22rem]">
       <span className="sr-only">{label}</span>
       <select value={value} onChange={(e) => onChange(e.target.value)} className="w-full min-w-0 appearance-none truncate bg-transparent text-sm font-semibold outline-none">
         {children}
