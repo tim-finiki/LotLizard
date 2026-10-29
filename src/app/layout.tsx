@@ -13,6 +13,11 @@ export const metadata: Metadata = {
   openGraph: { siteName: SITE_NAME, type: "website", locale: "en_US" },
   twitter: { card: "summary" },
   other: { "lotlizard-build": buildInfo().commit },
+  // Search Console / Bing Webmaster ownership tokens, set per deployment (see .env.example).
+  verification: {
+    ...(process.env.GOOGLE_SITE_VERIFICATION ? { google: process.env.GOOGLE_SITE_VERIFICATION } : {}),
+    ...(process.env.BING_SITE_VERIFICATION ? { other: { "msvalidate.01": process.env.BING_SITE_VERIFICATION } } : {}),
+  },
 };
 
 export const viewport: Viewport = {

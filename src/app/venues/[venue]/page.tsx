@@ -2,11 +2,26 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import { collectSourceIds, getSourcesFor, getVenue, listEvents, listFacilities, listVenues } from "@/lib/data/repository";
+import {
+  collectSourceIds,
+  facilityAttributions,
+  facilitySourceIds,
+  getSourcesFor,
+  getVenue,
+  hasSponsorships,
+  listEvents,
+  listFacilities,
+  listVenues,
+} from "@/lib/data/repository";
 import { getPredictor } from "@/lib/predictions/predictor";
 import { COVERAGE_LABEL, VENUE_TYPE_LABEL } from "@/lib/labels";
 import { stateName } from "@/lib/states";
-import { statePath, venueJsonLd, venuePath } from "@/lib/seo";
+import { NOINDEX_FOLLOW, isIndexableVenue, statePath, venueJsonLd, venuePath } from "@/lib/seo";
+import { verificationSummary, type VerificationSummary } from "@/lib/verification";
+import { eventLabel, lotOpenTime } from "@/lib/events";
+import { submissionsStatus } from "@/lib/submissions/availability";
+import { ParkingOptionsList } from "@/components/ParkingOptionsList";
+import { VerificationStatus } from "@/components/VerificationStatus";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ConfidenceBadge } from "@/components/ConfidenceBadge";
 import { JsonLd } from "@/components/JsonLd";
@@ -22,6 +37,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/venues/[venue]">): Promise<Metadata> {
   const venue = await getVenue((await params).venue);
   if (!venue) return {};
+  const facilities = await listFacilities(venue.id);
   const where = `${venue.address.city}, ${venue.address.state}`;
   const team = venue.teams[0] ? `${venue.teams[0]} ` : "";
   const title = `${venue.name} Parking Guide — ${team}lots, prices & tailgating`;
@@ -32,8 +48,13 @@ export async function generateMetadata({ params }: PageProps<"/venues/[venue]">)
   return {
     title,
     description,
-    alternates: { canonical: venuePath(venue) },
+    alternates: {
+      canonical: venuePath(venue),
+      // Machine-readable version of the same facts, with sources and confidence.
+      types: { "application/json": `/api/v1/venues/${venue.slug}` },
+    },
     openGraph: { title, description, url: venuePath(venue) },
+    ...(isIndexableVenue(venue, facilities.length) ? {} : { robots: NOINDEX_FOLLOW }),
   };
 }
 
@@ -45,6 +66,16 @@ export default async function VenuePage({ params }: PageProps<"/venues/[venue]">
   const sources = await getSourcesFor(collectSourceIds(venue, facilities));
   const prediction = await getPredictor().predict({ venueSlug: venue.slug, facilitySlug: "*" });
   const detailed = facilities.length > 0;
+  const facilityVerification: Record<string, VerificationSummary> = {};
+  for (const f of facilities) {
+    facilityVerification[f.id] = verificationSummary(facilityAttributions(f), await getSourcesFor([...new Set(facilitySourceIds(f))]), f.attribution.confidence);
+  }
+  const venueVerification = verificationSummary(
+    [venue.attribution, ...facilities.flatMap(facilityAttributions)],
+    sources,
+    venue.attribution.confidence,
+  );
+  const openHours = venue.lotOpenHoursBefore?.value;
 
   const breadcrumbs = (
     <Breadcrumbs
@@ -67,12 +98,15 @@ export default async function VenuePage({ params }: PageProps<"/venues/[venue]">
         <ConfidenceBadge level={venue.attribution.confidence} />
       </div>
       {venue.summary && <p className="mt-2 text-sm">{venue.summary}</p>}
+      <div className="mt-2">
+        <VerificationStatus summary={venueVerification} />
+      </div>
     </div>
   );
 
   return (
     <>
-      <JsonLd data={venueJsonLd(venue)} />
+      <JsonLd data={venueJsonLd(venue, facilities, events)} />
       {detailed ? (
         // Map-first layout: compact title bar + full-height explorer; details follow below.
         <div className="flex h-[calc(100dvh-3.5rem)] min-h-[520px] flex-col">
@@ -107,16 +141,60 @@ export default async function VenuePage({ params }: PageProps<"/venues/[venue]">
           <div className="mt-6 rounded-2xl bg-white p-5 ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
             <h2 className="text-lg font-bold">Parking data coming soon</h2>
             <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
-              We haven&apos;t verified parking for {venue.name} yet, so we&apos;re not showing any. Know a lot, a price or a
-              tailgate spot? Your report goes to our moderators and helps launch this guide.
+              We haven&apos;t verified parking for {venue.name} yet, so we&apos;re not showing any.
+              {submissionsStatus().enabled
+                ? " Know a lot, a price or a tailgate spot? Your report goes to our moderators and helps launch this guide."
+                : " Community reporting is coming soon."}
             </p>
-            <Link href={`/submit?venue=${venue.slug}`} className="mt-3 inline-flex h-11 items-center rounded-lg bg-brand-600 px-4 text-sm font-semibold text-white">
-              Share parking info
+            <Link href="/venues" className="mt-3 inline-flex h-11 items-center rounded-lg bg-brand-600 px-4 text-sm font-semibold text-white">
+              Browse venues with parking guides
             </Link>
           </div>
         )}
 
         <div className="mt-10 flex flex-col gap-10">
+          {detailed && (
+            <Section id="parking-options" title={`All ${facilities.length} parking options at ${venue.name}`}>
+              <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                Every option we track, with what&apos;s known and what isn&apos;t. Open one for prices, payment, amenities,
+                directions and sources.
+              </p>
+              {/* Collapsed to keep the mobile page short; the content is still in the HTML for crawlers. */}
+              <details className="group">
+                <summary className="flex h-11 cursor-pointer list-none items-center rounded-lg bg-white px-4 text-sm font-semibold text-brand-700 ring-1 ring-black/5 dark:bg-neutral-900 dark:text-brand-100 dark:ring-white/10">
+                  <span className="group-open:hidden">Show all {facilities.length} with details</span>
+                  <span className="hidden group-open:inline">Hide details</span>
+                </summary>
+                <div className="mt-3">
+                  <ParkingOptionsList venue={venue} facilities={facilities} verification={facilityVerification} />
+                </div>
+              </details>
+            </Section>
+          )}
+
+          {events.length > 0 && (
+            <Section id="schedule" title="Season schedule">
+              <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                Games with a public source, in date order (including games already played). {openHours !== undefined && `Official lots open ${openHours} hours before kickoff.`}
+              </p>
+              <ul className="flex flex-col gap-2">
+                {events.map((e) => {
+                  const opens = openHours !== undefined ? lotOpenTime(e, openHours) : undefined;
+                  return (
+                    <li key={e.id} className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-white px-4 py-3 text-sm ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+                      <span>
+                        <span className="font-semibold">{eventLabel(e)}</span>
+                        {!e.startLocal && <span className="text-neutral-500"> · kickoff time TBA</span>}
+                        {opens && <span className="text-neutral-500"> · official lots open {opens}</span>}
+                      </span>
+                      <ConfidenceBadge level={e.attribution.confidence} compact />
+                    </li>
+                  );
+                })}
+              </ul>
+            </Section>
+          )}
+
           {venue.policies && venue.policies.length > 0 && (
             <Section id="policies" title="Rules & policies">
               <div className="grid gap-3 sm:grid-cols-2">
@@ -152,9 +230,12 @@ export default async function VenuePage({ params }: PageProps<"/venues/[venue]">
             </Section>
           )}
 
-          <Suspense fallback={null}>
-            <SponsoredSlot placement="venue_page" venueId={venue.id} />
-          </Suspense>
+          {/* Rendered only when a sponsorship is configured, so the page otherwise stays fully static. */}
+          {hasSponsorships("venue_page", venue.id) && (
+            <Suspense fallback={null}>
+              <SponsoredSlot placement="venue_page" venueId={venue.id} />
+            </Suspense>
+          )}
 
           <Section
             id="sources"
