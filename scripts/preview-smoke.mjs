@@ -55,6 +55,9 @@ page.on("requestfailed", (req) => {
 });
 const consoleErrors = [];
 page.on("console", (m) => m.type() === "error" && !m.text().includes("/_vercel/") && consoleErrors.push(m.text()));
+// Uncaught exceptions in the page fail the run, even if every step's checks passed.
+const pageErrors = [];
+page.on("pageerror", (e) => pageErrors.push(e.message.split("\n")[0]));
 
 const steps = [];
 async function step(name, fn) {
@@ -139,6 +142,10 @@ try {
     await Promise.all([page.waitForURL(/[?&]lot=/), page.getByRole("link", { name: "Show on the parking map" }).click()]);
     // Its pin is highlighted, or the page says it has no confirmed location to pin.
     await page.locator(".ll-marker--active").or(page.getByText("no confirmed location")).first().waitFor();
+    // Returning to a page Next kept alive must leave a working map, not an error screen.
+    await page.waitForTimeout(1500);
+    if (await page.getByText("Something went wrong").count()) throw new Error("the venue page crashed after returning to it");
+    await page.waitForFunction(() => [...document.querySelectorAll("img.leaflet-tile-loaded")].some((t) => t.offsetParent), null, { timeout: 15_000 });
   });
 } catch {
   ok = false;
@@ -148,5 +155,9 @@ await browser.close();
 console.log(steps.join("\n"));
 console.log(`Map tiles: ${tiles.ok} loaded, ${tiles.failed.length} failed`);
 if (consoleErrors.length) console.log(`Console errors:\n  ${consoleErrors.slice(0, 10).join("\n  ")}`);
+if (pageErrors.length) {
+  ok = false;
+  console.log(`FAIL uncaught page errors:\n  ${pageErrors.slice(0, 10).join("\n  ")}`);
+}
 console.log(`Screenshots: ${out}/`);
 process.exit(ok ? 0 : 1);

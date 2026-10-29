@@ -2,8 +2,9 @@
 
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { useEffect, useMemo, useRef } from "react";
-import { MapContainer, Marker, TileLayer, Tooltip, ZoomControl, useMap } from "react-leaflet";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { LeafletContext, createLeafletContext, type LeafletContextInterface } from "@react-leaflet/core";
+import { Marker, TileLayer, Tooltip, ZoomControl, useMap } from "react-leaflet";
 import type { FacilityType } from "@/lib/types";
 import { FACILITY_TYPE_COLOR, FACILITY_TYPE_LABEL } from "@/lib/labels";
 
@@ -30,6 +31,43 @@ export interface VenueMapProps {
 const TILE_URL = process.env.NEXT_PUBLIC_MAP_TILE_URL || "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 const TILE_ATTRIBUTION =
   process.env.NEXT_PUBLIC_MAP_TILE_ATTRIBUTION || '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+
+/**
+ * Like react-leaflet's MapContainer, but safe with Next's Activity route preservation. When Next hides a
+ * visited page it runs effect cleanups without removing the DOM; MapContainer's cleanup removes the
+ * Leaflet map and never recreates it, so showing the page again (Back, or a link back to the venue)
+ * crashed while re-adding layers. Here the map is removed only once its container has really left the
+ * document, so a hidden page keeps a live map and its layers simply re-attach when shown again.
+ */
+function StableMapContainer({ center, zoom, className, children, ...options }: L.MapOptions & { center: L.LatLngExpression; zoom: number; className?: string; children: React.ReactNode }) {
+  const [context, setContext] = useState<LeafletContextInterface | null>(null);
+  const mapRef = useRef<L.Map | null>(null);
+  // Options are read once, on creation, as with MapContainer.
+  const initial = useRef({ center, zoom, options });
+  const attach = useCallback((node: HTMLDivElement | null) => {
+    if (!node || mapRef.current) return;
+    const { center: c, zoom: z, options: o } = initial.current;
+    const map = L.map(node, o).setView(c, z);
+    mapRef.current = map;
+    setContext(createLeafletContext(map));
+  }, []);
+  useEffect(
+    () => () => {
+      const map = mapRef.current;
+      // Hidden by Activity: the container is still in the document, so keep the map for when it's shown.
+      if (map && !map.getContainer().isConnected) {
+        map.remove();
+        mapRef.current = null;
+      }
+    },
+    [],
+  );
+  return (
+    <div ref={attach} className={className}>
+      {context && <LeafletContext value={context}>{children}</LeafletContext>}
+    </div>
+  );
+}
 
 function escapeHtml(s: string) {
   return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
@@ -96,7 +134,7 @@ export default function VenueMap({ venue, markers, activeId, onSelect, bottomIns
   const active = markers.find((m) => m.id === activeId);
 
   return (
-    <MapContainer center={[venue.lat, venue.lng]} zoom={15} scrollWheelZoom={false} zoomControl={false} zoomSnap={0.25} className="h-full w-full" attributionControl>
+    <StableMapContainer center={[venue.lat, venue.lng]} zoom={15} scrollWheelZoom={false} zoomControl={false} zoomSnap={0.25} className="h-full w-full" attributionControl>
       <TileLayer url={TILE_URL} attribution={TILE_ATTRIBUTION} maxZoom={19} />
       <ZoomControl position="topright" />
       <FitBounds points={points} bottomInset={bottomInset} topInset={topInset} />
@@ -119,6 +157,6 @@ export default function VenueMap({ venue, markers, activeId, onSelect, bottomIns
           </Tooltip>
         </Marker>
       ))}
-    </MapContainer>
+    </StableMapContainer>
   );
 }
