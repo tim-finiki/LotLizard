@@ -1,0 +1,44 @@
+name: Preview mobile smoke test
+
+# Walks homepage → search → parking map (real OpenStreetMap tiles) → lot details on an emulated iPhone
+# against each successful Vercel preview deployment, and uploads a screenshot of every step.
+# Previews sit behind Vercel Authentication: add the project's "Protection Bypass for Automation" secret
+# as the repository secret VERCEL_AUTOMATION_BYPASS_SECRET, or the test is skipped with a notice.
+on:
+  deployment_status:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "Deployment URL to test"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    if: github.event_name == 'workflow_dispatch' || (github.event.deployment_status.state == 'success' && github.event.deployment.environment != 'Production')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      URL: ${{ inputs.url || github.event.deployment_status.environment_url || github.event.deployment_status.target_url }}
+      VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - name: Install Playwright
+        run: npm install --no-save --no-package-lock playwright@1 && npx playwright install --with-deps chromium
+      - name: Smoke test
+        run: |
+          if [ -z "$VERCEL_AUTOMATION_BYPASS_SECRET" ]; then
+            echo "::notice::VERCEL_AUTOMATION_BYPASS_SECRET is not set, and the preview requires Vercel login; trying anyway."
+          fi
+          node scripts/preview-smoke.mjs "$URL" preview-smoke
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: preview-smoke-screenshots
+          path: preview-smoke/
+          if-no-files-found: ignore
