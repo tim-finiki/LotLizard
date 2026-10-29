@@ -1,0 +1,1065 @@
+{
+  "lots": {
+    "blue-10-garage": {
+      "fields": {
+        "ada": {
+          "confidence": "low",
+          "evidence": "accessible parking spots are available at all parking garages surrounding PNC Park",
+          "method": "search_snippet",
+          "notes": "All-garages statement applied to this garage.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-information-guide"
+          ],
+          "value": "available"
+        },
+        "covered": {
+          "confidence": "low",
+          "evidence": "Parking lots surrounding PNC Park will include Gold 1 lot, Gold 1 garage, Gold 2 lot, Gold 4 lot, Red 5 garage, Red 5A lot, Red 6 lot, Blue 10 garage, Red 7A lot, and Red 7C lot.",
+          "method": "search_snippet",
+          "notes": "Covered because the official source calls it a garage.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "Parking lots surrounding PNC Park will include Gold 1 lot, Gold 1 garage, Gold 2 lot, Gold 4 lot, Red 5 garage, Red 5A lot, Red 6 lot, Blue 10 garage, Red 7A lot, and Red 7C lot.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation"
+          ],
+          "value": "A garage listed by the Pirates among the parking facilities surrounding PNC Park."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Parking lots surrounding PNC Park will include Gold 1 lot, Gold 1 garage, Gold 2 lot, Gold 4 lot, Red 5 garage, Red 5A lot, Red 6 lot, Blue 10 garage, Red 7A lot, and Red 7C lot.",
+          "method": "search_snippet",
+          "notes": "From an undated, likely older Pirates transportation page; lot assignments change by event.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation"
+          ],
+          "value": "Blue 10 Garage"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "paying with a credit card upon arrival in the North Shore",
+          "method": "search_snippet",
+          "notes": "Pirates statement for all North Shore parking, applied to each listed lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation-parking"
+          ],
+          "value": "card"
+        },
+        "payment_not_accepted": {
+          "confidence": "low",
+          "evidence": "all North Shore parking lots and garages will be going cashless for special events",
+          "method": "search_snippet",
+          "notes": "2024 all-lots rule applied to each lot.",
+          "observedAt": "2024-03-28",
+          "sources": [
+            "cbsnews-com-pittsburgh-news-north-shore-parking-lots-and-garages-going-completel"
+          ],
+          "value": "cash"
+        },
+        "payment_timing": {
+          "confidence": "low",
+          "evidence": "Several methods are available to purchase parking passes on the North Shore, which include purchasing a parking pass with your gameday Pirates tickets using the MLB Ballpark app, online at pirates.com/parking, or paying with a credit card upon arrival in the North Shore",
+          "method": "search_snippet",
+          "notes": "Pirates statement for all North Shore parking, applied to each listed lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation-parking"
+          ],
+          "value": "advance_optional"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Parking lots surrounding PNC Park will include Gold 1 lot, Gold 1 garage, Gold 2 lot, Gold 4 lot, Red 5 garage, Red 5A lot, Red 6 lot, Blue 10 garage, Red 7A lot, and Red 7C lot.",
+          "method": "search_snippet",
+          "notes": "From an undated, likely older Pirates transportation page; lot assignments change by event.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation"
+          ],
+          "value": "garage"
+        }
+      },
+      "prices": {}
+    },
+    "champions-garage": {
+      "fields": {
+        "ada": {
+          "confidence": "low",
+          "evidence": "accessible parking spots are available at all parking garages surrounding PNC Park",
+          "method": "search_snippet",
+          "notes": "All-garages statement applied to this garage; Pirates guide lists Champions Garage contact (412) 586-7988.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-information-guide"
+          ],
+          "value": "available"
+        },
+        "address": {
+          "confidence": "low",
+          "evidence": "445 spaces adjacent to PNC Park's Home Plate Gate and Heinz Field | 643 W. General Robinson St.",
+          "method": "search_snippet",
+          "notes": "From 2021 opening coverage.",
+          "observedAt": "2021-09-10",
+          "sources": [
+            "wpxi-com-news-top-stories-new-parking-garage-opens-north-shore-c4hlejgv2bdwjodal"
+          ],
+          "value": "643 W. General Robinson St."
+        },
+        "covered": {
+          "confidence": "low",
+          "evidence": "No Tailgating will be allowed inside the Champions Garage.",
+          "method": "search_snippet",
+          "notes": "Covered because the official source calls it a garage.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "Adding over 400 new spaces to the North Shore | No Tailgating will be allowed inside the Champions Garage.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "A cashless garage of over 400 spaces at West General Robinson Street and Tony Dorsett Drive, behind the Hyatt Place hotel, between Acrisure Stadium and PNC Park."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Adding over 400 new spaces to the North Shore | No Tailgating will be allowed inside the Champions Garage.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "Champions Garage"
+        },
+        "operator": {
+          "confidence": "low",
+          "evidence": "The structure was created by Oxford Development Company, in partnership with the Pittsburgh Pirates and Pittsburgh Steelers.",
+          "method": "search_snippet",
+          "notes": "Source says Oxford developed it; operator status as of 2026 not confirmed.",
+          "observedAt": "2021-09-10",
+          "sources": [
+            "wpxi-com-news-top-stories-new-parking-garage-opens-north-shore-c4hlejgv2bdwjodal"
+          ],
+          "value": "Oxford Development Company"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "No Tailgating will be allowed inside the Champions Garage.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "no"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Adding over 400 new spaces to the North Shore | No Tailgating will be allowed inside the Champions Garage.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "garage"
+        }
+      },
+      "prices": {
+        "car|other|lot|2021": {
+          "confidence": "low",
+          "evidence": "$20 to park for Pitt games, $15 for Pirates games and $40 for Steelers games",
+          "method": "search_snippet",
+          "notes": "2021 launch price for Pirates games; current price not found.",
+          "observedAt": "2021-09-10",
+          "sources": [
+            "wpxi-com-news-top-stories-new-parking-garage-opens-north-shore-c4hlejgv2bdwjodal"
+          ],
+          "value": "min=15;max=15;vehicle=car;scope=lot;event=other;season=2021"
+        }
+      }
+    },
+    "gold-1-garage": {
+      "fields": {
+        "ada": {
+          "confidence": "low",
+          "evidence": "accessible parking spots are available at all parking garages surrounding PNC Park",
+          "method": "search_snippet",
+          "notes": "All-garages statement applied to this garage.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-information-guide"
+          ],
+          "value": "available"
+        },
+        "address": {
+          "confidence": "low",
+          "evidence": "Gold 1 Garage (792 W. General Robinson St.)",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "bestparking-com-pittsburgh-pa-parking-neighborhoods-north-shore-pittsburgh-pa-pa"
+          ],
+          "value": "792 W. General Robinson St."
+        },
+        "covered": {
+          "confidence": "low",
+          "evidence": "Parking lots surrounding PNC Park will include Gold 1 lot, Gold 1 garage, Gold 2 lot, Gold 4 lot, Red 5 garage, Red 5A lot, Red 6 lot, Blue 10 garage, Red 7A lot, and Red 7C lot.",
+          "method": "search_snippet",
+          "notes": "Covered because the official source calls it a garage.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "Parking lots surrounding PNC Park will include Gold 1 lot, Gold 1 garage, Gold 2 lot, Gold 4 lot, Red 5 garage, Red 5A lot, Red 6 lot, Blue 10 garage, Red 7A lot, and Red 7C lot.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation"
+          ],
+          "value": "A garage listed by the Pirates among the parking facilities surrounding PNC Park."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Parking lots surrounding PNC Park will include Gold 1 lot, Gold 1 garage, Gold 2 lot, Gold 4 lot, Red 5 garage, Red 5A lot, Red 6 lot, Blue 10 garage, Red 7A lot, and Red 7C lot.",
+          "method": "search_snippet",
+          "notes": "From an undated, likely older Pirates transportation page; lot assignments change by event.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation"
+          ],
+          "value": "Gold 1 Garage"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "paying with a credit card upon arrival in the North Shore",
+          "method": "search_snippet",
+          "notes": "Pirates statement for all North Shore parking, applied to each listed lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation-parking"
+          ],
+          "value": "card"
+        },
+        "payment_not_accepted": {
+          "confidence": "low",
+          "evidence": "all North Shore parking lots and garages will be going cashless for special events",
+          "method": "search_snippet",
+          "notes": "2024 all-lots rule applied to each lot.",
+          "observedAt": "2024-03-28",
+          "sources": [
+            "cbsnews-com-pittsburgh-news-north-shore-parking-lots-and-garages-going-completel"
+          ],
+          "value": "cash"
+        },
+        "payment_timing": {
+          "confidence": "low",
+          "evidence": "Several methods are available to purchase parking passes on the North Shore, which include purchasing a parking pass with your gameday Pirates tickets using the MLB Ballpark app, online at pirates.com/parking, or paying with a credit card upon arrival in the North Shore",
+          "method": "search_snippet",
+          "notes": "Pirates statement for all North Shore parking, applied to each listed lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation-parking"
+          ],
+          "value": "advance_optional"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Parking lots surrounding PNC Park will include Gold 1 lot, Gold 1 garage, Gold 2 lot, Gold 4 lot, Red 5 garage, Red 5A lot, Red 6 lot, Blue 10 garage, Red 7A lot, and Red 7C lot.",
+          "method": "search_snippet",
+          "notes": "From an undated, likely older Pirates transportation page; lot assignments change by event.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation"
+          ],
+          "value": "garage"
+        }
+      },
+      "prices": {
+        "car|other|lot|2026": {
+          "confidence": "low",
+          "evidence": "Nearly every standard lot and garage is $20 per Pirates game. The budget pick is the Gold 1 Garage at $15; the premium pick is Red Lot 6 at $40 (Red Lot 5A is $25).",
+          "method": "search_snippet",
+          "notes": "Undated third-party guide that presents itself as current; season assumed 2026 and unverified against an official rate sheet.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "parkingaccess-com-blog-pnc-park-parking"
+          ],
+          "value": "min=15;max=15;vehicle=car;scope=lot;event=other;season=2026"
+        }
+      }
+    },
+    "gold-lot-2": {
+      "fields": {
+        "address": {
+          "confidence": "low",
+          "evidence": "Gold Lot 2 (10 Chuck Noll Way)",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "bestparking-com-pittsburgh-pa-parking-neighborhoods-north-shore-pittsburgh-pa-pa"
+          ],
+          "value": "10 Chuck Noll Way"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "Parking lots surrounding PNC Park will include Gold 1 lot, Gold 1 garage, Gold 2 lot, Gold 4 lot, Red 5 garage, Red 5A lot, Red 6 lot, Blue 10 garage, Red 7A lot, and Red 7C lot.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation"
+          ],
+          "value": "A surface lot listed by the Pirates among the parking lots surrounding PNC Park."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Parking lots surrounding PNC Park will include Gold 1 lot, Gold 1 garage, Gold 2 lot, Gold 4 lot, Red 5 garage, Red 5A lot, Red 6 lot, Blue 10 garage, Red 7A lot, and Red 7C lot.",
+          "method": "search_snippet",
+          "notes": "From an undated, likely older Pirates transportation page; lot assignments change by event.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation"
+          ],
+          "value": "Gold Lot 2"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "paying with a credit card upon arrival in the North Shore",
+          "method": "search_snippet",
+          "notes": "Pirates statement for all North Shore parking, applied to each listed lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation-parking"
+          ],
+          "value": "card"
+        },
+        "payment_not_accepted": {
+          "confidence": "low",
+          "evidence": "all North Shore parking lots and garages will be going cashless for special events",
+          "method": "search_snippet",
+          "notes": "2024 all-lots rule applied to each lot.",
+          "observedAt": "2024-03-28",
+          "sources": [
+            "cbsnews-com-pittsburgh-news-north-shore-parking-lots-and-garages-going-completel"
+          ],
+          "value": "cash"
+        },
+        "payment_timing": {
+          "confidence": "low",
+          "evidence": "Several methods are available to purchase parking passes on the North Shore, which include purchasing a parking pass with your gameday Pirates tickets using the MLB Ballpark app, online at pirates.com/parking, or paying with a credit card upon arrival in the North Shore",
+          "method": "search_snippet",
+          "notes": "Pirates statement for all North Shore parking, applied to each listed lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation-parking"
+          ],
+          "value": "advance_optional"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Parking lots surrounding PNC Park will include Gold 1 lot, Gold 1 garage, Gold 2 lot, Gold 4 lot, Red 5 garage, Red 5A lot, Red 6 lot, Blue 10 garage, Red 7A lot, and Red 7C lot.",
+          "method": "search_snippet",
+          "notes": "From an undated, likely older Pirates transportation page; lot assignments change by event.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "kamin-science-center-main-lot": {
+      "fields": {
+        "description": {
+          "confidence": "medium",
+          "evidence": "special parking rates apply during Steelers games, Pirates games, Pitt Panthers games, concerts, and other events on the North Shore | Visitor rates do not apply when parking for a special event",
+          "method": "search_snippet",
+          "observedAt": "2026-07-22",
+          "sources": [
+            "kaminsciencecenter-org-visit-parking"
+          ],
+          "value": "The Kamin Science Center's on-site lot; special parking rates apply during Steelers and Pirates games (event rates: 412-627-3397)."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "special parking rates apply during Steelers games, Pirates games, Pitt Panthers games, concerts, and other events on the North Shore | Visitor rates do not apply when parking for a special event",
+          "method": "search_snippet",
+          "observedAt": "2026-07-22",
+          "sources": [
+            "kaminsciencecenter-org-visit-parking"
+          ],
+          "value": "Kamin Science Center Main Lot"
+        },
+        "operator": {
+          "confidence": "medium",
+          "evidence": "On-site parking is available for $6 per vehicle for Kamin Science Center visitors only.",
+          "method": "search_snippet",
+          "observedAt": "2026-07-22",
+          "sources": [
+            "kaminsciencecenter-org-visit-parking"
+          ],
+          "value": "Kamin Science Center"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "special parking rates apply during Steelers games, Pirates games, Pitt Panthers games, concerts, and other events on the North Shore | Visitor rates do not apply when parking for a special event",
+          "method": "search_snippet",
+          "observedAt": "2026-07-22",
+          "sources": [
+            "kaminsciencecenter-org-visit-parking"
+          ],
+          "value": "private_lot"
+        }
+      },
+      "prices": {}
+    },
+    "kamin-science-center-north-lot": {
+      "fields": {
+        "description": {
+          "confidence": "medium",
+          "evidence": "additional Science Center parking is available across the street in the North Lot at the same price as the Main Lot",
+          "method": "search_snippet",
+          "observedAt": "2026-07-22",
+          "sources": [
+            "kaminsciencecenter-org-visit-parking"
+          ],
+          "value": "Overflow lot across the street from the Kamin Science Center Main Lot, connected by a crosswalk; special event rates apply on game days."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "additional Science Center parking is available across the street in the North Lot at the same price as the Main Lot",
+          "method": "search_snippet",
+          "observedAt": "2026-07-22",
+          "sources": [
+            "kaminsciencecenter-org-visit-parking"
+          ],
+          "value": "Kamin Science Center North Lot"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "additional Science Center parking is available across the street in the North Lot at the same price as the Main Lot",
+          "method": "search_snippet",
+          "observedAt": "2026-07-22",
+          "sources": [
+            "kaminsciencecenter-org-visit-parking"
+          ],
+          "value": "private_lot"
+        }
+      },
+      "prices": {}
+    },
+    "nova-place-garage": {
+      "fields": {
+        "address": {
+          "confidence": "low",
+          "evidence": "100 S. Commons – Garage",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "parkchirp-com-facilities-100-s-commons-garage"
+          ],
+          "value": "100 South Commons, Pittsburgh, PA 15212"
+        },
+        "covered": {
+          "confidence": "low",
+          "evidence": "Search summary of Pirates advisory: Open garages: Red 5 Garage and Red Lot 5A, the Champions Garage, Blue 10 Garage, and NOVA Place.",
+          "method": "search_snippet",
+          "notes": "Covered because the source calls it a garage.",
+          "observedAt": "2026-04-13",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation-parking-opening-week"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "Search summary of Pirates advisory: Open garages: Red 5 Garage and Red Lot 5A, the Champions Garage, Blue 10 Garage, and NOVA Place.",
+          "method": "search_snippet",
+          "observedAt": "2026-04-13",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation-parking-opening-week"
+          ],
+          "value": "A North Side garage at 100 South Commons that the Pirates listed as open for fan parking during an April 2026 homestand."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Search summary of Pirates advisory: Open garages: Red 5 Garage and Red Lot 5A, the Champions Garage, Blue 10 Garage, and NOVA Place.",
+          "method": "search_snippet",
+          "notes": "Listed as open for fans during the April 2026 (NFL Draft period) homestand; search summary, not a direct quote.",
+          "observedAt": "2026-04-13",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation-parking-opening-week"
+          ],
+          "value": "Nova Place Garage"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Search summary of Pirates advisory: Open garages: Red 5 Garage and Red Lot 5A, the Champions Garage, Blue 10 Garage, and NOVA Place.",
+          "method": "search_snippet",
+          "observedAt": "2026-04-13",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation-parking-opening-week"
+          ],
+          "value": "garage"
+        }
+      },
+      "prices": {}
+    },
+    "red-5-garage": {
+      "fields": {
+        "ada": {
+          "confidence": "low",
+          "evidence": "accessible parking spots are available at all parking garages surrounding PNC Park",
+          "method": "search_snippet",
+          "notes": "All-garages statement applied to this garage.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-information-guide"
+          ],
+          "value": "available"
+        },
+        "covered": {
+          "confidence": "low",
+          "evidence": "Parking lots surrounding PNC Park will include Gold 1 lot, Gold 1 garage, Gold 2 lot, Gold 4 lot, Red 5 garage, Red 5A lot, Red 6 lot, Blue 10 garage, Red 7A lot, and Red 7C lot.",
+          "method": "search_snippet",
+          "notes": "Covered because the official source calls it a garage.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "Parking lots surrounding PNC Park will include Gold 1 lot, Gold 1 garage, Gold 2 lot, Gold 4 lot, Red 5 garage, Red 5A lot, Red 6 lot, Blue 10 garage, Red 7A lot, and Red 7C lot.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation"
+          ],
+          "value": "A garage on West General Robinson Street listed by the Pirates among the parking facilities surrounding PNC Park."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Parking lots surrounding PNC Park will include Gold 1 lot, Gold 1 garage, Gold 2 lot, Gold 4 lot, Red 5 garage, Red 5A lot, Red 6 lot, Blue 10 garage, Red 7A lot, and Red 7C lot.",
+          "method": "search_snippet",
+          "notes": "From an undated, likely older Pirates transportation page; lot assignments change by event.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation"
+          ],
+          "value": "Red 5 Garage"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "paying with a credit card upon arrival in the North Shore",
+          "method": "search_snippet",
+          "notes": "Pirates statement for all North Shore parking, applied to each listed lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation-parking"
+          ],
+          "value": "card"
+        },
+        "payment_not_accepted": {
+          "confidence": "low",
+          "evidence": "all North Shore parking lots and garages will be going cashless for special events",
+          "method": "search_snippet",
+          "notes": "2024 all-lots rule applied to each lot.",
+          "observedAt": "2024-03-28",
+          "sources": [
+            "cbsnews-com-pittsburgh-news-north-shore-parking-lots-and-garages-going-completel"
+          ],
+          "value": "cash"
+        },
+        "payment_timing": {
+          "confidence": "low",
+          "evidence": "Several methods are available to purchase parking passes on the North Shore, which include purchasing a parking pass with your gameday Pirates tickets using the MLB Ballpark app, online at pirates.com/parking, or paying with a credit card upon arrival in the North Shore",
+          "method": "search_snippet",
+          "notes": "Pirates statement for all North Shore parking, applied to each listed lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation-parking"
+          ],
+          "value": "advance_optional"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Parking lots surrounding PNC Park will include Gold 1 lot, Gold 1 garage, Gold 2 lot, Gold 4 lot, Red 5 garage, Red 5A lot, Red 6 lot, Blue 10 garage, Red 7A lot, and Red 7C lot.",
+          "method": "search_snippet",
+          "notes": "From an undated, likely older Pirates transportation page; lot assignments change by event.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation"
+          ],
+          "value": "garage"
+        }
+      },
+      "prices": {}
+    },
+    "red-lot-5a": {
+      "fields": {
+        "address": {
+          "confidence": "low",
+          "evidence": "Red Lot 5A (664 W. General Robinson St.)",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "bestparking-com-pittsburgh-pa-parking-neighborhoods-north-shore-pittsburgh-pa-pa"
+          ],
+          "value": "664 W. General Robinson St."
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "Parking lots surrounding PNC Park will include Gold 1 lot, Gold 1 garage, Gold 2 lot, Gold 4 lot, Red 5 garage, Red 5A lot, Red 6 lot, Blue 10 garage, Red 7A lot, and Red 7C lot.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation"
+          ],
+          "value": "A surface lot listed by the Pirates among the parking lots surrounding PNC Park."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Parking lots surrounding PNC Park will include Gold 1 lot, Gold 1 garage, Gold 2 lot, Gold 4 lot, Red 5 garage, Red 5A lot, Red 6 lot, Blue 10 garage, Red 7A lot, and Red 7C lot.",
+          "method": "search_snippet",
+          "notes": "From an undated, likely older Pirates transportation page; lot assignments change by event.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation"
+          ],
+          "value": "Red Lot 5A"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "paying with a credit card upon arrival in the North Shore",
+          "method": "search_snippet",
+          "notes": "Pirates statement for all North Shore parking, applied to each listed lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation-parking"
+          ],
+          "value": "card"
+        },
+        "payment_not_accepted": {
+          "confidence": "low",
+          "evidence": "all North Shore parking lots and garages will be going cashless for special events",
+          "method": "search_snippet",
+          "notes": "2024 all-lots rule applied to each lot.",
+          "observedAt": "2024-03-28",
+          "sources": [
+            "cbsnews-com-pittsburgh-news-north-shore-parking-lots-and-garages-going-completel"
+          ],
+          "value": "cash"
+        },
+        "payment_timing": {
+          "confidence": "low",
+          "evidence": "Several methods are available to purchase parking passes on the North Shore, which include purchasing a parking pass with your gameday Pirates tickets using the MLB Ballpark app, online at pirates.com/parking, or paying with a credit card upon arrival in the North Shore",
+          "method": "search_snippet",
+          "notes": "Pirates statement for all North Shore parking, applied to each listed lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation-parking"
+          ],
+          "value": "advance_optional"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Parking lots surrounding PNC Park will include Gold 1 lot, Gold 1 garage, Gold 2 lot, Gold 4 lot, Red 5 garage, Red 5A lot, Red 6 lot, Blue 10 garage, Red 7A lot, and Red 7C lot.",
+          "method": "search_snippet",
+          "notes": "From an undated, likely older Pirates transportation page; lot assignments change by event.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {
+        "car|other|lot|2026": {
+          "confidence": "low",
+          "evidence": "Nearly every standard lot and garage is $20 per Pirates game. The budget pick is the Gold 1 Garage at $15; the premium pick is Red Lot 6 at $40 (Red Lot 5A is $25).",
+          "method": "search_snippet",
+          "notes": "Undated third-party guide that presents itself as current; season assumed 2026 and unverified against an official rate sheet.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "parkingaccess-com-blog-pnc-park-parking"
+          ],
+          "value": "min=25;max=25;vehicle=car;scope=lot;event=other;season=2026"
+        }
+      }
+    },
+    "red-lot-6": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "Parking lots surrounding PNC Park will include Gold 1 lot, Gold 1 garage, Gold 2 lot, Gold 4 lot, Red 5 garage, Red 5A lot, Red 6 lot, Blue 10 garage, Red 7A lot, and Red 7C lot.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation"
+          ],
+          "value": "A surface lot listed by the Pirates among the parking lots surrounding PNC Park."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Parking lots surrounding PNC Park will include Gold 1 lot, Gold 1 garage, Gold 2 lot, Gold 4 lot, Red 5 garage, Red 5A lot, Red 6 lot, Blue 10 garage, Red 7A lot, and Red 7C lot.",
+          "method": "search_snippet",
+          "notes": "From an undated, likely older Pirates transportation page; lot assignments change by event.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation"
+          ],
+          "value": "Red Lot 6"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "paying with a credit card upon arrival in the North Shore",
+          "method": "search_snippet",
+          "notes": "Pirates statement for all North Shore parking, applied to each listed lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation-parking"
+          ],
+          "value": "card"
+        },
+        "payment_not_accepted": {
+          "confidence": "low",
+          "evidence": "all North Shore parking lots and garages will be going cashless for special events",
+          "method": "search_snippet",
+          "notes": "2024 all-lots rule applied to each lot.",
+          "observedAt": "2024-03-28",
+          "sources": [
+            "cbsnews-com-pittsburgh-news-north-shore-parking-lots-and-garages-going-completel"
+          ],
+          "value": "cash"
+        },
+        "payment_timing": {
+          "confidence": "low",
+          "evidence": "Several methods are available to purchase parking passes on the North Shore, which include purchasing a parking pass with your gameday Pirates tickets using the MLB Ballpark app, online at pirates.com/parking, or paying with a credit card upon arrival in the North Shore",
+          "method": "search_snippet",
+          "notes": "Pirates statement for all North Shore parking, applied to each listed lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation-parking"
+          ],
+          "value": "advance_optional"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Parking lots surrounding PNC Park will include Gold 1 lot, Gold 1 garage, Gold 2 lot, Gold 4 lot, Red 5 garage, Red 5A lot, Red 6 lot, Blue 10 garage, Red 7A lot, and Red 7C lot.",
+          "method": "search_snippet",
+          "notes": "From an undated, likely older Pirates transportation page; lot assignments change by event.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-pirates-ballpark-transportation"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {
+        "car|other|lot|2026": {
+          "confidence": "low",
+          "evidence": "Nearly every standard lot and garage is $20 per Pirates game. The budget pick is the Gold 1 Garage at $15; the premium pick is Red Lot 6 at $40 (Red Lot 5A is $25).",
+          "method": "search_snippet",
+          "notes": "Undated third-party guide that presents itself as current; season assumed 2026 and unverified against an official rate sheet.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "parkingaccess-com-blog-pnc-park-parking"
+          ],
+          "value": "min=40;max=40;vehicle=car;scope=lot;event=other;season=2026"
+        }
+      }
+    }
+  },
+  "slug": "pnc-park",
+  "sources": {
+    "acrisurestadium-com-stadium-parking-directions": {
+      "method": "search_snippet",
+      "name": "Acrisure Stadium — Parking & Directions",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://acrisurestadium.com/stadium/parking-directions/"
+    },
+    "bestparking-com-pittsburgh-pa-parking-neighborhoods-north-shore-pittsburgh-pa-pa": {
+      "method": "search_snippet",
+      "name": "BestParking — North Shore Pittsburgh",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://www.bestparking.com/pittsburgh-pa-parking/neighborhoods/north-shore-pittsburgh-pa-parking/"
+    },
+    "cbsnews-com-pittsburgh-news-north-shore-parking-lots-and-garages-going-completel": {
+      "method": "search_snippet",
+      "name": "KDKA/CBS Pittsburgh — North Shore lots going cashless",
+      "retrievedAt": "2024-03-28",
+      "type": "media",
+      "url": "https://www.cbsnews.com/pittsburgh/news/north-shore-parking-lots-and-garages-going-completely-cashless-starting-with-pirates-home-opener"
+    },
+    "en-wikipedia-org-wiki-pnc-park": {
+      "method": "search_snippet",
+      "name": "Wikipedia — PNC Park",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://en.wikipedia.org/wiki/PNC_Park"
+    },
+    "kaminsciencecenter-org-visit-parking": {
+      "method": "search_snippet",
+      "name": "Kamin Science Center — Parking Information",
+      "retrievedAt": "2026-07-22",
+      "type": "operator",
+      "url": "https://kaminsciencecenter.org/visit/parking/"
+    },
+    "mlb-com-pirates-ballpark": {
+      "method": "search_snippet",
+      "name": "Pittsburgh Pirates — Ballpark",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.mlb.com/pirates/ballpark"
+    },
+    "mlb-com-pirates-ballpark-disability-access-guide": {
+      "method": "search_snippet",
+      "name": "Pittsburgh Pirates — Disability Access Guide",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.mlb.com/pirates/ballpark/disability-access-guide"
+    },
+    "mlb-com-pirates-ballpark-information-guide": {
+      "method": "search_snippet",
+      "name": "Pittsburgh Pirates — Guest Information Guide",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.mlb.com/pirates/ballpark/information/guide"
+    },
+    "mlb-com-pirates-ballpark-transportation": {
+      "method": "search_snippet",
+      "name": "Pittsburgh Pirates — PNC Park Transportation Information",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.mlb.com/pirates/ballpark/transportation"
+    },
+    "mlb-com-pirates-ballpark-transportation-light-rail": {
+      "method": "search_snippet",
+      "name": "Pittsburgh Pirates — PNC Park Light Rail Service",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.mlb.com/pirates/ballpark/transportation/light-rail"
+    },
+    "mlb-com-pirates-ballpark-transportation-parking": {
+      "method": "search_snippet",
+      "name": "Pittsburgh Pirates — PNC Park Parking Information",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.mlb.com/pirates/ballpark/transportation/parking"
+    },
+    "mlb-com-pirates-ballpark-transportation-parking-opening-week": {
+      "method": "search_snippet",
+      "name": "Pittsburgh Pirates — Opening Week Parking Advisory",
+      "retrievedAt": "2026-04-13",
+      "type": "official",
+      "url": "https://www.mlb.com/pirates/ballpark/transportation/parking/opening-week"
+    },
+    "parkchirp-com-facilities-100-s-commons-garage": {
+      "method": "search_snippet",
+      "name": "ParkChirp — 100 S. Commons Garage",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://parkchirp.com/facilities/100-s-commons-garage/"
+    },
+    "parkingaccess-com-blog-pnc-park-parking": {
+      "method": "search_snippet",
+      "name": "ParkingAccess — PNC Park Parking Guide",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://parkingaccess.com/blog/pnc-park-parking"
+    },
+    "wpxi-com-news-top-stories-new-parking-garage-opens-north-shore-c4hlejgv2bdwjodal": {
+      "method": "search_snippet",
+      "name": "WPXI — New parking garage opens on North Shore",
+      "retrievedAt": "2021-09-10",
+      "type": "media",
+      "url": "https://www.wpxi.com/news/top-stories/new-parking-garage-opens-north-shore/C4HLEJGV2BDWJODALFAHDGMICY/"
+    }
+  },
+  "venue": {
+    "fields": {
+      "city": {
+        "confidence": "low",
+        "evidence": "115 Federal Street, Pittsburgh, PA 15212",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-pirates-ballpark"
+        ],
+        "value": "Pittsburgh"
+      },
+      "lat": {
+        "confidence": "low",
+        "evidence": "40.44694°N, 80.00583°W (40°26′49″N 80°0′21″W)",
+        "method": "search_snippet",
+        "notes": "Third-party coordinate; latlong.net gives 40.447105, -80.006363.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "en-wikipedia-org-wiki-pnc-park"
+        ],
+        "value": "40.44694"
+      },
+      "lng": {
+        "confidence": "low",
+        "evidence": "40.44694°N, 80.00583°W (40°26′49″N 80°0′21″W)",
+        "method": "search_snippet",
+        "notes": "Third-party coordinate.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "en-wikipedia-org-wiki-pnc-park"
+        ],
+        "value": "-80.00583"
+      },
+      "postal_code": {
+        "confidence": "low",
+        "evidence": "115 Federal Street, Pittsburgh, PA 15212",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-pirates-ballpark"
+        ],
+        "value": "15212"
+      },
+      "state": {
+        "confidence": "low",
+        "evidence": "115 Federal Street, Pittsburgh, PA 15212",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-pirates-ballpark"
+        ],
+        "value": "PA"
+      },
+      "street": {
+        "confidence": "low",
+        "evidence": "115 Federal Street, Pittsburgh, PA 15212",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-pirates-ballpark"
+        ],
+        "value": "115 Federal Street"
+      },
+      "teams": {
+        "confidence": "low",
+        "evidence": "PNC PARK PARKING INFORMATION | the Pirates and ParkMobile have partnered to help you reserve parking in advance",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-pirates-ballpark-transportation-parking"
+        ],
+        "value": "Pittsburgh Pirates"
+      },
+      "timezone": {
+        "confidence": "low",
+        "evidence": "115 Federal Street, Pittsburgh, PA 15212",
+        "method": "search_snippet",
+        "notes": "Timezone inferred from Pittsburgh, PA location (US Eastern).",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-pirates-ballpark"
+        ],
+        "value": "America/New_York"
+      },
+      "venue_name": {
+        "confidence": "low",
+        "evidence": "115 Federal Street, Pittsburgh, PA 15212",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-pirates-ballpark"
+        ],
+        "value": "PNC Park"
+      },
+      "venue_type": {
+        "confidence": "low",
+        "evidence": "115 Federal Street, Pittsburgh, PA 15212",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-pirates-ballpark"
+        ],
+        "value": "ballpark"
+      }
+    },
+    "policy": {
+      "Accessible parking": {
+        "confidence": "low",
+        "evidence": "parking for guests with disabilities is available in parking lots surrounding PNC Park, on a first-come first-served basis",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-pirates-ballpark-disability-access-guide"
+        ],
+        "value": "Parking for guests with disabilities is available in lots surrounding PNC Park on a first-come, first-served basis (ALCO: 412-323-4455)."
+      },
+      "Buying parking": {
+        "confidence": "low",
+        "evidence": "Several methods are available to purchase parking passes on the North Shore, which include purchasing a parking pass with your gameday Pirates tickets using the MLB Ballpark app, online at pirates.com/parking, or paying with a credit card upon arrival in the North Shore.",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-pirates-ballpark-transportation-parking"
+        ],
+        "value": "Passes can be bought with Pirates tickets in the MLB Ballpark app, online at pirates.com/parking, or by credit card on arrival on the North Shore."
+      },
+      "Cashless parking": {
+        "confidence": "low",
+        "evidence": "all North Shore parking lots and garages will be going cashless for special events | starting on April 5, no cash will be accepted for parking",
+        "method": "search_snippet",
+        "observedAt": "2024-03-28",
+        "sources": [
+          "cbsnews-com-pittsburgh-news-north-shore-parking-lots-and-garages-going-completel"
+        ],
+        "value": "North Shore parking lots and garages went cashless for special events starting April 5, 2024."
+      },
+      "Downtown alternative": {
+        "confidence": "low",
+        "evidence": "arrive as early as possible or find alternate parking in the Golden Triangle in one of the eight Pittsburgh Parking Authority Garages",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-pirates-ballpark-transportation-parking"
+        ],
+        "value": "The Pirates encourage arriving early or parking in one of eight Pittsburgh Parking Authority garages downtown."
+      }
+    },
+    "transit": {
+      "Pittsburgh Regional Transit T (North Side station)": {
+        "confidence": "low",
+        "evidence": "We recommend using the free \"T\" service that links Golden Triangle \"T\" stations to the North Side \"T\" station. | There is also FREE \"T\" SERVICE that links the North Shore ALLEGHENY \"T\" STATION to the NORTH SIDE \"T\" STATION.",
+        "method": "search_snippet",
+        "notes": "Pirates page wording may date from 2012-2013; confirm current free-fare terms with PRT.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-pirates-ballpark-transportation-light-rail"
+        ],
+        "value": "Free T service links Golden Triangle stations and Allegheny station to North Side station, across General Robinson Street from the Home Plate entrance."
+      }
+    }
+  },
+  "version": 1
+}

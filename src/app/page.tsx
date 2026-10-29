@@ -10,7 +10,8 @@ export const metadata: Metadata = { alternates: { canonical: "/" } };
 export default async function Home() {
   const venues = await listVenues();
   const pilot = venues.filter((v) => v.coverage === "pilot_detailed");
-  const more = venues.filter((v) => v.coverage !== "pilot_detailed").slice(0, 6);
+  const guides = venues.filter((v) => v.coverage === "basic");
+  const more = venues.filter((v) => v.coverage === "venue_only").slice(0, 6);
 
   return (
     <div>
@@ -54,6 +55,20 @@ export default async function Home() {
             </Link>
           ))}
         </section>
+
+        {guides.length > 0 && (
+          <section aria-labelledby="guides-heading" className="flex flex-col gap-3">
+            <div className="flex items-baseline justify-between">
+              <h2 id="guides-heading" className="text-xl font-bold">More parking guides</h2>
+              <Link href="/venues" className="text-sm font-semibold text-brand-700 dark:text-brand-100">All venues →</Link>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {guides.map((v) => (
+                <VenueCard key={v.id} venue={v} />
+              ))}
+            </div>
+          </section>
+        )}
 
         <section aria-labelledby="how-heading" className="grid gap-3 sm:grid-cols-3">
           <h2 id="how-heading" className="sr-only">How LotLizard works</h2>

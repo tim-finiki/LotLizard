@@ -1,0 +1,1249 @@
+{
+  "lots": {
+    "live-casino-garage": {
+      "fields": {
+        "address": {
+          "confidence": "low",
+          "evidence": "900 Packer Ave Philadelphia, PA 19148",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "m-booking-com-hotel-us-live-casino-amp-philadelphia-html"
+          ],
+          "value": "900 Packer Ave, Philadelphia, PA 19148"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "Self-parking for Eagles games costs $60 for non-Live! Rewards members and classic card and gold card holders, and free for platinum, black, jade and chairman's club card holders.",
+          "method": "search_snippet",
+          "observedAt": "2025-09-01",
+          "sources": [
+            "cbsnews-com-amp-philadelphia-news-lincoln-financial-field-parking-map-eagles"
+          ],
+          "value": "Live! Casino & Hotel offers self-parking for Eagles games, free for higher Live! Rewards tiers."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Self-parking for Eagles games costs $60 for non-Live! Rewards members and classic card and gold card holders",
+          "method": "search_snippet",
+          "observedAt": "2025-09-01",
+          "sources": [
+            "cbsnews-com-amp-philadelphia-news-lincoln-financial-field-parking-map-eagles"
+          ],
+          "value": "Live! Casino & Hotel Philadelphia garage"
+        },
+        "operator": {
+          "confidence": "low",
+          "evidence": "Live! Casino & Hotel also offers game-day parking",
+          "method": "search_snippet",
+          "observedAt": "2025-09-01",
+          "sources": [
+            "cbsnews-com-amp-philadelphia-news-lincoln-financial-field-parking-map-eagles"
+          ],
+          "value": "Live! Casino & Hotel Philadelphia"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Live! Casino & Hotel also offers game-day parking",
+          "method": "search_snippet",
+          "observedAt": "2025-09-01",
+          "sources": [
+            "cbsnews-com-amp-philadelphia-news-lincoln-financial-field-parking-map-eagles"
+          ],
+          "value": "garage"
+        }
+      },
+      "prices": {
+        "car|nfl_regular|lot|2025": {
+          "confidence": "low",
+          "evidence": "Self-parking for Eagles games costs $60 for non-Live! Rewards members and classic card and gold card holders",
+          "method": "search_snippet",
+          "notes": "Free for platinum, black, jade and chairman's club card holders. 2025 figure.",
+          "observedAt": "2025-09-01",
+          "sources": [
+            "cbsnews-com-amp-philadelphia-news-lincoln-financial-field-parking-map-eagles"
+          ],
+          "value": "min=60;max=60;vehicle=car;scope=lot;event=nfl_regular;season=2025"
+        }
+      }
+    },
+    "lot-j": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "The reserve lots are D/E, J, K (North), K (East), L (South) and L (North).",
+          "method": "search_snippet",
+          "notes": "Reserved lots require a pass; all reserved areas are subject to vehicle inspection.",
+          "observedAt": "2025-09-01",
+          "sources": [
+            "cbsnews-com-amp-philadelphia-news-lincoln-financial-field-parking-map-eagles"
+          ],
+          "value": "Lot J is one of the stadium's six reserved parking lots for Eagles games."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Lot J - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lot-j"
+          ],
+          "value": "Lot J"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+          "method": "search_snippet",
+          "notes": "Sports Complex-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gameguide-philadelphiaeagles-com-stm"
+          ],
+          "value": "card;mobile_wallet"
+        },
+        "payment_not_accepted": {
+          "confidence": "low",
+          "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+          "method": "search_snippet",
+          "notes": "Sports Complex-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gameguide-philadelphiaeagles-com-stm"
+          ],
+          "value": "cash"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Lot J - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lot-j"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-k-east": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "The reserve lots are D/E, J, K (North), K (East), L (South) and L (North).",
+          "method": "search_snippet",
+          "notes": "Reserved lots require a pass; all reserved areas are subject to vehicle inspection.",
+          "observedAt": "2025-09-01",
+          "sources": [
+            "cbsnews-com-amp-philadelphia-news-lincoln-financial-field-parking-map-eagles"
+          ],
+          "value": "Lot K (East) is one of the stadium's six reserved parking lots for Eagles games."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Lot K (East) - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lot-k-east"
+          ],
+          "value": "Lot K (East)"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+          "method": "search_snippet",
+          "notes": "Sports Complex-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gameguide-philadelphiaeagles-com-stm"
+          ],
+          "value": "card;mobile_wallet"
+        },
+        "payment_not_accepted": {
+          "confidence": "low",
+          "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+          "method": "search_snippet",
+          "notes": "Sports Complex-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gameguide-philadelphiaeagles-com-stm"
+          ],
+          "value": "cash"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Lot K (East) - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lot-k-east"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-k-north": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "The reserve lots are D/E, J, K (North), K (East), L (South) and L (North).",
+          "method": "search_snippet",
+          "notes": "Reserved lots require a pass; all reserved areas are subject to vehicle inspection.",
+          "observedAt": "2025-09-01",
+          "sources": [
+            "cbsnews-com-amp-philadelphia-news-lincoln-financial-field-parking-map-eagles"
+          ],
+          "value": "Lot K (North) is one of the stadium's six reserved parking lots for Eagles games."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Lot K (North) - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lok-k-north"
+          ],
+          "value": "Lot K (North)"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+          "method": "search_snippet",
+          "notes": "Sports Complex-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gameguide-philadelphiaeagles-com-stm"
+          ],
+          "value": "card;mobile_wallet"
+        },
+        "payment_not_accepted": {
+          "confidence": "low",
+          "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+          "method": "search_snippet",
+          "notes": "Sports Complex-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gameguide-philadelphiaeagles-com-stm"
+          ],
+          "value": "cash"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Lot K (North) - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lok-k-north"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-l-north": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "The reserve lots are D/E, J, K (North), K (East), L (South) and L (North).",
+          "method": "search_snippet",
+          "notes": "Reserved lots require a pass; all reserved areas are subject to vehicle inspection.",
+          "observedAt": "2025-09-01",
+          "sources": [
+            "cbsnews-com-amp-philadelphia-news-lincoln-financial-field-parking-map-eagles"
+          ],
+          "value": "Lot L (North) is one of the stadium's six reserved parking lots for Eagles games."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Lot L (North) - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lot-l-north"
+          ],
+          "value": "Lot L (North)"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+          "method": "search_snippet",
+          "notes": "Sports Complex-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gameguide-philadelphiaeagles-com-stm"
+          ],
+          "value": "card;mobile_wallet"
+        },
+        "payment_not_accepted": {
+          "confidence": "low",
+          "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+          "method": "search_snippet",
+          "notes": "Sports Complex-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gameguide-philadelphiaeagles-com-stm"
+          ],
+          "value": "cash"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Lot L (North) - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lot-l-north"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-l-south": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "The reserve lots are D/E, J, K (North), K (East), L (South) and L (North).",
+          "method": "search_snippet",
+          "notes": "No dedicated official lot page surfaced in search.",
+          "observedAt": "2025-09-01",
+          "sources": [
+            "cbsnews-com-amp-philadelphia-news-lincoln-financial-field-parking-map-eagles"
+          ],
+          "value": "Lot L (South) is one of the stadium's six reserved parking lots for Eagles games."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "The reserve lots are D/E, J, K (North), K (East), L (South) and L (North).",
+          "method": "search_snippet",
+          "observedAt": "2025-09-01",
+          "sources": [
+            "cbsnews-com-amp-philadelphia-news-lincoln-financial-field-parking-map-eagles"
+          ],
+          "value": "Lot L (South)"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+          "method": "search_snippet",
+          "notes": "Sports Complex-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gameguide-philadelphiaeagles-com-stm"
+          ],
+          "value": "card;mobile_wallet"
+        },
+        "payment_not_accepted": {
+          "confidence": "low",
+          "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+          "method": "search_snippet",
+          "notes": "Sports Complex-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gameguide-philadelphiaeagles-com-stm"
+          ],
+          "value": "cash"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "The reserve lots are D/E, J, K (North), K (East), L (South) and L (North).",
+          "method": "search_snippet",
+          "observedAt": "2025-09-01",
+          "sources": [
+            "cbsnews-com-amp-philadelphia-news-lincoln-financial-field-parking-map-eagles"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-p": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "Lot P - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lot-p"
+          ],
+          "value": "Lot P is a public parking lot in the South Philadelphia Sports Complex listed on the Lincoln Financial Field site. Lot P sits inside the Citizens Bank Park lots; since Oct. 2026 it is a designated oversized-vehicle area for Eagles games."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Lot P - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lot-p"
+          ],
+          "value": "Lot P"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+          "method": "search_snippet",
+          "notes": "Sports Complex-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gameguide-philadelphiaeagles-com-stm"
+          ],
+          "value": "card;mobile_wallet"
+        },
+        "payment_not_accepted": {
+          "confidence": "low",
+          "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+          "method": "search_snippet",
+          "notes": "Sports Complex-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gameguide-philadelphiaeagles-com-stm"
+          ],
+          "value": "cash"
+        },
+        "tailgating_notes": {
+          "confidence": "medium",
+          "evidence": "Parking attendants will direct oversized vehicles to designated areas outside Lincoln Financial Field. Those vehicles will go to Lot D and the upper section of Lot N. Lot P (inside the Citizens Bank Park parking lots), was added",
+          "method": "search_snippet",
+          "observedAt": "2026-10-02",
+          "sources": [
+            "inquirer-com-eagles-tailgate-eagles-games-new-guidelines-sunday-rams-20261002-ht"
+          ],
+          "value": "Since Oct. 4, 2026, attendants hand-park oversized vehicles in designated areas (upper Lot N; Lot P); companion standard cars may not park there; a one-hour equipment drop-off window starts when gates open."
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Lot P - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lot-p"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {
+        "car|nfl_regular|area|2026": {
+          "confidence": "medium",
+          "evidence": "Eagles Game Rate: $50 – regular vehicle",
+          "method": "search_snippet",
+          "notes": "Stadium-wide Eagles game rate, not specific to this lot. Oversized rate is listed as $200 on the parking page (an older FAQ says $100).",
+          "observedAt": "2026-10-13",
+          "sources": [
+            "lincolnfinancialfield-com-parking"
+          ],
+          "value": "min=50;max=50;vehicle=car;scope=area;event=nfl_regular;season=2026"
+        },
+        "rv|nfl_regular|area|2026": {
+          "confidence": "low",
+          "evidence": "Guests without an oversized vehicle prepaid parking pass will be required to pay the $200 oversized vehicle parking rate upon arrival for the standard four spots, with the option to purchase two more spots for an additional $100.",
+          "method": "search_snippet",
+          "notes": "Oversized-vehicle rate (four spots) for guests without a prepaid oversized pass; two extra spots +$100. Article URL attribution of this quote is uncertain.",
+          "observedAt": "2026-10-02",
+          "sources": [
+            "inquirer-com-eagles-tailgate-eagles-games-new-guidelines-sunday-rams-20261002-ht"
+          ],
+          "value": "min=200;max=200;vehicle=rv;scope=area;event=nfl_regular;season=2026"
+        }
+      }
+    },
+    "lot-q": {
+      "fields": {
+        "description": {
+          "confidence": "medium",
+          "evidence": "Tailgating is not permitted in the parking lots north of Pattison Avenue and west of Darien Street, including Lots Q-W",
+          "method": "search_snippet",
+          "observedAt": "2026-10-13",
+          "sources": [
+            "lincolnfinancialfield-com-parking"
+          ],
+          "value": "Lot Q is a Sports Complex lot north of Pattison Avenue and west of Darien Street where the stadium says tailgating is not permitted."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "Tailgating is not permitted in the parking lots north of Pattison Avenue and west of Darien Street, including Lots Q-W",
+          "method": "search_snippet",
+          "observedAt": "2026-10-13",
+          "sources": [
+            "lincolnfinancialfield-com-parking"
+          ],
+          "value": "Lot Q"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+          "method": "search_snippet",
+          "notes": "Sports Complex-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gameguide-philadelphiaeagles-com-stm"
+          ],
+          "value": "card;mobile_wallet"
+        },
+        "payment_not_accepted": {
+          "confidence": "low",
+          "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+          "method": "search_snippet",
+          "notes": "Sports Complex-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gameguide-philadelphiaeagles-com-stm"
+          ],
+          "value": "cash"
+        },
+        "tailgating": {
+          "confidence": "medium",
+          "evidence": "Tailgating is not permitted in the parking lots north of Pattison Avenue and west of Darien Street, including Lots Q-W",
+          "method": "search_snippet",
+          "observedAt": "2026-10-13",
+          "sources": [
+            "lincolnfinancialfield-com-parking"
+          ],
+          "value": "no"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "including Lots Q-W",
+          "method": "search_snippet",
+          "observedAt": "2026-10-13",
+          "sources": [
+            "lincolnfinancialfield-com-parking"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {
+        "car|nfl_regular|area|2026": {
+          "confidence": "medium",
+          "evidence": "Eagles Game Rate: $50 – regular vehicle",
+          "method": "search_snippet",
+          "notes": "Stadium-wide Eagles game rate, not specific to this lot. Oversized rate is listed as $200 on the parking page (an older FAQ says $100).",
+          "observedAt": "2026-10-13",
+          "sources": [
+            "lincolnfinancialfield-com-parking"
+          ],
+          "value": "min=50;max=50;vehicle=car;scope=area;event=nfl_regular;season=2026"
+        }
+      }
+    },
+    "lots-abgh": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "Lots A/B/G/H - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lots-abgh"
+          ],
+          "value": "Lots A/B/G/H is a public parking lot in the South Philadelphia Sports Complex listed on the Lincoln Financial Field site."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Lots A/B/G/H - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lots-abgh"
+          ],
+          "value": "Lots A/B/G/H"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+          "method": "search_snippet",
+          "notes": "Sports Complex-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gameguide-philadelphiaeagles-com-stm"
+          ],
+          "value": "card;mobile_wallet"
+        },
+        "payment_not_accepted": {
+          "confidence": "low",
+          "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+          "method": "search_snippet",
+          "notes": "Sports Complex-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gameguide-philadelphiaeagles-com-stm"
+          ],
+          "value": "cash"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Lots A/B/G/H - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lots-abgh"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {
+        "car|nfl_regular|area|2026": {
+          "confidence": "medium",
+          "evidence": "Eagles Game Rate: $50 – regular vehicle",
+          "method": "search_snippet",
+          "notes": "Stadium-wide Eagles game rate, not specific to this lot. Oversized rate is listed as $200 on the parking page (an older FAQ says $100).",
+          "observedAt": "2026-10-13",
+          "sources": [
+            "lincolnfinancialfield-com-parking"
+          ],
+          "value": "min=50;max=50;vehicle=car;scope=area;event=nfl_regular;season=2026"
+        }
+      }
+    },
+    "lots-cd": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "Lots C/D - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lots-cd"
+          ],
+          "value": "Lots C/D is a public parking lot in the South Philadelphia Sports Complex listed on the Lincoln Financial Field site."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Lots C/D - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lots-cd"
+          ],
+          "value": "Lots C/D"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+          "method": "search_snippet",
+          "notes": "Sports Complex-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gameguide-philadelphiaeagles-com-stm"
+          ],
+          "value": "card;mobile_wallet"
+        },
+        "payment_not_accepted": {
+          "confidence": "low",
+          "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+          "method": "search_snippet",
+          "notes": "Sports Complex-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gameguide-philadelphiaeagles-com-stm"
+          ],
+          "value": "cash"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Lots C/D - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lots-cd"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {
+        "car|nfl_regular|area|2026": {
+          "confidence": "medium",
+          "evidence": "Eagles Game Rate: $50 – regular vehicle",
+          "method": "search_snippet",
+          "notes": "Stadium-wide Eagles game rate, not specific to this lot. Oversized rate is listed as $200 on the parking page (an older FAQ says $100).",
+          "observedAt": "2026-10-13",
+          "sources": [
+            "lincolnfinancialfield-com-parking"
+          ],
+          "value": "min=50;max=50;vehicle=car;scope=area;event=nfl_regular;season=2026"
+        }
+      }
+    },
+    "lots-de": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "The reserve lots are D/E, J, K (North), K (East), L (South) and L (North).",
+          "method": "search_snippet",
+          "notes": "Reserved lots require a pass; all reserved areas are subject to vehicle inspection.",
+          "observedAt": "2025-09-01",
+          "sources": [
+            "cbsnews-com-amp-philadelphia-news-lincoln-financial-field-parking-map-eagles"
+          ],
+          "value": "Lots D/E is one of the stadium's six reserved parking lots for Eagles games."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Lots D/E - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lots-de"
+          ],
+          "value": "Lots D/E"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+          "method": "search_snippet",
+          "notes": "Sports Complex-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gameguide-philadelphiaeagles-com-stm"
+          ],
+          "value": "card;mobile_wallet"
+        },
+        "payment_not_accepted": {
+          "confidence": "low",
+          "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+          "method": "search_snippet",
+          "notes": "Sports Complex-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gameguide-philadelphiaeagles-com-stm"
+          ],
+          "value": "cash"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Lots D/E - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lots-de"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lots-m-n": {
+      "fields": {
+        "aliases": {
+          "confidence": "low",
+          "evidence": "Lots M/N (North) - Lincoln Financial Field; Lots M/N (South) - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lots-mn-south"
+          ],
+          "value": "Lots M/N (North);Lots M/N (South)"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "Lots M/N (North) - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lots-mn-north"
+          ],
+          "value": "Lots M/N is a public parking lot in the South Philadelphia Sports Complex listed on the Lincoln Financial Field site. The lot has separate North and South entrances; since Oct. 2026 the upper section of Lot N is a designated oversized-vehicle area for Eagles games."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Lots M/N (North) - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lots-mn-north"
+          ],
+          "value": "Lots M/N"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+          "method": "search_snippet",
+          "notes": "Sports Complex-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gameguide-philadelphiaeagles-com-stm"
+          ],
+          "value": "card;mobile_wallet"
+        },
+        "payment_not_accepted": {
+          "confidence": "low",
+          "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+          "method": "search_snippet",
+          "notes": "Sports Complex-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gameguide-philadelphiaeagles-com-stm"
+          ],
+          "value": "cash"
+        },
+        "tailgating_notes": {
+          "confidence": "medium",
+          "evidence": "Parking attendants will direct oversized vehicles to designated areas outside Lincoln Financial Field. Those vehicles will go to Lot D and the upper section of Lot N. Lot P (inside the Citizens Bank Park parking lots), was added",
+          "method": "search_snippet",
+          "observedAt": "2026-10-02",
+          "sources": [
+            "inquirer-com-eagles-tailgate-eagles-games-new-guidelines-sunday-rams-20261002-ht"
+          ],
+          "value": "Since Oct. 4, 2026, attendants hand-park oversized vehicles in designated areas (upper Lot N; Lot P); companion standard cars may not park there; a one-hour equipment drop-off window starts when gates open."
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Lots M/N (North) - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lots-mn-north"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {
+        "car|nfl_regular|area|2026": {
+          "confidence": "medium",
+          "evidence": "Eagles Game Rate: $50 – regular vehicle",
+          "method": "search_snippet",
+          "notes": "Stadium-wide Eagles game rate, not specific to this lot. Oversized rate is listed as $200 on the parking page (an older FAQ says $100).",
+          "observedAt": "2026-10-13",
+          "sources": [
+            "lincolnfinancialfield-com-parking"
+          ],
+          "value": "min=50;max=50;vehicle=car;scope=area;event=nfl_regular;season=2026"
+        },
+        "rv|nfl_regular|area|2026": {
+          "confidence": "low",
+          "evidence": "Guests without an oversized vehicle prepaid parking pass will be required to pay the $200 oversized vehicle parking rate upon arrival for the standard four spots, with the option to purchase two more spots for an additional $100.",
+          "method": "search_snippet",
+          "notes": "Oversized-vehicle rate (four spots) for guests without a prepaid oversized pass; two extra spots +$100. Article URL attribution of this quote is uncertain.",
+          "observedAt": "2026-10-02",
+          "sources": [
+            "inquirer-com-eagles-tailgate-eagles-games-new-guidelines-sunday-rams-20261002-ht"
+          ],
+          "value": "min=200;max=200;vehicle=rv;scope=area;event=nfl_regular;season=2026"
+        }
+      }
+    },
+    "lots-rwx": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "Lots R/W/X - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lots-rwx"
+          ],
+          "value": "Lots R/W/X is a public parking lot in the South Philadelphia Sports Complex listed on the Lincoln Financial Field site. Most of this lot falls in the Q–W area where the stadium says tailgating is not permitted."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Lots R/W/X - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lots-rwx"
+          ],
+          "value": "Lots R/W/X"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+          "method": "search_snippet",
+          "notes": "Sports Complex-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gameguide-philadelphiaeagles-com-stm"
+          ],
+          "value": "card;mobile_wallet"
+        },
+        "payment_not_accepted": {
+          "confidence": "low",
+          "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+          "method": "search_snippet",
+          "notes": "Sports Complex-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gameguide-philadelphiaeagles-com-stm"
+          ],
+          "value": "cash"
+        },
+        "tailgating_notes": {
+          "confidence": "medium",
+          "evidence": "Tailgating is not permitted in the parking lots north of Pattison Avenue and west of Darien Street, including Lots Q-W",
+          "method": "search_snippet",
+          "observedAt": "2026-10-13",
+          "sources": [
+            "lincolnfinancialfield-com-parking"
+          ],
+          "value": "The stadium says tailgating is not permitted in Lots Q-W (north of Pattison Avenue and west of Darien Street); Lots R and W fall in that range, Lot X is not named."
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Lots R/W/X - Lincoln Financial Field",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "lincolnfinancialfield-com-lots-rwx"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {
+        "car|nfl_regular|area|2026": {
+          "confidence": "medium",
+          "evidence": "Eagles Game Rate: $50 – regular vehicle",
+          "method": "search_snippet",
+          "notes": "Stadium-wide Eagles game rate, not specific to this lot. Oversized rate is listed as $200 on the parking page (an older FAQ says $100).",
+          "observedAt": "2026-10-13",
+          "sources": [
+            "lincolnfinancialfield-com-parking"
+          ],
+          "value": "min=50;max=50;vehicle=car;scope=area;event=nfl_regular;season=2026"
+        }
+      }
+    }
+  },
+  "slug": "lincoln-financial-field",
+  "sources": {
+    "cbsnews-com-amp-philadelphia-news-lincoln-financial-field-parking-map-eagles": {
+      "method": "search_snippet",
+      "name": "CBS News Philadelphia — Where to park at Lincoln Financial Field",
+      "retrievedAt": "2025-09-01",
+      "type": "media",
+      "url": "https://www.cbsnews.com/amp/philadelphia/news/lincoln-financial-field-parking-map-eagles"
+    },
+    "gameguide-philadelphiaeagles-com-stm": {
+      "method": "search_snippet",
+      "name": "Philadelphia Eagles — Game Guide (STM)",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://gameguide.philadelphiaeagles.com/stm"
+    },
+    "inquirer-com-eagles-septa-service-cuts-broad-street-line-sports-complex-20250816": {
+      "method": "search_snippet",
+      "name": "Philadelphia Inquirer — SEPTA service cuts and the Sports Complex",
+      "retrievedAt": "2025-08-16",
+      "type": "media",
+      "url": "https://www.inquirer.com/eagles/septa-service-cuts-broad-street-line-sports-complex-20250816.html"
+    },
+    "inquirer-com-eagles-tailgate-eagles-games-new-guidelines-sunday-rams-20261002-ht": {
+      "method": "search_snippet",
+      "name": "Philadelphia Inquirer — new tailgate guidelines (Rams game)",
+      "retrievedAt": "2026-10-02",
+      "type": "media",
+      "url": "https://www.inquirer.com/eagles/tailgate-eagles-games-new-guidelines-sunday-rams-20261002.html"
+    },
+    "lincolnfinancialfield-com-faqs": {
+      "method": "search_snippet",
+      "name": "Lincoln Financial Field — FAQs",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.lincolnfinancialfield.com/faqs/"
+    },
+    "lincolnfinancialfield-com-lok-k-north": {
+      "method": "search_snippet",
+      "name": "Lincoln Financial Field — Lot K (North)",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.lincolnfinancialfield.com/lok-k-north/"
+    },
+    "lincolnfinancialfield-com-lot-j": {
+      "method": "search_snippet",
+      "name": "Lincoln Financial Field — Lot J",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.lincolnfinancialfield.com/lot-j/"
+    },
+    "lincolnfinancialfield-com-lot-k-east": {
+      "method": "search_snippet",
+      "name": "Lincoln Financial Field — Lot K (East)",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.lincolnfinancialfield.com/lot-k-east/"
+    },
+    "lincolnfinancialfield-com-lot-l-north": {
+      "method": "search_snippet",
+      "name": "Lincoln Financial Field — Lot L (North)",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.lincolnfinancialfield.com/lot-l-north/"
+    },
+    "lincolnfinancialfield-com-lot-p": {
+      "method": "search_snippet",
+      "name": "Lincoln Financial Field — Lot P",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.lincolnfinancialfield.com/lot-p/"
+    },
+    "lincolnfinancialfield-com-lots-abgh": {
+      "method": "search_snippet",
+      "name": "Lincoln Financial Field — Lots A/B/G/H",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.lincolnfinancialfield.com/lots-abgh/"
+    },
+    "lincolnfinancialfield-com-lots-cd": {
+      "method": "search_snippet",
+      "name": "Lincoln Financial Field — Lots C/D",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.lincolnfinancialfield.com/lots-cd/"
+    },
+    "lincolnfinancialfield-com-lots-de": {
+      "method": "search_snippet",
+      "name": "Lincoln Financial Field — Lots D/E",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.lincolnfinancialfield.com/lots-de/"
+    },
+    "lincolnfinancialfield-com-lots-mn-north": {
+      "method": "search_snippet",
+      "name": "Lincoln Financial Field — Lots M/N",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.lincolnfinancialfield.com/lots-mn-north/"
+    },
+    "lincolnfinancialfield-com-lots-mn-south": {
+      "method": "search_snippet",
+      "name": "Lincoln Financial Field — Lots M/N (South)",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.lincolnfinancialfield.com/lots-mn-south/"
+    },
+    "lincolnfinancialfield-com-lots-rwx": {
+      "method": "search_snippet",
+      "name": "Lincoln Financial Field — Lots R/W/X",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.lincolnfinancialfield.com/lots-rwx/"
+    },
+    "lincolnfinancialfield-com-parking": {
+      "method": "search_snippet",
+      "name": "Lincoln Financial Field — Parking",
+      "retrievedAt": "2026-10-13",
+      "type": "official",
+      "url": "https://www.lincolnfinancialfield.com/parking/"
+    },
+    "m-booking-com-hotel-us-live-casino-amp-philadelphia-html": {
+      "method": "search_snippet",
+      "name": "Booking.com — Live! Casino & Hotel Philadelphia",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://m.booking.com/hotel/us/live-casino-amp-philadelphia.html"
+    },
+    "mlb-com-phillies-ballpark-transportation-public-transportation-septa": {
+      "method": "search_snippet",
+      "name": "Philadelphia Phillies — Public Transportation/SEPTA",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.mlb.com/phillies/ballpark/transportation/public-transportation-septa"
+    }
+  },
+  "venue": {
+    "fields": {
+      "city": {
+        "confidence": "low",
+        "evidence": "Lincoln Financial Field, One Lincoln Financial Field Way, Philadelphia, PA 19148",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "lincolnfinancialfield-com-faqs"
+        ],
+        "value": "Philadelphia"
+      },
+      "lot_open_hours_before": {
+        "confidence": "low",
+        "evidence": "parking areas are generally open four and a half hours prior to kick off",
+        "method": "search_snippet",
+        "notes": "Home openers and primetime games have opened earlier in past seasons.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "lincolnfinancialfield-com-faqs"
+        ],
+        "value": "4.5"
+      },
+      "postal_code": {
+        "confidence": "low",
+        "evidence": "Lincoln Financial Field, One Lincoln Financial Field Way, Philadelphia, PA 19148",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "lincolnfinancialfield-com-faqs"
+        ],
+        "value": "19148"
+      },
+      "state": {
+        "confidence": "low",
+        "evidence": "Lincoln Financial Field, One Lincoln Financial Field Way, Philadelphia, PA 19148",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "lincolnfinancialfield-com-faqs"
+        ],
+        "value": "PA"
+      },
+      "street": {
+        "confidence": "low",
+        "evidence": "Lincoln Financial Field, One Lincoln Financial Field Way, Philadelphia, PA 19148",
+        "method": "search_snippet",
+        "notes": "The FAQ advises entering 1020 Pattison Avenue into map apps.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "lincolnfinancialfield-com-faqs"
+        ],
+        "value": "One Lincoln Financial Field Way"
+      },
+      "teams": {
+        "confidence": "medium",
+        "evidence": "Eagles Game Rate: $50 – regular vehicle",
+        "method": "search_snippet",
+        "observedAt": "2026-10-13",
+        "sources": [
+          "lincolnfinancialfield-com-parking"
+        ],
+        "value": "Philadelphia Eagles"
+      },
+      "timezone": {
+        "confidence": "low",
+        "evidence": "Lincoln Financial Field, One Lincoln Financial Field Way, Philadelphia, PA 19148",
+        "method": "search_snippet",
+        "notes": "Derived from the Philadelphia, PA address.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "lincolnfinancialfield-com-faqs"
+        ],
+        "value": "America/New_York"
+      },
+      "venue_name": {
+        "confidence": "low",
+        "evidence": "Lincoln Financial Field, One Lincoln Financial Field Way, Philadelphia, PA 19148",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "lincolnfinancialfield-com-faqs"
+        ],
+        "value": "Lincoln Financial Field"
+      },
+      "venue_type": {
+        "confidence": "low",
+        "evidence": "The Pepsi Plaza contains the Eagles Ticket Office.",
+        "method": "search_snippet",
+        "notes": "Venue type inferred from it being the Eagles' NFL stadium.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "lincolnfinancialfield-com-faqs"
+        ],
+        "value": "stadium"
+      }
+    },
+    "policy": {
+      "Accessible parking": {
+        "confidence": "low",
+        "evidence": "Accessible parking is at the North Gate, and fans will need to present a valid placard and ADA parking pass to leave their vehicles in these parking spaces.",
+        "method": "search_snippet",
+        "notes": "Source exact URL attribution from search summary; verify.",
+        "observedAt": "2025-09-01",
+        "sources": [
+          "cbsnews-com-amp-philadelphia-news-lincoln-financial-field-parking-map-eagles"
+        ],
+        "value": "Accessible parking is at the North Gate; a valid placard and an ADA parking pass are required."
+      },
+      "Cashless parking": {
+        "confidence": "low",
+        "evidence": "all parking lots within the Sports Complex are also cashless, and acceptable payment at these lots includes major credit cards, debit cards, and digital payment options such as Apple Pay and Google Pay",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "gameguide-philadelphiaeagles-com-stm"
+        ],
+        "value": "All parking lots within the Sports Complex are cashless; major credit cards, debit cards and digital payments such as Apple Pay and Google Pay are accepted."
+      },
+      "Oversized vehicles (2026)": {
+        "confidence": "medium",
+        "evidence": "Parking attendants will direct oversized vehicles to designated areas outside Lincoln Financial Field. Those vehicles will go to Lot D and the upper section of Lot N. Lot P (inside the Citizens Bank Park parking lots), was added to the initial list of lots by the Eagles and Comcast Spectacor after pushback from tailgaters.",
+        "method": "search_snippet",
+        "notes": "Rules set by the Sports Complex Parking Venture with the Eagles and Comcast Spectacor; revised after fan pushback (one-hour drop-off window at gate opening). Lot P addition may come from a follow-up Inquirer article.",
+        "observedAt": "2026-10-02",
+        "sources": [
+          "inquirer-com-eagles-tailgate-eagles-games-new-guidelines-sunday-rams-20261002-ht"
+        ],
+        "value": "Starting Oct. 4, 2026, lot attendants direct oversized vehicles to designated areas (Lot D and the upper section of Lot N, later also Lot P); companion standard cars may not park in those areas and spots cannot be chosen or reserved."
+      },
+      "Prepaid parking": {
+        "confidence": "low",
+        "evidence": "prepaid parking, if available, will be located on Ticketmaster.com",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "lincolnfinancialfield-com-faqs"
+        ],
+        "value": "Prepaid parking, if available, is sold on Ticketmaster.com."
+      },
+      "Rideshare": {
+        "confidence": "low",
+        "evidence": "Unlike Citizens Bank Park and Xfinity Mobile Arena, there is no designated ride-hail lot at the Linc.",
+        "method": "search_snippet",
+        "notes": "Undated CBS article; verify.",
+        "observedAt": "2025-09-01",
+        "sources": [
+          "cbsnews-com-amp-philadelphia-news-lincoln-financial-field-parking-map-eagles"
+        ],
+        "value": "There is no designated ride-hail lot at Lincoln Financial Field."
+      },
+      "Tailgating restrictions": {
+        "confidence": "medium",
+        "evidence": "Tailgating is not permitted in the parking lots north of Pattison Avenue and west of Darien Street, including Lots Q-W and the lot near the Jefferson Health Training Complex",
+        "method": "search_snippet",
+        "observedAt": "2026-10-13",
+        "sources": [
+          "lincolnfinancialfield-com-parking"
+        ],
+        "value": "Tailgating is not permitted in the parking lots north of Pattison Avenue and west of Darien Street, including Lots Q-W and the lot near the Jefferson Health Training Complex."
+      },
+      "Vehicle inspection": {
+        "confidence": "medium",
+        "evidence": "all reserved parking areas are subject to a vehicle inspection prior to an event",
+        "method": "search_snippet",
+        "observedAt": "2026-10-13",
+        "sources": [
+          "lincolnfinancialfield-com-parking"
+        ],
+        "value": "All reserved parking areas are subject to a vehicle inspection prior to an event."
+      }
+    },
+    "transit": {
+      "SEPTA B (Broad Street Line)": {
+        "confidence": "low",
+        "evidence": "Ride the B south to NRG Station (last stop) located at Broad & Pattison ... There is a free transfer to the B from the L and Trolley routes at 15th St/City Hall",
+        "method": "search_snippet",
+        "notes": "Source is the Phillies' transit page; NRG Station serves the whole Sports Complex.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-phillies-ballpark-transportation-public-transportation-septa"
+        ],
+        "value": "Ride the B south to NRG Station (last stop) at Broad & Pattison; free transfer from the L and trolley routes at 15th St/City Hall."
+      },
+      "SEPTA bus routes 4 and 17": {
+        "confidence": "low",
+        "evidence": "Bus routes 4 and 17 (weekends only) provide direct service to the stadiums.",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-phillies-ballpark-transportation-public-transportation-septa"
+        ],
+        "value": "Bus routes 4 and 17 (Route 17 weekends only) provide direct service to the stadiums."
+      },
+      "SEPTA Sports Express": {
+        "confidence": "low",
+        "evidence": "the first round of SEPTA cuts ... would end game-day express service to the sports complex",
+        "method": "search_snippet",
+        "notes": "Likely outdated; check SEPTA before game day.",
+        "observedAt": "2025-08-16",
+        "sources": [
+          "inquirer-com-eagles-septa-service-cuts-broad-street-line-sports-complex-20250816"
+        ],
+        "value": "Game-day express service to the Sports Complex was cut in SEPTA's August 2025 service reductions; it was restored for some 2025 games via sponsorships. 2026 status unconfirmed."
+      }
+    }
+  },
+  "version": 1
+}

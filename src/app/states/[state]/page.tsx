@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: PageProps<"/states/[state]">)
   const name = stateName(code);
   let indexable = false;
   for (const v of await listVenuesByState(code)) {
-    if (isIndexableVenue(v, (await listFacilities(v.id)).length)) indexable = true;
+    if (isIndexableVenue(v, await listFacilities(v.id))) indexable = true;
   }
   return {
     title: `${name} stadium & event parking`,
