@@ -11,6 +11,7 @@ export function preModerationFlags(input: SubmissionInput, facility?: ParkingFac
   const text = [
     "body" in input ? input.body : "",
     "notes" in input ? (input.notes ?? "") : "",
+    "instructions" in input ? (input.instructions ?? "") : "",
   ].join(" ");
 
   if (text.match(URL_RE)) flags.push("contains_link");
@@ -43,6 +44,12 @@ export function preModerationFlags(input: SubmissionInput, facility?: ParkingFac
         flags.push("contradicts_curated_timing");
       }
     }
+  }
+
+  if (input.kind === "entrance") {
+    if (input.role === "lot_owner") flags.push("owner_claim_unverified");
+    // Address-only reports have no exact point yet; the geocoded suggestion is approximate.
+    if (!input.pin) flags.push("address_only");
   }
 
   const eventDate = "eventDate" in input ? input.eventDate : "observedDate" in input ? input.observedDate : undefined;

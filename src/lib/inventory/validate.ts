@@ -79,6 +79,14 @@ export function validateInventory(raw: unknown, base?: Venue, now = new Date().t
     if (a && addresses.has(a)) at(slug, `duplicate of lot "${addresses.get(a)}" (same address)`);
     else if (a) addresses.set(a, slug);
 
+    // Entrance coordinates are navigated to only once verified, so "verified" must mean LotLizard checked
+    // it on site (or confirmed an operator's pin), and can never rest on geocoded coordinates.
+    const ev = lot.fields.entrance_verification;
+    if (ev?.value === "verified") {
+      if (ev.method !== "field" || !ev.verifiedAt) at(slug, 'entrance_verification "verified" needs a field verification with verifiedAt');
+      if (lot.fields.entrance_location?.value.trim().endsWith("geocoded")) at(slug, "a geocoded entrance location cannot be verified");
+    }
+
     if (lot.fields.location) {
       try {
         const loc = readField("location", lot.fields.location.value);

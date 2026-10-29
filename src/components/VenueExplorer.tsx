@@ -20,7 +20,7 @@ import {
 } from "@/lib/ranking";
 import { AMENITY_LABEL, FACILITY_TYPE_COLOR, FACILITY_TYPE_LABEL } from "@/lib/labels";
 import { CONFIDENCE_LABEL } from "@/lib/confidence";
-import { directionsLinks, type DirectionsLinks } from "@/lib/directions";
+import { DIRECTIONS_BASIS_LABEL, directionsLinks, type DirectionsLinks } from "@/lib/directions";
 import { eventShortLabel, formatClock, formatEventDate, lotOpenTime, upcomingEvents } from "@/lib/events";
 import { formatDistance } from "@/lib/geo";
 import { activeFilterCount, applyDisplayFilters, buildMarkers, clearFilters } from "@/lib/explorer";
@@ -643,7 +643,7 @@ function DirectionsRow({ links }: { links: DirectionsLinks | null }) {
       <a href={links.apple} target="_blank" rel="noopener noreferrer" className="flex h-9 items-center rounded-lg bg-neutral-100 px-3 text-xs font-semibold dark:bg-neutral-800">
         Apple Maps
       </a>
-      <span className="text-[11px] text-neutral-500">{links.basis === "street_address" ? "to the listed street address" : "to the verified entrance"}</span>
+      <span className="text-[11px] text-neutral-500">{DIRECTIONS_BASIS_LABEL[links.basis]}</span>
     </div>
   );
 }

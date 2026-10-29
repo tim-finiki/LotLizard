@@ -48,7 +48,11 @@ facts CSV / JSON  ──►  npm run inventory -- import <file>  ──►  src/
 | `operator` | Operator name |
 | `ownership` | `public` (city, county, state or public authority) or `private`. Omit when no source says. |
 | `access` | `public` (anyone can park), `pass_required` (pass/permit issued in advance), `restricted` (reserved for specific people, e.g. season-ticket holders; never recommended). Omit when no source says. Ownership and access are independent. |
-| `address` | Street address as published |
+| `address` | The lot's official street address as published (not necessarily where cars enter) |
+| `entrance_address` | Street address of the vehicle entrance, when it differs or is published separately |
+| `entrance_location` | `lat,lng,pin` (exact coordinates someone dropped), `lat,lng,surveyed` (LotLizard on site) or `lat,lng,geocoded` (approximate, from an address — never navigated to) |
+| `entrance_instructions` | e.g. "Access only from Fieldhouse Dr via Big Tree Rd" |
+| `entrance_verification` | `unverified` (default), `needs_review`, or `verified`. `verified` requires a `field` row with `verified_at` and can't rest on geocoded coordinates. Directions use the entrance pin only once verified; otherwise the entrance address, then the lot's surveyed pin, then its street address. |
 | `aliases` | `;`-separated |
 | `description` | One or two factual sentences |
 | `location` | `lat,lng,exact` or `lat,lng,approximate`. Exact requires a surveyed or operator/official coordinate. |

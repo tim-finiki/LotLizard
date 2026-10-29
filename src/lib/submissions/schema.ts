@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { PAYMENT_METHODS, PAYMENT_TIMINGS } from "@/lib/payment";
 
-export const SUBMISSION_KINDS = ["price", "review", "payment", "lot_info", "correction", "exit_time"] as const;
+export const SUBMISSION_KINDS = ["price", "review", "payment", "lot_info", "correction", "exit_time", "entrance"] as const;
 export const SUBMITTER_ROLES = ["community", "lot_owner"] as const;
 export type SubmissionKind = (typeof SUBMISSION_KINDS)[number];
 
@@ -43,6 +43,23 @@ const paymentSubmission = z
     path: ["notAccepted"],
   });
 
+/**
+ * Vehicle entrance from a fan or a lot owner: a street address, a map pin, or both. Either is enough;
+ * both are preferred. The pin is kept exactly as dropped.
+ */
+const entranceSubmission = z
+  .object({
+    ...base,
+    kind: z.literal("entrance"),
+    facilitySlug: base.facilitySlug.unwrap(),
+    role: z.enum(SUBMITTER_ROLES),
+    address: z.string().trim().min(5).max(200).optional(),
+    pin: z.object({ lat: z.number().min(18).max(72), lng: z.number().min(-180).max(-64) }).optional(),
+    instructions: z.string().trim().max(400).optional(),
+    observedDate: isoDate,
+  })
+  .refine((e) => e.address || e.pin, { message: "Add the entrance's street address, drop a pin, or both", path: ["address"] });
+
 export const submissionInputSchema = z.discriminatedUnion("kind", [
   z.object({
     ...base,
@@ -63,6 +80,7 @@ export const submissionInputSchema = z.discriminatedUnion("kind", [
     body: z.string().trim().min(20).max(2000),
   }),
   paymentSubmission,
+  entranceSubmission,
   z.object({
     ...base,
     kind: z.literal("lot_info"),

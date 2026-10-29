@@ -9,6 +9,7 @@ import type {
   PriceObservation,
   UniversalAmenity,
   Venue,
+  VehicleEntrance,
   VenuePolicy,
   TransitOption,
 } from "@/lib/types";
@@ -172,6 +173,20 @@ export function inventoryFacility(inv: VenueInventory, lotSlug: string, lot: Inv
     ? { value: readField("tailgating", tailgate.value) === "yes", attribution: attribution(v, tailgate) }
     : { value: "unknown", attribution: unknown() };
   const location = read(f.location, "location");
+  const entranceFacts = [f.entrance_address, f.entrance_location, f.entrance_instructions].filter((x): x is Fact => !!x);
+  const entranceVerified = f.entrance_verification ? readField("entrance_verification", f.entrance_verification.value) : undefined;
+  const entrance: VehicleEntrance | undefined = entranceFacts.length
+    ? {
+        ...(f.entrance_address ? { address: f.entrance_address.value } : {}),
+        ...(f.entrance_location ? { location: readField("entrance_location", f.entrance_location.value) } : {}),
+        ...(f.entrance_instructions ? { instructions: f.entrance_instructions.value } : {}),
+        // Verified only on LotLizard's say-so, recorded as a fact with a verification date.
+        verification: entranceVerified ?? "unverified",
+        ...(entranceVerified === "verified" && f.entrance_verification?.verifiedAt ? { verifiedAt: f.entrance_verification.verifiedAt } : {}),
+        reportedAt: entranceFacts.map((x) => x.observedAt).sort().at(-1)!,
+        attribution: combined(v, entranceFacts),
+      }
+    : undefined;
   const walk = read(f.walk_minutes, "walk_minutes");
 
   return {
@@ -185,6 +200,7 @@ export function inventoryFacility(inv: VenueInventory, lotSlug: string, lot: Inv
     ...(f.ownership ? { ownership: { value: readField("ownership", f.ownership.value), attribution: attribution(v, f.ownership) } } : {}),
     ...(f.access ? { access: { value: readField("access", f.access.value), attribution: attribution(v, f.access) } } : {}),
     ...(f.address ? { address: f.address.value } : {}),
+    ...(entrance ? { entrance } : {}),
     ...(location ? { location } : {}),
     description: f.description?.value ?? "",
     ...(walk !== undefined && f.walk_minutes ? { walkMinutes: { value: walk, attribution: attribution(v, f.walk_minutes) } } : {}),

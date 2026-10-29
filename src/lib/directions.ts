@@ -1,33 +1,58 @@
-import type { GeoPoint } from "@/lib/types";
+import type { GeoPoint, VehicleEntrance } from "@/lib/types";
+
+export type DirectionsBasis = "verified_entrance" | "entrance_address" | "exact_pin" | "street_address";
 
 export interface DirectionsLinks {
   google: string;
   apple: string;
   /** What the link navigates to — shown to users so they know how precise it is. */
-  basis: "exact_pin" | "street_address";
+  basis: DirectionsBasis;
+}
+
+/** Plain-language destination for each basis, shown next to the links. */
+export const DIRECTIONS_BASIS_LABEL: Record<DirectionsBasis, string> = {
+  verified_entrance: "to the verified vehicle entrance",
+  entrance_address: "to the vehicle entrance address",
+  exact_pin: "to the lot's surveyed location",
+  street_address: "to the lot's street address",
+};
+
+function links(destination: string, basis: DirectionsBasis): DirectionsLinks {
+  return {
+    google: `https://www.google.com/maps/dir/?api=1&destination=${destination}`,
+    apple: `https://maps.apple.com/?daddr=${destination}`,
+    basis,
+  };
 }
 
 /**
- * Navigation links only when the destination is reliable: an exact (surveyed) pin, or a sourced
- * street address. Approximate editorial pins never produce directions.
+ * Coordinates that may be used for turn-by-turn navigation: a verified entrance that was pinned or
+ * surveyed. Geocoded coordinates are approximate (an address's centroid, not the driveway) and
+ * unverified pins aren't confirmed, so neither is ever routed to.
  */
-export function directionsLinks(target: { location?: GeoPoint; address?: string }): DirectionsLinks | null {
-  if (target.location?.precision === "exact") {
-    const ll = `${target.location.lat},${target.location.lng}`;
-    return {
-      google: `https://www.google.com/maps/dir/?api=1&destination=${ll}`,
-      apple: `https://maps.apple.com/?daddr=${ll}`,
-      basis: "exact_pin",
-    };
+export function navigableEntrance(entrance?: VehicleEntrance): { lat: number; lng: number } | undefined {
+  const loc = entrance?.location;
+  if (!loc || entrance.verification !== "verified" || loc.method === "geocoded") return undefined;
+  return { lat: loc.lat, lng: loc.lng };
+}
+
+/**
+ * Navigation links only when the destination is reliable, in this order:
+ * 1. a verified vehicle-entrance pin;
+ * 2. the vehicle entrance's street address (unless it's flagged for review);
+ * 3. an exact (surveyed) pin for the lot itself;
+ * 4. the lot's official street address.
+ * Approximate editorial pins, geocoded coordinates and unverified pins never produce directions.
+ */
+export function directionsLinks(target: { location?: GeoPoint; address?: string; entrance?: VehicleEntrance }): DirectionsLinks | null {
+  const entrancePin = navigableEntrance(target.entrance);
+  if (entrancePin) return links(`${entrancePin.lat},${entrancePin.lng}`, "verified_entrance");
+  // A sourced entrance address is usable even before LotLizard verifies it, unless it's under review.
+  if (target.entrance?.address && target.entrance.verification !== "needs_review" && isStreetAddress(target.entrance.address)) {
+    return links(encodeURIComponent(target.entrance.address), "entrance_address");
   }
-  if (target.address && isStreetAddress(target.address)) {
-    const q = encodeURIComponent(target.address);
-    return {
-      google: `https://www.google.com/maps/dir/?api=1&destination=${q}`,
-      apple: `https://maps.apple.com/?daddr=${q}`,
-      basis: "street_address",
-    };
-  }
+  if (target.location?.precision === "exact") return links(`${target.location.lat},${target.location.lng}`, "exact_pin");
+  if (target.address && isStreetAddress(target.address)) return links(encodeURIComponent(target.address), "street_address");
   return null;
 }
 
