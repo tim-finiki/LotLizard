@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { collectSourceIds, facilityAttributions, facilitySourceIds, getSourcesFor, listFacilities, listVenues } from "@/lib/data/repository";
 import { facilityPath, isIndexableVenue, siteUrl, statePath, venuePath } from "@/lib/seo";
 import { verificationSummary } from "@/lib/verification";
+import { METROS, isIndexableMetro, metroPath } from "@/lib/metro";
+import { listVenuesWithFacilities } from "@/lib/data/repository";
 
 /**
  * Only pages we want indexed: venues with real parking data, their lots, and states that contain
@@ -13,6 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const entries: MetadataRoute.Sitemap = [];
   const states = new Set<string>();
   let latest: string | undefined;
+  const all = await listVenuesWithFacilities();
 
   for (const venue of await listVenues()) {
     const facilities = await listFacilities(venue.id);
@@ -34,6 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/venues`, lastModified: latest, changeFrequency: "weekly", priority: 0.8 },
     { url: `${base}/about/data`, changeFrequency: "monthly", priority: 0.3 },
     ...entries,
+    ...METROS.filter((m) => isIndexableMetro(m, all)).map((m) => ({ url: base + metroPath(m), lastModified: latest, changeFrequency: "weekly" as const, priority: 0.8 })),
     ...[...states].sort().map((s) => ({ url: base + statePath(s), lastModified: latest, changeFrequency: "monthly" as const, priority: 0.5 })),
   ];
 }
