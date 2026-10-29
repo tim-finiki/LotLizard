@@ -3,6 +3,9 @@ import Link from "next/link";
 import "./globals.css";
 import { SITE_NAME, siteUrl } from "@/lib/seo";
 import { buildInfo } from "@/lib/build-info";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { AnalyticsEvents } from "@/components/AnalyticsEvents";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
@@ -70,6 +73,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             </p>
           </div>
         </footer>
+        {/* No-ops until Web Analytics / Speed Insights are enabled for the project in Vercel. */}
+        <Analytics />
+        <SpeedInsights />
+        <AnalyticsEvents />
       </body>
     </html>
   );
