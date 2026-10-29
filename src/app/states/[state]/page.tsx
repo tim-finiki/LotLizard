@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { listFacilities, listStatesWithVenues, listVenuesByState } from "@/lib/data/repository";
+import Link from "next/link";
+import { listFacilities, listStatesWithVenues, listVenuesByState, listVenuesWithFacilities } from "@/lib/data/repository";
+import { METROS, metroHasPage, metroPath } from "@/lib/metro";
 import { stateName, US_STATES } from "@/lib/states";
 import { NOINDEX_FOLLOW, isIndexableVenue, statePath } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -33,6 +35,8 @@ export default async function StatePage({ params }: PageProps<"/states/[state]">
   const venues = await listVenuesByState(code);
   if (venues.length === 0) notFound();
   const name = stateName(code);
+  const all = await listVenuesWithFacilities();
+  const metros = METROS.filter((m) => m.places.some((p) => p.state === code) && metroHasPage(m, all));
   return (
     <div className="mx-auto max-w-5xl px-4 py-6">
       <Breadcrumbs items={[{ name: "Venues", path: "/venues" }, { name, path: statePath(code) }]} />
@@ -40,6 +44,19 @@ export default async function StatePage({ params }: PageProps<"/states/[state]">
       <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
         {venues.length} {venues.length === 1 ? "venue" : "venues"} in {name}.
       </p>
+      {metros.length > 0 && (
+        <p className="mt-3 text-sm">
+          Compare by city:{" "}
+          {metros.map((m, i) => (
+            <span key={m.slug}>
+              {i > 0 && " · "}
+              <Link href={metroPath(m)} className="font-semibold text-brand-700 underline-offset-2 hover:underline dark:text-brand-100">
+                {m.name} stadium parking
+              </Link>
+            </span>
+          ))}
+        </p>
+      )}
       <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {venues.map((v) => (
           <VenueCard key={v.id} venue={v} />

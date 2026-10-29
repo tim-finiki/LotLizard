@@ -113,3 +113,9 @@ export function collectSourceIds(venue: Venue, facilities: ParkingFacility[]): s
   ];
   return [...new Set([...venueAttributions.flatMap((a) => a?.sourceIds ?? []), ...facilities.flatMap(facilitySourceIds)])];
 }
+
+/** Every venue with its facilities, for cross-venue pages (metro hubs). */
+export async function listVenuesWithFacilities(): Promise<{ venue: Venue; facilities: ParkingFacility[] }[]> {
+  "use cache";
+  return Promise.all((await listVenues()).map(async (venue) => ({ venue, facilities: await listFacilities(venue.id) })));
+}

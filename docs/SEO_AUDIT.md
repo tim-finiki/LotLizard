@@ -129,3 +129,23 @@ Booking-site affiliate links, if adopted, stay clearly labelled and outside the 
 3. **Analytics provider** and whether a consent banner is acceptable.
 4. **Logo PNG** for header, favicon, OG images and `Organization.logo`.
 5. **Map tile provider** for production traffic.
+
+## City hubs (added with the inventory pipeline)
+
+`/cities/<metro>` pages compare venues in one metro. The comparison covers:
+- lots tracked;
+- car price range, labelled venue-wide when not lot-specific;
+- cashless and prepaid-pass rules, each counted only over lots where that fact is known;
+- tailgating;
+- lot opening times;
+- covered and accessible parking;
+- transit;
+- lots that serve more than one venue.
+
+Rules (`src/lib/metro.ts`, tested):
+- **Page exists** only with ≥2 venues that have parking guides. A one-venue hub would duplicate the venue page.
+- **Page is indexed** only with ≥2 *indexable* venues. Otherwise it is `noindex, follow`.
+- **Internal links** go from venue pages ("Other <metro> venues") and state pages ("Compare by city"). Indexable hubs are in the sitemap.
+- **JSON-LD** is an `ItemList` of the compared venues; no other claims.
+
+Known, pre-existing: under partial prerendering an unknown slug (`/venues/x`, `/cities/x`) streams the not-found page with a `noindex` tag but HTTP 200 (a soft 404). It is low risk because the tag is present, but it is worth fixing when Next supports a static 404 status for these routes.

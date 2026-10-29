@@ -9,6 +9,7 @@ import {
   getSourcesFor,
   getVenue,
   hasSponsorships,
+  listVenuesWithFacilities,
   listEvents,
   listFacilities,
   listVenues,
@@ -21,6 +22,7 @@ import { verificationSummary, type VerificationSummary } from "@/lib/verificatio
 import { eventLabel, lotOpenTime } from "@/lib/events";
 import { submissionsStatus } from "@/lib/submissions/availability";
 import { ParkingOptionsList } from "@/components/ParkingOptionsList";
+import { guideVenues, metroHasPage, metroOf, metroPath } from "@/lib/metro";
 import { VerificationStatus } from "@/components/VerificationStatus";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ConfidenceBadge } from "@/components/ConfidenceBadge";
@@ -83,6 +85,9 @@ export default async function VenuePage({ params }: PageProps<"/venues/[venue]">
     venue.attribution.confidence,
   );
   const openHours = venue.lotOpenHoursBefore?.value;
+  const metro = metroOf(venue);
+  const allVenues = metro ? await listVenuesWithFacilities() : [];
+  const metroNeighbors = metro && metroHasPage(metro, allVenues) ? guideVenues(metro, allVenues).filter((x) => x.venue.id !== venue.id) : [];
 
   const breadcrumbs = (
     <Breadcrumbs
@@ -209,6 +214,25 @@ export default async function VenuePage({ params }: PageProps<"/venues/[venue]">
                   );
                 })}
               </ul>
+            </Section>
+          )}
+
+          {metro && metroNeighbors.length > 0 && (
+            <Section id="nearby" title={`Other ${metro.name} venues`}>
+              <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                {metroNeighbors.map((x, i) => (
+                  <span key={x.venue.id}>
+                    {i > 0 && ", "}
+                    <Link href={venuePath(x.venue)} className="font-semibold text-brand-700 underline-offset-2 hover:underline dark:text-brand-100">
+                      {x.venue.name} parking
+                    </Link>
+                  </span>
+                ))}
+                {" · "}
+                <Link href={metroPath(metro)} className="font-semibold text-brand-700 underline-offset-2 hover:underline dark:text-brand-100">
+                  Compare {metro.name} venue parking →
+                </Link>
+              </p>
             </Section>
           )}
 

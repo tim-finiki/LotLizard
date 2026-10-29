@@ -141,6 +141,21 @@ export function facilityJsonLd(venue: Venue, facility: ParkingFacility) {
   };
 }
 
+/** Metro hub: an ItemList of the venues compared on the page (no claims beyond names and URLs). */
+export function metroJsonLd(metro: { name: string; slug: string }, venues: Venue[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `${metro.name} stadium & event parking`,
+    url: absolute(`/cities/${metro.slug}`),
+    itemListElement: venues.map((v, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: { "@type": "StadiumOrArena", name: v.name, url: absolute(venuePath(v)), address: postalAddress(v) },
+    })),
+  };
+}
+
 export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
   return {
     "@context": "https://schema.org",
