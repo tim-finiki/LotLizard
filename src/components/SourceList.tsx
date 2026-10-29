@@ -1,0 +1,34 @@
+import type { DataSource } from "@/lib/types";
+
+const TYPE_LABEL: Record<DataSource["type"], string> = {
+  official: "Official",
+  operator: "Operator",
+  media: "Media",
+  third_party: "Third party",
+  user_report: "Community",
+  lotlizard_field: "LotLizard field check",
+  editorial_estimate: "LotLizard estimate",
+};
+
+export function SourceList({ sources }: { sources: DataSource[] }) {
+  return (
+    <ul className="divide-y divide-black/5 dark:divide-white/10">
+      {sources.map((s) => (
+        <li key={s.id} className="py-2 text-sm">
+          <span className="mr-2 rounded bg-neutral-100 px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
+            {TYPE_LABEL[s.type]}
+          </span>
+          {s.url ? (
+            <a href={s.url} target="_blank" rel="noopener noreferrer nofollow" className="text-brand-700 underline-offset-2 hover:underline dark:text-brand-100">
+              {s.name}
+            </a>
+          ) : (
+            <span>{s.name}</span>
+          )}
+          <span className="text-neutral-500"> · {s.retrievedAt}</span>
+          {s.notes && <p className="mt-0.5 text-xs text-neutral-500">{s.notes}</p>}
+        </li>
+      ))}
+    </ul>
+  );
+}
