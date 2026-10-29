@@ -6,13 +6,23 @@
  * re-encoded, recreated or recoloured here.
  */
 
-/** Header B wordmark: live Sora text, white "Lot" + lime "Lizard" with dark edge and lime outline. */
+/**
+ * Header B wordmark: Sora text, white "Lot" + lime "Lizard" with dark edge and lime outline, as SVG so the
+ * outlines are vector strokes. 1 user unit = 1/100 em; y=84 is the baseline of a line-height-1 box.
+ * textLength keeps the word inside its box even before Sora loads. Decorative: the link names it.
+ */
 export function Wordmark({ className = "" }: { className?: string }) {
+  const text = { x: 0, y: 84, fontSize: 100, textLength: 489 };
   return (
-    <span className={`ll-wordmark ${className}`}>
-      <span className="ll-wordmark__lot">Lot</span>
-      <span className="ll-wordmark__lizard">Lizard</span>
-    </span>
+    <svg className={`ll-wordmark ${className}`} viewBox="0 0 490 100" aria-hidden="true">
+      <text {...text} className="ll-wordmark__ring">
+        LotLizard
+      </text>
+      <text {...text} className="ll-wordmark__text">
+        <tspan className="ll-wordmark__lot">Lot</tspan>
+        <tspan className="ll-wordmark__lizard">Lizard</tspan>
+      </text>
+    </svg>
   );
 }
 
