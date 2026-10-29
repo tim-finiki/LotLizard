@@ -16,8 +16,8 @@ export default async function VenuesPage() {
       <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Venues", path: "/venues" }]} />
       <h1 className="mt-2 text-2xl font-extrabold">Venue directory</h1>
       <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
-        Detailed parking data is live for our pilot venue. Other venues are listed so fans can contribute — we never
-        fill pages with made-up lots.
+        Venues with a parking guide come first. The rest are listed until we have sourced parking data for them —
+        we never fill pages with made-up lots.
       </p>
       <div className="mt-2">
         <VenueDirectory venues={venues} />

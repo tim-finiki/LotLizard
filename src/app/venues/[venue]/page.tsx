@@ -44,6 +44,8 @@ export async function generateMetadata({ params }: PageProps<"/venues/[venue]">)
   const description =
     venue.coverage === "pilot_detailed"
       ? `Compare ${venue.name} parking in ${where}: official and private lots, prices, walking distance, tailgating rules and exit routes — with sources and confidence levels.`
+      : venue.coverage === "basic"
+        ? `${venue.name} parking in ${where}: ${facilities.length} lots and options compared by price, payment and tailgating rules — with the source and confidence behind every fact.`
       : `${venue.name} parking in ${where}. Parking data is coming soon — help other fans by sharing what you know.`;
   return {
     title,
@@ -54,9 +56,11 @@ export async function generateMetadata({ params }: PageProps<"/venues/[venue]">)
       types: { "application/json": `/api/v1/venues/${venue.slug}` },
     },
     openGraph: { title, description, url: venuePath(venue) },
-    ...(isIndexableVenue(venue, facilities.length) ? {} : { robots: NOINDEX_FOLLOW }),
+    ...(isIndexableVenue(venue, facilities) ? {} : { robots: NOINDEX_FOLLOW }),
   };
 }
+
+const MIN_MAPPED_FOR_EXPLORER = 3;
 
 export default async function VenuePage({ params }: PageProps<"/venues/[venue]">) {
   const venue = await getVenue((await params).venue);
@@ -66,6 +70,9 @@ export default async function VenuePage({ params }: PageProps<"/venues/[venue]">
   const sources = await getSourcesFor(collectSourceIds(venue, facilities));
   const prediction = await getPredictor().predict({ venueSlug: venue.slug, facilitySlug: "*" });
   const detailed = facilities.length > 0;
+  // The map-first explorer only helps when enough lots are actually on the map. Otherwise the list is
+  // the page: we never place pins we can't source.
+  const mapFirst = facilities.filter((f) => f.location).length >= MIN_MAPPED_FOR_EXPLORER;
   const facilityVerification: Record<string, VerificationSummary> = {};
   for (const f of facilities) {
     facilityVerification[f.id] = verificationSummary(facilityAttributions(f), await getSourcesFor([...new Set(facilitySourceIds(f))]), f.attribution.confidence);
@@ -107,7 +114,7 @@ export default async function VenuePage({ params }: PageProps<"/venues/[venue]">
   return (
     <>
       <JsonLd data={venueJsonLd(venue, facilities, events)} />
-      {detailed ? (
+      {mapFirst ? (
         // Map-first layout: compact title bar + full-height explorer; details follow below.
         <div className="flex h-[calc(100dvh-3.5rem)] min-h-[520px] flex-col">
           <div className="flex shrink-0 items-center justify-between gap-3 border-b border-black/5 bg-white px-4 py-2 dark:border-white/10 dark:bg-neutral-900">
@@ -130,7 +137,7 @@ export default async function VenuePage({ params }: PageProps<"/venues/[venue]">
 
       <div id="venue-info" className="mx-auto max-w-5xl scroll-mt-16 px-4 pb-16 pt-4">
         {breadcrumbs}
-        {detailed ? (
+        {mapFirst ? (
           <h2 className="mt-2 text-xl font-extrabold">About {venue.name} parking</h2>
         ) : (
           <h1 className="mt-2 text-2xl font-extrabold leading-tight sm:text-3xl">{venue.name} parking</h1>
@@ -159,16 +166,26 @@ export default async function VenuePage({ params }: PageProps<"/venues/[venue]">
                 Every option we track, with what&apos;s known and what isn&apos;t. Open one for prices, payment, amenities,
                 directions and sources.
               </p>
-              {/* Collapsed to keep the mobile page short; the content is still in the HTML for crawlers. */}
-              <details className="group">
-                <summary className="flex h-11 cursor-pointer list-none items-center rounded-lg bg-white px-4 text-sm font-semibold text-brand-700 ring-1 ring-black/5 dark:bg-neutral-900 dark:text-brand-100 dark:ring-white/10">
-                  <span className="group-open:hidden">Show all {facilities.length} with details</span>
-                  <span className="hidden group-open:inline">Hide details</span>
-                </summary>
-                <div className="mt-3">
+              {mapFirst ? (
+                // Collapsed under the map to keep the mobile page short; the content is still in the HTML for crawlers.
+                <details className="group">
+                  <summary className="flex h-11 cursor-pointer list-none items-center rounded-lg bg-white px-4 text-sm font-semibold text-brand-700 ring-1 ring-black/5 dark:bg-neutral-900 dark:text-brand-100 dark:ring-white/10">
+                    <span className="group-open:hidden">Show all {facilities.length} with details</span>
+                    <span className="hidden group-open:inline">Hide details</span>
+                  </summary>
+                  <div className="mt-3">
+                    <ParkingOptionsList venue={venue} facilities={facilities} verification={facilityVerification} />
+                  </div>
+                </details>
+              ) : (
+                <>
+                  <p className="text-xs text-neutral-500">
+                    No map yet: lot entrances here haven&apos;t been located by a source we trust, so we list them instead of
+                    guessing pins.
+                  </p>
                   <ParkingOptionsList venue={venue} facilities={facilities} verification={facilityVerification} />
-                </div>
-              </details>
+                </>
+              )}
             </Section>
           )}
 

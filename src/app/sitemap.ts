@@ -16,7 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   for (const venue of await listVenues()) {
     const facilities = await listFacilities(venue.id);
-    if (!isIndexableVenue(venue, facilities.length)) continue;
+    if (!isIndexableVenue(venue, facilities)) continue;
     states.add(venue.address.state);
     const sources = await getSourcesFor(collectSourceIds(venue, facilities));
     const summary = verificationSummary([venue.attribution, ...facilities.flatMap(facilityAttributions)], sources, venue.attribution.confidence);

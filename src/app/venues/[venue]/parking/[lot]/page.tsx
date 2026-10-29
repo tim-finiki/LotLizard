@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: PageProps<"/venues/[venue]/pa
     description,
     alternates: { canonical: facilityPath(venue, facility) },
     openGraph: { title, description, url: facilityPath(venue, facility) },
-    ...(isIndexableVenue(venue, siblings.length) ? {} : { robots: NOINDEX_FOLLOW }),
+    ...(isIndexableVenue(venue, siblings) ? {} : { robots: NOINDEX_FOLLOW }),
   };
 }
 

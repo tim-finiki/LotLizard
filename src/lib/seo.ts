@@ -21,8 +21,28 @@ export const statePath = (code: string) => `/states/${code.toLowerCase()}`;
  */
 export const MIN_FACILITIES_TO_INDEX = 3;
 
-export function isIndexableVenue(venue: Venue, facilityCount: number): boolean {
-  return venue.coverage !== "venue_only" && facilityCount >= MIN_FACILITIES_TO_INDEX;
+/**
+ * A parking option that tells a visitor something: backed by a non-editorial source and with at
+ * least two known decision facts (where it is, price, how or when you pay, tailgating, walk time).
+ */
+export function isSubstantiveFacility(f: ParkingFacility): boolean {
+  const sourced = f.attribution.sourceIds.some((id) => id !== "lotlizard-editorial");
+  const known = [
+    !!f.location || (!!f.address && /\d/.test(f.address)),
+    f.prices.length > 0,
+    !!f.payment && (!!f.payment.timing || f.payment.accepted.length > 0 || (f.payment.notAccepted?.length ?? 0) > 0),
+    f.tailgating.allowed.value !== "unknown",
+    !!f.walkMinutes,
+  ].filter(Boolean).length;
+  return sourced && known >= 2;
+}
+
+export function substantiveFacilities(facilities: ParkingFacility[]): ParkingFacility[] {
+  return facilities.filter(isSubstantiveFacility);
+}
+
+export function isIndexableVenue(venue: Venue, facilities: ParkingFacility[]): boolean {
+  return venue.coverage !== "venue_only" && substantiveFacilities(facilities).length >= MIN_FACILITIES_TO_INDEX;
 }
 
 /** Robots metadata for pages that should be crawled for links but kept out of the index. */

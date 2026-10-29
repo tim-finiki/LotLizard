@@ -1,0 +1,930 @@
+{
+  "lots": {
+    "blue-10-garage": {
+      "fields": {
+        "covered": {
+          "confidence": "low",
+          "evidence": "park at the Blue 10 Garage or the Nova Place Garage",
+          "method": "search_snippet",
+          "notes": "Covered because the source calls it a garage.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "wpxi-com-news-local-acrisure-releases-traffic-parking-tips-ahead-steelers-game-s"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "park at the Blue 10 Garage or the Nova Place Garage for those arriving less than two hours before game time",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "wpxi-com-news-local-acrisure-releases-traffic-parking-tips-ahead-steelers-game-s"
+          ],
+          "value": "A North Shore garage that WPXI suggested for Steelers fans arriving less than two hours before game time."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "park at the Blue 10 Garage or the Nova Place Garage for those arriving less than two hours before game time",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "wpxi-com-news-local-acrisure-releases-traffic-parking-tips-ahead-steelers-game-s"
+          ],
+          "value": "Blue 10 Garage"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "fans seeking pay parking on the North Shore (Blue 7 Lots or Blue 10 Garage) must pay via credit / debit card",
+          "method": "search_snippet",
+          "notes": "Third-party guide quoting the stadium's traffic guide.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "parkingaccess-com-acrisure-stadium-parking"
+          ],
+          "value": "card"
+        },
+        "payment_timing": {
+          "confidence": "low",
+          "evidence": "fans seeking pay parking on the North Shore (Blue 7 Lots or Blue 10 Garage) must pay via credit / debit card",
+          "method": "search_snippet",
+          "notes": "Described as drive-up pay parking in a third-party guide.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "parkingaccess-com-acrisure-stadium-parking"
+          ],
+          "value": "pay_on_arrival"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "park at the Blue 10 Garage or the Nova Place Garage for those arriving less than two hours before game time",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "wpxi-com-news-local-acrisure-releases-traffic-parking-tips-ahead-steelers-game-s"
+          ],
+          "value": "garage"
+        }
+      },
+      "prices": {}
+    },
+    "blue-7-lots": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "fans seeking pay parking on the North Shore (Blue 7 Lots or Blue 10 Garage) must pay via credit / debit card",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "parkingaccess-com-acrisure-stadium-parking"
+          ],
+          "value": "North Shore surface lots described as drive-up pay parking requiring a credit or debit card."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "fans seeking pay parking on the North Shore (Blue 7 Lots or Blue 10 Garage) must pay via credit / debit card",
+          "method": "search_snippet",
+          "notes": "Only third-party source found.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "parkingaccess-com-acrisure-stadium-parking"
+          ],
+          "value": "Blue 7 Lots"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "fans seeking pay parking on the North Shore (Blue 7 Lots or Blue 10 Garage) must pay via credit / debit card",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "parkingaccess-com-acrisure-stadium-parking"
+          ],
+          "value": "card"
+        },
+        "payment_timing": {
+          "confidence": "low",
+          "evidence": "fans seeking pay parking on the North Shore (Blue 7 Lots or Blue 10 Garage) must pay via credit / debit card",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "parkingaccess-com-acrisure-stadium-parking"
+          ],
+          "value": "pay_on_arrival"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "fans seeking pay parking on the North Shore (Blue 7 Lots or Blue 10 Garage) must pay via credit / debit card",
+          "method": "search_snippet",
+          "notes": "Only third-party source found.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "parkingaccess-com-acrisure-stadium-parking"
+          ],
+          "value": "private_lot"
+        }
+      },
+      "prices": {}
+    },
+    "champions-garage": {
+      "fields": {
+        "address": {
+          "confidence": "low",
+          "evidence": "445 spaces adjacent to PNC Park's Home Plate Gate and Heinz Field | 643 W. General Robinson St.",
+          "method": "search_snippet",
+          "notes": "From 2021 opening coverage.",
+          "observedAt": "2021-09-10",
+          "sources": [
+            "wpxi-com-news-top-stories-new-parking-garage-opens-north-shore-c4hlejgv2bdwjodal"
+          ],
+          "value": "643 W. General Robinson St."
+        },
+        "covered": {
+          "confidence": "low",
+          "evidence": "No Tailgating will be allowed inside the Champions Garage.",
+          "method": "search_snippet",
+          "notes": "Covered because the official source calls it a garage.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "Adding over 400 new spaces to the North Shore | No Tailgating will be allowed inside the Champions Garage.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "A cashless garage of over 400 spaces at West General Robinson Street and Tony Dorsett Drive, behind the Hyatt Place hotel, between Acrisure Stadium and PNC Park."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Adding over 400 new spaces to the North Shore | No Tailgating will be allowed inside the Champions Garage.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "Champions Garage"
+        },
+        "operator": {
+          "confidence": "low",
+          "evidence": "The structure was created by Oxford Development Company, in partnership with the Pittsburgh Pirates and Pittsburgh Steelers.",
+          "method": "search_snippet",
+          "notes": "Source says Oxford developed it; operator status as of 2026 not confirmed.",
+          "observedAt": "2021-09-10",
+          "sources": [
+            "wpxi-com-news-top-stories-new-parking-garage-opens-north-shore-c4hlejgv2bdwjodal"
+          ],
+          "value": "Oxford Development Company"
+        },
+        "payment_not_accepted": {
+          "confidence": "low",
+          "evidence": "Search summary of official page: it is a cashless lot where passes are scanned on entry",
+          "method": "search_snippet",
+          "notes": "Wording is a search-result summary of the official page, not a direct quote.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "cash"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "No Tailgating will be allowed inside the Champions Garage.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "no"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Adding over 400 new spaces to the North Shore | No Tailgating will be allowed inside the Champions Garage.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "garage"
+        }
+      },
+      "prices": {
+        "car|nfl_regular|lot|2021": {
+          "confidence": "low",
+          "evidence": "cost per parking spot for the 2021 season is $40 for each regular season game",
+          "method": "search_snippet",
+          "notes": "2021 launch price; current price not found.",
+          "observedAt": "2021-08-25",
+          "sources": [
+            "steelers-com-news-reserve-your-spot-in-the-champions-garage"
+          ],
+          "value": "min=40;max=40;vehicle=car;scope=lot;event=nfl_regular;season=2021"
+        }
+      }
+    },
+    "gold-1-garage": {
+      "fields": {
+        "ada": {
+          "confidence": "low",
+          "evidence": "ADA access is provided at the Art Rooney entrance before the fence diverter.",
+          "method": "search_snippet",
+          "notes": "Official page appears to date from about 2022.",
+          "observedAt": "2022-08-11",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions-gold-1-garage"
+          ],
+          "value": "available"
+        },
+        "address": {
+          "confidence": "low",
+          "evidence": "Gold 1 Garage (792 W. General Robinson St.)",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "bestparking-com-pittsburgh-pa-parking-neighborhoods-north-shore-pittsburgh-pa-pa"
+          ],
+          "value": "792 W. General Robinson St."
+        },
+        "covered": {
+          "confidence": "low",
+          "evidence": "Gold 1 Garage - Acrisure Stadium in Pittsburgh, PA",
+          "method": "search_snippet",
+          "notes": "Covered because the official source calls it a garage.",
+          "observedAt": "2022-08-11",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions-gold-1-garage"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "Gold 1 Garage - Acrisure Stadium in Pittsburgh, PA | With the construction of the Gold 1 Garage complete, there are some access changes",
+          "method": "search_snippet",
+          "observedAt": "2022-08-11",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions-gold-1-garage"
+          ],
+          "value": "A parking garage beside Acrisure Stadium with separate exits toward I-376/Route 65, I-279 HOV and Route 28."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Gold 1 Garage - Acrisure Stadium in Pittsburgh, PA | With the construction of the Gold 1 Garage complete, there are some access changes",
+          "method": "search_snippet",
+          "observedAt": "2022-08-11",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions-gold-1-garage"
+          ],
+          "value": "Gold 1 Garage"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Gold 1 Garage - Acrisure Stadium in Pittsburgh, PA | With the construction of the Gold 1 Garage complete, there are some access changes",
+          "method": "search_snippet",
+          "observedAt": "2022-08-11",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions-gold-1-garage"
+          ],
+          "value": "garage"
+        }
+      },
+      "prices": {}
+    },
+    "green-lot-31": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "Directions to Event Day Parking (Card Only) | Event-day parking options including Green 31, Green 33, CCAC, and Nova Place Garage",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "Listed by Acrisure Stadium's parking page under event-day (card-only) parking."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Directions to Event Day Parking (Card Only) | Event-day parking options including Green 31, Green 33, CCAC, and Nova Place Garage",
+          "method": "search_snippet",
+          "notes": "Lot list partly from a third-party summary of the official page.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "Green 31"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "Directions to Event Day Parking (Card Only)",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "card"
+        },
+        "payment_timing": {
+          "confidence": "low",
+          "evidence": "Directions to Event Day Parking (Card Only)",
+          "method": "search_snippet",
+          "notes": "Listed as event-day parking.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "pay_on_arrival"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Directions to Event Day Parking (Card Only) | Event-day parking options including Green 31, Green 33, CCAC, and Nova Place Garage",
+          "method": "search_snippet",
+          "notes": "Lot list partly from a third-party summary of the official page.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "green-lot-33": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "Directions to Event Day Parking (Card Only) | Event-day parking options including Green 31, Green 33, CCAC, and Nova Place Garage",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "Listed by Acrisure Stadium's parking page under event-day (card-only) parking."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Directions to Event Day Parking (Card Only) | Event-day parking options including Green 31, Green 33, CCAC, and Nova Place Garage",
+          "method": "search_snippet",
+          "notes": "Lot list partly from a third-party summary of the official page.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "Green 33"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "Directions to Event Day Parking (Card Only)",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "card"
+        },
+        "payment_timing": {
+          "confidence": "low",
+          "evidence": "Directions to Event Day Parking (Card Only)",
+          "method": "search_snippet",
+          "notes": "Listed as event-day parking.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "pay_on_arrival"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Directions to Event Day Parking (Card Only) | Event-day parking options including Green 31, Green 33, CCAC, and Nova Place Garage",
+          "method": "search_snippet",
+          "notes": "Lot list partly from a third-party summary of the official page.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "kamin-science-center-main-lot": {
+      "fields": {
+        "description": {
+          "confidence": "medium",
+          "evidence": "special parking rates apply during Steelers games, Pirates games, Pitt Panthers games, concerts, and other events on the North Shore | Visitor rates do not apply when parking for a special event",
+          "method": "search_snippet",
+          "observedAt": "2026-07-22",
+          "sources": [
+            "kaminsciencecenter-org-visit-parking"
+          ],
+          "value": "The Kamin Science Center's on-site lot; special parking rates apply during Steelers and Pirates games (event rates: 412-627-3397)."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "special parking rates apply during Steelers games, Pirates games, Pitt Panthers games, concerts, and other events on the North Shore | Visitor rates do not apply when parking for a special event",
+          "method": "search_snippet",
+          "observedAt": "2026-07-22",
+          "sources": [
+            "kaminsciencecenter-org-visit-parking"
+          ],
+          "value": "Kamin Science Center Main Lot"
+        },
+        "operator": {
+          "confidence": "medium",
+          "evidence": "On-site parking is available for $6 per vehicle for Kamin Science Center visitors only.",
+          "method": "search_snippet",
+          "observedAt": "2026-07-22",
+          "sources": [
+            "kaminsciencecenter-org-visit-parking"
+          ],
+          "value": "Kamin Science Center"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "special parking rates apply during Steelers games, Pirates games, Pitt Panthers games, concerts, and other events on the North Shore | Visitor rates do not apply when parking for a special event",
+          "method": "search_snippet",
+          "observedAt": "2026-07-22",
+          "sources": [
+            "kaminsciencecenter-org-visit-parking"
+          ],
+          "value": "private_lot"
+        }
+      },
+      "prices": {}
+    },
+    "kamin-science-center-north-lot": {
+      "fields": {
+        "description": {
+          "confidence": "medium",
+          "evidence": "additional Science Center parking is available across the street in the North Lot at the same price as the Main Lot",
+          "method": "search_snippet",
+          "observedAt": "2026-07-22",
+          "sources": [
+            "kaminsciencecenter-org-visit-parking"
+          ],
+          "value": "Overflow lot across the street from the Kamin Science Center Main Lot, connected by a crosswalk; special event rates apply on game days."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "additional Science Center parking is available across the street in the North Lot at the same price as the Main Lot",
+          "method": "search_snippet",
+          "observedAt": "2026-07-22",
+          "sources": [
+            "kaminsciencecenter-org-visit-parking"
+          ],
+          "value": "Kamin Science Center North Lot"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "additional Science Center parking is available across the street in the North Lot at the same price as the Main Lot",
+          "method": "search_snippet",
+          "observedAt": "2026-07-22",
+          "sources": [
+            "kaminsciencecenter-org-visit-parking"
+          ],
+          "value": "private_lot"
+        }
+      },
+      "prices": {}
+    },
+    "nova-place-garage": {
+      "fields": {
+        "address": {
+          "confidence": "low",
+          "evidence": "100 S. Commons – Garage",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "parkchirp-com-facilities-100-s-commons-garage"
+          ],
+          "value": "100 South Commons, Pittsburgh, PA 15212"
+        },
+        "covered": {
+          "confidence": "low",
+          "evidence": "the Nova Place Garage",
+          "method": "search_snippet",
+          "notes": "Covered because the source calls it a garage.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "wpxi-com-news-local-acrisure-releases-traffic-parking-tips-ahead-steelers-game-s"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "park at the Blue 10 Garage or the Nova Place Garage for those arriving less than two hours before game time",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "wpxi-com-news-local-acrisure-releases-traffic-parking-tips-ahead-steelers-game-s"
+          ],
+          "value": "A garage at 100 South Commons on the North Side, listed for event-day parking and suggested for late-arriving Steelers fans."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "park at the Blue 10 Garage or the Nova Place Garage for those arriving less than two hours before game time",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "wpxi-com-news-local-acrisure-releases-traffic-parking-tips-ahead-steelers-game-s"
+          ],
+          "value": "Nova Place Garage"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "Directions to Event Day Parking (Card Only)",
+          "method": "search_snippet",
+          "notes": "Search results place Nova Place Garage under the official page's card-only event-day heading; listing is a search summary.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "card"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "park at the Blue 10 Garage or the Nova Place Garage for those arriving less than two hours before game time",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "wpxi-com-news-local-acrisure-releases-traffic-parking-tips-ahead-steelers-game-s"
+          ],
+          "value": "garage"
+        }
+      },
+      "prices": {}
+    },
+    "red-5-garage": {
+      "fields": {
+        "covered": {
+          "confidence": "low",
+          "evidence": "West General Robinson Red 5 Garage",
+          "method": "search_snippet",
+          "notes": "Covered because the source calls it a garage.",
+          "observedAt": "2013-09-20",
+          "sources": [
+            "steelers-com-news-traffic-and-parking-details-for-sunday-s-game-11239741"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "Alco Parking has informed the Steelers that the following parking lots WILL NOT be available for fans until 6 p.m. even if they have a pre-sold parking pass to the football game | West General Robinson Red 5 Garage",
+          "method": "search_snippet",
+          "observedAt": "2013-09-20",
+          "sources": [
+            "steelers-com-news-traffic-and-parking-details-for-sunday-s-game-11239741"
+          ],
+          "value": "A garage on West General Robinson Street that a Steelers game notice listed as accepting pre-sold football parking passes."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Alco Parking has informed the Steelers that the following parking lots WILL NOT be available for fans until 6 p.m. even if they have a pre-sold parking pass to the football game | West General Robinson Red 5 Garage",
+          "method": "search_snippet",
+          "notes": "Source is a 2013 Steelers notice for a Pirates/Steelers same-day schedule; outdated.",
+          "observedAt": "2013-09-20",
+          "sources": [
+            "steelers-com-news-traffic-and-parking-details-for-sunday-s-game-11239741"
+          ],
+          "value": "Red 5 Garage"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Alco Parking has informed the Steelers that the following parking lots WILL NOT be available for fans until 6 p.m. even if they have a pre-sold parking pass to the football game | West General Robinson Red 5 Garage",
+          "method": "search_snippet",
+          "notes": "Source is a 2013 Steelers notice for a Pirates/Steelers same-day schedule; outdated.",
+          "observedAt": "2013-09-20",
+          "sources": [
+            "steelers-com-news-traffic-and-parking-details-for-sunday-s-game-11239741"
+          ],
+          "value": "garage"
+        }
+      },
+      "prices": {}
+    },
+    "stage-ae-lot": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "Search summary of official page: The page lists a Stage AE Lot among the pre-sold parking options.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "Listed by Acrisure Stadium among pre-sold parking options."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Search summary of official page: The page lists a Stage AE Lot among the pre-sold parking options.",
+          "method": "search_snippet",
+          "notes": "Search-result summary of the official page, not a direct quote.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "Stage AE Lot"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Search summary of official page: The page lists a Stage AE Lot among the pre-sold parking options.",
+          "method": "search_snippet",
+          "notes": "Search-result summary of the official page, not a direct quote.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "acrisurestadium-com-stadium-parking-directions"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    }
+  },
+  "slug": "acrisure-stadium",
+  "sources": {
+    "acrisurestadium-com": {
+      "method": "search_snippet",
+      "name": "Acrisure Stadium — event page",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://acrisurestadium.com/?p=22162"
+    },
+    "acrisurestadium-com-event-bruno-mars-the-romantic-tour-2026": {
+      "method": "search_snippet",
+      "name": "Acrisure Stadium — Bruno Mars 2026 event page",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://acrisurestadium.com/event/bruno-mars-the-romantic-tour-2026/"
+    },
+    "acrisurestadium-com-guest-services-a-z-guide": {
+      "method": "search_snippet",
+      "name": "Acrisure Stadium — A-Z Guide",
+      "retrievedAt": "2026-09-25",
+      "type": "official",
+      "url": "https://acrisurestadium.com/guest-services/a-z-guide/"
+    },
+    "acrisurestadium-com-stadium-parking-directions": {
+      "method": "search_snippet",
+      "name": "Acrisure Stadium — Parking & Directions",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://acrisurestadium.com/stadium/parking-directions/"
+    },
+    "acrisurestadium-com-stadium-parking-directions-gold-1-garage": {
+      "method": "search_snippet",
+      "name": "Acrisure Stadium — Gold 1 Garage",
+      "retrievedAt": "2022-08-11",
+      "type": "official",
+      "url": "https://acrisurestadium.com/stadium/parking-directions/gold-1-garage/"
+    },
+    "acrisurestadium-com-wp-content-uploads-guides-acrisure-stadium-accessibility-gui": {
+      "method": "search_snippet",
+      "name": "Acrisure Stadium — Accessibility Guide",
+      "retrievedAt": "2023-06-21",
+      "type": "official",
+      "url": "https://acrisurestadium.com/wp-content/uploads/guides/acrisure-stadium-accessibility-guide.pdf"
+    },
+    "bestparking-com-pittsburgh-pa-parking-neighborhoods-north-shore-pittsburgh-pa-pa": {
+      "method": "search_snippet",
+      "name": "BestParking — North Shore Pittsburgh",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://www.bestparking.com/pittsburgh-pa-parking/neighborhoods/north-shore-pittsburgh-pa-parking/"
+    },
+    "blog-ticketmaster-com": {
+      "method": "search_snippet",
+      "name": "Ticketmaster — Step Inside: Acrisure Stadium",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://blog.ticketmaster.com/?p=53699"
+    },
+    "cbsnews-com-pittsburgh-news-north-shore-parking-lots-and-garages-going-completel": {
+      "method": "search_snippet",
+      "name": "KDKA/CBS Pittsburgh — North Shore lots going cashless",
+      "retrievedAt": "2024-03-28",
+      "type": "media",
+      "url": "https://www.cbsnews.com/pittsburgh/news/north-shore-parking-lots-and-garages-going-completely-cashless-starting-with-pirates-home-opener"
+    },
+    "kaminsciencecenter-org-visit-parking": {
+      "method": "search_snippet",
+      "name": "Kamin Science Center — Parking Information",
+      "retrievedAt": "2026-07-22",
+      "type": "operator",
+      "url": "https://kaminsciencecenter.org/visit/parking/"
+    },
+    "parkchirp-com-facilities-100-s-commons-garage": {
+      "method": "search_snippet",
+      "name": "ParkChirp — 100 S. Commons Garage",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://parkchirp.com/facilities/100-s-commons-garage/"
+    },
+    "parkingaccess-com-acrisure-stadium-parking": {
+      "method": "search_snippet",
+      "name": "ParkingAccess — Acrisure Stadium Parking Guide",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://parkingaccess.com/acrisure-stadium-parking"
+    },
+    "pittsburghpanthers-com-facilities-acrisure-stadium-71": {
+      "method": "search_snippet",
+      "name": "Pitt Athletics — Acrisure Stadium facility page",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://pittsburghpanthers.com/facilities/acrisure-stadium/71"
+    },
+    "steelers-com-news-reserve-your-spot-in-the-champions-garage": {
+      "method": "search_snippet",
+      "name": "Pittsburgh Steelers — Reserve your spot in the Champions Garage",
+      "retrievedAt": "2021-08-25",
+      "type": "official",
+      "url": "https://www.steelers.com/news/reserve-your-spot-in-the-champions-garage"
+    },
+    "steelers-com-news-traffic-and-parking-details-for-sunday-s-game-11239741": {
+      "method": "search_snippet",
+      "name": "Pittsburgh Steelers — Traffic and parking details for Sunday's game",
+      "retrievedAt": "2013-09-20",
+      "type": "official",
+      "url": "https://www.steelers.com/news/traffic-and-parking-details-for-sunday-s-game-11239741"
+    },
+    "wpxi-com-news-local-acrisure-releases-traffic-parking-tips-ahead-steelers-game-s": {
+      "method": "search_snippet",
+      "name": "WPXI — Acrisure releases traffic, parking tips",
+      "retrievedAt": "2026-10-29",
+      "type": "media",
+      "url": "https://www.wpxi.com/news/local/acrisure-releases-traffic-parking-tips-ahead-steelers-game-sunday/ZTCSP6IXPVGYBPY5NZOJCDTKFM/"
+    },
+    "wpxi-com-news-top-stories-new-parking-garage-opens-north-shore-c4hlejgv2bdwjodal": {
+      "method": "search_snippet",
+      "name": "WPXI — New parking garage opens on North Shore",
+      "retrievedAt": "2021-09-10",
+      "type": "media",
+      "url": "https://www.wpxi.com/news/top-stories/new-parking-garage-opens-north-shore/C4HLEJGV2BDWJODALFAHDGMICY/"
+    }
+  },
+  "venue": {
+    "fields": {
+      "city": {
+        "confidence": "low",
+        "evidence": "100 Art Rooney Avenue, Pittsburgh, PA 15212",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "pittsburghpanthers-com-facilities-acrisure-stadium-71"
+        ],
+        "value": "Pittsburgh"
+      },
+      "lot_open_hours_before": {
+        "confidence": "low",
+        "evidence": "Parking lots and garages open 5 hours prior to kickoff.",
+        "method": "search_snippet",
+        "notes": "Stated on an Acrisure Stadium event page; some third-party guides say 4 hours, and a WPXI Steelers report said pre-sold lots opened at 8 a.m. for a 1 p.m. game.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "acrisurestadium-com"
+        ],
+        "value": "5"
+      },
+      "postal_code": {
+        "confidence": "low",
+        "evidence": "100 Art Rooney Avenue, Pittsburgh, PA 15212",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "pittsburghpanthers-com-facilities-acrisure-stadium-71"
+        ],
+        "value": "15212"
+      },
+      "state": {
+        "confidence": "low",
+        "evidence": "100 Art Rooney Avenue, Pittsburgh, PA 15212",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "pittsburghpanthers-com-facilities-acrisure-stadium-71"
+        ],
+        "value": "PA"
+      },
+      "street": {
+        "confidence": "low",
+        "evidence": "100 Art Rooney Avenue, Pittsburgh, PA 15212",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "pittsburghpanthers-com-facilities-acrisure-stadium-71"
+        ],
+        "value": "100 Art Rooney Avenue"
+      },
+      "teams": {
+        "confidence": "low",
+        "evidence": "Step Inside: Acrisure Stadium – Home of the Pittsburgh Steelers",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "blog-ticketmaster-com"
+        ],
+        "value": "Pittsburgh Steelers"
+      },
+      "timezone": {
+        "confidence": "low",
+        "evidence": "100 Art Rooney Avenue, Pittsburgh, PA 15212",
+        "method": "search_snippet",
+        "notes": "Timezone inferred from Pittsburgh, PA location (US Eastern).",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "pittsburghpanthers-com-facilities-acrisure-stadium-71"
+        ],
+        "value": "America/New_York"
+      },
+      "venue_name": {
+        "confidence": "low",
+        "evidence": "Step Inside: Acrisure Stadium – Home of the Pittsburgh Steelers",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "blog-ticketmaster-com"
+        ],
+        "value": "Acrisure Stadium"
+      },
+      "venue_type": {
+        "confidence": "low",
+        "evidence": "Step Inside: Acrisure Stadium – Home of the Pittsburgh Steelers",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "blog-ticketmaster-com"
+        ],
+        "value": "stadium"
+      }
+    },
+    "policy": {
+      "Accessible parking": {
+        "confidence": "low",
+        "evidence": "Alco Parking Corporation operates a number of parking lots in close proximity to Acrisure Stadium that offer accessible parking. A valid placard or license plate is required for access to these spaces.",
+        "method": "search_snippet",
+        "observedAt": "2023-06-21",
+        "sources": [
+          "acrisurestadium-com-wp-content-uploads-guides-acrisure-stadium-accessibility-gui"
+        ],
+        "value": "Alco Parking operates nearby lots with accessible parking; a valid placard or license plate is required (Alco: 412-323-4455)."
+      },
+      "Cashless parking": {
+        "confidence": "low",
+        "evidence": "all North Shore parking lots and garages will be going cashless for special events | starting on April 5, no cash will be accepted for parking",
+        "method": "search_snippet",
+        "observedAt": "2024-03-28",
+        "sources": [
+          "cbsnews-com-pittsburgh-news-north-shore-parking-lots-and-garages-going-completel"
+        ],
+        "value": "North Shore parking lots and garages went cashless for special events starting April 5, 2024."
+      },
+      "Lot operation": {
+        "confidence": "low",
+        "evidence": "Acrisure Stadium does not own or operate the surrounding parking lots.",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "acrisurestadium-com-stadium-parking-directions"
+        ],
+        "value": "Acrisure Stadium does not own or operate the surrounding parking lots."
+      },
+      "Pre-sold parking": {
+        "confidence": "medium",
+        "evidence": "Parking on the North Shore is reserved and pre-sold.",
+        "method": "search_snippet",
+        "observedAt": "2026-09-25",
+        "sources": [
+          "acrisurestadium-com-guest-services-a-z-guide"
+        ],
+        "value": "Parking on the North Shore is reserved and pre-sold."
+      },
+      "Tailgating": {
+        "confidence": "medium",
+        "evidence": "For tailgating policies and guidelines, please refer to Alco Parking's Tailgating Policy. | No Tailgating will be allowed inside the Champions Garage.",
+        "method": "search_snippet",
+        "notes": "Pre-sold-lot statement from WPXI game-day report: \"Tailgating is permitted in the pre-sold lots surrounding the stadium.\"",
+        "observedAt": "2026-09-25",
+        "sources": [
+          "acrisurestadium-com-guest-services-a-z-guide"
+        ],
+        "value": "Tailgating is permitted in the pre-sold lots surrounding the stadium; no tailgating inside the Champions Garage. Acrisure Stadium refers fans to Alco Parking's Tailgating Policy."
+      }
+    },
+    "transit": {
+      "Pittsburgh Regional Transit Light Rail (T)": {
+        "confidence": "low",
+        "evidence": "fans can park downtown and ride the Light Rail Transit (LRT) to travel to Acrisure Stadium for FREE.",
+        "method": "search_snippet",
+        "notes": "Stated on a 2026 concert event page; the free-fare arrangement has been renewed on time-limited terms, so confirm with PRT.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "acrisurestadium-com-event-bruno-mars-the-romantic-tour-2026"
+        ],
+        "value": "Fans can park downtown and ride the Light Rail free to Acrisure Stadium."
+      }
+    }
+  },
+  "version": 1
+}

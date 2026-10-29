@@ -1,0 +1,835 @@
+{
+  "lots": {
+    "bethany-church": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "Bethany Church began its Packers parking program in 2010. The church doesn't have a set charge, and instead asks for donation.",
+          "method": "search_snippet",
+          "notes": "2023 coverage.",
+          "observedAt": "2023-10-29",
+          "sources": [
+            "spectrumnews1-com-wi-milwaukee-news-2023-10-29-churches-near-lambeau-field-use-p"
+          ],
+          "value": "Church lot near Lambeau Field that offers game-day parking for a donation rather than a set charge."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Bethany Church began its Packers parking program in 2010. The church doesn't have a set charge, and instead asks for donation.",
+          "method": "search_snippet",
+          "observedAt": "2023-10-29",
+          "sources": [
+            "spectrumnews1-com-wi-milwaukee-news-2023-10-29-churches-near-lambeau-field-use-p"
+          ],
+          "value": "Bethany Church lot"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Bethany Church began its Packers parking program in 2010. The church doesn't have a set charge, and instead asks for donation.",
+          "method": "search_snippet",
+          "observedAt": "2023-10-29",
+          "sources": [
+            "spectrumnews1-com-wi-milwaukee-news-2023-10-29-churches-near-lambeau-field-use-p"
+          ],
+          "value": "private_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-15-titletown": {
+      "fields": {
+        "description": {
+          "confidence": "medium",
+          "evidence": "A limited amount of individual parking passes in Lot 15 are available for pre-purchase. Lot 15 is located in Titletown and tailgating is not permitted in this lot. All pre-sold passes will be digital and presented on gameday via mobile phone.",
+          "method": "search_snippet",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "Packers lot in Titletown with a limited number of individual-game passes sold in advance as digital passes."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "A limited amount of individual parking passes in Lot 15 are available for pre-purchase. Lot 15 is located in Titletown and tailgating is not permitted in this lot. All pre-sold passes will be digital and presented on gameday via mobile phone.",
+          "method": "search_snippet",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "Lot 15 (Titletown)"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "A limited amount of individual parking passes in Lot 15 are available for pre-purchase. Lot 15 is located in Titletown and tailgating is not permitted in this lot. All pre-sold passes will be digital and presented on gameday via mobile phone.",
+          "method": "search_snippet",
+          "notes": "Source says passes are available for pre-purchase; whether on-site sales exist is not stated.",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "advance_optional"
+        },
+        "tailgating": {
+          "confidence": "medium",
+          "evidence": "A limited amount of individual parking passes in Lot 15 are available for pre-purchase. Lot 15 is located in Titletown and tailgating is not permitted in this lot. All pre-sold passes will be digital and presented on gameday via mobile phone.",
+          "method": "search_snippet",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "no"
+        },
+        "tailgating_notes": {
+          "confidence": "medium",
+          "evidence": "A limited amount of individual parking passes in Lot 15 are available for pre-purchase. Lot 15 is located in Titletown and tailgating is not permitted in this lot. All pre-sold passes will be digital and presented on gameday via mobile phone.",
+          "method": "search_snippet",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "Tailgating is not permitted in this lot."
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "A limited amount of individual parking passes in Lot 15 are available for pre-purchase. Lot 15 is located in Titletown and tailgating is not permitted in this lot. All pre-sold passes will be digital and presented on gameday via mobile phone.",
+          "method": "search_snippet",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-4": {
+      "fields": {
+        "ada": {
+          "confidence": "medium",
+          "evidence": "Non-reserved $50 cashless parking is available for guests with disabilities in Lot 4 off Lombardi Avenue and Lot 7 off Valley View Road.",
+          "method": "search_snippet",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "medium",
+          "evidence": "Non-reserved $50 cashless parking is available for guests with disabilities in Lot 4 off Lombardi Avenue and Lot 7 off Valley View Road. Spaces are limited and are available on a first-come, first-served basis.",
+          "method": "search_snippet",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "Non-reserved, first-come first-served accessible parking off Lombardi Avenue for guests with a valid disability permit."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "Non-reserved $50 cashless parking is available for guests with disabilities in Lot 4 off Lombardi Avenue and Lot 7 off Valley View Road.",
+          "method": "search_snippet",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "Lot 4 (accessible parking)"
+        },
+        "payment_not_accepted": {
+          "confidence": "medium",
+          "evidence": "Non-reserved $50 cashless parking is available for guests with disabilities in Lot 4 off Lombardi Avenue and Lot 7 off Valley View Road.",
+          "method": "search_snippet",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "cash"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "Non-reserved $50 cashless parking is available for guests with disabilities in Lot 4 off Lombardi Avenue and Lot 7 off Valley View Road.",
+          "method": "search_snippet",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "ada"
+        }
+      },
+      "prices": {
+        "car|nfl_regular|lot|2025": {
+          "confidence": "medium",
+          "evidence": "Non-reserved $50 cashless parking is available for guests with disabilities in Lot 4 off Lombardi Avenue and Lot 7 off Valley View Road.",
+          "method": "search_snippet",
+          "notes": "Other Packers event releases listed $5 (Family Night) and $80 (Shamrock Series); observed_at estimated.",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "min=50;max=50;vehicle=car;scope=lot;event=nfl_regular;season=2025"
+        }
+      }
+    },
+    "lot-7": {
+      "fields": {
+        "ada": {
+          "confidence": "medium",
+          "evidence": "Non-reserved $50 cashless parking is available for guests with disabilities in Lot 4 off Lombardi Avenue and Lot 7 off Valley View Road.",
+          "method": "search_snippet",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "medium",
+          "evidence": "Non-reserved $50 cashless parking is available for guests with disabilities in Lot 4 off Lombardi Avenue and Lot 7 off Valley View Road. Spaces are limited and are available on a first-come, first-served basis.",
+          "method": "search_snippet",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "Non-reserved, first-come first-served accessible parking off Valley View Road for guests with a valid disability permit."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "Non-reserved $50 cashless parking is available for guests with disabilities in Lot 4 off Lombardi Avenue and Lot 7 off Valley View Road.",
+          "method": "search_snippet",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "Lot 7 (accessible parking)"
+        },
+        "payment_not_accepted": {
+          "confidence": "medium",
+          "evidence": "Non-reserved $50 cashless parking is available for guests with disabilities in Lot 4 off Lombardi Avenue and Lot 7 off Valley View Road.",
+          "method": "search_snippet",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "cash"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "Non-reserved $50 cashless parking is available for guests with disabilities in Lot 4 off Lombardi Avenue and Lot 7 off Valley View Road.",
+          "method": "search_snippet",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "ada"
+        }
+      },
+      "prices": {
+        "car|nfl_regular|lot|2025": {
+          "confidence": "medium",
+          "evidence": "Non-reserved $50 cashless parking is available for guests with disabilities in Lot 4 off Lombardi Avenue and Lot 7 off Valley View Road.",
+          "method": "search_snippet",
+          "notes": "Other Packers event releases listed $5 (Family Night) and $80 (Shamrock Series); observed_at estimated.",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "min=50;max=50;vehicle=car;scope=lot;event=nfl_regular;season=2025"
+        }
+      }
+    },
+    "neighborhood-yard-parking": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "On South Ridge Road, nearest Lambeau Field, prices are $50. ... $20 west of Orrie.",
+          "method": "search_snippet",
+          "observedAt": "2024-08-24",
+          "sources": [
+            "aol-com-news-looking-parking-packers-game-prices-095600163-html"
+          ],
+          "value": "Residents near Lambeau Field rent yard spaces on game days, with prices falling with distance from the stadium."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "On South Ridge Road, nearest Lambeau Field, prices are $50. ... $20 west of Orrie.",
+          "method": "search_snippet",
+          "observedAt": "2024-08-24",
+          "sources": [
+            "aol-com-news-looking-parking-packers-game-prices-095600163-html"
+          ],
+          "value": "Neighborhood yard parking"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "On South Ridge Road, nearest Lambeau Field, prices are $50. ... $20 west of Orrie.",
+          "method": "search_snippet",
+          "observedAt": "2024-08-24",
+          "sources": [
+            "aol-com-news-looking-parking-packers-game-prices-095600163-html"
+          ],
+          "value": "residential"
+        }
+      },
+      "prices": {
+        "car|nfl_regular|area|2024": {
+          "confidence": "low",
+          "evidence": "On South Ridge Road, nearest Lambeau Field, prices are $50. ... $20 west of Orrie.",
+          "method": "search_snippet",
+          "notes": "Surveyed at the Aug 24, 2024 preseason game; regular-season prices may vary. 2025 NFL Draft prices ($100-$200) were a one-off.",
+          "observedAt": "2024-08-24",
+          "sources": [
+            "aol-com-news-looking-parking-packers-game-prices-095600163-html"
+          ],
+          "value": "min=20;max=50;vehicle=car;scope=area;event=nfl_regular;season=2024"
+        }
+      }
+    },
+    "pilgrim-lutheran-church": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "everyone else pays a suggested donation of $20 to help support its world missions",
+          "method": "search_snippet",
+          "observedAt": "2023-10-29",
+          "sources": [
+            "spectrumnews1-com-wi-milwaukee-news-2023-10-29-churches-near-lambeau-field-use-p"
+          ],
+          "value": "Church lot about five blocks from Lambeau Field that asks a suggested donation for game-day parking."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "everyone else pays a suggested donation of $20 to help support its world missions",
+          "method": "search_snippet",
+          "observedAt": "2023-10-29",
+          "sources": [
+            "spectrumnews1-com-wi-milwaukee-news-2023-10-29-churches-near-lambeau-field-use-p"
+          ],
+          "value": "Pilgrim Lutheran Church lot"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "everyone else pays a suggested donation of $20 to help support its world missions",
+          "method": "search_snippet",
+          "observedAt": "2023-10-29",
+          "sources": [
+            "spectrumnews1-com-wi-milwaukee-news-2023-10-29-churches-near-lambeau-field-use-p"
+          ],
+          "value": "private_lot"
+        }
+      },
+      "prices": {
+        "car|nfl_regular|lot|2023": {
+          "confidence": "low",
+          "evidence": "everyone else pays a suggested donation of $20 to help support its world missions",
+          "method": "search_snippet",
+          "notes": "Suggested donation, 2023; may be outdated.",
+          "observedAt": "2023-10-29",
+          "sources": [
+            "spectrumnews1-com-wi-milwaukee-news-2023-10-29-churches-near-lambeau-field-use-p"
+          ],
+          "value": "min=20;max=20;vehicle=car;scope=lot;event=nfl_regular;season=2023"
+        }
+      }
+    },
+    "pmi-resch-lot": {
+      "fields": {
+        "address": {
+          "confidence": "low",
+          "evidence": "the Resch Center lot at 820 Armed Forces Drive",
+          "method": "search_snippet",
+          "notes": "Address from 2022 third-party guide for the Resch Center lot.",
+          "observedAt": "2022-09-01",
+          "sources": [
+            "parkmobile-io-blog-lambeau-field-parking-tips-guide"
+          ],
+          "value": "820 Armed Forces Drive"
+        },
+        "description": {
+          "confidence": "medium",
+          "evidence": "PMI offers parking in nearby lots that can be reserved on an individual-game basis. ... PMI offers bus and RV parking in nearby locations.",
+          "method": "search_snippet",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "Lots operated by PMI (operator of the Resch Center) near Lambeau Field that can be reserved for individual games, including bus and RV parking."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "PMI offers parking in nearby lots that can be reserved on an individual-game basis. Visit www.ticketstaronline.com or call 800-895-0071 for more information.",
+          "method": "search_snippet",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "PMI lots near Resch Center"
+        },
+        "operator": {
+          "confidence": "medium",
+          "evidence": "PMI offers parking in nearby lots that can be reserved on an individual-game basis.",
+          "method": "search_snippet",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "PMI"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "cash, Venmo, ApplePay, debit or credit cards all accepted",
+          "method": "search_snippet",
+          "notes": "Resch Complex page; not confirmed to apply to Packers game days.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "reschcomplex-com-about-us-directions-parking"
+          ],
+          "value": "cash;venmo;mobile_wallet;card"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "PMI offers parking in nearby lots that can be reserved on an individual-game basis.",
+          "method": "search_snippet",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "advance_optional"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "lots open six hours before kickoff rather than four, and tailgating is allowed.",
+          "method": "search_snippet",
+          "notes": "Third-party claim; not confirmed by an official source.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "prked-com-post-packers-vs-panthers-lambeau-field-parking-2026"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "PMI offers parking in nearby lots that can be reserved on an individual-game basis.",
+          "method": "search_snippet",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "private_lot"
+        },
+        "vehicle_types": {
+          "confidence": "medium",
+          "evidence": "PMI offers bus and RV parking in nearby locations.",
+          "method": "search_snippet",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "car;bus;rv"
+        }
+      },
+      "prices": {
+        "car|nfl_regular|lot|2026": {
+          "confidence": "low",
+          "evidence": "the Resch Complex lot is sold by PMI at $50 per car, $155 for RVs, buses and limos",
+          "method": "search_snippet",
+          "notes": "Third-party; a 2022 ParkMobile guide listed $35 and Prked lists $35-$50.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "parkingaccess-com-blog-lambeau-field-parking"
+          ],
+          "value": "min=50;max=50;vehicle=car;scope=lot;event=nfl_regular;season=2026"
+        },
+        "rv|nfl_regular|lot|2026": {
+          "confidence": "low",
+          "evidence": "the Resch Complex lot is sold by PMI at $50 per car, $155 for RVs, buses and limos",
+          "method": "search_snippet",
+          "notes": "Third-party; also applies to buses and limos.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "parkingaccess-com-blog-lambeau-field-parking"
+          ],
+          "value": "min=155;max=155;vehicle=rv;scope=lot;event=nfl_regular;season=2026"
+        }
+      }
+    },
+    "stadium-lots-season-pass": {
+      "fields": {
+        "description": {
+          "confidence": "medium",
+          "evidence": "All parking spaces in the lots surrounding Lambeau Field are sold out to holders of season parking passes.",
+          "method": "search_snippet",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "The lots surrounding Lambeau Field are sold out to holders of season parking passes."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "All parking spaces in the lots surrounding Lambeau Field are sold out to holders of season parking passes.",
+          "method": "search_snippet",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "Lambeau Field stadium lots (season pass)"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Your tailgating set-up must be contained within the 9x6 foot space directly behind your parked vehicle.",
+          "method": "search_snippet",
+          "notes": "All-lots tailgating rule from Packers PDF; Lot 15 (Titletown) is an exception.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "res-cloudinary-com-nflclubs-image-upload-packers-kv2qbftvpynkyxmrnagw-pdf"
+          ],
+          "value": "yes"
+        },
+        "tailgating_notes": {
+          "confidence": "low",
+          "evidence": "Your tailgating set-up must be contained within the 9x6 foot space directly behind your parked vehicle.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "res-cloudinary-com-nflclubs-image-upload-packers-kv2qbftvpynkyxmrnagw-pdf"
+          ],
+          "value": "Set-up must stay within the 9x6 foot space directly behind your vehicle; no wood fires; charcoal or propane grills allowed if supervised."
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "All parking spaces in the lots surrounding Lambeau Field are sold out to holders of season parking passes.",
+          "method": "search_snippet",
+          "observedAt": "2025-08-01",
+          "sources": [
+            "packers-com-lambeau-field-parking"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {
+        "car|nfl_regular|lot|2024": {
+          "confidence": "low",
+          "evidence": "the team charges $50 per game to park in Lambeau lots, the same as charged last year",
+          "method": "search_snippet",
+          "notes": "2024 season price for season-pass holders; may be outdated.",
+          "observedAt": "2024-08-24",
+          "sources": [
+            "aol-com-news-looking-parking-packers-game-prices-095600163-html"
+          ],
+          "value": "min=50;max=50;vehicle=car;scope=lot;event=nfl_regular;season=2024"
+        }
+      }
+    },
+    "titletown-uber-zone": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "For smoothest pick up experience, exit the Mills Fleet Farm and Kwik Trip gates, walk northeast on S Ridge Rd toward Blue Ridge Dr. Meet your driver in the Bellin Health –Titletown lot.",
+          "method": "search_snippet",
+          "notes": "2017-2018 era partnership; lot sponsor name and zone may have changed.",
+          "observedAt": "2018-09-01",
+          "sources": [
+            "uber-com-blog-uber-and-the-green-bay-packers-2"
+          ],
+          "value": "Designated Uber pick-up area in the Bellin Health – Titletown lot, reached by walking northeast on S Ridge Rd."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "For smoothest pick up experience, exit the Mills Fleet Farm and Kwik Trip gates, walk northeast on S Ridge Rd toward Blue Ridge Dr. Meet your driver in the Bellin Health –Titletown lot.",
+          "method": "search_snippet",
+          "observedAt": "2018-09-01",
+          "sources": [
+            "uber-com-blog-uber-and-the-green-bay-packers-2"
+          ],
+          "value": "Uber zone, Titletown lot"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "For smoothest pick up experience, exit the Mills Fleet Farm and Kwik Trip gates, walk northeast on S Ridge Rd toward Blue Ridge Dr. Meet your driver in the Bellin Health –Titletown lot.",
+          "method": "search_snippet",
+          "observedAt": "2018-09-01",
+          "sources": [
+            "uber-com-blog-uber-and-the-green-bay-packers-2"
+          ],
+          "value": "rideshare_zone"
+        }
+      },
+      "prices": {}
+    }
+  },
+  "slug": "lambeau-field",
+  "sources": {
+    "aol-com-news-looking-parking-packers-game-prices-095600163-html": {
+      "method": "search_snippet",
+      "name": "Green Bay Press-Gazette via AOL — parking prices 2024 season",
+      "retrievedAt": "2024-08-24",
+      "type": "media",
+      "url": "https://www.aol.com/news/looking-parking-packers-game-prices-095600163.html"
+    },
+    "ashwaubenon-gov-media-4027-o11-1-24-amending-special-event-parkingclean-pdf": {
+      "method": "search_snippet",
+      "name": "Village of Ashwaubenon — Ordinance O11-1-24 (special event parking)",
+      "retrievedAt": "2024-11-26",
+      "type": "official",
+      "url": "https://ashwaubenon.gov/media/4027/o11-1-24-amending-special-event-parkingclean.pdf"
+    },
+    "packers-com-lambeau-field-contact-us": {
+      "method": "search_snippet",
+      "name": "Green Bay Packers — Lambeau Field Contact Us",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.packers.com/lambeau-field/contact-us"
+    },
+    "packers-com-lambeau-field-parking": {
+      "method": "search_snippet",
+      "name": "Green Bay Packers — Lambeau Field Parking",
+      "retrievedAt": "2025-08-01",
+      "type": "official",
+      "url": "https://www.packers.com/lambeau-field/parking"
+    },
+    "packers-com-news-lambeau-field-parking": {
+      "method": "search_snippet",
+      "name": "Green Bay Packers — Lambeau Field Parking (news)",
+      "retrievedAt": "2026-08-01",
+      "type": "official",
+      "url": "https://www.packers.com/news/lambeau-field-parking"
+    },
+    "parkingaccess-com-blog-lambeau-field-parking": {
+      "method": "search_snippet",
+      "name": "Parking Access — Lambeau Field Parking Guide",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://parkingaccess.com/blog/lambeau-field-parking"
+    },
+    "parkmobile-io-blog-lambeau-field-parking-tips-guide": {
+      "method": "search_snippet",
+      "name": "ParkMobile — The Cheesehead's Guide to Parking at Lambeau Field",
+      "retrievedAt": "2022-09-01",
+      "type": "third_party",
+      "url": "https://parkmobile.io/blog/lambeau-field-parking-tips-guide/"
+    },
+    "prked-com-post-packers-vs-panthers-lambeau-field-parking-2026": {
+      "method": "search_snippet",
+      "name": "Prked — Packers vs Panthers Lambeau Field Parking 2026",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://prked.com/post/packers-vs-panthers-lambeau-field-parking-2026"
+    },
+    "res-cloudinary-com-nflclubs-image-upload-packers-kv2qbftvpynkyxmrnagw-pdf": {
+      "method": "search_snippet",
+      "name": "Green Bay Packers — gameday parking PDF",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://res.cloudinary.com/nflclubs/image/upload/packers/kv2qbftvpynkyxmrnagw.pdf"
+    },
+    "reschcomplex-com-about-us-directions-parking": {
+      "method": "search_snippet",
+      "name": "Resch Complex — Directions & Parking",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.reschcomplex.com/about-us/directions-parking"
+    },
+    "spectrumnews1-com-wi-milwaukee-news-2023-10-29-churches-near-lambeau-field-use-p": {
+      "method": "search_snippet",
+      "name": "Spectrum News 1 — Churches near Lambeau Field use parking lot revenue",
+      "retrievedAt": "2023-10-29",
+      "type": "media",
+      "url": "https://spectrumnews1.com/wi/milwaukee/news/2023/10/29/churches-near-lambeau-field-use-parking-lot-revenue-to-help-others"
+    },
+    "uber-com-blog-uber-and-the-green-bay-packers-2": {
+      "method": "search_snippet",
+      "name": "Uber Blog — Uber and the Green Bay Packers",
+      "retrievedAt": "2018-09-01",
+      "type": "operator",
+      "url": "https://www.uber.com/blog/uber-and-the-green-bay-packers-2"
+    }
+  },
+  "venue": {
+    "fields": {
+      "city": {
+        "confidence": "low",
+        "evidence": "The address is confirmed as 1265 Lombardi Avenue, Green Bay, WI 54304",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "packers-com-lambeau-field-contact-us"
+        ],
+        "value": "Green Bay"
+      },
+      "lot_open_hours_before": {
+        "confidence": "low",
+        "evidence": "All Lambeau Field lots open four hours prior to kickoff.",
+        "method": "search_snippet",
+        "notes": "Packers PDF date unknown.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "res-cloudinary-com-nflclubs-image-upload-packers-kv2qbftvpynkyxmrnagw-pdf"
+        ],
+        "value": "4"
+      },
+      "postal_code": {
+        "confidence": "low",
+        "evidence": "The address is confirmed as 1265 Lombardi Avenue, Green Bay, WI 54304",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "packers-com-lambeau-field-contact-us"
+        ],
+        "value": "54304"
+      },
+      "state": {
+        "confidence": "low",
+        "evidence": "The address is confirmed as 1265 Lombardi Avenue, Green Bay, WI 54304",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "packers-com-lambeau-field-contact-us"
+        ],
+        "value": "WI"
+      },
+      "street": {
+        "confidence": "low",
+        "evidence": "The address is confirmed as 1265 Lombardi Avenue, Green Bay, WI 54304",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "packers-com-lambeau-field-contact-us"
+        ],
+        "value": "1265 Lombardi Avenue"
+      },
+      "teams": {
+        "confidence": "low",
+        "evidence": "The address is confirmed as 1265 Lombardi Avenue, Green Bay, WI 54304",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "packers-com-lambeau-field-contact-us"
+        ],
+        "value": "Green Bay Packers"
+      },
+      "timezone": {
+        "confidence": "low",
+        "evidence": "The address is confirmed as 1265 Lombardi Avenue, Green Bay, WI 54304",
+        "method": "search_snippet",
+        "notes": "Timezone inferred from Green Bay, WI location (Central Time).",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "packers-com-lambeau-field-contact-us"
+        ],
+        "value": "America/Chicago"
+      },
+      "venue_name": {
+        "confidence": "low",
+        "evidence": "The address is confirmed as 1265 Lombardi Avenue, Green Bay, WI 54304",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "packers-com-lambeau-field-contact-us"
+        ],
+        "value": "Lambeau Field"
+      },
+      "venue_type": {
+        "confidence": "low",
+        "evidence": "The address is confirmed as 1265 Lombardi Avenue, Green Bay, WI 54304",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "packers-com-lambeau-field-contact-us"
+        ],
+        "value": "stadium"
+      }
+    },
+    "policy": {
+      "Ashwaubenon game-day no-parking fines": {
+        "confidence": "low",
+        "evidence": "The ordinance text lists $200.00 for special event parking if paid within fifteen days, $225.00 after first notice, and $250.00 after second notice",
+        "method": "search_snippet",
+        "notes": "Ordinance O11-1-24 adopted Nov 26, 2024; section later repealed and recreated by O3-1-25 and a draft O2-2-25 may change sign wording — confirm current text.",
+        "observedAt": "2024-11-26",
+        "sources": [
+          "ashwaubenon-gov-media-4027-o11-1-24-amending-special-event-parkingclean-pdf"
+        ],
+        "value": "Parking where signs read \"No Parking on Packer Game Day\" is prohibited; the special event parking fine is $200 if paid within fifteen days, $225 after first notice and $250 after second notice."
+      },
+      "Cashless stadium": {
+        "confidence": "medium",
+        "evidence": "The stadium is entirely cashless; only traditional credit/debit card or contactless payment methods will be accepted.",
+        "method": "search_snippet",
+        "notes": "Applies to the stadium; observed_at estimated.",
+        "observedAt": "2025-08-01",
+        "sources": [
+          "packers-com-lambeau-field-parking"
+        ],
+        "value": "Lambeau Field is entirely cashless; only credit/debit card or contactless payment is accepted. Cash-to-card stations are available."
+      },
+      "Fires and grills": {
+        "confidence": "low",
+        "evidence": "No recreational (wood) fires are allowed. However, grill cooking with charcoal or propane gas is permitted. Grills must be supervised at all times by a responsible adult and be fully extinguished before being left unattended.",
+        "method": "search_snippet",
+        "notes": "Packers PDF date unknown.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "res-cloudinary-com-nflclubs-image-upload-packers-kv2qbftvpynkyxmrnagw-pdf"
+        ],
+        "value": "No recreational (wood) fires are allowed. Grill cooking with charcoal or propane gas is permitted; grills must be supervised at all times by a responsible adult and be fully extinguished before being left unattended."
+      },
+      "Free street parking": {
+        "confidence": "medium",
+        "evidence": "free parking is available on many residential streets within walking distance of Lambeau Field.",
+        "method": "search_snippet",
+        "notes": "observed_at estimated. Check posted Ashwaubenon game-day no-parking signs.",
+        "observedAt": "2026-08-01",
+        "sources": [
+          "packers-com-news-lambeau-field-parking"
+        ],
+        "value": "Free parking is available on many residential streets within walking distance of Lambeau Field."
+      },
+      "Season parking passes": {
+        "confidence": "medium",
+        "evidence": "All parking spaces in the lots surrounding Lambeau Field are sold out to holders of season parking passes.",
+        "method": "search_snippet",
+        "notes": "observed_at estimated.",
+        "observedAt": "2025-08-01",
+        "sources": [
+          "packers-com-lambeau-field-parking"
+        ],
+        "value": "All parking spaces in the lots surrounding Lambeau Field are sold out to holders of season parking passes."
+      },
+      "Tailgating space": {
+        "confidence": "low",
+        "evidence": "Your tailgating set-up must be contained within the 9x6 foot space directly behind your parked vehicle.",
+        "method": "search_snippet",
+        "notes": "Packers PDF date unknown.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "res-cloudinary-com-nflclubs-image-upload-packers-kv2qbftvpynkyxmrnagw-pdf"
+        ],
+        "value": "Your tailgating set-up must be contained within the 9x6 foot space directly behind your parked vehicle."
+      }
+    },
+    "transit": {
+      "Green Bay Metro free gameday buses": {
+        "confidence": "medium",
+        "evidence": "For the 2026 season, fans will be offered four free, efficient and convenient gameday bus routes for all Packers home games.",
+        "method": "search_snippet",
+        "notes": "Service hours conflict between sources (five hours before kickoff on an older page vs four hours per a third-party guide); check Green Bay Metro.",
+        "observedAt": "2026-08-01",
+        "sources": [
+          "packers-com-news-lambeau-field-parking"
+        ],
+        "value": "Four free gameday bus routes serve all Packers home games for the 2026 season."
+      },
+      "Rideshare drop-off": {
+        "confidence": "medium",
+        "evidence": "Due to the traffic congestion around the stadium we suggest dropping off your passengers on the corner of Shadow Ln and Frank St",
+        "method": "search_snippet",
+        "notes": "observed_at estimated.",
+        "observedAt": "2025-08-01",
+        "sources": [
+          "packers-com-lambeau-field-parking"
+        ],
+        "value": "The Packers suggest dropping off passengers at the corner of Shadow Ln and Frank St; it is not a post-game pick-up zone."
+      }
+    }
+  },
+  "version": 1
+}

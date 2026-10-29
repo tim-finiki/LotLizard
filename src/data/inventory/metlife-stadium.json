@@ -1,0 +1,1212 @@
+{
+  "lots": {
+    "deck-a": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "Parking deck included in the Gold permit lots for NFL games."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "Deck A"
+        },
+        "payment_timing": {
+          "confidence": "low",
+          "evidence": "A prepaid permit is required for vehicles entering the complex on NFL game days.",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date. Snippet wording may be paraphrased by search tool.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "prepay_required"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+          "method": "search_snippet",
+          "notes": "Classified as garage because the source calls it a 'Deck'; Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "garage"
+        }
+      },
+      "prices": {}
+    },
+    "lot-b": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "Official MetLife Stadium Gold lot; on NFL game days a prepaid Gold (or Platinum) permit is required."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "Lot B"
+        },
+        "payment_timing": {
+          "confidence": "low",
+          "evidence": "A prepaid permit is required for vehicles entering the complex on NFL game days.",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date. Snippet wording may be paraphrased by search tool.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "prepay_required"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating has become a ritual at the stadium and is permitted provided guests tailgate in the same space occupied by their vehicle.",
+          "method": "search_snippet",
+          "notes": "All-lots rule from Jets Parking FAQ applied to this lot; Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "newyorkjets-com-faqs-parking-faq"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-d": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "Official MetLife Stadium Gold lot; on NFL game days a prepaid Gold (or Platinum) permit is required."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "Lot D"
+        },
+        "payment_timing": {
+          "confidence": "low",
+          "evidence": "A prepaid permit is required for vehicles entering the complex on NFL game days.",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date. Snippet wording may be paraphrased by search tool.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "prepay_required"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating has become a ritual at the stadium and is permitted provided guests tailgate in the same space occupied by their vehicle.",
+          "method": "search_snippet",
+          "notes": "All-lots rule from Jets Parking FAQ applied to this lot; Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "newyorkjets-com-faqs-parking-faq"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-e": {
+      "fields": {
+        "ada": {
+          "confidence": "low",
+          "evidence": "Ticket holders with a valid ADA license plate or hang tag AND a Pre-Paid Parking Permit are directed to park in ADA spaces in Lots E, F, or G.",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "newyorkjets-com-faqs-parking-faq"
+          ],
+          "value": "available"
+        },
+        "aliases": {
+          "confidence": "low",
+          "evidence": "A designated Uber Zone is located in Lot E off of West Peripheral Road, right outside of the Verizon Gate at MetLife Stadium.",
+          "method": "search_snippet",
+          "notes": "Page appears to date from about 2018 (references a 2018 parking map); date estimated, may be outdated.",
+          "observedAt": "2018-09-01",
+          "sources": [
+            "newyorkjets-com-news-uber-faq"
+          ],
+          "value": "Uber Zone;Rideshare Zone"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "The platinum colored lots are for Club and Suite season ticket holders and the gold colored lots are for all PSL and non-PSL season ticket holders.",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "newyorkjets-com-faqs-parking-faq"
+          ],
+          "value": "Official MetLife Stadium Platinum lot; on NFL game days a prepaid Platinum permit is required. Jets FAQ says Platinum lots are for Club and Suite season ticket members."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Platinum permits cover Lots E, F, or G",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date. Snippet wording may be paraphrased by search tool.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "Lot E"
+        },
+        "payment_timing": {
+          "confidence": "low",
+          "evidence": "A prepaid permit is required for vehicles entering the complex on NFL game days.",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date. Snippet wording may be paraphrased by search tool.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "prepay_required"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating has become a ritual at the stadium and is permitted provided guests tailgate in the same space occupied by their vehicle.",
+          "method": "search_snippet",
+          "notes": "All-lots rule from Jets Parking FAQ applied to this lot; Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "newyorkjets-com-faqs-parking-faq"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Platinum permits cover Lots E, F, or G",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-f": {
+      "fields": {
+        "ada": {
+          "confidence": "low",
+          "evidence": "Ticket holders with a valid ADA license plate or hang tag AND a Pre-Paid Parking Permit are directed to park in ADA spaces in Lots E, F, or G.",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "newyorkjets-com-faqs-parking-faq"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "The platinum colored lots are for Club and Suite season ticket holders and the gold colored lots are for all PSL and non-PSL season ticket holders.",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "newyorkjets-com-faqs-parking-faq"
+          ],
+          "value": "Official MetLife Stadium Platinum lot; on NFL game days a prepaid Platinum permit is required. Jets FAQ says Platinum lots are for Club and Suite season ticket members."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Platinum permits cover Lots E, F, or G",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date. Snippet wording may be paraphrased by search tool.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "Lot F"
+        },
+        "payment_timing": {
+          "confidence": "low",
+          "evidence": "A prepaid permit is required for vehicles entering the complex on NFL game days.",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date. Snippet wording may be paraphrased by search tool.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "prepay_required"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating has become a ritual at the stadium and is permitted provided guests tailgate in the same space occupied by their vehicle.",
+          "method": "search_snippet",
+          "notes": "All-lots rule from Jets Parking FAQ applied to this lot; Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "newyorkjets-com-faqs-parking-faq"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Platinum permits cover Lots E, F, or G",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-g": {
+      "fields": {
+        "ada": {
+          "confidence": "low",
+          "evidence": "Ticket holders with a valid ADA license plate or hang tag AND a Pre-Paid Parking Permit are directed to park in ADA spaces in Lots E, F, or G.",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "newyorkjets-com-faqs-parking-faq"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "The platinum colored lots are for Club and Suite season ticket holders and the gold colored lots are for all PSL and non-PSL season ticket holders.",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "newyorkjets-com-faqs-parking-faq"
+          ],
+          "value": "Official MetLife Stadium Platinum lot; on NFL game days a prepaid Platinum permit is required. Jets FAQ says Platinum lots are for Club and Suite season ticket members."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Platinum permits cover Lots E, F, or G",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date. Snippet wording may be paraphrased by search tool.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "Lot G"
+        },
+        "payment_timing": {
+          "confidence": "low",
+          "evidence": "A prepaid permit is required for vehicles entering the complex on NFL game days.",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date. Snippet wording may be paraphrased by search tool.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "prepay_required"
+        },
+        "tailgating_notes": {
+          "confidence": "low",
+          "evidence": "And also not permitted in the non-tailgating areas located in Lot G.",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "newyorkjets-com-faqs-parking-faq"
+          ],
+          "value": "Tailgating is not permitted in the non-tailgating areas located in Lot G."
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Platinum permits cover Lots E, F, or G",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-j": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "Official MetLife Stadium Gold lot; on NFL game days a prepaid Gold (or Platinum) permit is required."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "Lot J"
+        },
+        "payment_timing": {
+          "confidence": "low",
+          "evidence": "A prepaid permit is required for vehicles entering the complex on NFL game days.",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date. Snippet wording may be paraphrased by search tool.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "prepay_required"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating has become a ritual at the stadium and is permitted provided guests tailgate in the same space occupied by their vehicle.",
+          "method": "search_snippet",
+          "notes": "All-lots rule from Jets Parking FAQ applied to this lot; Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "newyorkjets-com-faqs-parking-faq"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-k": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "Official MetLife Stadium Gold lot; on NFL game days a prepaid Gold (or Platinum) permit is required."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "Lot K"
+        },
+        "payment_timing": {
+          "confidence": "low",
+          "evidence": "A prepaid permit is required for vehicles entering the complex on NFL game days.",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date. Snippet wording may be paraphrased by search tool.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "prepay_required"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating has become a ritual at the stadium and is permitted provided guests tailgate in the same space occupied by their vehicle.",
+          "method": "search_snippet",
+          "notes": "All-lots rule from Jets Parking FAQ applied to this lot; Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "newyorkjets-com-faqs-parking-faq"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-l": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "Official MetLife Stadium Gold lot; on NFL game days a prepaid Gold (or Platinum) permit is required."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "Lot L"
+        },
+        "payment_timing": {
+          "confidence": "low",
+          "evidence": "A prepaid permit is required for vehicles entering the complex on NFL game days.",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date. Snippet wording may be paraphrased by search tool.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "prepay_required"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating has become a ritual at the stadium and is permitted provided guests tailgate in the same space occupied by their vehicle.",
+          "method": "search_snippet",
+          "notes": "All-lots rule from Jets Parking FAQ applied to this lot; Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "newyorkjets-com-faqs-parking-faq"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "official_lot"
+        },
+        "vehicle_types": {
+          "confidence": "low",
+          "evidence": "charter bus parking is located in Parking Lot L",
+          "method": "search_snippet",
+          "notes": "From general-event parking page; NFL-specific bus rules not confirmed. Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-general-event-parking"
+          ],
+          "value": "bus"
+        }
+      },
+      "prices": {}
+    },
+    "lot-m": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "Official MetLife Stadium Gold lot; on NFL game days a prepaid Gold (or Platinum) permit is required."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "Lot M"
+        },
+        "payment_timing": {
+          "confidence": "low",
+          "evidence": "A prepaid permit is required for vehicles entering the complex on NFL game days.",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date. Snippet wording may be paraphrased by search tool.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "prepay_required"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating has become a ritual at the stadium and is permitted provided guests tailgate in the same space occupied by their vehicle.",
+          "method": "search_snippet",
+          "notes": "All-lots rule from Jets Parking FAQ applied to this lot; Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "newyorkjets-com-faqs-parking-faq"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-p": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "Official MetLife Stadium Gold lot; on NFL game days a prepaid Gold (or Platinum) permit is required."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "Lot P"
+        },
+        "payment_timing": {
+          "confidence": "low",
+          "evidence": "A prepaid permit is required for vehicles entering the complex on NFL game days.",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date. Snippet wording may be paraphrased by search tool.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "prepay_required"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating has become a ritual at the stadium and is permitted provided guests tailgate in the same space occupied by their vehicle.",
+          "method": "search_snippet",
+          "notes": "All-lots rule from Jets Parking FAQ applied to this lot; Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "newyorkjets-com-faqs-parking-faq"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-s": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "Platinum permits cover Lots E, F, G, or S",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "newyorkjets-com-faqs-parking-faq"
+          ],
+          "value": "Listed by the Jets Parking FAQ as a Platinum permit lot."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Platinum permits cover Lots E, F, G, or S",
+          "method": "search_snippet",
+          "notes": "Only the Jets FAQ lists Lot S; MetLife NFL page lists Platinum as E, F, G only. Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "newyorkjets-com-faqs-parking-faq"
+          ],
+          "value": "Lot S"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Platinum permits cover Lots E, F, G, or S",
+          "method": "search_snippet",
+          "notes": "Snippet wording may be paraphrased by search tool. Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "newyorkjets-com-faqs-parking-faq"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "murray-hill-parkway-offsite-lot": {
+      "fields": {
+        "address": {
+          "confidence": "low",
+          "evidence": "Guests without prepaid permits may park at the off-site lot located at 20 Murray Hill Parkway, East Rutherford, NJ 07073 for $65 (cash/credit card accepted).",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "cms-metlifestadium-com-getting-here-nfl-parking-information"
+          ],
+          "value": "20 Murray Hill Parkway, East Rutherford, NJ 07073"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "This lot is open for both Giants and Jets Home Games.",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "cms-metlifestadium-com-getting-here-nfl-parking-information"
+          ],
+          "value": "Off-site lot for NFL guests without prepaid permits, open for both Giants and Jets home games."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Guests without prepaid permits may park at the off-site lot located at 20 Murray Hill Parkway, East Rutherford, NJ 07073 for $65 (cash/credit card accepted).",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "cms-metlifestadium-com-getting-here-nfl-parking-information"
+          ],
+          "value": "Off-Site Lot (20 Murray Hill Parkway)"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "Guests without prepaid permits may park at the off-site lot located at 20 Murray Hill Parkway, East Rutherford, NJ 07073 for $65 (cash/credit card accepted).",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "cms-metlifestadium-com-getting-here-nfl-parking-information"
+          ],
+          "value": "cash;card"
+        },
+        "payment_timing": {
+          "confidence": "low",
+          "evidence": "Guests without prepaid permits may park at the off-site lot located at 20 Murray Hill Parkway, East Rutherford, NJ 07073 for $65 (cash/credit card accepted).",
+          "method": "search_snippet",
+          "notes": "Inferred from 'guests without prepaid permits may park... for $65'. Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "cms-metlifestadium-com-getting-here-nfl-parking-information"
+          ],
+          "value": "pay_on_arrival"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Guests without prepaid permits may park at the off-site lot located at 20 Murray Hill Parkway, East Rutherford, NJ 07073 for $65 (cash/credit card accepted).",
+          "method": "search_snippet",
+          "notes": "Off-site lot for guests without prepaid permits; third-party guides say a shuttle runs to Lot G (not confirmed in official snippet). Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "cms-metlifestadium-com-getting-here-nfl-parking-information"
+          ],
+          "value": "private_lot"
+        }
+      },
+      "prices": {
+        "car|nfl_regular|lot|": {
+          "confidence": "low",
+          "evidence": "Guests without prepaid permits may park at the off-site lot located at 20 Murray Hill Parkway, East Rutherford, NJ 07073 for $65 (cash/credit card accepted).",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date. Another cached version of a MetLife NFL page lists $55 for this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "cms-metlifestadium-com-getting-here-nfl-parking-information"
+          ],
+          "value": "min=65;max=65;vehicle=car;scope=lot;event=nfl_regular"
+        }
+      }
+    },
+    "secaucus-junction-parkfast": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "ticket holders can park at the Laz at Edison Park Fast parking lot located at the Frank R. Lautenberg Station at Secaucus Junction. Ticket holders can park in this 1,100-space parking lot and take NJ TRANSIT rail service to MetLife Sports Complex.",
+          "method": "search_snippet",
+          "notes": "From general-event parking page. Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-general-event-parking"
+          ],
+          "value": "1,100-space lot at Frank R. Lautenberg Station, Secaucus Junction, from which ticket holders take NJ TRANSIT rail to the MetLife Sports Complex."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "ticket holders can park at the Laz at Edison Park Fast parking lot located at the Frank R. Lautenberg Station at Secaucus Junction. Ticket holders can park in this 1,100-space parking lot and take NJ TRANSIT rail service to MetLife Sports Complex.",
+          "method": "search_snippet",
+          "notes": "Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-general-event-parking"
+          ],
+          "value": "Edison ParkFast at Secaucus Junction"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "ticket holders can park at the Laz at Edison Park Fast parking lot located at the Frank R. Lautenberg Station at Secaucus Junction. Ticket holders can park in this 1,100-space parking lot and take NJ TRANSIT rail service to MetLife Sports Complex.",
+          "method": "search_snippet",
+          "notes": "Park-and-ride lot; reach stadium by NJ TRANSIT rail. Source page date unknown; observed_at set to research date.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "metlifestadium-com-plan-your-visit-parking-tailgating-general-event-parking"
+          ],
+          "value": "private_lot"
+        }
+      },
+      "prices": {}
+    }
+  },
+  "slug": "metlife-stadium",
+  "sources": {
+    "cms-metlifestadium-com-getting-here-nfl-parking-information": {
+      "method": "search_snippet",
+      "name": "MetLife Stadium — NFL Parking (cms page)",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://cms.metlifestadium.com/getting-here/nfl-parking-information"
+    },
+    "coachusa-com-351-meadowlands-express": {
+      "method": "search_snippet",
+      "name": "Coach USA — 351 Meadowlands Express",
+      "retrievedAt": "2026-10-15",
+      "type": "operator",
+      "url": "https://www.coachusa.com/351-meadowlands-express"
+    },
+    "giants-com-tickets-knowbeforeyougo": {
+      "method": "search_snippet",
+      "name": "New York Giants — Know Before You Go",
+      "retrievedAt": "2026-10-15",
+      "type": "official",
+      "url": "https://www.giants.com/tickets/knowbeforeyougo"
+    },
+    "metlifestadium-com-connect-internships": {
+      "method": "search_snippet",
+      "name": "MetLife Stadium — Internships (contact/address)",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.metlifestadium.com/connect/internships"
+    },
+    "metlifestadium-com-plan-your-visit-parking-tailgating-general-event-parking": {
+      "method": "search_snippet",
+      "name": "MetLife Stadium — General Event Parking",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.metlifestadium.com/plan-your-visit/parking-tailgating/general-event-parking"
+    },
+    "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking": {
+      "method": "search_snippet",
+      "name": "MetLife Stadium — NFL Parking",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.metlifestadium.com/plan-your-visit/parking-tailgating/nfl-parking"
+    },
+    "metlifestadium-com-plan-your-visit-parking-tailgating-tailgating": {
+      "method": "search_snippet",
+      "name": "MetLife Stadium — Tailgating",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.metlifestadium.com/plan-your-visit/parking-tailgating/tailgating"
+    },
+    "newyorkjets-com-faqs-parking-faq": {
+      "method": "search_snippet",
+      "name": "New York Jets — Parking FAQ",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.newyorkjets.com/faqs/parking-faq"
+    },
+    "newyorkjets-com-news-uber-faq": {
+      "method": "search_snippet",
+      "name": "New York Jets — Uber FAQ",
+      "retrievedAt": "2018-09-01",
+      "type": "official",
+      "url": "https://newyorkjets.com/news/uber-faq"
+    },
+    "njtransit-com-press-releases-nj-transit-ready-kick-nfl-regular-season-metlife-st": {
+      "method": "search_snippet",
+      "name": "NJ TRANSIT — Ready to Kick Off the NFL Regular Season at MetLife Stadium",
+      "retrievedAt": "2026-09-10",
+      "type": "official",
+      "url": "https://www.njtransit.com/press-releases/nj-transit-ready-kick-nfl-regular-season-metlife-stadium-3"
+    }
+  },
+  "venue": {
+    "fields": {
+      "city": {
+        "confidence": "low",
+        "evidence": "MetLife Stadium - 1 MetLife Stadium Drive, East Rutherford, NJ 07073",
+        "method": "search_snippet",
+        "notes": "Source page date unknown; observed_at set to research date.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "metlifestadium-com-connect-internships"
+        ],
+        "value": "East Rutherford"
+      },
+      "lot_open_hours_before": {
+        "confidence": "medium",
+        "evidence": "For Giants games, a prepaid parking pass is required for entry. Parking lots will open 5 hours before the start of the game.",
+        "method": "search_snippet",
+        "notes": "Page reported as updated about two weeks before research date. Jets FAQ also says: \"Parking lots open five hours prior to kickoff.\"",
+        "observedAt": "2026-10-15",
+        "sources": [
+          "giants-com-tickets-knowbeforeyougo"
+        ],
+        "value": "5"
+      },
+      "postal_code": {
+        "confidence": "low",
+        "evidence": "MetLife Stadium - 1 MetLife Stadium Drive, East Rutherford, NJ 07073",
+        "method": "search_snippet",
+        "notes": "Source page date unknown; observed_at set to research date.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "metlifestadium-com-connect-internships"
+        ],
+        "value": "07073"
+      },
+      "state": {
+        "confidence": "low",
+        "evidence": "MetLife Stadium - 1 MetLife Stadium Drive, East Rutherford, NJ 07073",
+        "method": "search_snippet",
+        "notes": "Source page date unknown; observed_at set to research date.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "metlifestadium-com-connect-internships"
+        ],
+        "value": "NJ"
+      },
+      "street": {
+        "confidence": "low",
+        "evidence": "MetLife Stadium - 1 MetLife Stadium Drive, East Rutherford, NJ 07073",
+        "method": "search_snippet",
+        "notes": "Source page date unknown; observed_at set to research date.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "metlifestadium-com-connect-internships"
+        ],
+        "value": "1 MetLife Stadium Drive"
+      },
+      "teams": {
+        "confidence": "medium",
+        "evidence": "NJ TRANSIT offered train service to and from Secaucus Junction for every Giants or Jets home game",
+        "method": "search_snippet",
+        "notes": "Press release date estimated (early Sept 2026); snippet wording may be paraphrased by search tool.",
+        "observedAt": "2026-09-10",
+        "sources": [
+          "njtransit-com-press-releases-nj-transit-ready-kick-nfl-regular-season-metlife-st"
+        ],
+        "value": "New York Giants;New York Jets"
+      },
+      "timezone": {
+        "confidence": "low",
+        "evidence": "MetLife Stadium - 1 MetLife Stadium Drive, East Rutherford, NJ 07073",
+        "method": "search_snippet",
+        "notes": "Derived from East Rutherford, NJ location; not stated explicitly by source.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "metlifestadium-com-connect-internships"
+        ],
+        "value": "America/New_York"
+      },
+      "venue_name": {
+        "confidence": "low",
+        "evidence": "MetLife Stadium - 1 MetLife Stadium Drive, East Rutherford, NJ 07073",
+        "method": "search_snippet",
+        "notes": "Source page date unknown; observed_at set to research date.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "metlifestadium-com-connect-internships"
+        ],
+        "value": "MetLife Stadium"
+      },
+      "venue_type": {
+        "confidence": "low",
+        "evidence": "MetLife Stadium - 1 MetLife Stadium Drive, East Rutherford, NJ 07073",
+        "method": "search_snippet",
+        "notes": "Source page date unknown; observed_at set to research date.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "metlifestadium-com-connect-internships"
+        ],
+        "value": "stadium"
+      }
+    },
+    "policy": {
+      "Grills in decks": {
+        "confidence": "low",
+        "evidence": "The stadium does not allow grills or other heating devices in the parking decks.",
+        "method": "search_snippet",
+        "notes": "Source page date unknown; observed_at set to research date. Snippet wording may be paraphrased by search tool.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "metlifestadium-com-plan-your-visit-parking-tailgating-tailgating"
+        ],
+        "value": "Grills and other heating devices are not allowed in the parking decks; open fires and deep fryers are prohibited."
+      },
+      "Hang tag display": {
+        "confidence": "low",
+        "evidence": "Hang Tag Parking Permits must be displayed at all times while on the Sports Complex, either hung from the rear view mirror or placed on the dashboard of the vehicle.",
+        "method": "search_snippet",
+        "notes": "Source page date unknown; observed_at set to research date.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+        ],
+        "value": "Hang tag permits must be displayed at all times on the Sports Complex, hung from the rear view mirror or placed on the dashboard."
+      },
+      "Jets pass format": {
+        "confidence": "low",
+        "evidence": "Mobile parking passes and printed PDFs are the only method of entry into Jets parking lots on gamedays. Screenshots of your parking pass are not permitted.",
+        "method": "search_snippet",
+        "notes": "Source page date unknown; observed_at set to research date.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "newyorkjets-com-faqs-parking-faq"
+        ],
+        "value": "Mobile parking passes and printed PDFs are the only method of entry into Jets parking lots on gamedays; screenshots are not permitted."
+      },
+      "Jets season parking permits": {
+        "confidence": "low",
+        "evidence": "Club & Suite Holders: $550 ($55 per game). PSL & Non-PSL Seat Holders: $450 ($45 per game).",
+        "method": "search_snippet",
+        "notes": "Source page date unknown; observed_at set to research date. Season not stated; an older FAQ version listed $500/$400. Single-game Gold permits 'will be priced dynamically on a per game basis.'",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "newyorkjets-com-faqs-parking-faq"
+        ],
+        "value": "Club & Suite holders $550 ($55 per game); PSL & non-PSL seat holders $450 ($45 per game). Single-game Gold permits are priced dynamically."
+      },
+      "Lost permits": {
+        "confidence": "low",
+        "evidence": "Parking permits will not be replaced if lost, stolen or destroyed.",
+        "method": "search_snippet",
+        "notes": "Source page date unknown; observed_at set to research date.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+        ],
+        "value": "Parking permits will not be replaced if lost, stolen or destroyed."
+      },
+      "Lot closing": {
+        "confidence": "low",
+        "evidence": "Parking lots close two hours after the end of the game.",
+        "method": "search_snippet",
+        "notes": "Source page date unknown; observed_at set to research date.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "newyorkjets-com-faqs-parking-faq"
+        ],
+        "value": "Parking lots close two hours after the end of the game."
+      },
+      "No tailgate sales": {
+        "confidence": "low",
+        "evidence": "Individuals and companies are prohibited from selling access to a tailgate party to members of the general public either in advance of or on the day of an event.",
+        "method": "search_snippet",
+        "notes": "Source page date unknown; observed_at set to research date.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "newyorkjets-com-faqs-parking-faq"
+        ],
+        "value": "Individuals and companies are prohibited from selling access to a tailgate party to the general public."
+      },
+      "One permit, one space": {
+        "confidence": "low",
+        "evidence": "the parking permit entitles the ticket holder to one parking space for his/her vehicle and tailgate set-up",
+        "method": "search_snippet",
+        "notes": "Source page date unknown; observed_at set to research date.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+        ],
+        "value": "The NFL parking permit entitles the ticket holder to one parking space for the vehicle and tailgate set-up."
+      },
+      "Oversized vehicles": {
+        "confidence": "low",
+        "evidence": "trucks, trailers, buses and other oversized vehicles are not permitted to park in the enclosed parking deck at American Dream",
+        "method": "search_snippet",
+        "notes": "Source page date unknown; observed_at set to research date. From general-event parking page.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "metlifestadium-com-plan-your-visit-parking-tailgating-general-event-parking"
+        ],
+        "value": "Trucks, trailers, buses and other oversized vehicles are not permitted to park in the enclosed parking deck at American Dream."
+      },
+      "Parking permit tiers": {
+        "confidence": "low",
+        "evidence": "The \"GOLD\" permit will allow access to any \"Gold\" Lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream)",
+        "method": "search_snippet",
+        "notes": "Source page date unknown; observed_at set to research date. Jets FAQ lists Platinum as Lots E, F, G, or S.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "metlifestadium-com-plan-your-visit-parking-tailgating-nfl-parking"
+        ],
+        "value": "Platinum permits admit to any Platinum lot (Lots E, F, G); Gold permits admit to any Gold lot (Lots B, D, J, K, L, M, P, Deck A and all lots near American Dream). Permit numbers do not guarantee a specific space."
+      },
+      "Prepaid parking required (Giants)": {
+        "confidence": "medium",
+        "evidence": "For Giants games, a prepaid parking pass is required for entry.",
+        "method": "search_snippet",
+        "observedAt": "2026-10-15",
+        "sources": [
+          "giants-com-tickets-knowbeforeyougo"
+        ],
+        "value": "For Giants games, a prepaid parking pass is required for entry. Passes are available via mobile entry or print-at-home."
+      },
+      "Tailgate space limits": {
+        "confidence": "low",
+        "evidence": "Tailgating is limited to the lined space and the area directly behind or in front of each vehicle",
+        "method": "search_snippet",
+        "notes": "Source page date unknown; observed_at set to research date.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "metlifestadium-com-plan-your-visit-parking-tailgating-tailgating"
+        ],
+        "value": "Tailgating is limited to the lined space and the area directly behind or in front of each vehicle; tents larger than 8' x 8' are not permitted and saving spaces is not permitted."
+      },
+      "Tailgating": {
+        "confidence": "low",
+        "evidence": "Tailgating has become a ritual at the stadium and is permitted provided guests tailgate in the same space occupied by their vehicle.",
+        "method": "search_snippet",
+        "notes": "Source page date unknown; observed_at set to research date.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "newyorkjets-com-faqs-parking-faq"
+        ],
+        "value": "one car, one space: Tailgating is permitted provided guests tailgate in the same space occupied by their vehicle; not permitted in the Arena-side parking garages or non-tailgating areas of Lot G."
+      }
+    },
+    "transit": {
+      "Coach USA 351 Meadowlands Express": {
+        "confidence": "medium",
+        "evidence": "Your trip will normally take 20 minutes, each way, subject to traffic and weather conditions.",
+        "method": "search_snippet",
+        "notes": "Page listed October 2026 game dates. Also: \"The fare is only $18.00 for round-trip travel.\"",
+        "observedAt": "2026-10-15",
+        "sources": [
+          "coachusa-com-351-meadowlands-express"
+        ],
+        "value": "Round-trip event bus between Port Authority Bus Terminal and MetLife Stadium, about 20 minutes each way; $18.00 round trip. Return boarding is next to parking Lot K."
+      },
+      "NJ TRANSIT DoorDash Meadowlands Rail Line": {
+        "confidence": "medium",
+        "evidence": "There is no direct train service from Penn Station New York to MetLife Stadium. Customers may take any NJ TRANSIT train that stops at Secaucus Junction and then transfer to DoorDash Meadowlands Rail Line trains.",
+        "method": "search_snippet",
+        "notes": "Press release date estimated (Sept 2026). Schedules vary per game; check the event advisory. Also: \"Tickets purchased on the train include a $5 surcharge for each ticket.\"",
+        "observedAt": "2026-09-10",
+        "sources": [
+          "njtransit-com-press-releases-nj-transit-ready-kick-nfl-regular-season-metlife-st"
+        ],
+        "value": "No direct train from Penn Station New York; take any NJ TRANSIT train stopping at Secaucus Junction and transfer to Meadowlands Rail Line trains to the stadium. Tickets bought on the train carry a $5 surcharge."
+      }
+    }
+  },
+  "version": 1
+}

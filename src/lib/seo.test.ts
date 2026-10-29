@@ -3,12 +3,12 @@
  * claims more than the data supports, and the plain-text summaries state unknowns as unknown.
  */
 import { describe, expect, it } from "vitest";
-import { VENUES } from "@/lib/data/venues";
+import { FACILITIES, VENUES } from "@/lib/data/catalog";
 import { HIGHMARK_FACILITIES } from "@/lib/data/facilities/highmark";
 import { EVENTS } from "@/lib/data/events";
 import { SOURCES } from "@/lib/data/sources";
 import { facilityAttributions } from "@/lib/data/repository";
-import { MIN_FACILITIES_TO_INDEX, facilityJsonLd, isIndexableVenue, siteJsonLd, siteUrl, venueJsonLd, zonedDateTime } from "@/lib/seo";
+import { MIN_FACILITIES_TO_INDEX, facilityJsonLd, isIndexableVenue, isSubstantiveFacility, siteJsonLd, siteUrl, venueJsonLd, zonedDateTime } from "@/lib/seo";
 import { summarizeFacility } from "@/lib/facility-summary";
 import { formatDate, verificationSummary } from "@/lib/verification";
 import { featureState } from "@/lib/features";
@@ -23,14 +23,24 @@ const facility = (slug: string) => HIGHMARK_FACILITIES.find((f) => f.slug === sl
 
 describe("indexability", () => {
   it("indexes the pilot venue and no directory-only venue", () => {
-    expect(isIndexableVenue(highmark, HIGHMARK_FACILITIES.length)).toBe(true);
+    expect(isIndexableVenue(highmark, HIGHMARK_FACILITIES)).toBe(true);
     expect(directory.length).toBeGreaterThan(0);
-    for (const v of directory) expect(isIndexableVenue(v, 0)).toBe(false);
+    for (const v of directory) expect(isIndexableVenue(v, [])).toBe(false);
   });
 
   it("requires a minimum number of parking options", () => {
-    expect(isIndexableVenue(highmark, MIN_FACILITIES_TO_INDEX - 1)).toBe(false);
-    expect(isIndexableVenue({ ...highmark, coverage: "venue_only" }, 50)).toBe(false);
+    const substantive = HIGHMARK_FACILITIES.filter(isSubstantiveFacility);
+    expect(substantive.length).toBeGreaterThanOrEqual(MIN_FACILITIES_TO_INDEX);
+    expect(isIndexableVenue(highmark, substantive.slice(0, MIN_FACILITIES_TO_INDEX - 1))).toBe(false);
+    expect(isIndexableVenue({ ...highmark, coverage: "venue_only" }, HIGHMARK_FACILITIES)).toBe(false);
+  });
+
+  it("does not count lots that are only named, or only editorially sourced", () => {
+    const base = HIGHMARK_FACILITIES.find((f) => f.slug === "gold-lot")!;
+    const bare = { ...base, location: undefined, address: undefined, prices: [], payment: undefined, walkMinutes: undefined, tailgating: { allowed: { value: "unknown" as const, attribution: base.attribution } } };
+    expect(isSubstantiveFacility(bare)).toBe(false);
+    expect(isSubstantiveFacility({ ...base, attribution: { sourceIds: ["lotlizard-editorial"], confidence: "low" } })).toBe(false);
+    expect(isIndexableVenue(highmark, [bare, bare, bare, bare])).toBe(false);
   });
 });
 
@@ -43,7 +53,12 @@ describe("sitemap", () => {
     for (const f of HIGHMARK_FACILITIES) expect(urls).toContain(`${siteUrl()}/venues/highmark-stadium/parking/${f.slug}`);
     for (const v of directory) expect(urls).not.toContain(`${siteUrl()}/venues/${v.slug}`);
     expect(urls.some((u) => u.endsWith("/submit"))).toBe(false);
-    expect(urls.filter((u) => u.includes("/states/"))).toEqual([`${siteUrl()}/states/ny`]);
+    // Every state in the sitemap has an indexable venue; states with only directory venues are left out.
+    const indexableStates = new Set(
+      VENUES.filter((v) => isIndexableVenue(v, FACILITIES.filter((f) => f.venueId === v.id))).map((v) => `${siteUrl()}/states/${v.address.state.toLowerCase()}`),
+    );
+    expect(new Set(urls.filter((u) => u.includes("/states/")))).toEqual(indexableStates);
+    expect(indexableStates).toContain(`${siteUrl()}/states/ny`);
     for (const e of entries.filter((e) => e.url.includes("/venues/"))) {
       expect(e.lastModified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     }

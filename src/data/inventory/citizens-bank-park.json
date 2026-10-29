@@ -1,0 +1,609 @@
+{
+  "lots": {
+    "lot-k": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "Lot K will be operating in limited capacity from June 2 until July 6 due to the 2026 FIFA World Cup",
+          "method": "search_snippet",
+          "notes": "World Cup restriction has ended.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "Lot K is a Phillies parking lot that ran at limited capacity from June 2 to July 6, 2026 because of the FIFA World Cup."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Lot K will be operating in limited capacity from June 2 until July 6",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "Lot K"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "All parking for Phillies games at Citizens Bank Park will be cashless. Methods of payment include credit/debit cards and mobile payment (Apple Pay and Google Pay).",
+          "method": "search_snippet",
+          "notes": "Ballpark-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "card;mobile_wallet"
+        },
+        "payment_not_accepted": {
+          "confidence": "low",
+          "evidence": "All parking for Phillies games at Citizens Bank Park will be cashless. Methods of payment include credit/debit cards and mobile payment (Apple Pay and Google Pay).",
+          "method": "search_snippet",
+          "notes": "Ballpark-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "cash"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Lot K will be operating in limited capacity from June 2 until July 6",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {
+        "car|other|area|2026": {
+          "confidence": "low",
+          "evidence": "car parking is $30",
+          "method": "search_snippet",
+          "notes": "Ballpark-wide Phillies car rate, not specific to this lot. Page date not confirmed.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "min=30;max=30;vehicle=car;scope=area;event=other;season=2026"
+        }
+      }
+    },
+    "lot-o": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "The tailgating lots are M, N and O.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "Lot O is one of the Phillies' tailgating lots, which open five hours before the scheduled start time."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "The tailgating lots are M, N and O.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "Lot O"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "All parking for Phillies games at Citizens Bank Park will be cashless. Methods of payment include credit/debit cards and mobile payment (Apple Pay and Google Pay).",
+          "method": "search_snippet",
+          "notes": "Ballpark-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "card;mobile_wallet"
+        },
+        "payment_not_accepted": {
+          "confidence": "low",
+          "evidence": "All parking for Phillies games at Citizens Bank Park will be cashless. Methods of payment include credit/debit cards and mobile payment (Apple Pay and Google Pay).",
+          "method": "search_snippet",
+          "notes": "Ballpark-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "cash"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "The tailgating lots are M, N and O.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "The tailgating lots are M, N and O.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {
+        "car|other|area|2026": {
+          "confidence": "low",
+          "evidence": "car parking is $30",
+          "method": "search_snippet",
+          "notes": "Ballpark-wide Phillies car rate, not specific to this lot. Page date not confirmed.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "min=30;max=30;vehicle=car;scope=area;event=other;season=2026"
+        }
+      }
+    },
+    "lot-p": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "Lot P (inside the Citizens Bank Park parking lots), was added to the initial list of lots by the Eagles and Comcast Spectacor after pushback from tailgaters.",
+          "method": "search_snippet",
+          "notes": "No Phillies-specific rules for Lot P surfaced.",
+          "observedAt": "2026-10-02",
+          "sources": [
+            "inquirer-com-eagles-tailgate-eagles-games-new-guidelines-sunday-rams-20261002-ht"
+          ],
+          "value": "Lot P is inside the Citizens Bank Park parking lots and was added in Oct. 2026 as a designated oversized-vehicle area for Eagles games."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Lot P (inside the Citizens Bank Park parking lots)",
+          "method": "search_snippet",
+          "observedAt": "2026-10-02",
+          "sources": [
+            "inquirer-com-eagles-tailgate-eagles-games-new-guidelines-sunday-rams-20261002-ht"
+          ],
+          "value": "Lot P"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "All parking for Phillies games at Citizens Bank Park will be cashless. Methods of payment include credit/debit cards and mobile payment (Apple Pay and Google Pay).",
+          "method": "search_snippet",
+          "notes": "Ballpark-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "card;mobile_wallet"
+        },
+        "payment_not_accepted": {
+          "confidence": "low",
+          "evidence": "All parking for Phillies games at Citizens Bank Park will be cashless. Methods of payment include credit/debit cards and mobile payment (Apple Pay and Google Pay).",
+          "method": "search_snippet",
+          "notes": "Ballpark-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "cash"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Lot P (inside the Citizens Bank Park parking lots)",
+          "method": "search_snippet",
+          "observedAt": "2026-10-02",
+          "sources": [
+            "inquirer-com-eagles-tailgate-eagles-games-new-guidelines-sunday-rams-20261002-ht"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {
+        "car|other|area|2026": {
+          "confidence": "low",
+          "evidence": "car parking is $30",
+          "method": "search_snippet",
+          "notes": "Ballpark-wide Phillies car rate, not specific to this lot. Page date not confirmed.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "min=30;max=30;vehicle=car;scope=area;event=other;season=2026"
+        }
+      }
+    },
+    "lot-t-rideshare": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "Lot T is designated for Uber RideShare for Citizens Bank Park and Wells Fargo Center events.",
+          "method": "search_snippet",
+          "notes": "Text still says Wells Fargo Center (now Xfinity Mobile Arena), so the page may be outdated. Drivers may not park or idle.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "Lot T is the designated Uber/rideshare pickup and drop-off area for Citizens Bank Park events, reached by walking from the Third Base Gate along Pattison Avenue toward Broad Street."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Lot T is designated for Uber RideShare for Citizens Bank Park and Wells Fargo Center events.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "Lot T (Rideshare)"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Lot T is designated for Uber RideShare for Citizens Bank Park and Wells Fargo Center events.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "rideshare_zone"
+        }
+      },
+      "prices": {}
+    },
+    "lots-m-n": {
+      "fields": {
+        "aliases": {
+          "confidence": "low",
+          "evidence": "Lots M and N",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "Lot M;Lot N"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "Lots M and N are the recommended bus lots, south of Pattison Avenue, and the entrance is at 7th Street off Pattison.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "Lots M and N, south of Pattison Avenue with an entrance at 7th Street, are the Phillies' recommended bus lots and are tailgating lots."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Lots M and N are the recommended bus lots, south of Pattison Avenue, and the entrance is at 7th Street off Pattison.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "Lots M/N"
+        },
+        "payment_accepted": {
+          "confidence": "low",
+          "evidence": "All parking for Phillies games at Citizens Bank Park will be cashless. Methods of payment include credit/debit cards and mobile payment (Apple Pay and Google Pay).",
+          "method": "search_snippet",
+          "notes": "Ballpark-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "card;mobile_wallet"
+        },
+        "payment_not_accepted": {
+          "confidence": "low",
+          "evidence": "All parking for Phillies games at Citizens Bank Park will be cashless. Methods of payment include credit/debit cards and mobile payment (Apple Pay and Google Pay).",
+          "method": "search_snippet",
+          "notes": "Ballpark-wide rule applied to this lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "cash"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "tailgating lots A-H, M, N & O",
+          "method": "search_snippet",
+          "notes": "Some Phillies pages list tailgating lots as only M, N and O; M and N appear in every version.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Lots M and N are the recommended bus lots",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "official_lot"
+        },
+        "vehicle_types": {
+          "confidence": "low",
+          "evidence": "Lots M and N are the recommended bus lots",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "car;bus"
+        }
+      },
+      "prices": {
+        "bus|other|lot|2026": {
+          "confidence": "low",
+          "evidence": "Parking for a bus or any oversized vehicle that takes up more than one space is $60.",
+          "method": "search_snippet",
+          "notes": "Groups can prepay bus parking by calling 215-463-1000.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "min=60;max=60;vehicle=bus;scope=lot;event=other;season=2026"
+        },
+        "car|other|area|2026": {
+          "confidence": "low",
+          "evidence": "car parking is $30",
+          "method": "search_snippet",
+          "notes": "Ballpark-wide Phillies car rate, not specific to this lot. Page date not confirmed.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-phillies-ballpark-transportation-parking"
+          ],
+          "value": "min=30;max=30;vehicle=car;scope=area;event=other;season=2026"
+        }
+      }
+    }
+  },
+  "slug": "citizens-bank-park",
+  "sources": {
+    "en-wikipedia-org-wiki-citizens-bank-park": {
+      "method": "search_snippet",
+      "name": "Wikipedia — Citizens Bank Park",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://en.wikipedia.org/wiki/Citizens_Bank_Park"
+    },
+    "inquirer-com-eagles-tailgate-eagles-games-new-guidelines-sunday-rams-20261002-ht": {
+      "method": "search_snippet",
+      "name": "Philadelphia Inquirer — new tailgate guidelines (Rams game)",
+      "retrievedAt": "2026-10-02",
+      "type": "media",
+      "url": "https://www.inquirer.com/eagles/tailgate-eagles-games-new-guidelines-sunday-rams-20261002.html"
+    },
+    "latlong-net-place-citizens-bank-park-pa-usa-31977-html": {
+      "method": "search_snippet",
+      "name": "LatLong.net — Citizens Bank Park",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://www.latlong.net/place/citizens-bank-park-pa-usa-31977.html"
+    },
+    "mlb-com-phillies-ballpark-disability-access-guide": {
+      "method": "search_snippet",
+      "name": "Philadelphia Phillies — Access Guide for Guests with Disabilities",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.mlb.com/phillies/ballpark/disability-access-guide"
+    },
+    "mlb-com-phillies-ballpark-information-know-before-you-go": {
+      "method": "search_snippet",
+      "name": "Philadelphia Phillies — Know Before You Go",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.mlb.com/phillies/ballpark/information/know-before-you-go"
+    },
+    "mlb-com-phillies-ballpark-transportation-parking": {
+      "method": "search_snippet",
+      "name": "Philadelphia Phillies — Where to park at Citizens Bank Park",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.mlb.com/phillies/ballpark/transportation/parking"
+    },
+    "mlb-com-phillies-ballpark-transportation-public-transportation-septa": {
+      "method": "search_snippet",
+      "name": "Philadelphia Phillies — Public Transportation/SEPTA",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.mlb.com/phillies/ballpark/transportation/public-transportation-septa"
+    }
+  },
+  "venue": {
+    "fields": {
+      "city": {
+        "confidence": "low",
+        "evidence": "1 Citizens Bank Way, Philadelphia, Pennsylvania, United States",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "latlong-net-place-citizens-bank-park-pa-usa-31977-html"
+        ],
+        "value": "Philadelphia"
+      },
+      "lat": {
+        "confidence": "low",
+        "evidence": "39°54′21″N 75°9′59″W",
+        "method": "search_snippet",
+        "notes": "Converted from DMS; LatLong.net gives 39.906216, -75.167465.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "en-wikipedia-org-wiki-citizens-bank-park"
+        ],
+        "value": "39.9058"
+      },
+      "lng": {
+        "confidence": "low",
+        "evidence": "39°54′21″N 75°9′59″W",
+        "method": "search_snippet",
+        "notes": "Converted from DMS.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "en-wikipedia-org-wiki-citizens-bank-park"
+        ],
+        "value": "-75.1664"
+      },
+      "lot_open_hours_before": {
+        "confidence": "low",
+        "evidence": "Tailgating lots will open five hours prior to the scheduled start time. Non-tailgating lots will open three hours prior to the scheduled start time.",
+        "method": "search_snippet",
+        "notes": "Tailgating lots open 5 hours before.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-phillies-ballpark-information-know-before-you-go"
+        ],
+        "value": "3"
+      },
+      "state": {
+        "confidence": "low",
+        "evidence": "1 Citizens Bank Way, Philadelphia, Pennsylvania, United States",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "latlong-net-place-citizens-bank-park-pa-usa-31977-html"
+        ],
+        "value": "PA"
+      },
+      "street": {
+        "confidence": "low",
+        "evidence": "1 Citizens Bank Way, Philadelphia, Pennsylvania, United States",
+        "method": "search_snippet",
+        "notes": "Postal code not confirmed in a snippet.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "latlong-net-place-citizens-bank-park-pa-usa-31977-html"
+        ],
+        "value": "1 Citizens Bank Way"
+      },
+      "teams": {
+        "confidence": "low",
+        "evidence": "All parking for Phillies games at Citizens Bank Park will be cashless.",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-phillies-ballpark-transportation-parking"
+        ],
+        "value": "Philadelphia Phillies"
+      },
+      "timezone": {
+        "confidence": "low",
+        "evidence": "1 Citizens Bank Way, Philadelphia, Pennsylvania, United States",
+        "method": "search_snippet",
+        "notes": "Derived from the Philadelphia, PA address.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "latlong-net-place-citizens-bank-park-pa-usa-31977-html"
+        ],
+        "value": "America/New_York"
+      },
+      "venue_name": {
+        "confidence": "low",
+        "evidence": "1 Citizens Bank Way, Philadelphia, Pennsylvania, United States",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "latlong-net-place-citizens-bank-park-pa-usa-31977-html"
+        ],
+        "value": "Citizens Bank Park"
+      },
+      "venue_type": {
+        "confidence": "low",
+        "evidence": "Where to park at Citizens Bank Park",
+        "method": "search_snippet",
+        "notes": "Ballpark of the Phillies.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-phillies-ballpark-transportation-parking"
+        ],
+        "value": "ballpark"
+      }
+    },
+    "policy": {
+      "Accessible parking": {
+        "confidence": "low",
+        "evidence": "There are handicapped parking areas surrounding Citizens Bank Park (must have placard or proper plates).",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-phillies-ballpark-disability-access-guide"
+        ],
+        "value": "Handicapped parking areas surround the ballpark; a placard or proper plates are required."
+      },
+      "Bus parking": {
+        "confidence": "low",
+        "evidence": "Parking for a bus or any oversized vehicle that takes up more than one space is $60 ... To order, please call 215-463-1000.",
+        "method": "search_snippet",
+        "notes": "Older Phillies pages list $50 and Lot Q for buses.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-phillies-ballpark-transportation-parking"
+        ],
+        "value": "Buses park in Lots M and N (entrance at 7th Street off Pattison Avenue); a bus or oversized vehicle taking more than one space costs $60; groups can prepay by calling 215-463-1000."
+      },
+      "Cashless parking": {
+        "confidence": "low",
+        "evidence": "All parking for Phillies games at Citizens Bank Park will be cashless. Methods of payment include credit/debit cards and mobile payment (Apple Pay and Google Pay).",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-phillies-ballpark-transportation-parking"
+        ],
+        "value": "All parking for Phillies games is cashless; credit/debit cards and mobile payment (Apple Pay and Google Pay) are accepted."
+      },
+      "Lot opening times": {
+        "confidence": "low",
+        "evidence": "Tailgating lots will open five hours prior to the scheduled start time. Non-tailgating lots will open three hours prior to the scheduled start time.",
+        "method": "search_snippet",
+        "notes": "Concert days can differ.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-phillies-ballpark-information-know-before-you-go"
+        ],
+        "value": "Tailgating lots open five hours before the scheduled start time; non-tailgating lots open three hours before."
+      },
+      "Tailgating restrictions": {
+        "confidence": "low",
+        "evidence": "Tailgating is not permitted in parking lots West of Darien Street and North of Pattison Avenue.",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-phillies-ballpark-transportation-parking"
+        ],
+        "value": "Tailgating is not permitted in parking lots west of Darien Street and north of Pattison Avenue."
+      }
+    },
+    "transit": {
+      "SEPTA B (Broad Street Line)": {
+        "confidence": "low",
+        "evidence": "Ride the B south to NRG Station (last stop) located at Broad & Pattison, a short walk (about seven minutes) from Citizens Bank Park.",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-phillies-ballpark-transportation-public-transportation-septa"
+        ],
+        "value": "Ride the B south to NRG Station (last stop) at Broad & Pattison, about a seven-minute walk from the ballpark."
+      },
+      "SEPTA bus routes 4 and 17": {
+        "confidence": "low",
+        "evidence": "Bus routes 4 and 17 (weekends only) provide direct service to the stadiums.",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-phillies-ballpark-transportation-public-transportation-septa"
+        ],
+        "value": "Bus routes 4 and 17 (Route 17 weekends only) provide direct service to the stadiums."
+      }
+    }
+  },
+  "version": 1
+}

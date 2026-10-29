@@ -1,23 +1,19 @@
 import type { Attribution, ParkingFacility, Sponsorship, SponsorshipPlacement, Venue, VenueEvent } from "@/lib/types";
 import { EVENTS } from "@/lib/data/events";
-import { VENUES } from "@/lib/data/venues";
-import { HIGHMARK_FACILITIES } from "@/lib/data/facilities/highmark";
-import { SOURCES } from "@/lib/data/sources";
+import { FACILITIES, SOURCES, VENUES } from "@/lib/data/catalog";
 
 /**
  * Repository over curated data. Every page and API reads through these functions so the
  * backing store (today: typed seed files; later: Postgres/PostGIS) can change in one place.
  */
 
-const FACILITIES: ParkingFacility[] = [...HIGHMARK_FACILITIES];
 /** Sponsorships are always labelled and never affect ranking. None are active in the pilot. */
 const SPONSORSHIPS: Sponsorship[] = [];
 
 export async function listVenues(): Promise<Venue[]> {
   "use cache";
-  return [...VENUES].sort(
-    (a, b) => Number(b.coverage === "pilot_detailed") - Number(a.coverage === "pilot_detailed") || a.name.localeCompare(b.name),
-  );
+  const rank = { pilot_detailed: 2, basic: 1, venue_only: 0 } as const;
+  return [...VENUES].sort((a, b) => rank[b.coverage] - rank[a.coverage] || a.name.localeCompare(b.name));
 }
 
 export async function getVenue(slug: string): Promise<Venue | undefined> {

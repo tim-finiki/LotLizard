@@ -15,7 +15,7 @@ function haystack(v: Venue): string {
   return normalize([v.name, ...(v.formerNames ?? []), ...v.teams, v.address.city, v.address.state, stateName(v.address.state)].join(" "));
 }
 
-/** Every query token must prefix-match some word. Ranked: name-start > pilot coverage > alphabetical. */
+/** Every query token must prefix-match some word. Ranked: name-start > parking coverage > alphabetical. */
 export function searchVenues(venues: Venue[], query: string): Venue[] {
   const tokens = normalize(query).split(" ").filter(Boolean);
   if (tokens.length === 0) return venues;
@@ -25,8 +25,8 @@ export function searchVenues(venues: Venue[], query: string): Venue[] {
       const ok = tokens.every((t) => words.some((w) => w.startsWith(t)));
       if (!ok) return null;
       const nameStarts = normalize(v.name).startsWith(tokens[0]) ? 2 : 0;
-      const pilot = v.coverage === "pilot_detailed" ? 1 : 0;
-      return { v, score: nameStarts + pilot };
+      const coverage = v.coverage === "pilot_detailed" ? 1 : v.coverage === "basic" ? 0.5 : 0;
+      return { v, score: nameStarts + coverage };
     })
     .filter((x): x is { v: Venue; score: number } => x !== null);
   return scored.sort((a, b) => b.score - a.score || a.v.name.localeCompare(b.v.name)).map((x) => x.v);

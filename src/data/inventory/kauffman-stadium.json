@@ -1,0 +1,796 @@
+{
+  "lots": {
+    "lot-c": {
+      "fields": {
+        "ada": {
+          "confidence": "low",
+          "evidence": "it places them in every lot except Lots L and N, which have only a limited number of van-accessible spaces",
+          "method": "search_snippet",
+          "notes": "All-lots rule (except L and N) applied to this lot; spaces are first-come, first-served for properly tagged vehicles.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-royals-ballpark-disability-access-guide"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "medium",
+          "evidence": "Lots G, F and C: only some sections open.",
+          "method": "search_snippet",
+          "notes": "World Cup-period changes were temporary (June 2026).",
+          "observedAt": "2026-06-18",
+          "sources": [
+            "kctv5-com-2026-06-18-parking-changes-royals-fans-truman-sports-complex"
+          ],
+          "value": "Truman Sports Complex lot used for Royals parking; KCTV5 reported only some sections were open to Royals fans during June 2026 World Cup dates."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "Lots G, F and C: only some sections open.",
+          "method": "search_snippet",
+          "observedAt": "2026-06-18",
+          "sources": [
+            "kctv5-com-2026-06-18-parking-changes-royals-fans-truman-sports-complex"
+          ],
+          "value": "Lot C"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "Parking can also be bought at the gate for $30 (General), $40 (Reserved) or $50 (Oversized Vehicle).",
+          "method": "search_snippet",
+          "notes": "2025 source; the 2026 KCTV5 home-opener guide also lists gate prices ($30/$45/$50).",
+          "observedAt": "2025-03-27",
+          "sources": [
+            "kctv5-com-2025-03-27-its-opening-day-royals-fans-heres-everything-you-need-know"
+          ],
+          "value": "advance_optional"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating is allowed, and large tailgate groups will be directed to Lot N.",
+          "method": "search_snippet",
+          "notes": "General Royals tailgating rule applied to each lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-royals-ballpark-transportation"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "Lots G, F and C: only some sections open.",
+          "method": "search_snippet",
+          "observedAt": "2026-06-18",
+          "sources": [
+            "kctv5-com-2026-06-18-parking-changes-royals-fans-truman-sports-complex"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {
+        "car|other|area|2026": {
+          "confidence": "medium",
+          "evidence": "When purchasing parking online in advance, a General Parking pass is $21, a Reserved Parking pass is $36, and an Oversize Vehicle Parking pass is $41.",
+          "method": "search_snippet",
+          "notes": "Complex-wide advance online prices for General ($21) and Reserved ($36); the lot-to-tier mapping is not published in the snippet. Gate prices are higher.",
+          "observedAt": "2026-03-30",
+          "sources": [
+            "mlb-com-royals-ballpark-transportation"
+          ],
+          "value": "min=21;max=36;vehicle=car;scope=area;event=other;season=2026"
+        }
+      }
+    },
+    "lot-d": {
+      "fields": {
+        "ada": {
+          "confidence": "low",
+          "evidence": "it places them in every lot except Lots L and N, which have only a limited number of van-accessible spaces",
+          "method": "search_snippet",
+          "notes": "All-lots rule (except L and N) applied to this lot; spaces are first-come, first-served for properly tagged vehicles.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-royals-ballpark-disability-access-guide"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "medium",
+          "evidence": "Lots E and D: closed to fans.",
+          "method": "search_snippet",
+          "notes": "World Cup-period changes were temporary (June 2026).",
+          "observedAt": "2026-06-18",
+          "sources": [
+            "kctv5-com-2026-06-18-parking-changes-royals-fans-truman-sports-complex"
+          ],
+          "value": "Truman Sports Complex lot used for Royals parking; KCTV5 reported it was closed to Royals fans during June 2026 World Cup dates."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "Lots E and D: closed to fans.",
+          "method": "search_snippet",
+          "observedAt": "2026-06-18",
+          "sources": [
+            "kctv5-com-2026-06-18-parking-changes-royals-fans-truman-sports-complex"
+          ],
+          "value": "Lot D"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "Parking can also be bought at the gate for $30 (General), $40 (Reserved) or $50 (Oversized Vehicle).",
+          "method": "search_snippet",
+          "notes": "2025 source; the 2026 KCTV5 home-opener guide also lists gate prices ($30/$45/$50).",
+          "observedAt": "2025-03-27",
+          "sources": [
+            "kctv5-com-2025-03-27-its-opening-day-royals-fans-heres-everything-you-need-know"
+          ],
+          "value": "advance_optional"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating is allowed, and large tailgate groups will be directed to Lot N.",
+          "method": "search_snippet",
+          "notes": "General Royals tailgating rule applied to each lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-royals-ballpark-transportation"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "Lots E and D: closed to fans.",
+          "method": "search_snippet",
+          "observedAt": "2026-06-18",
+          "sources": [
+            "kctv5-com-2026-06-18-parking-changes-royals-fans-truman-sports-complex"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {
+        "car|other|area|2026": {
+          "confidence": "medium",
+          "evidence": "When purchasing parking online in advance, a General Parking pass is $21, a Reserved Parking pass is $36, and an Oversize Vehicle Parking pass is $41.",
+          "method": "search_snippet",
+          "notes": "Complex-wide advance online prices for General ($21) and Reserved ($36); the lot-to-tier mapping is not published in the snippet. Gate prices are higher.",
+          "observedAt": "2026-03-30",
+          "sources": [
+            "mlb-com-royals-ballpark-transportation"
+          ],
+          "value": "min=21;max=36;vehicle=car;scope=area;event=other;season=2026"
+        }
+      }
+    },
+    "lot-e": {
+      "fields": {
+        "ada": {
+          "confidence": "low",
+          "evidence": "it places them in every lot except Lots L and N, which have only a limited number of van-accessible spaces",
+          "method": "search_snippet",
+          "notes": "All-lots rule (except L and N) applied to this lot; spaces are first-come, first-served for properly tagged vehicles.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-royals-ballpark-disability-access-guide"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "medium",
+          "evidence": "Lots E and D: closed to fans.",
+          "method": "search_snippet",
+          "notes": "World Cup-period changes were temporary (June 2026).",
+          "observedAt": "2026-06-18",
+          "sources": [
+            "kctv5-com-2026-06-18-parking-changes-royals-fans-truman-sports-complex"
+          ],
+          "value": "Truman Sports Complex lot used for Royals parking; KCTV5 reported it was closed to Royals fans during June 2026 World Cup dates."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "Lots E and D: closed to fans.",
+          "method": "search_snippet",
+          "observedAt": "2026-06-18",
+          "sources": [
+            "kctv5-com-2026-06-18-parking-changes-royals-fans-truman-sports-complex"
+          ],
+          "value": "Lot E"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "Parking can also be bought at the gate for $30 (General), $40 (Reserved) or $50 (Oversized Vehicle).",
+          "method": "search_snippet",
+          "notes": "2025 source; the 2026 KCTV5 home-opener guide also lists gate prices ($30/$45/$50).",
+          "observedAt": "2025-03-27",
+          "sources": [
+            "kctv5-com-2025-03-27-its-opening-day-royals-fans-heres-everything-you-need-know"
+          ],
+          "value": "advance_optional"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating is allowed, and large tailgate groups will be directed to Lot N.",
+          "method": "search_snippet",
+          "notes": "General Royals tailgating rule applied to each lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-royals-ballpark-transportation"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "Lots E and D: closed to fans.",
+          "method": "search_snippet",
+          "observedAt": "2026-06-18",
+          "sources": [
+            "kctv5-com-2026-06-18-parking-changes-royals-fans-truman-sports-complex"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {
+        "car|other|area|2026": {
+          "confidence": "medium",
+          "evidence": "When purchasing parking online in advance, a General Parking pass is $21, a Reserved Parking pass is $36, and an Oversize Vehicle Parking pass is $41.",
+          "method": "search_snippet",
+          "notes": "Complex-wide advance online prices for General ($21) and Reserved ($36); the lot-to-tier mapping is not published in the snippet. Gate prices are higher.",
+          "observedAt": "2026-03-30",
+          "sources": [
+            "mlb-com-royals-ballpark-transportation"
+          ],
+          "value": "min=21;max=36;vehicle=car;scope=area;event=other;season=2026"
+        }
+      }
+    },
+    "lot-f": {
+      "fields": {
+        "ada": {
+          "confidence": "low",
+          "evidence": "it places them in every lot except Lots L and N, which have only a limited number of van-accessible spaces",
+          "method": "search_snippet",
+          "notes": "All-lots rule (except L and N) applied to this lot; spaces are first-come, first-served for properly tagged vehicles.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-royals-ballpark-disability-access-guide"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "medium",
+          "evidence": "Lots G, F and C: only some sections open.",
+          "method": "search_snippet",
+          "notes": "World Cup-period changes were temporary (June 2026).",
+          "observedAt": "2026-06-18",
+          "sources": [
+            "kctv5-com-2026-06-18-parking-changes-royals-fans-truman-sports-complex"
+          ],
+          "value": "Truman Sports Complex lot used for Royals parking; KCTV5 reported only some sections were open to Royals fans during June 2026 World Cup dates."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "Lots G, F and C: only some sections open.",
+          "method": "search_snippet",
+          "observedAt": "2026-06-18",
+          "sources": [
+            "kctv5-com-2026-06-18-parking-changes-royals-fans-truman-sports-complex"
+          ],
+          "value": "Lot F"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "Parking can also be bought at the gate for $30 (General), $40 (Reserved) or $50 (Oversized Vehicle).",
+          "method": "search_snippet",
+          "notes": "2025 source; the 2026 KCTV5 home-opener guide also lists gate prices ($30/$45/$50).",
+          "observedAt": "2025-03-27",
+          "sources": [
+            "kctv5-com-2025-03-27-its-opening-day-royals-fans-heres-everything-you-need-know"
+          ],
+          "value": "advance_optional"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating is allowed, and large tailgate groups will be directed to Lot N.",
+          "method": "search_snippet",
+          "notes": "General Royals tailgating rule applied to each lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-royals-ballpark-transportation"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "Lots G, F and C: only some sections open.",
+          "method": "search_snippet",
+          "observedAt": "2026-06-18",
+          "sources": [
+            "kctv5-com-2026-06-18-parking-changes-royals-fans-truman-sports-complex"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {
+        "car|other|area|2026": {
+          "confidence": "medium",
+          "evidence": "When purchasing parking online in advance, a General Parking pass is $21, a Reserved Parking pass is $36, and an Oversize Vehicle Parking pass is $41.",
+          "method": "search_snippet",
+          "notes": "Complex-wide advance online prices for General ($21) and Reserved ($36); the lot-to-tier mapping is not published in the snippet. Gate prices are higher.",
+          "observedAt": "2026-03-30",
+          "sources": [
+            "mlb-com-royals-ballpark-transportation"
+          ],
+          "value": "min=21;max=36;vehicle=car;scope=area;event=other;season=2026"
+        }
+      }
+    },
+    "lot-g": {
+      "fields": {
+        "ada": {
+          "confidence": "low",
+          "evidence": "it places them in every lot except Lots L and N, which have only a limited number of van-accessible spaces",
+          "method": "search_snippet",
+          "notes": "All-lots rule (except L and N) applied to this lot; spaces are first-come, first-served for properly tagged vehicles.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-royals-ballpark-disability-access-guide"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "medium",
+          "evidence": "Lots G, F and C: only some sections open.",
+          "method": "search_snippet",
+          "notes": "World Cup-period changes were temporary (June 2026).",
+          "observedAt": "2026-06-18",
+          "sources": [
+            "kctv5-com-2026-06-18-parking-changes-royals-fans-truman-sports-complex"
+          ],
+          "value": "Truman Sports Complex lot used for Royals parking; KCTV5 reported only some sections were open to Royals fans during June 2026 World Cup dates."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "Lots G, F and C: only some sections open.",
+          "method": "search_snippet",
+          "observedAt": "2026-06-18",
+          "sources": [
+            "kctv5-com-2026-06-18-parking-changes-royals-fans-truman-sports-complex"
+          ],
+          "value": "Lot G"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "Parking can also be bought at the gate for $30 (General), $40 (Reserved) or $50 (Oversized Vehicle).",
+          "method": "search_snippet",
+          "notes": "2025 source; the 2026 KCTV5 home-opener guide also lists gate prices ($30/$45/$50).",
+          "observedAt": "2025-03-27",
+          "sources": [
+            "kctv5-com-2025-03-27-its-opening-day-royals-fans-heres-everything-you-need-know"
+          ],
+          "value": "advance_optional"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating is allowed, and large tailgate groups will be directed to Lot N.",
+          "method": "search_snippet",
+          "notes": "General Royals tailgating rule applied to each lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-royals-ballpark-transportation"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "Lots G, F and C: only some sections open.",
+          "method": "search_snippet",
+          "observedAt": "2026-06-18",
+          "sources": [
+            "kctv5-com-2026-06-18-parking-changes-royals-fans-truman-sports-complex"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {
+        "car|other|area|2026": {
+          "confidence": "medium",
+          "evidence": "When purchasing parking online in advance, a General Parking pass is $21, a Reserved Parking pass is $36, and an Oversize Vehicle Parking pass is $41.",
+          "method": "search_snippet",
+          "notes": "Complex-wide advance online prices for General ($21) and Reserved ($36); the lot-to-tier mapping is not published in the snippet. Gate prices are higher.",
+          "observedAt": "2026-03-30",
+          "sources": [
+            "mlb-com-royals-ballpark-transportation"
+          ],
+          "value": "min=21;max=36;vehicle=car;scope=area;event=other;season=2026"
+        }
+      }
+    },
+    "lot-l": {
+      "fields": {
+        "ada": {
+          "confidence": "low",
+          "evidence": "it places them in every lot except Lots L and N, which have only a limited number of van-accessible spaces",
+          "method": "search_snippet",
+          "notes": "Limited number of van-accessible spaces only.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-royals-ballpark-disability-access-guide"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "it places them in every lot except Lots L and N, which have only a limited number of van-accessible spaces",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-royals-ballpark-disability-access-guide"
+          ],
+          "value": "Truman Sports Complex lot that has a limited number of van-accessible spaces for Royals games."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "it places them in every lot except Lots L and N, which have only a limited number of van-accessible spaces",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-royals-ballpark-disability-access-guide"
+          ],
+          "value": "Lot L"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "Parking can also be bought at the gate for $30 (General), $40 (Reserved) or $50 (Oversized Vehicle).",
+          "method": "search_snippet",
+          "notes": "2025 source; the 2026 KCTV5 home-opener guide also lists gate prices ($30/$45/$50).",
+          "observedAt": "2025-03-27",
+          "sources": [
+            "kctv5-com-2025-03-27-its-opening-day-royals-fans-heres-everything-you-need-know"
+          ],
+          "value": "advance_optional"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating is allowed, and large tailgate groups will be directed to Lot N.",
+          "method": "search_snippet",
+          "notes": "General Royals tailgating rule applied to each lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-royals-ballpark-transportation"
+          ],
+          "value": "yes"
+        },
+        "tailgating_notes": {
+          "confidence": "medium",
+          "evidence": "Tailgate lot: moved from Lot N to Lot L.",
+          "method": "search_snippet",
+          "notes": "Temporary World Cup-period change.",
+          "observedAt": "2026-06-18",
+          "sources": [
+            "kctv5-com-2026-06-18-parking-changes-royals-fans-truman-sports-complex"
+          ],
+          "value": "During June 2026 World Cup dates, the Royals tailgate lot moved from Lot N to Lot L."
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "it places them in every lot except Lots L and N, which have only a limited number of van-accessible spaces",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-royals-ballpark-disability-access-guide"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {
+        "car|other|area|2026": {
+          "confidence": "medium",
+          "evidence": "When purchasing parking online in advance, a General Parking pass is $21, a Reserved Parking pass is $36, and an Oversize Vehicle Parking pass is $41.",
+          "method": "search_snippet",
+          "notes": "Complex-wide advance online prices for General ($21) and Reserved ($36); the lot-to-tier mapping is not published in the snippet. Gate prices are higher.",
+          "observedAt": "2026-03-30",
+          "sources": [
+            "mlb-com-royals-ballpark-transportation"
+          ],
+          "value": "min=21;max=36;vehicle=car;scope=area;event=other;season=2026"
+        }
+      }
+    },
+    "lot-n": {
+      "fields": {
+        "ada": {
+          "confidence": "low",
+          "evidence": "it places them in every lot except Lots L and N, which have only a limited number of van-accessible spaces",
+          "method": "search_snippet",
+          "notes": "Limited number of van-accessible spaces only.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-royals-ballpark-disability-access-guide"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "Tailgating is allowed, and large tailgate groups will be directed to Lot N.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-royals-ballpark-transportation"
+          ],
+          "value": "Truman Sports Complex lot where the Royals direct large tailgate groups; it has a limited number of van-accessible spaces."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Tailgating is allowed, and large tailgate groups will be directed to Lot N.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-royals-ballpark-transportation"
+          ],
+          "value": "Lot N"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "Parking can also be bought at the gate for $30 (General), $40 (Reserved) or $50 (Oversized Vehicle).",
+          "method": "search_snippet",
+          "notes": "2025 source; the 2026 KCTV5 home-opener guide also lists gate prices ($30/$45/$50).",
+          "observedAt": "2025-03-27",
+          "sources": [
+            "kctv5-com-2025-03-27-its-opening-day-royals-fans-heres-everything-you-need-know"
+          ],
+          "value": "advance_optional"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating is allowed, and large tailgate groups will be directed to Lot N.",
+          "method": "search_snippet",
+          "notes": "Large tailgate groups are directed to Lot N.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-royals-ballpark-transportation"
+          ],
+          "value": "yes"
+        },
+        "tailgating_notes": {
+          "confidence": "low",
+          "evidence": "The official Royals transportation page says large tailgate groups are sent to Lot N. Tollgate staffing starts several hours before first pitch, and the exact time depends on expected attendance. Tailgating is allowed, but vehicles can't park on the grass.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-royals-ballpark-transportation"
+          ],
+          "value": "Large tailgate groups are directed to Lot N; vehicles may not park on the grass."
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Tailgating is allowed, and large tailgate groups will be directed to Lot N.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "mlb-com-royals-ballpark-transportation"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {
+        "car|other|area|2026": {
+          "confidence": "medium",
+          "evidence": "When purchasing parking online in advance, a General Parking pass is $21, a Reserved Parking pass is $36, and an Oversize Vehicle Parking pass is $41.",
+          "method": "search_snippet",
+          "notes": "Complex-wide advance online prices for General ($21) and Reserved ($36); the lot-to-tier mapping is not published in the snippet. Gate prices are higher.",
+          "observedAt": "2026-03-30",
+          "sources": [
+            "mlb-com-royals-ballpark-transportation"
+          ],
+          "value": "min=21;max=36;vehicle=car;scope=area;event=other;season=2026"
+        }
+      }
+    }
+  },
+  "slug": "kauffman-stadium",
+  "sources": {
+    "en-wikipedia-org-wiki-kauffman-stadium": {
+      "method": "search_snippet",
+      "name": "Wikipedia — Kauffman Stadium",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://en.wikipedia.org/wiki/Kauffman_Stadium"
+    },
+    "kctv5-com-2025-03-27-its-opening-day-royals-fans-heres-everything-you-need-know": {
+      "method": "search_snippet",
+      "name": "KCTV5 — It's Opening Day, Royals fans! (2025)",
+      "retrievedAt": "2025-03-27",
+      "type": "media",
+      "url": "https://www.kctv5.com/2025/03/27/its-opening-day-royals-fans-heres-everything-you-need-know"
+    },
+    "kctv5-com-2026-06-18-parking-changes-royals-fans-truman-sports-complex": {
+      "method": "search_snippet",
+      "name": "KCTV5 — Parking changes for Royals fans at Truman Sports Complex",
+      "retrievedAt": "2026-06-18",
+      "type": "media",
+      "url": "https://www.kctv5.com/2026/06/18/parking-changes-royals-fans-truman-sports-complex/"
+    },
+    "kshb-com-sports-everything-you-need-to-know-before-going-to-a-royals-game": {
+      "method": "search_snippet",
+      "name": "KSHB — Everything you need to know before going to a Royals game",
+      "retrievedAt": "2026-10-29",
+      "type": "media",
+      "url": "https://www.kshb.com/sports/everything-you-need-to-know-before-going-to-a-royals-game"
+    },
+    "mlb-com-royals-ballpark-disability-access-guide": {
+      "method": "search_snippet",
+      "name": "Kansas City Royals — Disability Access Guide",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.mlb.com/royals/ballpark/disability-access-guide"
+    },
+    "mlb-com-royals-ballpark-transportation": {
+      "method": "search_snippet",
+      "name": "Kansas City Royals — Kauffman Stadium Parking and Directions",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://mlb.com/royals/ballpark/transportation"
+    },
+    "ridekc-org-news-metro-route-47-broadway-serves-the-k": {
+      "method": "search_snippet",
+      "name": "RideKC — Metro Route 47-Broadway serves The K",
+      "retrievedAt": "2026-10-29",
+      "type": "operator",
+      "url": "https://ridekc.org/news/metro_route_47_broadway_serves_the_k"
+    }
+  },
+  "venue": {
+    "fields": {
+      "city": {
+        "confidence": "low",
+        "evidence": "1 Royal Way, Kansas City, MO 64129",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "en-wikipedia-org-wiki-kauffman-stadium"
+        ],
+        "value": "Kansas City"
+      },
+      "lat": {
+        "confidence": "low",
+        "evidence": "Wikipedia infobox: about 39.0514° N, 94.4806° W (39°03′05″N 94°28′50″W)",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "en-wikipedia-org-wiki-kauffman-stadium"
+        ],
+        "value": "39.0514"
+      },
+      "lng": {
+        "confidence": "low",
+        "evidence": "Wikipedia infobox: about 39.0514° N, 94.4806° W (39°03′05″N 94°28′50″W)",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "en-wikipedia-org-wiki-kauffman-stadium"
+        ],
+        "value": "-94.4806"
+      },
+      "postal_code": {
+        "confidence": "low",
+        "evidence": "1 Royal Way, Kansas City, MO 64129",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "en-wikipedia-org-wiki-kauffman-stadium"
+        ],
+        "value": "64129"
+      },
+      "state": {
+        "confidence": "low",
+        "evidence": "1 Royal Way, Kansas City, MO 64129",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "en-wikipedia-org-wiki-kauffman-stadium"
+        ],
+        "value": "MO"
+      },
+      "street": {
+        "confidence": "low",
+        "evidence": "1 Royal Way, Kansas City, MO 64129",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "en-wikipedia-org-wiki-kauffman-stadium"
+        ],
+        "value": "1 Royal Way"
+      },
+      "teams": {
+        "confidence": "low",
+        "evidence": "Kansas City Royals — Kauffman Stadium Parking and Directions",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-royals-ballpark-transportation"
+        ],
+        "value": "Kansas City Royals"
+      },
+      "timezone": {
+        "confidence": "low",
+        "evidence": "1 Royal Way, Kansas City, MO 64129",
+        "method": "search_snippet",
+        "notes": "Derived from Kansas City, Missouri location (Central Time).",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "en-wikipedia-org-wiki-kauffman-stadium"
+        ],
+        "value": "America/Chicago"
+      },
+      "venue_name": {
+        "confidence": "low",
+        "evidence": "Kauffman Stadium Parking and Directions",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-royals-ballpark-transportation"
+        ],
+        "value": "Kauffman Stadium"
+      },
+      "venue_type": {
+        "confidence": "low",
+        "evidence": "Kauffman Stadium",
+        "method": "search_snippet",
+        "notes": "Home of the Kansas City Royals (MLB).",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "en-wikipedia-org-wiki-kauffman-stadium"
+        ],
+        "value": "ballpark"
+      }
+    },
+    "policy": {
+      "Advance purchase": {
+        "confidence": "medium",
+        "evidence": "Parking must be bought in advance and shown in the MLB Ballpark app at the tollgates, and the page encourages guests to arrive early",
+        "method": "search_snippet",
+        "notes": "Other sources (KCTV5 2025/2026) list higher gate prices, so drive-up purchase has been possible.",
+        "observedAt": "2026-03-30",
+        "sources": [
+          "mlb-com-royals-ballpark-transportation"
+        ],
+        "value": "Parking passes are bought in advance and shown in the MLB Ballpark app at the tollgates; gate sales cost more."
+      },
+      "Lot opening": {
+        "confidence": "low",
+        "evidence": "Tollgate staffing starts several hours before first pitch, and the exact time depends on expected attendance.",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "mlb-com-royals-ballpark-transportation"
+        ],
+        "value": "Tollgates open several hours before first pitch; the exact time depends on expected attendance."
+      },
+      "Tailgating end": {
+        "confidence": "low",
+        "evidence": "Tailgating ends when the 2nd inning of the game begins and tailgaters will have to enter the game or leave the premises.",
+        "method": "search_snippet",
+        "notes": "Undated media guide; not confirmed on an official Royals page.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "kshb-com-sports-everything-you-need-to-know-before-going-to-a-royals-game"
+        ],
+        "value": "Tailgating ends when the 2nd inning begins; tailgaters must enter the game or leave the premises."
+      }
+    },
+    "transit": {
+      "RideKC 47-Broadway": {
+        "confidence": "low",
+        "evidence": "It serves Kauffman Stadium seven days a week",
+        "method": "search_snippet",
+        "notes": "Release appears to date from 2014–2015; check RideKC.org for the current schedule.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "ridekc-org-news-metro-route-47-broadway-serves-the-k"
+        ],
+        "value": "KCATA Metro Route 47-Broadway serves Kauffman Stadium seven days a week."
+      }
+    }
+  },
+  "version": 1
+}

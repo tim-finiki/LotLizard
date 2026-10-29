@@ -1,0 +1,1254 @@
+{
+  "lots": {
+    "bus-rv-parking-dubiner-circle": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "Class A and C buses and RVs need a Bus/RV pass and are sent to the western and northern areas of Dubiner Circle behind Kauffman Stadium. Space is limited, so arriving early is recommended to secure a bus parking space.",
+          "method": "search_snippet",
+          "notes": "One older Chiefs page says Bus/RV parking is case-by-case; call Fan Experience at 816-920-4237.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "chiefs-com-parking"
+          ],
+          "value": "Chiefs Bus/RV pass parking for Class A and C buses and RVs in the western and northern areas of Dubiner Circle behind Kauffman Stadium; space is limited."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Class A and C buses and RVs need a Bus/RV pass and are sent to the western and northern areas of Dubiner Circle behind Kauffman Stadium.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "chiefs-com-parking"
+          ],
+          "value": "Bus/RV Parking (Dubiner Circle)"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "a parking pass must be purchased in advance to enter the Truman Sports Complex, at chiefs.com/buyparking.",
+          "method": "search_snippet",
+          "notes": "Complex-wide Chiefs game-day rule.",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "kctv5-com-2026-09-14-chiefs-kick-off-their-2026-season-monday-night-arrowhead-he"
+          ],
+          "value": "prepay_required"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Class A and C buses and RVs need a Bus/RV pass and are sent to the western and northern areas of Dubiner Circle behind Kauffman Stadium.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "chiefs-com-parking"
+          ],
+          "value": "official_lot"
+        },
+        "vehicle_types": {
+          "confidence": "low",
+          "evidence": "Class A and C buses and RVs need a Bus/RV pass",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "chiefs-com-parking"
+          ],
+          "value": "bus;rv"
+        }
+      },
+      "prices": {}
+    },
+    "lot-a": {
+      "fields": {
+        "ada": {
+          "confidence": "low",
+          "evidence": "The official Chiefs and GEHA Field pages say accessible parking is in the front of Lots A, B, C, D, F, G, H and J, and guests need a registered state issued handicapped license plate or hang tag.",
+          "method": "search_snippet",
+          "notes": "Accessible spaces are first-come, first-served and require a parking pass plus state-issued plate or hang tag.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-accessibility"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "Red passes use lots C, B, A, and L",
+          "method": "search_snippet",
+          "notes": "Lot assignments vary by pass type and entry gate.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "Truman Sports Complex lot used by Chiefs Red parking pass holders, with accessible parking at the front of the lot."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Red passes use lots C, B, A, and L",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "Lot A"
+        },
+        "payment_not_accepted": {
+          "confidence": "medium",
+          "evidence": "toll booths did not accept cash, so fans had to buy digital parking passes online in advance.",
+          "method": "search_snippet",
+          "notes": "Complex-wide Chiefs game-day rule applied to each lot.",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "chiefs-com-news-important-fan-information-for-monday-night-s-home-opener-at-arro"
+          ],
+          "value": "cash"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "a parking pass must be purchased in advance to enter the Truman Sports Complex, at chiefs.com/buyparking.",
+          "method": "search_snippet",
+          "notes": "Complex-wide Chiefs game-day rule applied to each lot.",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "kctv5-com-2026-09-14-chiefs-kick-off-their-2026-season-monday-night-arrowhead-he"
+          ],
+          "value": "prepay_required"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating is permitted in all parking lots at the Truman Sports Complex.",
+          "method": "search_snippet",
+          "notes": "All-lots rule from the Chiefs tailgating page applied to each lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "chiefs-com-stadium-parking-tailgating"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Red passes use lots C, B, A, and L",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-b": {
+      "fields": {
+        "ada": {
+          "confidence": "low",
+          "evidence": "The official Chiefs and GEHA Field pages say accessible parking is in the front of Lots A, B, C, D, F, G, H and J, and guests need a registered state issued handicapped license plate or hang tag.",
+          "method": "search_snippet",
+          "notes": "Accessible spaces are first-come, first-served and require a parking pass plus state-issued plate or hang tag.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-accessibility"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "The official GEHA Field site says Gold passes are for the lots nearest the front of Lots B, C, D, F, G, and part of Lot H.",
+          "method": "search_snippet",
+          "notes": "Lot assignments vary by pass type and entry gate.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "Truman Sports Complex lot used by Chiefs Red and Gold parking pass holders, with accessible parking at the front of the lot."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "The official GEHA Field site says Gold passes are for the lots nearest the front of Lots B, C, D, F, G, and part of Lot H.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "Lot B"
+        },
+        "payment_not_accepted": {
+          "confidence": "medium",
+          "evidence": "toll booths did not accept cash, so fans had to buy digital parking passes online in advance.",
+          "method": "search_snippet",
+          "notes": "Complex-wide Chiefs game-day rule applied to each lot.",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "chiefs-com-news-important-fan-information-for-monday-night-s-home-opener-at-arro"
+          ],
+          "value": "cash"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "a parking pass must be purchased in advance to enter the Truman Sports Complex, at chiefs.com/buyparking.",
+          "method": "search_snippet",
+          "notes": "Complex-wide Chiefs game-day rule applied to each lot.",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "kctv5-com-2026-09-14-chiefs-kick-off-their-2026-season-monday-night-arrowhead-he"
+          ],
+          "value": "prepay_required"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating is permitted in all parking lots at the Truman Sports Complex.",
+          "method": "search_snippet",
+          "notes": "All-lots rule from the Chiefs tailgating page applied to each lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "chiefs-com-stadium-parking-tailgating"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "The official GEHA Field site says Gold passes are for the lots nearest the front of Lots B, C, D, F, G, and part of Lot H.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-c": {
+      "fields": {
+        "ada": {
+          "confidence": "low",
+          "evidence": "The official Chiefs and GEHA Field pages say accessible parking is in the front of Lots A, B, C, D, F, G, H and J, and guests need a registered state issued handicapped license plate or hang tag.",
+          "method": "search_snippet",
+          "notes": "Accessible spaces are first-come, first-served and require a parking pass plus state-issued plate or hang tag.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-accessibility"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "The official GEHA Field site says Gold passes are for the lots nearest the front of Lots B, C, D, F, G, and part of Lot H.",
+          "method": "search_snippet",
+          "notes": "Lot assignments vary by pass type and entry gate.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "Truman Sports Complex lot used by Chiefs Red and Gold parking pass holders, with accessible parking at the front of the lot."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "The official GEHA Field site says Gold passes are for the lots nearest the front of Lots B, C, D, F, G, and part of Lot H.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "Lot C"
+        },
+        "payment_not_accepted": {
+          "confidence": "medium",
+          "evidence": "toll booths did not accept cash, so fans had to buy digital parking passes online in advance.",
+          "method": "search_snippet",
+          "notes": "Complex-wide Chiefs game-day rule applied to each lot.",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "chiefs-com-news-important-fan-information-for-monday-night-s-home-opener-at-arro"
+          ],
+          "value": "cash"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "a parking pass must be purchased in advance to enter the Truman Sports Complex, at chiefs.com/buyparking.",
+          "method": "search_snippet",
+          "notes": "Complex-wide Chiefs game-day rule applied to each lot.",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "kctv5-com-2026-09-14-chiefs-kick-off-their-2026-season-monday-night-arrowhead-he"
+          ],
+          "value": "prepay_required"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating is permitted in all parking lots at the Truman Sports Complex.",
+          "method": "search_snippet",
+          "notes": "All-lots rule from the Chiefs tailgating page applied to each lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "chiefs-com-stadium-parking-tailgating"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "The official GEHA Field site says Gold passes are for the lots nearest the front of Lots B, C, D, F, G, and part of Lot H.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-d": {
+      "fields": {
+        "ada": {
+          "confidence": "low",
+          "evidence": "The official Chiefs and GEHA Field pages say accessible parking is in the front of Lots A, B, C, D, F, G, H and J, and guests need a registered state issued handicapped license plate or hang tag.",
+          "method": "search_snippet",
+          "notes": "Accessible spaces are first-come, first-served and require a parking pass plus state-issued plate or hang tag.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-accessibility"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "The official GEHA Field site says Gold passes are for the lots nearest the front of Lots B, C, D, F, G, and part of Lot H.",
+          "method": "search_snippet",
+          "notes": "Lot assignments vary by pass type and entry gate.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "Truman Sports Complex lot whose front area is used by Chiefs Gold parking pass holders, with accessible parking at the front of the lot."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "The official GEHA Field site says Gold passes are for the lots nearest the front of Lots B, C, D, F, G, and part of Lot H.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "Lot D"
+        },
+        "payment_not_accepted": {
+          "confidence": "medium",
+          "evidence": "toll booths did not accept cash, so fans had to buy digital parking passes online in advance.",
+          "method": "search_snippet",
+          "notes": "Complex-wide Chiefs game-day rule applied to each lot.",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "chiefs-com-news-important-fan-information-for-monday-night-s-home-opener-at-arro"
+          ],
+          "value": "cash"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "a parking pass must be purchased in advance to enter the Truman Sports Complex, at chiefs.com/buyparking.",
+          "method": "search_snippet",
+          "notes": "Complex-wide Chiefs game-day rule applied to each lot.",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "kctv5-com-2026-09-14-chiefs-kick-off-their-2026-season-monday-night-arrowhead-he"
+          ],
+          "value": "prepay_required"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating is permitted in all parking lots at the Truman Sports Complex.",
+          "method": "search_snippet",
+          "notes": "All-lots rule from the Chiefs tailgating page applied to each lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "chiefs-com-stadium-parking-tailgating"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "The official GEHA Field site says Gold passes are for the lots nearest the front of Lots B, C, D, F, G, and part of Lot H.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-e": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "Platinum Parking passes are lot specific for either parking in Lot M or Lot E with overflow in Lot H.",
+          "method": "search_snippet",
+          "notes": "Lot assignments vary by pass type and entry gate.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "Premium Truman Sports Complex lot used by Chiefs Platinum parking pass holders."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Platinum Parking passes are lot specific for either parking in Lot M or Lot E with overflow in Lot H.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "Lot E"
+        },
+        "payment_not_accepted": {
+          "confidence": "medium",
+          "evidence": "toll booths did not accept cash, so fans had to buy digital parking passes online in advance.",
+          "method": "search_snippet",
+          "notes": "Complex-wide Chiefs game-day rule applied to each lot.",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "chiefs-com-news-important-fan-information-for-monday-night-s-home-opener-at-arro"
+          ],
+          "value": "cash"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "a parking pass must be purchased in advance to enter the Truman Sports Complex, at chiefs.com/buyparking.",
+          "method": "search_snippet",
+          "notes": "Complex-wide Chiefs game-day rule applied to each lot.",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "kctv5-com-2026-09-14-chiefs-kick-off-their-2026-season-monday-night-arrowhead-he"
+          ],
+          "value": "prepay_required"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating is permitted in all parking lots at the Truman Sports Complex.",
+          "method": "search_snippet",
+          "notes": "All-lots rule from the Chiefs tailgating page applied to each lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "chiefs-com-stadium-parking-tailgating"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Platinum Parking passes are lot specific for either parking in Lot M or Lot E with overflow in Lot H.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-f": {
+      "fields": {
+        "ada": {
+          "confidence": "low",
+          "evidence": "The official Chiefs and GEHA Field pages say accessible parking is in the front of Lots A, B, C, D, F, G, H and J, and guests need a registered state issued handicapped license plate or hang tag.",
+          "method": "search_snippet",
+          "notes": "Accessible spaces are first-come, first-served and require a parking pass plus state-issued plate or hang tag.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-accessibility"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "The official GEHA Field site says Gold passes are for the lots nearest the front of Lots B, C, D, F, G, and part of Lot H.",
+          "method": "search_snippet",
+          "notes": "Lot assignments vary by pass type and entry gate.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "Truman Sports Complex lot whose front area is used by Chiefs Gold parking pass holders, with accessible parking at the front of the lot."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "The official GEHA Field site says Gold passes are for the lots nearest the front of Lots B, C, D, F, G, and part of Lot H.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "Lot F"
+        },
+        "payment_not_accepted": {
+          "confidence": "medium",
+          "evidence": "toll booths did not accept cash, so fans had to buy digital parking passes online in advance.",
+          "method": "search_snippet",
+          "notes": "Complex-wide Chiefs game-day rule applied to each lot.",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "chiefs-com-news-important-fan-information-for-monday-night-s-home-opener-at-arro"
+          ],
+          "value": "cash"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "a parking pass must be purchased in advance to enter the Truman Sports Complex, at chiefs.com/buyparking.",
+          "method": "search_snippet",
+          "notes": "Complex-wide Chiefs game-day rule applied to each lot.",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "kctv5-com-2026-09-14-chiefs-kick-off-their-2026-season-monday-night-arrowhead-he"
+          ],
+          "value": "prepay_required"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating is permitted in all parking lots at the Truman Sports Complex.",
+          "method": "search_snippet",
+          "notes": "All-lots rule from the Chiefs tailgating page applied to each lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "chiefs-com-stadium-parking-tailgating"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "The official GEHA Field site says Gold passes are for the lots nearest the front of Lots B, C, D, F, G, and part of Lot H.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-g": {
+      "fields": {
+        "ada": {
+          "confidence": "low",
+          "evidence": "The official Chiefs and GEHA Field pages say accessible parking is in the front of Lots A, B, C, D, F, G, H and J, and guests need a registered state issued handicapped license plate or hang tag.",
+          "method": "search_snippet",
+          "notes": "Accessible spaces are first-come, first-served and require a parking pass plus state-issued plate or hang tag.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-accessibility"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "The official GEHA Field site says Gold passes are for the lots nearest the front of Lots B, C, D, F, G, and part of Lot H.",
+          "method": "search_snippet",
+          "notes": "Lot assignments vary by pass type and entry gate.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "Truman Sports Complex lot whose front area is used by Chiefs Gold parking pass holders, with accessible parking at the front of the lot."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "The official GEHA Field site says Gold passes are for the lots nearest the front of Lots B, C, D, F, G, and part of Lot H.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "Lot G"
+        },
+        "payment_not_accepted": {
+          "confidence": "medium",
+          "evidence": "toll booths did not accept cash, so fans had to buy digital parking passes online in advance.",
+          "method": "search_snippet",
+          "notes": "Complex-wide Chiefs game-day rule applied to each lot.",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "chiefs-com-news-important-fan-information-for-monday-night-s-home-opener-at-arro"
+          ],
+          "value": "cash"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "a parking pass must be purchased in advance to enter the Truman Sports Complex, at chiefs.com/buyparking.",
+          "method": "search_snippet",
+          "notes": "Complex-wide Chiefs game-day rule applied to each lot.",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "kctv5-com-2026-09-14-chiefs-kick-off-their-2026-season-monday-night-arrowhead-he"
+          ],
+          "value": "prepay_required"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating is permitted in all parking lots at the Truman Sports Complex.",
+          "method": "search_snippet",
+          "notes": "All-lots rule from the Chiefs tailgating page applied to each lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "chiefs-com-stadium-parking-tailgating"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "The official GEHA Field site says Gold passes are for the lots nearest the front of Lots B, C, D, F, G, and part of Lot H.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-h": {
+      "fields": {
+        "ada": {
+          "confidence": "low",
+          "evidence": "The official Chiefs and GEHA Field pages say accessible parking is in the front of Lots A, B, C, D, F, G, H and J, and guests need a registered state issued handicapped license plate or hang tag.",
+          "method": "search_snippet",
+          "notes": "Accessible spaces are first-come, first-served and require a parking pass plus state-issued plate or hang tag.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-accessibility"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "Platinum Parking passes are lot specific for either parking in Lot M or Lot E with overflow in Lot H.",
+          "method": "search_snippet",
+          "notes": "Lot assignments vary by pass type and entry gate.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "Truman Sports Complex lot partly used by Chiefs Gold pass holders and as overflow for Platinum pass holders, with accessible parking at the front of the lot."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Platinum Parking passes are lot specific for either parking in Lot M or Lot E with overflow in Lot H.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "Lot H"
+        },
+        "payment_not_accepted": {
+          "confidence": "medium",
+          "evidence": "toll booths did not accept cash, so fans had to buy digital parking passes online in advance.",
+          "method": "search_snippet",
+          "notes": "Complex-wide Chiefs game-day rule applied to each lot.",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "chiefs-com-news-important-fan-information-for-monday-night-s-home-opener-at-arro"
+          ],
+          "value": "cash"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "a parking pass must be purchased in advance to enter the Truman Sports Complex, at chiefs.com/buyparking.",
+          "method": "search_snippet",
+          "notes": "Complex-wide Chiefs game-day rule applied to each lot.",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "kctv5-com-2026-09-14-chiefs-kick-off-their-2026-season-monday-night-arrowhead-he"
+          ],
+          "value": "prepay_required"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating is permitted in all parking lots at the Truman Sports Complex.",
+          "method": "search_snippet",
+          "notes": "All-lots rule from the Chiefs tailgating page applied to each lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "chiefs-com-stadium-parking-tailgating"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Platinum Parking passes are lot specific for either parking in Lot M or Lot E with overflow in Lot H.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-j": {
+      "fields": {
+        "ada": {
+          "confidence": "low",
+          "evidence": "The official Chiefs and GEHA Field pages say accessible parking is in the front of Lots A, B, C, D, F, G, H and J, and guests need a registered state issued handicapped license plate or hang tag.",
+          "method": "search_snippet",
+          "notes": "Accessible spaces are first-come, first-served and require a parking pass plus state-issued plate or hang tag.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-accessibility"
+          ],
+          "value": "available"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "The official Chiefs and GEHA Field pages say accessible parking is in the front of Lots A, B, C, D, F, G, H and J, and guests need a registered state issued handicapped license plate or hang tag.",
+          "method": "search_snippet",
+          "notes": "Lot assignments vary by pass type and entry gate.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-accessibility"
+          ],
+          "value": "Truman Sports Complex lot with accessible parking at the front of the lot for Chiefs games."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "The official Chiefs and GEHA Field pages say accessible parking is in the front of Lots A, B, C, D, F, G, H and J, and guests need a registered state issued handicapped license plate or hang tag.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-accessibility"
+          ],
+          "value": "Lot J"
+        },
+        "payment_not_accepted": {
+          "confidence": "medium",
+          "evidence": "toll booths did not accept cash, so fans had to buy digital parking passes online in advance.",
+          "method": "search_snippet",
+          "notes": "Complex-wide Chiefs game-day rule applied to each lot.",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "chiefs-com-news-important-fan-information-for-monday-night-s-home-opener-at-arro"
+          ],
+          "value": "cash"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "a parking pass must be purchased in advance to enter the Truman Sports Complex, at chiefs.com/buyparking.",
+          "method": "search_snippet",
+          "notes": "Complex-wide Chiefs game-day rule applied to each lot.",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "kctv5-com-2026-09-14-chiefs-kick-off-their-2026-season-monday-night-arrowhead-he"
+          ],
+          "value": "prepay_required"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating is permitted in all parking lots at the Truman Sports Complex.",
+          "method": "search_snippet",
+          "notes": "All-lots rule from the Chiefs tailgating page applied to each lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "chiefs-com-stadium-parking-tailgating"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "The official Chiefs and GEHA Field pages say accessible parking is in the front of Lots A, B, C, D, F, G, H and J, and guests need a registered state issued handicapped license plate or hang tag.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-accessibility"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-l": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "Red passes use lots C, B, A, and L",
+          "method": "search_snippet",
+          "notes": "Lot assignments vary by pass type and entry gate.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "Truman Sports Complex lot used by Chiefs Red parking pass holders."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Red passes use lots C, B, A, and L",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "Lot L"
+        },
+        "payment_not_accepted": {
+          "confidence": "medium",
+          "evidence": "toll booths did not accept cash, so fans had to buy digital parking passes online in advance.",
+          "method": "search_snippet",
+          "notes": "Complex-wide Chiefs game-day rule applied to each lot.",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "chiefs-com-news-important-fan-information-for-monday-night-s-home-opener-at-arro"
+          ],
+          "value": "cash"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "a parking pass must be purchased in advance to enter the Truman Sports Complex, at chiefs.com/buyparking.",
+          "method": "search_snippet",
+          "notes": "Complex-wide Chiefs game-day rule applied to each lot.",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "kctv5-com-2026-09-14-chiefs-kick-off-their-2026-season-monday-night-arrowhead-he"
+          ],
+          "value": "prepay_required"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating is permitted in all parking lots at the Truman Sports Complex.",
+          "method": "search_snippet",
+          "notes": "All-lots rule from the Chiefs tailgating page applied to each lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "chiefs-com-stadium-parking-tailgating"
+          ],
+          "value": "yes"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Red passes use lots C, B, A, and L",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "lot-m": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "Platinum Parking passes are lot specific for either parking in Lot M or Lot E with overflow in Lot H.",
+          "method": "search_snippet",
+          "notes": "Lot assignments vary by pass type and entry gate.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "Premium Truman Sports Complex lot used by Chiefs Platinum parking pass holders and home to the Ford Tailgate District on game days."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "Platinum Parking passes are lot specific for either parking in Lot M or Lot E with overflow in Lot H.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "Lot M"
+        },
+        "payment_not_accepted": {
+          "confidence": "medium",
+          "evidence": "toll booths did not accept cash, so fans had to buy digital parking passes online in advance.",
+          "method": "search_snippet",
+          "notes": "Complex-wide Chiefs game-day rule applied to each lot.",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "chiefs-com-news-important-fan-information-for-monday-night-s-home-opener-at-arro"
+          ],
+          "value": "cash"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "a parking pass must be purchased in advance to enter the Truman Sports Complex, at chiefs.com/buyparking.",
+          "method": "search_snippet",
+          "notes": "Complex-wide Chiefs game-day rule applied to each lot.",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "kctv5-com-2026-09-14-chiefs-kick-off-their-2026-season-monday-night-arrowhead-he"
+          ],
+          "value": "prepay_required"
+        },
+        "tailgating": {
+          "confidence": "low",
+          "evidence": "Tailgating is permitted in all parking lots at the Truman Sports Complex.",
+          "method": "search_snippet",
+          "notes": "All-lots rule from the Chiefs tailgating page applied to each lot.",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "chiefs-com-stadium-parking-tailgating"
+          ],
+          "value": "yes"
+        },
+        "tailgating_notes": {
+          "confidence": "medium",
+          "evidence": "The Ford Tailgate District in Lot M opened at 3:30 p.m.",
+          "method": "search_snippet",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "chiefs-com-news-important-fan-information-for-monday-night-s-home-opener-at-arro"
+          ],
+          "value": "Home of the Ford Tailgate District on Chiefs game days; it opened at 3:30 p.m. for the 2026 Monday night home opener."
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "Platinum Parking passes are lot specific for either parking in Lot M or Lot E with overflow in Lot H.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+          ],
+          "value": "official_lot"
+        }
+      },
+      "prices": {}
+    },
+    "missouri-welcome-center-rideshare": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "The Chiefs say ride-share vehicles can drop off and pick up at the Missouri Welcome Center, which sits between Gates 1 and 2 on Blue Ridge Cutoff, and the team lists no charge for this.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "chiefs-com-parking"
+          ],
+          "value": "Rideshare drop-off and pick-up area at the Missouri Welcome Center, between Gates 1 and 2 on Blue Ridge Cutoff."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "Rideshare drop-off is at the Missouri Welcome Center between Gates 1 and 2 on Blue Ridge Cutoff.",
+          "method": "search_snippet",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "kctv5-com-2026-09-14-chiefs-kick-off-their-2026-season-monday-night-arrowhead-he"
+          ],
+          "value": "Missouri Welcome Center Rideshare Zone"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "Rideshare drop-off is at the Missouri Welcome Center between Gates 1 and 2 on Blue Ridge Cutoff.",
+          "method": "search_snippet",
+          "observedAt": "2026-09-14",
+          "sources": [
+            "kctv5-com-2026-09-14-chiefs-kick-off-their-2026-season-monday-night-arrowhead-he"
+          ],
+          "value": "rideshare_zone"
+        }
+      },
+      "prices": {}
+    },
+    "ztrip-drop-off-zone": {
+      "fields": {
+        "description": {
+          "confidence": "low",
+          "evidence": "The Chiefs also have a partnership with zTrip, which gives riders a dedicated drop-off and pick-up on the east side of the stadium, across from Lots A and B on Red Coat Drive.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "chiefs-com-parking"
+          ],
+          "value": "Dedicated zTrip drop-off and pick-up area on the east side of the stadium, across from Lots A and B on Red Coat Drive."
+        },
+        "name": {
+          "confidence": "low",
+          "evidence": "The Chiefs also have a partnership with zTrip, which gives riders a dedicated drop-off and pick-up on the east side of the stadium, across from Lots A and B on Red Coat Drive.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "chiefs-com-parking"
+          ],
+          "value": "zTrip Drop-off and Pick-up Zone"
+        },
+        "type": {
+          "confidence": "low",
+          "evidence": "The Chiefs also have a partnership with zTrip, which gives riders a dedicated drop-off and pick-up on the east side of the stadium, across from Lots A and B on Red Coat Drive.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-29",
+          "sources": [
+            "chiefs-com-parking"
+          ],
+          "value": "rideshare_zone"
+        }
+      },
+      "prices": {}
+    }
+  },
+  "slug": "geha-field-at-arrowhead-stadium",
+  "sources": {
+    "chiefs-com-news-important-fan-information-for-monday-night-s-home-opener-at-arro": {
+      "method": "search_snippet",
+      "name": "Kansas City Chiefs — Important fan information for Monday night's home opener (2026)",
+      "retrievedAt": "2026-09-14",
+      "type": "official",
+      "url": "https://www.chiefs.com/news/important-fan-information-for-monday-night-s-home-opener-at-arrowhead-stadium-2026"
+    },
+    "chiefs-com-parking": {
+      "method": "search_snippet",
+      "name": "Kansas City Chiefs — Parking",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://chiefs.com/parking"
+    },
+    "chiefs-com-stadium-parking-faqs": {
+      "method": "search_snippet",
+      "name": "Kansas City Chiefs — Parking FAQs",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://chiefs.com/stadium/parking/faqs"
+    },
+    "chiefs-com-stadium-parking-tailgating": {
+      "method": "search_snippet",
+      "name": "Kansas City Chiefs — Tailgating",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://chiefs.com/stadium/parking/tailgating"
+    },
+    "en-wikipedia-org-wiki-arrowhead-stadium": {
+      "method": "search_snippet",
+      "name": "Wikipedia — Arrowhead Stadium",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://en.wikipedia.org/wiki/Arrowhead_Stadium"
+    },
+    "gehafieldatarrowhead-com-accessibility": {
+      "method": "search_snippet",
+      "name": "GEHA Field at Arrowhead Stadium — Accessibility Services",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.gehafieldatarrowhead.com/accessibility"
+    },
+    "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs": {
+      "method": "search_snippet",
+      "name": "GEHA Field at Arrowhead Stadium — Parking & Tailgating FAQs",
+      "retrievedAt": "2026-10-29",
+      "type": "official",
+      "url": "https://www.gehafieldatarrowhead.com/plan-your-visit/parking-tailgating/faqs"
+    },
+    "kctv5-com-2026-09-14-chiefs-kick-off-their-2026-season-monday-night-arrowhead-he": {
+      "method": "search_snippet",
+      "name": "KCTV5 — The Chiefs kick off their 2026 season Monday night at Arrowhead",
+      "retrievedAt": "2026-09-14",
+      "type": "media",
+      "url": "https://www.kctv5.com/2026/09/14/chiefs-kick-off-their-2026-season-monday-night-arrowhead-heres-what-you-should-know/"
+    },
+    "nfl-com-news-chiefs-drop-geha-field-return-arrowhead-stadium": {
+      "method": "search_snippet",
+      "name": "NFL.com — Chiefs drop GEHA Field, return to Arrowhead Stadium",
+      "retrievedAt": "2026-08-05",
+      "type": "media",
+      "url": "https://www.nfl.com/news/chiefs-drop-geha-field-return-arrowhead-stadium"
+    },
+    "visitkc-com-node-18626": {
+      "method": "search_snippet",
+      "name": "Visit KC — Arrowhead Events",
+      "retrievedAt": "2026-10-29",
+      "type": "third_party",
+      "url": "https://visitkc.com/node/18626"
+    }
+  },
+  "venue": {
+    "fields": {
+      "city": {
+        "confidence": "low",
+        "evidence": "One Arrowhead Drive, Kansas City, MO 64129",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "visitkc-com-node-18626"
+        ],
+        "value": "Kansas City"
+      },
+      "lat": {
+        "confidence": "low",
+        "evidence": "Wikipedia lists the stadium at 39°2′56″N 94°29′2″W, which is 39.04889°N 94.48389°W",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "en-wikipedia-org-wiki-arrowhead-stadium"
+        ],
+        "value": "39.04889"
+      },
+      "lng": {
+        "confidence": "low",
+        "evidence": "Wikipedia lists the stadium at 39°2′56″N 94°29′2″W, which is 39.04889°N 94.48389°W",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "en-wikipedia-org-wiki-arrowhead-stadium"
+        ],
+        "value": "-94.48389"
+      },
+      "lot_open_hours_before": {
+        "confidence": "low",
+        "evidence": "The Chiefs' FAQ says parking lots open 4.5 hours prior to kickoff and recommends arriving early.",
+        "method": "search_snippet",
+        "notes": "Page undated. Specific games vary (2026 home opener: parking gates 3:00 p.m. for 7:15 p.m. kickoff).",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "chiefs-com-stadium-parking-faqs"
+        ],
+        "value": "4.5"
+      },
+      "postal_code": {
+        "confidence": "low",
+        "evidence": "One Arrowhead Drive, Kansas City, MO 64129",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "visitkc-com-node-18626"
+        ],
+        "value": "64129"
+      },
+      "state": {
+        "confidence": "low",
+        "evidence": "One Arrowhead Drive, Kansas City, MO 64129",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "visitkc-com-node-18626"
+        ],
+        "value": "MO"
+      },
+      "street": {
+        "confidence": "low",
+        "evidence": "Wikipedia lists the address as 1 Arrowhead Drive in Kansas City, Missouri",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "en-wikipedia-org-wiki-arrowhead-stadium"
+        ],
+        "value": "1 Arrowhead Drive"
+      },
+      "teams": {
+        "confidence": "medium",
+        "evidence": "The Chiefs will continue playing at Arrowhead Stadium until their lease expires in 2031",
+        "method": "search_snippet",
+        "observedAt": "2026-08-05",
+        "sources": [
+          "nfl-com-news-chiefs-drop-geha-field-return-arrowhead-stadium"
+        ],
+        "value": "Kansas City Chiefs"
+      },
+      "timezone": {
+        "confidence": "low",
+        "evidence": "Kansas City, MO 64129",
+        "method": "search_snippet",
+        "notes": "Derived from Kansas City, Missouri location (Central Time).",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "visitkc-com-node-18626"
+        ],
+        "value": "America/Chicago"
+      },
+      "venue_name": {
+        "confidence": "medium",
+        "evidence": "The team announced Wednesday that one of the NFL's iconic venues had shed its official name — GEHA Field at Arrowhead Stadium — after the Government Employees Health Association agreed to using the classic, simplified name of the facility going forward.",
+        "method": "search_snippet",
+        "notes": "Name changed from GEHA Field at Arrowhead Stadium in August 2026; venue slug kept.",
+        "observedAt": "2026-08-05",
+        "sources": [
+          "nfl-com-news-chiefs-drop-geha-field-return-arrowhead-stadium"
+        ],
+        "value": "Arrowhead Stadium"
+      },
+      "venue_type": {
+        "confidence": "low",
+        "evidence": "Arrowhead Stadium",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "en-wikipedia-org-wiki-arrowhead-stadium"
+        ],
+        "value": "stadium"
+      }
+    },
+    "policy": {
+      "Advance parking purchase": {
+        "confidence": "medium",
+        "evidence": "a parking pass must be purchased in advance to enter the Truman Sports Complex, at chiefs.com/buyparking.",
+        "method": "search_snippet",
+        "observedAt": "2026-09-14",
+        "sources": [
+          "kctv5-com-2026-09-14-chiefs-kick-off-their-2026-season-monday-night-arrowhead-he"
+        ],
+        "value": "Parking passes must be purchased in advance to enter the Truman Sports Complex; toll booths do not accept cash."
+      },
+      "During the game": {
+        "confidence": "low",
+        "evidence": "Only ticketed event guests may access the complex, and guests may not remain in the parking lots or outside of the stadium during games.",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "chiefs-com-stadium-parking-tailgating"
+        ],
+        "value": "Only ticketed event guests may access the complex, and guests may not remain in the parking lots or outside the stadium during games."
+      },
+      "Leaving the lot": {
+        "confidence": "low",
+        "evidence": "Once inside a lot, leaving voids the pass.",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "gehafieldatarrowhead-com-plan-your-visit-parking-tailgating-faqs"
+        ],
+        "value": "Exiting a lot after entry voids the parking pass."
+      },
+      "Lot closing": {
+        "confidence": "low",
+        "evidence": "The FAQ says the parking lots close 1 hour after the end of the game.",
+        "method": "search_snippet",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "chiefs-com-stadium-parking-faqs"
+        ],
+        "value": "Parking lots close 1 hour after the end of the game."
+      },
+      "Tailgating space": {
+        "confidence": "low",
+        "evidence": "The total setup, including guests, is capped at eight (8) feet behind each parking space.",
+        "method": "search_snippet",
+        "notes": "Full rules are in the Chiefs' Tailgating Regulations document linked from the tailgating page.",
+        "observedAt": "2026-10-29",
+        "sources": [
+          "chiefs-com-stadium-parking-tailgating"
+        ],
+        "value": "Total tailgate setup, including guests, is limited to eight feet behind each parking space; a parking space cannot be used only for tailgate gear and emergency aisles must stay clear."
+      }
+    },
+    "transit": {
+      "RideKC 47-Broadway": {
+        "confidence": "medium",
+        "evidence": "Bus transportation is available to Arrowhead Stadium through KCATA on the RideKC 47-Broadway line.",
+        "method": "search_snippet",
+        "observedAt": "2026-09-14",
+        "sources": [
+          "kctv5-com-2026-09-14-chiefs-kick-off-their-2026-season-monday-night-arrowhead-he"
+        ],
+        "value": "KCATA bus service to Arrowhead Stadium on the RideKC 47-Broadway line."
+      },
+      "Rideshare": {
+        "confidence": "medium",
+        "evidence": "Rideshare drop-off is at the Missouri Welcome Center between Gates 1 and 2 on Blue Ridge Cutoff.",
+        "method": "search_snippet",
+        "observedAt": "2026-09-14",
+        "sources": [
+          "kctv5-com-2026-09-14-chiefs-kick-off-their-2026-season-monday-night-arrowhead-he"
+        ],
+        "value": "Drop-off and pick-up at the Missouri Welcome Center between Gates 1 and 2 on Blue Ridge Cutoff."
+      }
+    }
+  },
+  "version": 1
+}
