@@ -68,5 +68,15 @@ source are listed but not mapped. Unit tests enforce some of these rules.
    submissions that survive redeploys, also set the Upstash variables (free tier).
 3. Deploy. Pull requests get Preview Deployments automatically.
 
+### Preview vs. production
+
+- Every push to a branch with an open pull request builds a **Preview Deployment**. Vercel posts its URL on
+  the PR as a deployment status and a bot comment.
+- Only merges to `main` (the production branch) update the production domain.
+- Preview environments use the "Preview" environment variables in Vercel. Give previews their own
+  `ADMIN_TOKEN`, and leave the Upstash variables unset if preview submissions shouldn't mix with production data.
+- `NEXT_PUBLIC_SITE_URL` can stay unset for previews. Metadata then falls back to the project's production
+  URL, so preview pages never claim to be canonical.
+
 Before you scale traffic, move map tiles off the public OpenStreetMap servers to a tile provider or a
 self-hosted tile server. Change the tiles with `NEXT_PUBLIC_MAP_TILE_URL`.
