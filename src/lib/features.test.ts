@@ -95,17 +95,17 @@ describe("amenity filtering keeps map, list and rankings in sync", () => {
 describe("Highmark universal amenity data", () => {
   const slugs = (features: UniversalAmenity[]) => run(HIGHMARK_FACILITIES, features).visible.map((f) => f.slug).sort();
 
-  it("claims only what a source confirms: ADA at the two ADA lots, nothing else", () => {
+  it("claims only what a source confirms: ADA at the two ADA lots, restrooms at Big G's Lot, nothing else", () => {
     const claims = HIGHMARK_FACILITIES.flatMap((f) =>
       UNIVERSAL_AMENITIES.filter((k) => featureState(f, k) !== "unknown").map((k) => `${f.slug}:${k}:${featureState(f, k)}`),
     );
-    expect(claims.sort()).toEqual(["blue-ada-lot:ada:available", "white-ada-lot:ada:available"]);
+    expect(claims.sort()).toEqual(["big-g-lot:restrooms:available", "blue-ada-lot:ada:available", "white-ada-lot:ada:available"]);
   });
 
-  it("returns no lots for covered parking, EV charging or restrooms, since none are confirmed", () => {
+  it("returns only confirmed lots: none for covered parking or EV charging, Big G's for restrooms", () => {
     expect(slugs(["covered"])).toEqual([]);
     expect(slugs(["ev_charging"])).toEqual([]);
-    expect(slugs(["restrooms"])).toEqual([]);
+    expect(slugs(["restrooms"])).toEqual(["big-g-lot"]);
     expect(slugs(["ada"])).toEqual(["blue-ada-lot", "white-ada-lot"]);
   });
 
