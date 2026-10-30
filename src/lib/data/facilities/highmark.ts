@@ -366,10 +366,10 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     name: "Gorilla Parking",
     type: "private_lot",
     ownership: fact<Ownership>("private", "low", ["facebook-gorilla"], "Described as a private lot on its own Facebook page; not independently confirmed."),
-    access: fact<AccessLevel>("public", "medium", ["facebook-gorilla"], "Advertises seasonal parking spots for the Bills 2026 preseason and regular season; message the lot for details."),
+    access: fact<AccessLevel>("public", "low", ["facebook-gorilla"], "Its Facebook page reportedly advertises seasonal spots for the Bills 2026 preseason and regular season (seen in search results; page not read directly)."),
     address: "4177 Abbott Rd, Orchard Park, NY 14127",
     location: { lat: 42.7677, lng: -78.7869, precision: "approximate" },
-    description: "Private lot at the corner of Abbott Rd and Allen St. Its Facebook page advertises seasonal spots for the 2026 Bills preseason and regular season; its website says it holds up to 70 cars. No lot-specific price found yet.",
+    description: "Private lot at the corner of Abbott Rd and Allen St. Its Facebook page reportedly advertises seasonal spots for the 2026 Bills season, and its website reportedly says it holds up to 70 cars (both seen in search results, not read directly). No lot-specific price found yet.",
     prices: [
       {
         id: "abbott-area-2026",
@@ -388,7 +388,7 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     tailgating: { allowed: fact<boolean | "unknown">("unknown", "unverified", ["lotlizard-editorial"]) },
     exit: { routes: ["Abbott Rd"] },
     vehicleTypes: ["car"],
-    attribution: attr("medium", ["facebook-gorilla", "gorilla-site", "billsfans-tailgating"], `Operator's own Facebook page and website (2026 season). ${PIN_NOTE}`),
+    attribution: attr("low", ["facebook-gorilla", "gorilla-site", "billsfans-tailgating"], `Operator's Facebook page and website, reviewed through search results only; direct check pending. ${PIN_NOTE}`),
   },
   {
     id: "highmark-yellow-brick",
@@ -407,7 +407,7 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
       "The operator's main published address. Yellow Brick runs three adjacent lots on Big Tree Rd; a valid pass works in any of them for regular-size vehicles, subject to availability (RVs, oversized vehicles and overnight parking use Lot 2). Lots open four hours before events. The operator estimates a 5–10 minute walk to the stadium (operator's estimate, not measured by LotLizard).",
     prices: [yellowBrickRavens("yellow-brick-lot-1")],
     payment: YELLOW_BRICK_PAYMENT,
-    amenities: fact<ParkingFacility["amenities"]["value"]>(["tailgate_area"], "medium", ["yellowbrick-faq"], "Tailgating within the space you park in."),
+    amenities: fact<ParkingFacility["amenities"]["value"]>(["tailgate_area"], "medium", ["yellowbrick-faq"], "Tailgating permitted within the operator's stated space restrictions."),
     features: YELLOW_BRICK_FEATURES,
     tailgating: { allowed: YELLOW_BRICK_TAILGATE, notes: YELLOW_BRICK_TAILGATE_RULES },
     exit: { routes: ["Big Tree Rd eastbound to Route 219 (one-way post-game)"] },
