@@ -73,22 +73,13 @@ Keep the page set tied to verified inventory:
 
 Rule of thumb: a new page type ships with a test, like the one here, that keeps it out of the index and the sitemap until its data threshold is met.
 
-## Competitive differentiation (SpotHero, ParkWhiz)
+## Content principles
 
-SpotHero and ParkWhiz rank for "[venue] parking" with bookable inventory pages. Their pages are transactional: price, a "Reserve" button and a list of garages in their network. LotLizard should not try to imitate a booking catalogue it doesn't have. The defensible angle, already reflected in this PR:
+- **The whole picture:** official lots, private lots, shuttles, rideshare zones and tailgating rules.
+- **Sourced facts:** official, government and operator sources cited where they substantiate a fact.
+- **Honest unknowns:** unverified details are labelled, never filled in.
 
-- **The whole picture, not just the inventory they sell:**
-  - official team lots;
-  - cash-only private lots;
-  - shuttles;
-  - rideshare zones;
-  - tailgating rules.
-- **Source and confidence on every fact.** AI answer engines prefer citable, attributed statements; "official lots open 4 hours before kickoff (source: Buffalo Bills, medium confidence)" is quotable.
-- **Honest unknowns:** "Not yet field-verified", "area-wide range, not specific to this lot". This builds trust and avoids the stale-price complaints that booking sites attract.
-- **Event-day intelligence** they don't cover: tailgating, exit direction, game-day payment changes.
-- **Machine-readable data** at `/api/v1` for assistants and partners.
-
-Booking-site affiliate links, if adopted, stay clearly labelled and outside the ranking (already enforced by `ReferralLink` and the sponsorship rules).
+Booking links, if any, stay clearly labelled and outside the ranking (enforced by `ReferralLink` and the sponsorship rules).
 
 ## Measurement plan (decision needed on the provider)
 

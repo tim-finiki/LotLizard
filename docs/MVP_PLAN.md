@@ -55,16 +55,14 @@ _Last updated: 2026-10-29_
 - Verify lot entrances so more lots get turn-by-turn directions.
 - Collect lot-specific prices and documented exit routing (official lot maps, sheriff plans, field checks). Today only 2 lots have lot-specific prices and none have documented exit routing, which limits how much cost and direction can personalise rankings.
 
-## Phase 5 — Expansion (Buffalo region → nationwide)
-- Buffalo region: KeyBank Center, Sahlen Field, Darien Lake. Then top 30 NFL stadiums, then NBA/NHL arenas,
-  MLB ballparks and major amphitheaters.
-- Contributor playbook + bulk import tooling for curated lot data; dedupe and geocoding pipeline.
+## Phase 5 — Expansion
+- Market selection and venue order are kept in internal planning documents.
+- Contributor tooling: bulk import of curated lot data, dedupe and geocoding pipeline.
 - Search moves to Postgres trigram/FTS or a hosted index once the venue count exceeds a few thousand.
 
-## Phase 6 — Monetization
-- Referral partnerships (booking links via `/go/[lot]` click-tracking redirect, `rel="sponsored"`).
-- Labelled venue sponsorships via `SponsoredSlot`; operator "claimed listing" (never affects rank).
-- Data services: API keys, quotas and paid tiers on `/api/v1`, aggregated price-trend reports.
+## Phase 6 — Business model
+- Kept in internal planning documents. Product rules that are public stay in the PRD: sponsored or partner
+  content is always labelled and never changes ranking order.
 
 ## Phase 7 — Predictive arrival & exit times
 - Collect exit-time reports (already supported) and field observations → `TravelObservation`.
