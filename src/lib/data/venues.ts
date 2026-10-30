@@ -83,6 +83,7 @@ const highmark: Venue = {
   ],
   approaches: [
     { id: "north", label: "North (Buffalo, I-90)", description: "Toward downtown Buffalo and the Thruway (I-90), typically via US-219 north." },
+    { id: "east", label: "East (East Aurora)", description: "Toward East Aurora via Big Tree Rd (US-20A), which runs one-way eastbound after the game." },
     { id: "south", label: "South (Southern Tier)", description: "Toward Boston, Springville and the Southern Tier via US-219 south." },
     { id: "west", label: "West (Hamburg)", description: "Toward Hamburg and the lakeshore via Southwestern Blvd (US-20)." },
   ],
