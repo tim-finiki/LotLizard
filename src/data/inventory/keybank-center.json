@@ -33,17 +33,6 @@
           ],
           "value": "Adams Ramp"
         },
-        "covered": {
-          "confidence": "low",
-          "evidence": "the 1,800-space Adams Ramp on Washington Street",
-          "method": "search_snippet",
-          "notes": "Covered because it is a multi-level ramp.",
-          "observedAt": "2026-10-29",
-          "sources": [
-            "btpm-org-local-2025-03-11-downtown-parking-ramps-to-get-much-needed-renovations"
-          ],
-          "value": "available"
-        },
         "description": {
           "confidence": "low",
           "evidence": "The ramps closest to Key Bank Center are the One Seneca Ramp and the Adam Ramp",
@@ -164,17 +153,6 @@
           ],
           "value": "KeyBank Center Garage"
         },
-        "covered": {
-          "confidence": "low",
-          "evidence": "KeyBank Center parking ramp",
-          "method": "search_snippet",
-          "notes": "Covered because it is a multi-level ramp.",
-          "observedAt": "2026-10-29",
-          "sources": [
-            "nhl-com-sabres-fans-a-z-guide"
-          ],
-          "value": "available"
-        },
         "description": {
           "confidence": "low",
           "evidence": "park next to the venue at the KeyBank Center Parking Ramp between Perry Street and Illinois Street",
@@ -204,6 +182,27 @@
             "nhl-com-sabres-fans-a-z-guide"
           ],
           "value": "KeyBank Center Parking Ramp"
+        },
+        "payment_not_accepted": {
+          "confidence": "medium",
+          "evidence": "All lots are cashless",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "keybankcenter-com-plan-your-visit-directions-parking"
+          ],
+          "value": "cash"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "pre-purchasing parking in advance is strongly encouraged",
+          "method": "search_snippet",
+          "notes": "Book through the arena's official partner JustPark: https://www.justpark.com/us/event-parking/keybank-center. Onsite payment may be available but isn't guaranteed; lots can fill up on event days.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "keybankcenter-com-plan-your-visit-directions-parking"
+          ],
+          "value": "advance_optional"
         },
         "tailgating": {
           "confidence": "medium",
@@ -282,6 +281,27 @@
           ],
           "value": "KeyBank Center Surface Lot"
         },
+        "payment_not_accepted": {
+          "confidence": "medium",
+          "evidence": "All lots are cashless",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "keybankcenter-com-plan-your-visit-directions-parking"
+          ],
+          "value": "cash"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "pre-purchasing parking in advance is strongly encouraged",
+          "method": "search_snippet",
+          "notes": "Book through the arena's official partner JustPark: https://www.justpark.com/us/event-parking/keybank-center. Onsite payment may be available but isn't guaranteed; lots can fill up on event days.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "keybankcenter-com-plan-your-visit-directions-parking"
+          ],
+          "value": "advance_optional"
+        },
         "tailgating": {
           "confidence": "medium",
           "evidence": "tailgating is not permitted in any of our KeyBank Center parking lots or ramps",
@@ -340,17 +360,6 @@
           ],
           "value": "Harborcenter Ramp"
         },
-        "covered": {
-          "confidence": "low",
-          "evidence": "LECOM Harborcenter ramp",
-          "method": "search_snippet",
-          "notes": "Covered because it is a multi-level ramp.",
-          "observedAt": "2026-10-29",
-          "sources": [
-            "gogriffs-com-facilities-lecom-harborcenter-1"
-          ],
-          "value": "available"
-        },
         "description": {
           "confidence": "low",
           "evidence": "directly across from and connected to the KeyBank Center",
@@ -382,14 +391,25 @@
           ],
           "value": "LECOM Harborcenter Parking Ramp"
         },
+        "payment_not_accepted": {
+          "confidence": "medium",
+          "evidence": "All lots are cashless",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "keybankcenter-com-plan-your-visit-directions-parking"
+          ],
+          "value": "cash"
+        },
         "payment_timing": {
-          "confidence": "low",
+          "confidence": "medium",
           "evidence": "LECOM Harborcenter parking ramp for presale purchase",
           "method": "search_snippet",
           "notes": "Presale was offered for a playoff game; whether you can also pay on arrival varies by event.",
-          "observedAt": "2026-10-29",
+          "observedAt": "2026-10-30",
           "sources": [
-            "nhl-com-sabres-news-buffalo-sabres-playoff-parking-traffic-information"
+            "nhl-com-sabres-news-buffalo-sabres-playoff-parking-traffic-information",
+            "keybankcenter-com-plan-your-visit-directions-parking"
           ],
           "value": "advance_optional"
         },
@@ -482,6 +502,242 @@
         }
       },
       "prices": {}
+    },
+    "premium-p8019-64-exchange": {
+      "fields": {
+        "access": {
+          "confidence": "medium",
+          "evidence": "hourly, daily, overnight and monthly",
+          "method": "search_snippet",
+          "notes": "Hourly, daily, overnight and monthly parking on the operator's site.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8019"
+          ],
+          "value": "public"
+        },
+        "address": {
+          "confidence": "low",
+          "evidence": "64 Exchange St. Lot - P8019",
+          "method": "search_snippet",
+          "notes": "Address from ParkMobile; the operator page reviewed didn't show a street address.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "parkmobile-io-parking-locations-ny-buffalo-parking-parking-lot-64-exchange-st-lo"
+          ],
+          "value": "64 Exchange St, Buffalo, NY 14204"
+        },
+        "aliases": {
+          "confidence": "medium",
+          "evidence": "formerly known as Bison's Lot",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8019"
+          ],
+          "value": "Bison's Lot"
+        },
+        "description": {
+          "confidence": "medium",
+          "evidence": "formerly known as Bison's Lot",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8019"
+          ],
+          "value": "Lot on Exchange St a few blocks from KeyBank Center and Canalside, formerly known as Bison's Lot. Premium Parking sells hourly, daily, overnight and monthly parking; event-day rates vary and no fixed event price is published."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "64 Exchange St. Lot - P8019",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "parkmobile-io-parking-locations-ny-buffalo-parking-parking-lot-64-exchange-st-lo"
+          ],
+          "value": "Premium Parking P8019 (64 Exchange St)"
+        },
+        "operator": {
+          "confidence": "medium",
+          "evidence": "Find Parking at lot P8019 in Buffalo, NY",
+          "method": "search_snippet",
+          "notes": "Listed on Premium Parking's own site.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8019"
+          ],
+          "value": "Premium Parking"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "64 Exchange St. Lot - P8019",
+          "method": "search_snippet",
+          "notes": "Listed as a lot; formerly known as Bison's Lot.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "parkmobile-io-parking-locations-ny-buffalo-parking-parking-lot-64-exchange-st-lo"
+          ],
+          "value": "private_lot"
+        }
+      },
+      "prices": {}
+    },
+    "premium-p8022-commercial-perry": {
+      "fields": {
+        "access": {
+          "confidence": "medium",
+          "evidence": "Daily Rates 12 Hrs",
+          "method": "search_snippet",
+          "notes": "Sold by the day on the operator's site.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8022"
+          ],
+          "value": "public"
+        },
+        "address": {
+          "confidence": "medium",
+          "evidence": "prime corner lot at Commercial & Perry Streets",
+          "method": "search_snippet",
+          "notes": "The operator gives the corner, not a street number. Third-party listings disagree (36 Perry Blvd / 1 Commercial St on SpotHero; 17 Perry Blvd on BestParking).",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8022"
+          ],
+          "value": "Commercial St & Perry St, Buffalo, NY 14203"
+        },
+        "aliases": {
+          "confidence": "low",
+          "evidence": "36 Perry Blvd. (1 Commercial St.) - Aud Lot 2 (P8022)",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "spothero-com-facility-107750-1-commercial-st-parking"
+          ],
+          "value": "Aud Lot 2"
+        },
+        "description": {
+          "confidence": "medium",
+          "evidence": "prime corner lot at Commercial & Perry Streets in downtown Buffalo, near the waterfront, KeyBank Center, and metro transit",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8022"
+          ],
+          "value": "Corner lot at Commercial and Perry Streets, listed by Premium Parking as near the waterfront, KeyBank Center and Metro Rail. Event-day rates vary; no fixed event price is published."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "Parking Near Buffalo Commercial & Perry St",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8022"
+          ],
+          "value": "Premium Parking P8022 (Commercial & Perry)"
+        },
+        "operator": {
+          "confidence": "medium",
+          "evidence": "prime corner lot at Commercial & Perry Streets in downtown Buffalo, near the waterfront, KeyBank Center, and metro transit",
+          "method": "search_snippet",
+          "notes": "Listed on Premium Parking's own site.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8022"
+          ],
+          "value": "Premium Parking"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "prime corner lot at Commercial & Perry Streets",
+          "method": "search_snippet",
+          "notes": "The operator describes it as a corner lot.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8022"
+          ],
+          "value": "private_lot"
+        }
+      },
+      "prices": {}
+    },
+    "premium-p8027-155-washington": {
+      "fields": {
+        "access": {
+          "confidence": "medium",
+          "evidence": "Prime Buffalo location near downtown, Canalside, and KeyBank Center",
+          "method": "search_snippet",
+          "notes": "Sold by the hour and day on the operator's site.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8027"
+          ],
+          "value": "public"
+        },
+        "address": {
+          "confidence": "low",
+          "evidence": "155 Washington St. Lot - P8027 at 155 Washington St., Buffalo, NY 14203",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "parkmobile-io-parking-locations-ny-buffalo-parking-parking-lot-155-washington-st"
+          ],
+          "value": "155 Washington St, Buffalo, NY 14203"
+        },
+        "aliases": {
+          "confidence": "low",
+          "evidence": "Cobblestone Lot, operated by Premium Parking",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "spothero-com-facility-107743-155-washington-st-2-parking"
+          ],
+          "value": "Cobblestone Lot"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "located on the East side of Washington St. between Scott St. and Exchange St.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "spothero-com-facility-107743-155-washington-st-2-parking"
+          ],
+          "value": "Open-air lot on the east side of Washington St between Scott St and Exchange St, listed by Premium Parking as near Canalside and KeyBank Center. Event-day rates vary; no fixed event price is published."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "Parking Near Buffalo City Hall - 155 Washington",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8027"
+          ],
+          "value": "Premium Parking P8027 (155 Washington St)"
+        },
+        "operator": {
+          "confidence": "medium",
+          "evidence": "Prime Buffalo location near downtown, Canalside, and KeyBank Center",
+          "method": "search_snippet",
+          "notes": "Listed on Premium Parking's own site.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8027"
+          ],
+          "value": "Premium Parking"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "an open-air parking solution for visitors and commuters alike",
+          "method": "search_snippet",
+          "notes": "Surface (open-air) lot per ParkMobile.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "parkmobile-io-parking-locations-ny-buffalo-parking-parking-lot-155-washington-st"
+          ],
+          "value": "private_lot"
+        }
+      },
+      "prices": {}
     }
   },
   "slug": "keybank-center",
@@ -549,6 +805,13 @@
       "type": "third_party",
       "url": "https://gogriffs.com/facilities/lecom-harborcenter/1"
     },
+    "keybankcenter-com-plan-your-visit-directions-parking": {
+      "method": "search_snippet",
+      "name": "KeyBank Center — Directions & Parking",
+      "retrievedAt": "2026-10-30",
+      "type": "official",
+      "url": "https://www.keybankcenter.com/plan-your-visit/directions-parking"
+    },
     "koobit-com-sabres-vs-bruins-e215043-travel-parking-harborcenter-ramp-111820": {
       "method": "search_snippet",
       "name": "Koobit — Harborcenter Ramp parking listing",
@@ -590,6 +853,55 @@
       "retrievedAt": "2026-10-29",
       "type": "third_party",
       "url": "https://openchargemap.org/poi/details/112300"
+    },
+    "parkmobile-io-parking-locations-ny-buffalo-parking-parking-lot-155-washington-st": {
+      "method": "search_snippet",
+      "name": "ParkMobile — 155 Washington St. Lot (P8027)",
+      "retrievedAt": "2026-10-30",
+      "type": "third_party",
+      "url": "https://parkmobile.io/parking/locations/ny/buffalo-parking/parking-lot/155-washington-st-lot-p8027"
+    },
+    "parkmobile-io-parking-locations-ny-buffalo-parking-parking-lot-64-exchange-st-lo": {
+      "method": "search_snippet",
+      "name": "ParkMobile — 64 Exchange St. Lot (P8019)",
+      "retrievedAt": "2026-10-30",
+      "type": "third_party",
+      "url": "https://parkmobile.io/parking/locations/ny/buffalo-parking/parking-lot/64-exchange-st-lot-p8019"
+    },
+    "premiumparking-com-p8019": {
+      "method": "search_snippet",
+      "name": "Premium Parking — P8019",
+      "retrievedAt": "2026-10-30",
+      "type": "operator",
+      "url": "https://www.premiumparking.com/P8019"
+    },
+    "premiumparking-com-p8022": {
+      "method": "search_snippet",
+      "name": "Premium Parking — P8022, Commercial & Perry St",
+      "retrievedAt": "2026-10-30",
+      "type": "operator",
+      "url": "https://www.premiumparking.com/P8022"
+    },
+    "premiumparking-com-p8027": {
+      "method": "search_snippet",
+      "name": "Premium Parking — P8027, 155 Washington St",
+      "retrievedAt": "2026-10-30",
+      "type": "operator",
+      "url": "https://www.premiumparking.com/P8027"
+    },
+    "spothero-com-facility-107743-155-washington-st-2-parking": {
+      "method": "search_snippet",
+      "name": "SpotHero — 155 Washington St (Cobblestone Lot)",
+      "retrievedAt": "2026-10-30",
+      "type": "third_party",
+      "url": "https://www.spothero.com/facility/107743/155-washington-st-2-parking"
+    },
+    "spothero-com-facility-107750-1-commercial-st-parking": {
+      "method": "search_snippet",
+      "name": "SpotHero — 36 Perry Blvd. (1 Commercial St.) - Aud Lot 2 (P8022)",
+      "retrievedAt": "2026-10-30",
+      "type": "third_party",
+      "url": "https://spothero.com/facility/107750/1-commercial-st-parking"
     },
     "thestadiumreviews-com-parking-keybank-center": {
       "method": "search_snippet",

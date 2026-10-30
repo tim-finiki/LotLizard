@@ -232,7 +232,22 @@ describe("published ownership and access data", () => {
   });
 
   it("KeyBank Center: garages vs surface lot, city ramp publicly owned, disputed ownership left unconfirmed", () => {
-    expect(visible("keybank-center", p({ access: ["public"] }))).toEqual(["adam-ramp", "keybank-center-ramp", "keybank-center-surface-lot", "lecom-harborcenter-ramp"]);
+    expect(visible("keybank-center", p({ access: ["public"] }))).toEqual([
+      "adam-ramp",
+      "keybank-center-ramp",
+      "keybank-center-surface-lot",
+      "lecom-harborcenter-ramp",
+      "premium-p8019-64-exchange",
+      "premium-p8022-commercial-perry",
+      "premium-p8027-155-washington",
+    ]);
+    // Premium Parking's lots are operator-listed surface lots; their ownership isn't published.
+    expect(visible("keybank-center", p({ form: ["surface"] }))).toEqual([
+      "keybank-center-surface-lot",
+      "premium-p8019-64-exchange",
+      "premium-p8022-commercial-perry",
+      "premium-p8027-155-washington",
+    ]);
     expect(visible("keybank-center", p({ access: ["public"], form: ["garage"] }))).toEqual(["adam-ramp", "keybank-center-ramp", "lecom-harborcenter-ramp"]);
     expect(visible("keybank-center", p({ owner: ["public"], form: ["garage"] }))).toEqual(["adam-ramp"]);
     expect(visible("keybank-center", p({ owner: ["venue"] }))).toEqual(["keybank-center-surface-lot"]);

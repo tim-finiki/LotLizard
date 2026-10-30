@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { EVENTS } from "@/lib/data/events";
-import { FACILITIES, VENUES } from "@/lib/data/catalog";
+import { FACILITIES, SOURCES, VENUES } from "@/lib/data/catalog";
 import { DEFAULT_PREFERENCES, rankFacilities } from "@/lib/ranking";
 import { directionsLabel, directionsLinks } from "@/lib/directions";
 import { FEATURED_VENUES, venueHighlights, venueProfile } from "@/lib/featured";
@@ -62,11 +62,31 @@ describe("featured pilot venues", () => {
 
 describe("KeyBank addresses and entrances", () => {
   it("routes to third-party addresses only with an 'unverified' label", () => {
-    for (const f of lots("keybank-center").filter((x) => x.address)) {
+    const thirdParty = (ids: string[]) => ids.every((id) => SOURCES.find((s) => s.id === id)?.type === "third_party");
+    const addressed = lots("keybank-center").filter((x) => x.address && thirdParty(x.addressAttribution?.sourceIds ?? []));
+    expect(addressed.length).toBeGreaterThan(0);
+    for (const f of addressed) {
       expect(f.addressAttribution?.confidence).toBe("low");
       const d = directionsLinks(f);
       if (d) expect(directionsLabel(d)).toMatch(/not yet verified/);
     }
+  });
+
+  it("adds Premium Parking lots without pins, entrances, prices or covered claims", () => {
+    const premium = lots("keybank-center").filter((f) => f.slug.startsWith("premium-"));
+    expect(premium.map((f) => f.slug).sort()).toEqual(["premium-p8019-64-exchange", "premium-p8022-commercial-perry", "premium-p8027-155-washington"]);
+    for (const f of premium) {
+      expect(f.operator, f.slug).toBe("Premium Parking");
+      expect(f.location, f.slug).toBeUndefined();
+      expect(f.entrance, f.slug).toBeUndefined();
+      expect(f.prices, f.slug).toEqual([]);
+      expect(f.features?.covered, f.slug).toBeUndefined();
+    }
+  });
+
+  it("claims covered parking only where a source says so, not because a facility is a ramp", () => {
+    const covered = lots("keybank-center").filter((f) => f.features?.covered?.state === "available");
+    expect(covered.map((f) => f.slug)).toEqual(["one-seneca-ramp"]);
   });
 
   it("gives the arena ramp its sourced entrance instruction, with no invented driveway", () => {
