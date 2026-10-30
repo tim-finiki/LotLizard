@@ -74,14 +74,28 @@ describe("KeyBank addresses and entrances", () => {
 
   it("adds Premium Parking lots without pins, entrances, prices or covered claims", () => {
     const premium = lots("keybank-center").filter((f) => f.slug.startsWith("premium-"));
-    expect(premium.map((f) => f.slug).sort()).toEqual(["premium-p8019-64-exchange", "premium-p8022-commercial-perry", "premium-p8027-155-washington"]);
+    expect(premium.map((f) => f.slug).sort()).toEqual([
+      "premium-p8011-26-mississippi",
+      "premium-p8019-64-exchange",
+      "premium-p8022-commercial-perry",
+      "premium-p8027-155-washington",
+      "premium-p8139-191-scott",
+      "premium-p8146-199-scott",
+    ]);
     for (const f of premium) {
       expect(f.operator, f.slug).toBe("Premium Parking");
       expect(f.location, f.slug).toBeUndefined();
-      expect(f.entrance, f.slug).toBeUndefined();
+      expect(f.entrance?.location, f.slug).toBeUndefined();
       expect(f.prices, f.slug).toEqual([]);
-      expect(f.features?.covered, f.slug).toBeUndefined();
+      // Covered is only ever claimed false, and only where a listing says "uncovered".
+      expect(f.features?.covered?.state ?? "unknown", f.slug).not.toBe("available");
     }
+  });
+
+  it("doesn't route to a marketplace-only entrance address", () => {
+    const lot = lots("keybank-center").find((f) => f.slug === "premium-p8146-199-scott")!;
+    expect(lot.entrance).toMatchObject({ address: "229 Scott St, Buffalo, NY 14204", verification: "needs_review" });
+    expect(directionsLinks(lot)?.basis).toBe("street_address");
   });
 
   it("claims covered parking only where a source says so, not because a facility is a ramp", () => {
