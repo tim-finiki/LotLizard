@@ -3,6 +3,7 @@ import { VENUES } from "@/lib/data/venues";
 import { HIGHMARK_FACILITIES } from "@/lib/data/facilities/highmark";
 import { SOURCES } from "@/lib/data/sources";
 import { collectSourceIds } from "@/lib/data/repository";
+import { isStreetAddress } from "@/lib/directions";
 
 const sourceIds = new Set(SOURCES.map((s) => s.id));
 
@@ -36,5 +37,46 @@ describe("seed data integrity", () => {
   it("only maps facilities that belong to a known venue", () => {
     const ids = new Set(VENUES.map((v) => v.id));
     for (const f of HIGHMARK_FACILITIES) expect(ids).toContain(f.venueId);
+  });
+});
+
+describe("Highmark private lots", () => {
+  const privateLots = HIGHMARK_FACILITIES.filter((f) => f.type === "private_lot");
+  const sourceType = new Map(SOURCES.map((s) => [s.id, s.type]));
+
+  it("lists the six published private lots", () => {
+    expect(privateLots.map((f) => f.slug).sort()).toEqual([
+      "big-g-lot",
+      "dannys-south",
+      "gorilla-parking",
+      "hammers-lot",
+      "yellow-brick-parking",
+      "yellow-brick-parking-lot-2",
+    ]);
+  });
+
+  it("gives every private lot a street address and a non-editorial source", () => {
+    for (const f of privateLots) {
+      expect(f.address && isStreetAddress(f.address), `${f.slug} address`).toBe(true);
+      expect(f.attribution.sourceIds.some((id) => sourceType.get(id) !== "editorial_estimate"), `${f.slug} source`).toBe(true);
+    }
+  });
+
+  it("has no duplicate addresses", () => {
+    const addresses = privateLots.map((f) => f.address);
+    expect(new Set(addresses).size).toBe(addresses.length);
+  });
+
+  it("doesn't pin, rate the exit of, or invent a lot-level price for the lots added from 2026-10-30 research", () => {
+    for (const slug of ["big-g-lot", "yellow-brick-parking-lot-2"]) {
+      const f = HIGHMARK_FACILITIES.find((x) => x.slug === slug)!;
+      expect(f.location, slug).toBeUndefined();
+      expect(f.entrance, slug).toBeUndefined();
+      expect(f.exit.rating, slug).toBeUndefined();
+      expect(f.exit.directions, slug).toBeUndefined();
+      expect(f.walkMinutes, slug).toBeUndefined();
+      // Only the operator's own advertised starting price, marked as not lot-specific.
+      for (const p of f.prices) expect(p.scope, slug).toBe("area");
+    }
   });
 });

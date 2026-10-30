@@ -6,6 +6,8 @@ import type { DataSource } from "@/lib/types";
  * fact citing them can be promoted above "medium".
  */
 const SNIPPET = "Reviewed via search results 2026-10-29; direct page re-check pending.";
+const SNIPPET_1030 = "Reviewed via search results 2026-10-30; direct page re-check pending.";
+const DIRECT_1030 = "Page read directly 2026-10-30. Operator's own claims; not field-verified by LotLizard.";
 
 export const SOURCES: DataSource[] = [
   // Official
@@ -42,6 +44,16 @@ export const SOURCES: DataSource[] = [
   { id: "latlong-highmark", type: "third_party", name: "LatLong.net — New Highmark Stadium coordinates", url: "https://www.latlong.net/place/new-highmark-stadium-new-york-34252.html", retrievedAt: "2026-10-29" },
   { id: "coparking-yellowbrick", type: "third_party", name: "CoParking listing — Yellow Brick Parking", url: "https://coparking.ch/en/United-States/parking/73055", retrievedAt: "2026-10-29" },
   { id: "facebook-gorilla", type: "operator", name: "Gorilla Parking (4177 Abbott Rd) — Facebook page", url: "https://www.facebook.com/4177AbbottRoad/", retrievedAt: "2026-10-29" },
+
+  // Private lots (2026-10-30). Operator pages count as the lot's own public advertising.
+  { id: "bigg-site", type: "operator", name: "Big G Properties — Big G's Lot", url: "https://www.biggpropertiesllc.com/", retrievedAt: "2026-10-30", notes: DIRECT_1030 },
+  { id: "yellowbrick-site", type: "operator", name: "Yellow Brick Parking — Highmark Stadium parking", url: "https://yellowbrickparkinglot.com/", retrievedAt: "2026-10-30", notes: DIRECT_1030 },
+  { id: "yellowbrick-faq", type: "operator", name: "Yellow Brick Parking — FAQ", url: "https://yellowbrickparkinglot.com/faq/", retrievedAt: "2026-10-30", notes: DIRECT_1030 },
+  { id: "yellowbrick-about", type: "operator", name: "Yellow Brick Parking — About", url: "https://yellowbrickparkinglot.com/about/", retrievedAt: "2026-10-30", notes: DIRECT_1030 },
+  { id: "gorilla-site", type: "operator", name: "Gorilla Lot — website", url: "https://www.gorillalotparking.com/", retrievedAt: "2026-10-30", notes: SNIPPET_1030 },
+  { id: "billsfans-tailgating", type: "third_party", name: "BillsFans — Bills Mafia tailgating guide", url: "https://www.billsfans.com/the-ultimate-buffalo-bills-game-day-guide/tailgating/", retrievedAt: "2026-10-30", notes: SNIPPET_1030 },
+  { id: "dannys-site", type: "operator", name: "Danny's South — restaurant website", url: "https://www.dannysrestaurant.com/dannys-south/", retrievedAt: "2026-10-30", notes: SNIPPET_1030 },
+  { id: "visitbuffalo-dannys", type: "third_party", name: "Visit Buffalo Niagara — Danny's South", url: "https://visitbuffalo.com/businesses/dannys-south/", retrievedAt: "2026-10-30", notes: SNIPPET_1030 },
 
   // LotLizard
   { id: "lotlizard-editorial", type: "editorial_estimate", name: "LotLizard editorial (placement/estimate — not field-verified)", retrievedAt: "2026-10-29", notes: "Map pins, directory listings and ratings derived by LotLizard editors from the cited sources. Not surveyed on site." },

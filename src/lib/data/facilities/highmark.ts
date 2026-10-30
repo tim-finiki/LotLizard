@@ -92,6 +92,36 @@ function officialLot(
   };
 }
 
+const YELLOW_BRICK_BOOKING = { url: "https://yellowbrickparkinglot.com/", partner: "Yellow Brick Parking", isAffiliate: false };
+const YELLOW_BRICK_PAYMENT: PaymentPolicy = {
+  accepted: [],
+  reportedAt: "2026-10-30",
+  notes: "Guaranteed reservations through the operator; mobile or printed passes accepted. All sales are final and nonrefundable. Accepted payment methods and on-arrival sales aren't stated.",
+  attribution: attr("medium", ["yellowbrick-faq", "yellowbrick-site"]),
+};
+const YELLOW_BRICK_FEATURES: ParkingFacility["features"] = {
+  restrooms: { state: "available", reportedAt: "2026-10-30", notes: "Portable toilets in all three lots.", attribution: attr("medium", ["yellowbrick-faq"]) },
+  ev_charging: { state: "unavailable", reportedAt: "2026-10-30", notes: "The operator says there is no EV charging.", attribution: attr("medium", ["yellowbrick-faq"]) },
+};
+const YELLOW_BRICK_TAILGATE = fact<boolean | "unknown">(true, "medium", ["yellowbrick-faq"], "Tailgating permitted within the operator's space restrictions.");
+const YELLOW_BRICK_TAILGATE_RULES = "Small grills, tables and chairs allowed. No ground fires, fireworks, loud music or karaoke (operator rules).";
+
+/** The operator's advertised "starting at" price for one event, across its lots (not a lot-specific price). */
+function yellowBrickRavens(lot: string): PriceObservation {
+  return {
+    id: `${lot}-2026-11-01-from`,
+    min: 70,
+    max: 70,
+    vehicle: "car",
+    eventKind: "nfl_regular",
+    season: "2026",
+    observedAt: "2026-10-30",
+    paymentNotes: "Advertised as \"starting at $70\" for Bills vs. Ravens (Nov 1, 2026); reserved through the operator. Prices for other events and specific lots aren't published.",
+    scope: "area",
+    attribution: attr("medium", ["yellowbrick-site"], "Operator's starting price across its lots for one game; not specific to this lot."),
+  };
+}
+
 export const HIGHMARK_FACILITIES: ParkingFacility[] = [
   officialLot("platinum-lot", "Platinum Lot", "west", { lat: 42.7748, lng: -78.7928 }),
   officialLot("gold-lot", "Gold Lot", "west", { lat: 42.7712, lng: -78.7948 }),
@@ -323,7 +353,11 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     },
     exit: { routes: ["Abbott Rd → Big Tree Rd (one-way post-game)"] },
     vehicleTypes: ["car"],
-    attribution: attr("medium", ["audacy-hammers", "wkbw-hammers-2024", "prked-patriots"], `Address from a third-party listing. ${PIN_NOTE}`),
+    attribution: attr(
+      "medium",
+      ["audacy-hammers", "wkbw-hammers-2024", "prked-patriots", "billsfans-tailgating"],
+      `Address from a third-party listing. One fan guide reports a March 2026 change of ownership with 2026 operations unconfirmed; 2026 home-opener coverage describes the lot open under its long-time owner. ${PIN_NOTE}`,
+    ),
   },
   {
     id: "highmark-gorilla-parking",
@@ -332,9 +366,10 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     name: "Gorilla Parking",
     type: "private_lot",
     ownership: fact<Ownership>("private", "low", ["facebook-gorilla"], "Described as a private lot on its own Facebook page; not independently confirmed."),
+    access: fact<AccessLevel>("public", "low", ["facebook-gorilla"], "Its Facebook page reportedly advertises seasonal spots for the Bills 2026 preseason and regular season (seen in search results; page not read directly)."),
     address: "4177 Abbott Rd, Orchard Park, NY 14127",
     location: { lat: 42.7677, lng: -78.7869, precision: "approximate" },
-    description: "Private lot on Abbott Rd with its own Facebook page. No lot-specific price found yet.",
+    description: "Private lot at the corner of Abbott Rd and Allen St. Its Facebook page reportedly advertises seasonal spots for the 2026 Bills season, and its website reportedly says it holds up to 70 cars (both seen in search results, not read directly). No lot-specific price found yet.",
     prices: [
       {
         id: "abbott-area-2026",
@@ -353,26 +388,32 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     tailgating: { allowed: fact<boolean | "unknown">("unknown", "unverified", ["lotlizard-editorial"]) },
     exit: { routes: ["Abbott Rd"] },
     vehicleTypes: ["car"],
-    attribution: attr("low", ["facebook-gorilla"], PIN_NOTE),
+    attribution: attr("low", ["facebook-gorilla", "gorilla-site", "billsfans-tailgating"], `Operator's Facebook page and website, reviewed through search results only; direct check pending. ${PIN_NOTE}`),
   },
   {
     id: "highmark-yellow-brick",
     slug: "yellow-brick-parking",
     venueId: VENUE_ID,
-    name: "Yellow Brick Parking “Lot 1”",
-    aliases: ["Lot 1", "Yellow Brick Parking"],
-    aliasesAttribution: attr("low", ["coparking-yellowbrick"], "From the name on a parking aggregator listing."),
+    name: "Yellow Brick Parking",
+    aliases: ["Yellow Brick Parking Lot 1", "Yellow Brick Lot 1"],
+    aliasesAttribution: attr("low", ["coparking-yellowbrick"], "The operator runs three numbered lots; it doesn't say which number this address is. \"Lot 1\" comes from an aggregator listing."),
     type: "private_lot",
+    operator: "Yellow Brick Parking",
     ownership: fact<Ownership>("private", "low", ["coparking-yellowbrick"], "Listed as a private lot by a parking aggregator."),
+    access: fact<AccessLevel>("public", "medium", ["yellowbrick-site", "yellowbrick-faq"], "Regular-size vehicles with a valid Yellow Brick pass can use any of the three lots, subject to availability."),
     address: "5265 Big Tree Rd, Orchard Park, NY 14127",
     location: { lat: 42.7662, lng: -78.7812, precision: "approximate" },
-    description: "Private lot on Big Tree Rd listed by a parking aggregator. No price found yet.",
-    prices: [],
-    amenities: fact<ParkingFacility["amenities"]["value"]>([], "unverified", ["lotlizard-editorial"]),
-    tailgating: { allowed: fact<boolean | "unknown">("unknown", "unverified", ["lotlizard-editorial"]) },
+    description:
+      "The operator's main published address. Yellow Brick runs three adjacent lots on Big Tree Rd; a valid pass works in any of them for regular-size vehicles, subject to availability (RVs, oversized vehicles and overnight parking use Lot 2). Lots open four hours before events. The operator estimates a 5–10 minute walk to the stadium (operator's estimate, not measured by LotLizard).",
+    prices: [yellowBrickRavens("yellow-brick-lot-1")],
+    payment: YELLOW_BRICK_PAYMENT,
+    amenities: fact<ParkingFacility["amenities"]["value"]>(["tailgate_area"], "medium", ["yellowbrick-faq"], "Tailgating permitted within the operator's stated space restrictions."),
+    features: YELLOW_BRICK_FEATURES,
+    tailgating: { allowed: YELLOW_BRICK_TAILGATE, notes: YELLOW_BRICK_TAILGATE_RULES },
     exit: { routes: ["Big Tree Rd eastbound to Route 219 (one-way post-game)"] },
     vehicleTypes: ["car"],
-    attribution: attr("low", ["coparking-yellowbrick"], PIN_NOTE),
+    booking: YELLOW_BRICK_BOOKING,
+    attribution: attr("medium", ["yellowbrick-site", "yellowbrick-faq", "yellowbrick-about"], `Operator's own website (home, FAQ and About pages). ${PIN_NOTE}`),
   },
   {
     id: "highmark-dannys-south",
@@ -381,8 +422,9 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     name: "Danny's South",
     type: "private_lot",
     ownership: fact<Ownership>("private", "low", ["arenacapacity"], "Described as a private lot by a third-party guide."),
-    address: "Southwestern Blvd, Orchard Park, NY (exact address unconfirmed)",
-    description: "Private lot on Southwestern Blvd listed by a third-party guide. Exact location unconfirmed, so it is not pinned.",
+    address: "4300 Abbott Rd, Orchard Park, NY 14127",
+    description:
+      "Restaurant at the corner of Abbott Rd and Big Tree Rd, open for all Bills home games. Game-day lot parking is reported by a third-party guide, not by the restaurant. Not pinned until the lot's location is confirmed.",
     prices: [
       {
         id: "dannys-2026",
@@ -397,8 +439,63 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     ],
     amenities: fact<ParkingFacility["amenities"]["value"]>([], "unverified", ["lotlizard-editorial"]),
     tailgating: { allowed: fact<boolean | "unknown">("unknown", "unverified", ["lotlizard-editorial"]) },
-    exit: { routes: ["Southwestern Blvd (US-20)"] },
+    exit: {},
     vehicleTypes: ["car"],
-    attribution: attr("low", ["arenacapacity"]),
+    attribution: attr("low", ["arenacapacity", "dannys-site", "visitbuffalo-dannys"], "Address from the restaurant's own website; earlier LotLizard data placed it on Southwestern Blvd. Parking from a single third-party guide."),
+  },
+  {
+    id: "highmark-big-g",
+    slug: "big-g-lot",
+    venueId: VENUE_ID,
+    name: "Big G's Lot",
+    aliases: ["Big G Properties", "Big G's"],
+    aliasesAttribution: attr("medium", ["bigg-site"], "Names used on the operator's website."),
+    type: "private_lot",
+    operator: "Big G Properties",
+    ownership: fact<Ownership>("private", "medium", ["bigg-site"], "Describes itself as a family-owned parking operation."),
+    access: fact<AccessLevel>("public", "medium", ["bigg-site"], "First come, first served."),
+    address: "5375 Big Tree Rd, Orchard Park, NY 14127",
+    description:
+      "Family-owned lot on Big Tree Rd. Opens four hours before events, first come, first served. The operator says it is about 450 ft from its front-yard access to the stadium's pedestrian entry area (operator's claim, not a verified walking route). No event price is published. Not pinned until the vehicle entrance is confirmed.",
+    prices: [],
+    amenities: fact<ParkingFacility["amenities"]["value"]>(["tailgate_area", "lighting"], "medium", ["bigg-site"], "Tailgating areas and lighting, per the operator."),
+    features: {
+      restrooms: {
+        state: "available",
+        reportedAt: "2026-10-30",
+        notes: "Portable toilets.",
+        attribution: attr("medium", ["bigg-site"]),
+      },
+    },
+    tailgating: { allowed: fact<boolean | "unknown">(true, "medium", ["bigg-site"], "The operator advertises tailgating areas.") },
+    exit: {
+      routes: ["Two exit lanes turning right toward eastbound traffic and Route 219 (per the operator)"],
+      notes: "Exit layout as advertised by the operator; not observed by LotLizard. No exit-time data.",
+    },
+    vehicleTypes: ["car"],
+    attribution: attr("medium", ["bigg-site"], "Operator's own website. Address from the operator."),
+  },
+  {
+    id: "highmark-yellow-brick-lot-2",
+    slug: "yellow-brick-parking-lot-2",
+    venueId: VENUE_ID,
+    name: "Yellow Brick Parking “Lot 2”",
+    aliases: ["Yellow Brick Lot 2"],
+    aliasesAttribution: attr("medium", ["yellowbrick-faq"], "Lot number and address given in the operator's FAQ."),
+    type: "private_lot",
+    operator: "Yellow Brick Parking",
+    access: fact<AccessLevel>("public", "medium", ["yellowbrick-site", "yellowbrick-faq"], "Valid Yellow Brick pass required; RVs, oversized vehicles and overnight parking must use this lot."),
+    address: "5241 Big Tree Rd, Orchard Park, NY 14127",
+    description:
+      "One of three adjacent Yellow Brick Parking lots on Big Tree Rd, and the one RVs, oversized vehicles and overnight parking must use. Overnight and RV arrivals the day before must arrive between 9 AM and 4 PM. No RV electric or water hookups. Lots open four hours before events. Not pinned until the entrance is confirmed.",
+    prices: [yellowBrickRavens("yellow-brick-lot-2")],
+    payment: YELLOW_BRICK_PAYMENT,
+    amenities: fact<ParkingFacility["amenities"]["value"]>(["rv_friendly", "tailgate_area"], "medium", ["yellowbrick-faq"], "The operator's designated RV and oversized-vehicle lot; no electric or water hookups."),
+    features: YELLOW_BRICK_FEATURES,
+    tailgating: { allowed: YELLOW_BRICK_TAILGATE, notes: YELLOW_BRICK_TAILGATE_RULES },
+    exit: {},
+    vehicleTypes: ["car", "rv"],
+    booking: YELLOW_BRICK_BOOKING,
+    attribution: attr("medium", ["yellowbrick-faq", "yellowbrick-site", "yellowbrick-about"], "Address from the operator's FAQ."),
   },
 ];
