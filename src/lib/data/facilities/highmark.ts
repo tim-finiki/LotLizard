@@ -320,7 +320,6 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     venueId: VENUE_ID,
     name: "Hammer's Lot",
     type: "private_lot",
-    operator: "Eric Matwijow (owner, per media)",
     ownership: fact<Ownership>("private", "medium", ["wkbw-hammers-2024", "audacy-hammers"], "Privately owned by the same owner for about 40 years, per local media."),
     access: fact<AccessLevel>("public", "low", ["prked-patriots"], "A single 2026 third-party listing says first-come, first-served, paid on arrival."),
     address: "4170 Abbott Rd, Orchard Park, NY 14127",

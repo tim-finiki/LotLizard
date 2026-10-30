@@ -29,6 +29,7 @@ import { ConfidenceBadge } from "@/components/ConfidenceBadge";
 import { JsonLd } from "@/components/JsonLd";
 import { FactCard, Section } from "@/components/Section";
 import { SourceList } from "@/components/SourceList";
+import { publicVenueData } from "@/lib/public-data";
 import { SponsoredSlot } from "@/components/SponsoredSlot";
 import { VenueExplorer } from "@/components/VenueExplorer";
 import { FOCUS_SEO, venueProfile } from "@/lib/featured";
@@ -75,6 +76,8 @@ export default async function VenuePage({ params }: PageProps<"/venues/[venue]">
   const events = await listEvents(venue.id);
   const profile = venueProfile(venue.slug);
   const sources = await getSourcesFor(collectSourceIds(venue, facilities));
+  // The explorer is a client component: its props are sent to the browser, so it gets the public view only.
+  const publicData = publicVenueData(venue, facilities, sources);
   const prediction = await getPredictor().predict({ venueSlug: venue.slug, facilitySlug: "*" });
   const detailed = facilities.length > 0;
   // The map-first explorer only helps when enough lots are actually on the map. Otherwise the list is
@@ -148,7 +151,7 @@ export default async function VenuePage({ params }: PageProps<"/venues/[venue]">
             </a>
           </div>
           <div className="min-h-0 flex-1">
-            <VenueExplorer venue={venue} facilities={facilities} events={events} defaultWeights={profile?.defaultWeights} />
+            <VenueExplorer venue={publicData.venue} facilities={publicData.facilities} events={events} defaultWeights={profile?.defaultWeights} />
           </div>
         </div>
       ) : null}

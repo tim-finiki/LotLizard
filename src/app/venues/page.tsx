@@ -3,6 +3,8 @@ import { listVenuesWithFacilities } from "@/lib/data/repository";
 import { lotSearchEntry } from "@/lib/lot-search";
 import { VenueDirectory } from "@/components/VenueDirectory";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { SOURCES } from "@/lib/data/catalog";
+import { publicSources, publicVenue } from "@/lib/public-data";
 
 export const metadata: Metadata = {
   title: "Stadium, arena & concert venue parking directory",
@@ -12,7 +14,9 @@ export const metadata: Metadata = {
 
 export default async function VenuesPage() {
   const withLots = await listVenuesWithFacilities();
-  const venues = withLots.map((x) => x.venue);
+  // VenueDirectory is a client component, so it gets the public view of each venue.
+  const publicIds = new Set(publicSources(SOURCES).map((s) => s.id));
+  const venues = withLots.map((x) => publicVenue(x.venue, publicIds));
   const lots = withLots.flatMap(({ venue, facilities }) => facilities.map((f) => lotSearchEntry(venue, f)));
   return (
     <div className="mx-auto max-w-5xl px-4 py-6">
