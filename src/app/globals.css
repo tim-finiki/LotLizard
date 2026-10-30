@@ -37,21 +37,37 @@
   }
 }
 
-/* Header wordmark (approved Header B): Sora, white "Lot" + lime "Lizard", dark edge, thin lime outline. */
+/*
+ * Header wordmark (approved Header B): Sora 800, white "Lot" + lime "Lizard", dark edge, thin lime outline.
+ * Drawn as SVG text so both outlines are true vector strokes with round joins, crisp at any size or
+ * pixel density (see Wordmark in components/Brand.tsx). Units are 1/100 em.
+ */
 .ll-wordmark {
+  display: inline-block;
+  width: 4.9em;
+  height: 1em;
+  overflow: visible;
   font-family: var(--font-display);
   font-weight: 800;
-  line-height: 1;
-  letter-spacing: 0.01em;
-  -webkit-text-stroke: 0.16em #021528;
+  letter-spacing: 1px;
+  stroke-linejoin: round;
+}
+.ll-wordmark__ring {
+  fill: var(--color-lizard);
+  stroke: var(--color-lizard);
+  /* The dark edge plus 0.05em of lime on each side. */
+  stroke-width: 26px;
+}
+.ll-wordmark__text {
+  stroke: #021528;
+  stroke-width: 16px;
   paint-order: stroke fill;
-  filter: drop-shadow(1px 0 0 var(--color-lizard)) drop-shadow(-1px 0 0 var(--color-lizard)) drop-shadow(0 1px 0 var(--color-lizard)) drop-shadow(0 -1px 0 var(--color-lizard));
 }
 .ll-wordmark__lot {
-  color: #fff;
+  fill: #fff;
 }
 .ll-wordmark__lizard {
-  color: var(--color-lizard);
+  fill: var(--color-lizard);
 }
 
 :root {
