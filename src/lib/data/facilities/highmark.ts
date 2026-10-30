@@ -320,7 +320,6 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     venueId: VENUE_ID,
     name: "Hammer's Lot",
     type: "private_lot",
-    operator: "Eric Matwijow (owner, per media)",
     ownership: fact<Ownership>("private", "medium", ["wkbw-hammers-2024", "audacy-hammers"], "Privately owned by the same owner for about 40 years, per local media."),
     access: fact<AccessLevel>("public", "low", ["prked-patriots"], "A single 2026 third-party listing says first-come, first-served, paid on arrival."),
     address: "4170 Abbott Rd, Orchard Park, NY 14127",
@@ -366,10 +365,10 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     name: "Gorilla Parking",
     type: "private_lot",
     ownership: fact<Ownership>("private", "low", ["facebook-gorilla"], "Described as a private lot on its own Facebook page; not independently confirmed."),
-    access: fact<AccessLevel>("public", "low", ["facebook-gorilla"], "Its Facebook page reportedly advertises seasonal spots for the Bills 2026 preseason and regular season (seen in search results; page not read directly)."),
+    access: fact<AccessLevel>("public", "low", ["facebook-gorilla"], "Its Facebook page reportedly advertises seasonal spots for the Bills 2026 preseason and regular season; not yet confirmed directly with the operator."),
     address: "4177 Abbott Rd, Orchard Park, NY 14127",
     location: { lat: 42.7677, lng: -78.7869, precision: "approximate" },
-    description: "Private lot at the corner of Abbott Rd and Allen St. Its Facebook page reportedly advertises seasonal spots for the 2026 Bills season, and its website reportedly says it holds up to 70 cars (both seen in search results, not read directly). No lot-specific price found yet.",
+    description: "Private lot at the corner of Abbott Rd and Allen St. Its Facebook page reportedly advertises seasonal spots for the 2026 Bills season, and its website reportedly says it holds up to 70 cars, neither yet confirmed directly with the operator. No lot-specific price found yet.",
     prices: [
       {
         id: "abbott-area-2026",
@@ -388,7 +387,7 @@ export const HIGHMARK_FACILITIES: ParkingFacility[] = [
     tailgating: { allowed: fact<boolean | "unknown">("unknown", "unverified", ["lotlizard-editorial"]) },
     exit: { routes: ["Abbott Rd"] },
     vehicleTypes: ["car"],
-    attribution: attr("low", ["facebook-gorilla", "gorilla-site", "billsfans-tailgating"], `Operator's Facebook page and website, reviewed through search results only; direct check pending. ${PIN_NOTE}`),
+    attribution: attr("low", ["facebook-gorilla", "gorilla-site", "billsfans-tailgating"], `Operator's Facebook page and website; not yet confirmed directly with the operator. ${PIN_NOTE}`),
   },
   {
     id: "highmark-yellow-brick",
