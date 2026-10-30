@@ -92,6 +92,13 @@ describe("KeyBank addresses and entrances", () => {
     }
   });
 
+  it("publishes the only sourced height limit (Adam Ramp, from its operator)", () => {
+    const adam = lots("keybank-center").find((f) => f.slug === "adam-ramp")!;
+    expect(adam.description).toMatch(/clearance is 6'9"/);
+    const ramps = lots("keybank-center").filter((f) => f.type === "garage" && f.slug !== "adam-ramp");
+    for (const r of ramps) expect(r.description, r.slug).not.toMatch(/clearance/i);
+  });
+
   it("doesn't route to a marketplace-only entrance address", () => {
     const lot = lots("keybank-center").find((f) => f.slug === "premium-p8146-199-scott")!;
     expect(lot.entrance).toMatchObject({ address: "229 Scott St, Buffalo, NY 14204", verification: "needs_review" });

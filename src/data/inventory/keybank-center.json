@@ -14,12 +14,14 @@
           "value": "public"
         },
         "address": {
-          "confidence": "low",
+          "confidence": "medium",
           "evidence": "343 Washington St",
           "method": "search_snippet",
-          "observedAt": "2026-10-29",
+          "notes": "Address from the ramp's operator.",
+          "observedAt": "2026-10-30",
           "sources": [
-            "en-parkopedia-com-parking-garage-robert-b-adam-ramp-14203-buffalo"
+            "en-parkopedia-com-parking-garage-robert-b-adam-ramp-14203-buffalo",
+            "bcarparking-com-locations"
           ],
           "value": "343 Washington St, Buffalo, NY 14203"
         },
@@ -34,14 +36,29 @@
           "value": "Adams Ramp"
         },
         "description": {
-          "confidence": "low",
-          "evidence": "The ramps closest to Key Bank Center are the One Seneca Ramp and the Adam Ramp",
-          "method": "search_snippet",
-          "observedAt": "2026-10-29",
-          "sources": [
-            "buffalony-gov-civicalerts-asp"
+          "confidence": "medium",
+          "evidence": "343 Washington St., with a vehicle clearance height of 6'9\" ... 6'9\" clearance and 1,787 capacity",
+          "history": [
+            {
+              "confidence": "low",
+              "evidence": "The ramps closest to Key Bank Center are the One Seneca Ramp and the Adam Ramp",
+              "method": "search_snippet",
+              "observedAt": "2026-10-29",
+              "replacedAt": "2026-10-30",
+              "sources": [
+                "buffalony-gov-civicalerts-asp"
+              ],
+              "value": "City-owned downtown ramp on Washington Street, named by the city as one of the ramps closest to the arena."
+            }
           ],
-          "value": "City-owned downtown ramp on Washington Street, named by the city as one of the ramps closest to the arena."
+          "method": "search_snippet",
+          "notes": "Clearance and capacity from the operator's locations page.",
+          "observedAt": "2026-10-30",
+          "reason": "Adds the operator's posted clearance.",
+          "sources": [
+            "bcarparking-com-locations"
+          ],
+          "value": "City-owned ramp at 343 Washington St run by Buffalo Civic Auto Ramps, with about 1,787 spaces. Posted vehicle clearance is 6'9\" (6 ft 9 in); taller vehicles won't fit."
         },
         "ev_charging": {
           "confidence": "low",
@@ -1015,6 +1032,13 @@
       "retrievedAt": "2026-10-29",
       "type": "third_party",
       "url": "https://www.arenacapacity.com/?p=8938"
+    },
+    "bcarparking-com-locations": {
+      "method": "search_snippet",
+      "name": "Buffalo Civic Auto Ramps — Locations",
+      "retrievedAt": "2026-10-30",
+      "type": "operator",
+      "url": "https://bcarparking.com/locations"
     },
     "btpm-org-local-2025-03-11-downtown-parking-ramps-to-get-much-needed-renovations": {
       "method": "search_snippet",

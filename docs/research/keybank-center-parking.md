@@ -64,11 +64,45 @@ two entrances, both on Illinois St, and another lists it at 76 Illinois St (vs 1
 on Parkopedia). None of that is enough to change the published entrance, address or covered status.
 No height clearance was found for any ramp.
 
-## Map coordinates
+## Vehicle restrictions
 
-No new pins. No geocoder, OpenStreetMap, or city/county GIS service is reachable from this environment,
-and search excerpts don't carry lot coordinates (marketplace URLs contain the *searched destination's*
-coordinates, not the lot's). A street address is never used as an entrance pin.
+Only the Adam Ramp clearance is published (in its description, from the operator). Everything else is
+unknown: no source reviewed states a truck ban, RV/trailer rule or oversized-vehicle rule for any
+KeyBank facility.
+
+| Facility | Height limit | Trucks | RVs / trailers | Oversized | Source |
+|---|---|---|---|---|---|
+| Adam Ramp | **6'9"** (published) | Unknown | Unknown | Unknown | BCAR locations / parking-locations pages (https://bcarparking.com/locations, https://www.bcarparking.com/parking-locations/) |
+| KeyBank Center Ramp | Unknown | Unknown | Unknown | Unknown | Not found on the arena, Sabres or Bandits pages |
+| LECOM Harborcenter Ramp | Unknown | Unknown | Unknown | Unknown | Not found (Wikipedia: 750 indoor spaces; no clearance) |
+| One Seneca Ramp | Unknown | Unknown | Unknown | Unknown | Not found |
+| KeyBank Center Surface Lot | n/a | Unknown | Unknown | Unknown | Not found |
+| Premium P8011, P8019, P8022, P8027, P8139, P8146 (surface) | n/a | Unknown | Unknown | Unknown | Not found; Premium/SpotHero terms reviewed don't state vehicle rules |
+
+The City of Buffalo's Downtown Parking Ramps page says it lists "locations and height restrictions"
+for city ramps, but its figures weren't visible: https://www.buffalony.gov/1733/Downtown-Parking-Ramps
+
+## Map coordinates and verification blockers
+
+KeyBank map: **3 mapped** (Adam Ramp, LECOM Harborcenter Ramp, One Seneca Ramp — all approximate,
+labelled "Approximate") and **8 not mapped** (KeyBank Center Ramp, KeyBank Center Surface Lot and all six
+Premium lots). No new pins were added: no independent coordinate for any of the six Premium lots was
+found, and a street address is never turned into a pin.
+
+Blocked from this environment (connection refused by the network policy, checked 2026-10-30):
+premiumparking.com, spothero.com, parkwhiz.com, parkmobile.io, pay2park.net, keybankcenter.com,
+justpark.com, buffalony.gov, gis.buffalony.gov, gis.erie.gov, openstreetmap.org, nominatim.openstreetmap.org,
+overpass-api.de and geocoding.geo.census.gov. Search excerpts don't carry lot coordinates; marketplace
+URLs carry the *searched destination's* coordinates, not the lot's. Further searching won't change this.
+
+Property-level evidence that would support an approximate pin, once readable:
+
+| Lot | Evidence to read |
+|---|---|
+| P8139 (191 Scott St) | OpenStreetMap way 1203764308 (tagged surface parking): https://www.openstreetmap.org/way/1203764308 — take the polygon centroid |
+| P8146, P8027, P8019, P8011, P8022 | OpenStreetMap parking polygons at the address (search https://www.openstreetmap.org), or the City of Buffalo / Erie County parcel viewers for the lot outline |
+| Adam Ramp (pin already approximate) | City of Buffalo GIS layer "Buffalo_Civic_Auto_Ramps": https://gis.buffalony.gov/server/rest/services/Parking/Buffalo_Civic_Auto_Ramps/FeatureServer |
+| Vehicle entrances (all) | A site visit or the operator's own map; P8146's 229 Scott St entrance is SpotHero-only and stays `needs_review` |
 
 ## Sources requiring manual verification
 
