@@ -221,8 +221,9 @@ describe("published ownership and access data", () => {
     // Bills-run ADA lots are venue-operated surface lots too.
     expect(visible("highmark-stadium", p({ access: ["pass_required"], owner: ["venue"], form: ["surface"] }))).toEqual(withAda);
     expect(visible("highmark-stadium", p({ owner: ["public"] }))).toEqual([]);
-    // Private lots are reported private and open, but not confirmed open, so they aren't a match yet.
-    expect(visible("highmark-stadium", p({ owner: ["private"], access: ["public"] }))).toEqual([]);
+    // Only Big G's Lot states on its own site that it's family-owned and first come, first served; other
+    // private lots are reported private but not confirmed, so they aren't a match yet.
+    expect(visible("highmark-stadium", p({ owner: ["private"], access: ["public"] }))).toEqual(["big-g-lot"]);
     expect(visible("highmark-stadium", p({ form: ["garage"] }))).toEqual([]);
     // Official passes are prepay-only (medium), so they're also "reservation required".
     expect(visible("highmark-stadium", p({ access: ["pass_required"], reservation: ["required"] }))).toEqual(officialPass);

@@ -44,17 +44,14 @@ describe("Highmark private lots", () => {
   const privateLots = HIGHMARK_FACILITIES.filter((f) => f.type === "private_lot");
   const sourceType = new Map(SOURCES.map((s) => [s.id, s.type]));
 
-  it("lists the nine published private lots", () => {
+  it("lists the six published private lots", () => {
     expect(privateLots.map((f) => f.slug).sort()).toEqual([
       "big-g-lot",
-      "big-tree-lot",
-      "bills-parking-big-tree-rd",
       "dannys-south",
       "gorilla-parking",
       "hammers-lot",
       "yellow-brick-parking",
       "yellow-brick-parking-lot-2",
-      "yellow-brick-parking-lot-3",
     ]);
   });
 
@@ -71,14 +68,15 @@ describe("Highmark private lots", () => {
   });
 
   it("doesn't pin, rate the exit of, or invent a lot-level price for the lots added from 2026-10-30 research", () => {
-    for (const slug of ["big-g-lot", "yellow-brick-parking-lot-2", "yellow-brick-parking-lot-3", "big-tree-lot", "bills-parking-big-tree-rd"]) {
+    for (const slug of ["big-g-lot", "yellow-brick-parking-lot-2"]) {
       const f = HIGHMARK_FACILITIES.find((x) => x.slug === slug)!;
       expect(f.location, slug).toBeUndefined();
       expect(f.entrance, slug).toBeUndefined();
-      expect(f.exit, slug).toEqual({});
+      expect(f.exit.rating, slug).toBeUndefined();
+      expect(f.exit.directions, slug).toBeUndefined();
+      expect(f.walkMinutes, slug).toBeUndefined();
       // Only the operator's own advertised starting price, marked as not lot-specific.
       for (const p of f.prices) expect(p.scope, slug).toBe("area");
     }
   });
 });
-

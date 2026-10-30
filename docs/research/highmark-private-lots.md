@@ -7,15 +7,19 @@ Research date: 2026-10-30. Everything here is **not published** on the site. A l
 Facebook page, or a booking-platform listing) **and** a specific street address. Prices, entrances,
 availability and exit details are recorded only when a source states them.
 
-**Method note:** direct page fetches were blocked from the research environment, so every source was
-reviewed through search-result excerpts. Each source in `src/lib/data/sources.ts` carries a note that
-a direct page re-check is still pending. No coordinates could be checked against a geocoder, so no new
-map pins were added.
+**Method note:** the research environment couldn't open most web pages. Operator pages for Yellow
+Brick (home, `/faq/`, `/about/`) and Big G Properties were read directly on 2026-10-30 and
+supplied for this update; those sources are marked "page read directly" in `src/lib/data/sources.ts`.
+Everything else was reviewed through search-result excerpts and is marked "direct page re-check
+pending". No coordinates or vehicle entrances could be verified, so no new map pins were added.
 
 ## Candidates needing verification
 
 | Candidate | Address | Road | What we found | What's missing |
 |---|---|---|---|---|
+| Yellow Brick Parking Lot 3 | 5242 Big Tree Rd? | Big Tree Rd | The operator's site confirms a third adjacent lot. A ParkWhiz listing (June 2026 event) and a SpotHero destination use 5242 Big Tree Rd. | The operator doesn't give Lot 3's address; 5242 isn't established as Lot 3. Pass holders can already use any of the three lots, so the published Yellow Brick listings mention it. |
+| Big Tree Lot / "Premium Parking P8135" | 4297 Abbott Rd | Abbott Rd | SpotHero destination page (https://spothero.com/destination/buffalo/4297-abbott-road-parking), ParkMe and MapQuest listings. | A destination page alone doesn't show an active, named operator, game-day booking or an entrance. Listings disagree on capacity (150 or 200). |
+| Bills Parking | 5122 Big Tree Rd | Big Tree Rd | A Facebook page (https://www.facebook.com/billsparking) seen in search results describes a private lot for Bills games. | The page couldn't be retrieved directly; nothing confirmed. |
 | Kane's ("Fort Erie Lot") | 3952 Southwestern Blvd | Southwestern Blvd | Fan blog (about 2025): $60, attended, bathrooms, cash only. Town Board records list a commercial parking permit at this address (2010, 2014). A parking LLC registered at this address in March 2026. | No 2026 advertising by the operator. |
 | Twin Oaks Motel | 3949 Southwestern Blvd | Southwestern Blvd | Fan blog (about 2025): $60, porta-potties, oversized vehicles, buses and campers. A "Twin Oak Parking" listing on ParkingRank. | No 2026 advertising; motel's link to the lot unconfirmed. |
 | Bert's Bikes & Fitness | 4050 Southwestern Blvd | Southwestern Blvd | Fan blog (about 2025): $60, $80 front row. Older guides and reviews describe game-day parking. | No 2026 advertising by the business. |

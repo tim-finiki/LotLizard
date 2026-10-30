@@ -7,6 +7,7 @@ import type { DataSource } from "@/lib/types";
  */
 const SNIPPET = "Reviewed via search results 2026-10-29; direct page re-check pending.";
 const SNIPPET_1030 = "Reviewed via search results 2026-10-30; direct page re-check pending.";
+const DIRECT_1030 = "Page read directly 2026-10-30. Operator's own claims; not field-verified by LotLizard.";
 
 export const SOURCES: DataSource[] = [
   // Official
@@ -44,19 +45,11 @@ export const SOURCES: DataSource[] = [
   { id: "coparking-yellowbrick", type: "third_party", name: "CoParking listing — Yellow Brick Parking", url: "https://coparking.ch/en/United-States/parking/73055", retrievedAt: "2026-10-29" },
   { id: "facebook-gorilla", type: "operator", name: "Gorilla Parking (4177 Abbott Rd) — Facebook page", url: "https://www.facebook.com/4177AbbottRoad/", retrievedAt: "2026-10-29" },
 
-  // Private lots (2026-10-30 research). Operator pages count as the lot's own public advertising.
-  { id: "bigg-site", type: "operator", name: "Big G Properties — Big G's Lot", url: "https://www.biggpropertiesllc.com/", retrievedAt: "2026-10-30", notes: SNIPPET_1030 },
-  { id: "bigg-ravens", type: "operator", name: "Big G Properties — Bills vs. Ravens parking (Nov 1, 2026)", url: "https://www.biggpropertiesllc.com/event-details-registration/bills-vs-ravens-parking", retrievedAt: "2026-10-30", notes: SNIPPET_1030 },
-  { id: "yellowbrick-site", type: "operator", name: "Yellow Brick Parking — Highmark Stadium parking", url: "https://yellowbrickparkinglot.com/", retrievedAt: "2026-10-30", notes: SNIPPET_1030 },
-  { id: "yellowbrick-faq", type: "operator", name: "Yellow Brick Parking — FAQ", url: "https://yellowbrickparkinglot.com/faq/", retrievedAt: "2026-10-30", notes: SNIPPET_1030 },
-  { id: "facebook-yellowbrick", type: "operator", name: "Yellow Brick Parking — Facebook page", url: "https://www.facebook.com/yellowbrickparking/", retrievedAt: "2026-10-30", notes: SNIPPET_1030 },
-  { id: "coparking-yellowbrick-lot2", type: "third_party", name: "CoParking listing — Yellow Brick Parking Lot 2", url: "https://coparking.ch/en/United-States/parking/73064", retrievedAt: "2026-10-30", notes: SNIPPET_1030 },
-  { id: "parkwhiz-yellowbrick-lot3", type: "third_party", name: "ParkWhiz — Yellow Brick Parking Lot 3, 5242 Big Tree Road (event listing, June 2026)", url: "https://www.parkwhiz.ca/checkout?quote_id=047fdc01-92b9-4a47-b859-57e502d9e01a", retrievedAt: "2026-10-30", notes: SNIPPET_1030 },
-  { id: "spothero-5242", type: "third_party", name: "SpotHero — 5242 Big Tree Road parking", url: "https://spothero.com/destination/buffalo/5242-big-tree-road-parking", retrievedAt: "2026-10-30", notes: SNIPPET_1030 },
-  { id: "spothero-4297", type: "third_party", name: "SpotHero — 4297 Abbott Road parking", url: "https://spothero.com/destination/buffalo/4297-abbott-road-parking", retrievedAt: "2026-10-30", notes: SNIPPET_1030 },
-  { id: "parkme-4297", type: "third_party", name: "ParkMe — Big Tree Lot, 4297 Abbott Rd", url: "https://www.parkme.com/lot/1230346/4297-abbott-rd", retrievedAt: "2026-10-30", notes: SNIPPET_1030 },
-  { id: "mapquest-bigtreelot", type: "third_party", name: "MapQuest — Big Tree Lot (Premium Parking Lot P8135)", url: "https://www.mapquest.com/us/new-york/big-tree-lot-premium-parking-lot-p8135-753842619", retrievedAt: "2026-10-30", notes: SNIPPET_1030 },
-  { id: "facebook-billsparking", type: "operator", name: "Bills Parking (5122 Big Tree Rd) — Facebook page", url: "https://www.facebook.com/billsparking/", retrievedAt: "2026-10-30", notes: SNIPPET_1030 },
+  // Private lots (2026-10-30). Operator pages count as the lot's own public advertising.
+  { id: "bigg-site", type: "operator", name: "Big G Properties — Big G's Lot", url: "https://www.biggpropertiesllc.com/", retrievedAt: "2026-10-30", notes: DIRECT_1030 },
+  { id: "yellowbrick-site", type: "operator", name: "Yellow Brick Parking — Highmark Stadium parking", url: "https://yellowbrickparkinglot.com/", retrievedAt: "2026-10-30", notes: DIRECT_1030 },
+  { id: "yellowbrick-faq", type: "operator", name: "Yellow Brick Parking — FAQ", url: "https://yellowbrickparkinglot.com/faq/", retrievedAt: "2026-10-30", notes: DIRECT_1030 },
+  { id: "yellowbrick-about", type: "operator", name: "Yellow Brick Parking — About", url: "https://yellowbrickparkinglot.com/about/", retrievedAt: "2026-10-30", notes: DIRECT_1030 },
   { id: "gorilla-site", type: "operator", name: "Gorilla Lot — website", url: "https://www.gorillalotparking.com/", retrievedAt: "2026-10-30", notes: SNIPPET_1030 },
   { id: "billsfans-tailgating", type: "third_party", name: "BillsFans — Bills Mafia tailgating guide", url: "https://www.billsfans.com/the-ultimate-buffalo-bills-game-day-guide/tailgating/", retrievedAt: "2026-10-30", notes: SNIPPET_1030 },
   { id: "dannys-site", type: "operator", name: "Danny's South — restaurant website", url: "https://www.dannysrestaurant.com/dannys-south/", retrievedAt: "2026-10-30", notes: SNIPPET_1030 },
