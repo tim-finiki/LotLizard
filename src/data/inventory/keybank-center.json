@@ -14,12 +14,13 @@
           "value": "public"
         },
         "address": {
-          "confidence": "low",
+          "confidence": "medium",
           "evidence": "343 Washington St",
           "method": "search_snippet",
-          "observedAt": "2026-10-29",
+          "observedAt": "2026-10-30",
           "sources": [
-            "en-parkopedia-com-parking-garage-robert-b-adam-ramp-14203-buffalo"
+            "en-parkopedia-com-parking-garage-robert-b-adam-ramp-14203-buffalo",
+            "bcarparking-com-locations"
           ],
           "value": "343 Washington St, Buffalo, NY 14203"
         },
@@ -33,26 +34,29 @@
           ],
           "value": "Adams Ramp"
         },
-        "covered": {
-          "confidence": "low",
-          "evidence": "the 1,800-space Adams Ramp on Washington Street",
-          "method": "search_snippet",
-          "notes": "Covered because it is a multi-level ramp.",
-          "observedAt": "2026-10-29",
-          "sources": [
-            "btpm-org-local-2025-03-11-downtown-parking-ramps-to-get-much-needed-renovations"
-          ],
-          "value": "available"
-        },
         "description": {
-          "confidence": "low",
-          "evidence": "The ramps closest to Key Bank Center are the One Seneca Ramp and the Adam Ramp",
-          "method": "search_snippet",
-          "observedAt": "2026-10-29",
-          "sources": [
-            "buffalony-gov-civicalerts-asp"
+          "confidence": "medium",
+          "evidence": "343 Washington St., with a vehicle clearance height of 6'9\" ... 6'9\" clearance and 1,787 capacity",
+          "history": [
+            {
+              "confidence": "low",
+              "evidence": "The ramps closest to Key Bank Center are the One Seneca Ramp and the Adam Ramp",
+              "method": "search_snippet",
+              "observedAt": "2026-10-29",
+              "replacedAt": "2026-10-30",
+              "sources": [
+                "buffalony-gov-civicalerts-asp"
+              ],
+              "value": "City-owned downtown ramp on Washington Street, named by the city as one of the ramps closest to the arena."
+            }
           ],
-          "value": "City-owned downtown ramp on Washington Street, named by the city as one of the ramps closest to the arena."
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "reason": "Adds the operator's posted clearance.",
+          "sources": [
+            "bcarparking-com-locations"
+          ],
+          "value": "City-owned ramp at 343 Washington St run by Buffalo Civic Auto Ramps, with about 1,787 spaces. Posted vehicle clearance is 6'9\" (6 ft 9 in); taller vehicles won't fit."
         },
         "ev_charging": {
           "confidence": "low",
@@ -164,17 +168,6 @@
           ],
           "value": "KeyBank Center Garage"
         },
-        "covered": {
-          "confidence": "low",
-          "evidence": "KeyBank Center parking ramp",
-          "method": "search_snippet",
-          "notes": "Covered because it is a multi-level ramp.",
-          "observedAt": "2026-10-29",
-          "sources": [
-            "nhl-com-sabres-fans-a-z-guide"
-          ],
-          "value": "available"
-        },
         "description": {
           "confidence": "low",
           "evidence": "park next to the venue at the KeyBank Center Parking Ramp between Perry Street and Illinois Street",
@@ -204,6 +197,27 @@
             "nhl-com-sabres-fans-a-z-guide"
           ],
           "value": "KeyBank Center Parking Ramp"
+        },
+        "payment_not_accepted": {
+          "confidence": "medium",
+          "evidence": "All lots are cashless",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "keybankcenter-com-plan-your-visit-directions-parking"
+          ],
+          "value": "cash"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "pre-purchasing parking in advance is strongly encouraged",
+          "method": "search_snippet",
+          "notes": "Book in advance through KeyBank Center's official parking partner, JustPark (see keybankcenter.com). Onsite payment may be available but isn't guaranteed; lots can fill up on event days.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "keybankcenter-com-plan-your-visit-directions-parking"
+          ],
+          "value": "advance_optional"
         },
         "tailgating": {
           "confidence": "medium",
@@ -282,6 +296,27 @@
           ],
           "value": "KeyBank Center Surface Lot"
         },
+        "payment_not_accepted": {
+          "confidence": "medium",
+          "evidence": "All lots are cashless",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "keybankcenter-com-plan-your-visit-directions-parking"
+          ],
+          "value": "cash"
+        },
+        "payment_timing": {
+          "confidence": "medium",
+          "evidence": "pre-purchasing parking in advance is strongly encouraged",
+          "method": "search_snippet",
+          "notes": "Book in advance through KeyBank Center's official parking partner, JustPark (see keybankcenter.com). Onsite payment may be available but isn't guaranteed; lots can fill up on event days.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "keybankcenter-com-plan-your-visit-directions-parking"
+          ],
+          "value": "advance_optional"
+        },
         "tailgating": {
           "confidence": "medium",
           "evidence": "tailgating is not permitted in any of our KeyBank Center parking lots or ramps",
@@ -340,17 +375,6 @@
           ],
           "value": "Harborcenter Ramp"
         },
-        "covered": {
-          "confidence": "low",
-          "evidence": "LECOM Harborcenter ramp",
-          "method": "search_snippet",
-          "notes": "Covered because it is a multi-level ramp.",
-          "observedAt": "2026-10-29",
-          "sources": [
-            "gogriffs-com-facilities-lecom-harborcenter-1"
-          ],
-          "value": "available"
-        },
         "description": {
           "confidence": "low",
           "evidence": "directly across from and connected to the KeyBank Center",
@@ -382,14 +406,25 @@
           ],
           "value": "LECOM Harborcenter Parking Ramp"
         },
+        "payment_not_accepted": {
+          "confidence": "medium",
+          "evidence": "All lots are cashless",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "keybankcenter-com-plan-your-visit-directions-parking"
+          ],
+          "value": "cash"
+        },
         "payment_timing": {
-          "confidence": "low",
+          "confidence": "medium",
           "evidence": "LECOM Harborcenter parking ramp for presale purchase",
           "method": "search_snippet",
           "notes": "Presale was offered for a playoff game; whether you can also pay on arrival varies by event.",
-          "observedAt": "2026-10-29",
+          "observedAt": "2026-10-30",
           "sources": [
-            "nhl-com-sabres-news-buffalo-sabres-playoff-parking-traffic-information"
+            "nhl-com-sabres-news-buffalo-sabres-playoff-parking-traffic-information",
+            "keybankcenter-com-plan-your-visit-directions-parking"
           ],
           "value": "advance_optional"
         },
@@ -482,6 +517,498 @@
         }
       },
       "prices": {}
+    },
+    "premium-p8011-26-mississippi": {
+      "fields": {
+        "access": {
+          "confidence": "medium",
+          "evidence": "operated by Premium Parking",
+          "method": "search_snippet",
+          "notes": "Sold for KeyBank Center events.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "parkwhiz-com-p-buffalo-parking-26-mississippi-st"
+          ],
+          "value": "public"
+        },
+        "address": {
+          "confidence": "low",
+          "evidence": "Premium Parking Lot #P8011, 26 Mississippi St, Buffalo, NY 14203",
+          "method": "search_snippet",
+          "notes": "Street address not yet confirmed by the operator.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "mapquest-com-us-new-york-premium-parking-lot-p8011-789017429"
+          ],
+          "value": "26 Mississippi St, Buffalo, NY 14203"
+        },
+        "description": {
+          "confidence": "medium",
+          "evidence": "26 Mississippi St",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-city-buffalo-keybank-center-sabres-vs-islanders-314"
+          ],
+          "value": "Lot on Mississippi St a short walk from KeyBank Center; Premium Parking has sold it for Sabres games. Event-day rates vary; no fixed event price is published."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "Premium Parking Lot #P8011, 26 Mississippi St, Buffalo, NY 14203",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "mapquest-com-us-new-york-premium-parking-lot-p8011-789017429"
+          ],
+          "value": "Premium Parking P8011 (26 Mississippi St)"
+        },
+        "operator": {
+          "confidence": "medium",
+          "evidence": "26 Mississippi St",
+          "method": "search_snippet",
+          "notes": "Has been sold for KeyBank Center events.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-city-buffalo-keybank-center-sabres-vs-islanders-314"
+          ],
+          "value": "Premium Parking"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "Premium Parking Lot #P8011",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "mapquest-com-us-new-york-premium-parking-lot-p8011-789017429"
+          ],
+          "value": "private_lot"
+        }
+      },
+      "prices": {}
+    },
+    "premium-p8019-64-exchange": {
+      "fields": {
+        "access": {
+          "confidence": "medium",
+          "evidence": "hourly, daily, overnight and monthly",
+          "method": "search_snippet",
+          "notes": "Hourly, daily, overnight and monthly parking on the operator's site.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8019"
+          ],
+          "value": "public"
+        },
+        "address": {
+          "confidence": "low",
+          "evidence": "64 Exchange St. Lot - P8019",
+          "method": "search_snippet",
+          "notes": "Street address not yet confirmed by the operator.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "parkmobile-io-parking-locations-ny-buffalo-parking-parking-lot-64-exchange-st-lo"
+          ],
+          "value": "64 Exchange St, Buffalo, NY 14204"
+        },
+        "aliases": {
+          "confidence": "medium",
+          "evidence": "formerly known as Bison's Lot",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8019"
+          ],
+          "value": "Bison's Lot"
+        },
+        "description": {
+          "confidence": "medium",
+          "evidence": "formerly known as Bison's Lot",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8019"
+          ],
+          "value": "Lot on Exchange St a few blocks from KeyBank Center and Canalside, formerly known as Bison's Lot. Premium Parking sells hourly, daily, overnight and monthly parking; event-day rates vary and no fixed event price is published."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "64 Exchange St. Lot - P8019",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "parkmobile-io-parking-locations-ny-buffalo-parking-parking-lot-64-exchange-st-lo"
+          ],
+          "value": "Premium Parking P8019 (64 Exchange St)"
+        },
+        "operator": {
+          "confidence": "medium",
+          "evidence": "Find Parking at lot P8019 in Buffalo, NY",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8019"
+          ],
+          "value": "Premium Parking"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "64 Exchange St. Lot - P8019",
+          "method": "search_snippet",
+          "notes": "Formerly known as Bison's Lot.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "parkmobile-io-parking-locations-ny-buffalo-parking-parking-lot-64-exchange-st-lo"
+          ],
+          "value": "private_lot"
+        }
+      },
+      "prices": {}
+    },
+    "premium-p8022-commercial-perry": {
+      "fields": {
+        "access": {
+          "confidence": "medium",
+          "evidence": "Daily Rates 12 Hrs",
+          "method": "search_snippet",
+          "notes": "Sold by the day on the operator's site.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8022"
+          ],
+          "value": "public"
+        },
+        "address": {
+          "confidence": "medium",
+          "evidence": "prime corner lot at Commercial & Perry Streets",
+          "method": "search_snippet",
+          "notes": "The operator gives the corner, not a street number.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8022"
+          ],
+          "value": "Commercial St & Perry St, Buffalo, NY 14203"
+        },
+        "aliases": {
+          "confidence": "low",
+          "evidence": "36 Perry Blvd. (1 Commercial St.) - Aud Lot 2 (P8022)",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "spothero-com-facility-107750-1-commercial-st-parking"
+          ],
+          "value": "Aud Lot 2"
+        },
+        "description": {
+          "confidence": "medium",
+          "evidence": "prime corner lot at Commercial & Perry Streets in downtown Buffalo, near the waterfront, KeyBank Center, and metro transit",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8022"
+          ],
+          "value": "Corner lot at Commercial and Perry Streets, listed by Premium Parking as near the waterfront, KeyBank Center and Metro Rail. Event-day rates vary; no fixed event price is published."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "Parking Near Buffalo Commercial & Perry St",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8022"
+          ],
+          "value": "Premium Parking P8022 (Commercial & Perry)"
+        },
+        "operator": {
+          "confidence": "medium",
+          "evidence": "prime corner lot at Commercial & Perry Streets in downtown Buffalo, near the waterfront, KeyBank Center, and metro transit",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8022"
+          ],
+          "value": "Premium Parking"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "prime corner lot at Commercial & Perry Streets",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8022"
+          ],
+          "value": "private_lot"
+        }
+      },
+      "prices": {}
+    },
+    "premium-p8027-155-washington": {
+      "fields": {
+        "access": {
+          "confidence": "medium",
+          "evidence": "Prime Buffalo location near downtown, Canalside, and KeyBank Center",
+          "method": "search_snippet",
+          "notes": "Sold by the hour and day on the operator's site.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8027"
+          ],
+          "value": "public"
+        },
+        "address": {
+          "confidence": "low",
+          "evidence": "155 Washington St. Lot - P8027 at 155 Washington St., Buffalo, NY 14203",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "parkmobile-io-parking-locations-ny-buffalo-parking-parking-lot-155-washington-st"
+          ],
+          "value": "155 Washington St, Buffalo, NY 14203"
+        },
+        "aliases": {
+          "confidence": "low",
+          "evidence": "Cobblestone Lot, operated by Premium Parking",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "spothero-com-facility-107743-155-washington-st-2-parking"
+          ],
+          "value": "Cobblestone Lot"
+        },
+        "description": {
+          "confidence": "low",
+          "evidence": "located on the East side of Washington St. between Scott St. and Exchange St.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "spothero-com-facility-107743-155-washington-st-2-parking"
+          ],
+          "value": "Open-air lot on the east side of Washington St between Scott St and Exchange St, listed by Premium Parking as near Canalside and KeyBank Center. Event-day rates vary; no fixed event price is published."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "Parking Near Buffalo City Hall - 155 Washington",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8027"
+          ],
+          "value": "Premium Parking P8027 (155 Washington St)"
+        },
+        "operator": {
+          "confidence": "medium",
+          "evidence": "Prime Buffalo location near downtown, Canalside, and KeyBank Center",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8027"
+          ],
+          "value": "Premium Parking"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "an open-air parking solution for visitors and commuters alike",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "parkmobile-io-parking-locations-ny-buffalo-parking-parking-lot-155-washington-st"
+          ],
+          "value": "private_lot"
+        }
+      },
+      "prices": {}
+    },
+    "premium-p8139-191-scott": {
+      "fields": {
+        "access": {
+          "confidence": "medium",
+          "evidence": "convenient paid parking available at ... 191 Scott Street Lot (P8139)",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-city-buffalo-hofbruhaus-buffalo"
+          ],
+          "value": "public"
+        },
+        "address": {
+          "confidence": "medium",
+          "evidence": "191 Scott Street Lot (P8139)",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-city-buffalo-hofbruhaus-buffalo"
+          ],
+          "value": "191 Scott St, Buffalo, NY 14204"
+        },
+        "aliases": {
+          "confidence": "low",
+          "evidence": "Fairmont Creamery - P8139, 191 Scott St",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "mapquest-com-us-new-york-fairmont-creamery-p8139-753398491"
+          ],
+          "value": "Fairmont Creamery Lot"
+        },
+        "amenities": {
+          "confidence": "low",
+          "evidence": "well-lit and spacious surface lot",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "parkwhiz-com-p-buffalo-parking-191-scott-st"
+          ],
+          "value": "lighting"
+        },
+        "description": {
+          "confidence": "medium",
+          "evidence": "191 Scott Street Lot (P8139)",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-city-buffalo-hofbruhaus-buffalo"
+          ],
+          "value": "Surface lot on Scott St next to Hofbräuhaus Buffalo, listed by Premium Parking. Event-day rates vary; no fixed event price is published."
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "191 Scott Street Lot (P8139)",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-city-buffalo-hofbruhaus-buffalo"
+          ],
+          "value": "Premium Parking P8139 (191 Scott St)"
+        },
+        "operator": {
+          "confidence": "medium",
+          "evidence": "convenient paid parking available at 199 Scott Street Lot (P8146), or 191 Scott Street Lot (P8139)",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-city-buffalo-hofbruhaus-buffalo"
+          ],
+          "value": "Premium Parking"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "well-lit and spacious surface lot",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "parkwhiz-com-p-buffalo-parking-191-scott-st"
+          ],
+          "value": "private_lot"
+        }
+      },
+      "prices": {}
+    },
+    "premium-p8146-199-scott": {
+      "fields": {
+        "access": {
+          "confidence": "medium",
+          "evidence": "Prime Buffalo location near KeyBank Center, Canalside & Metro Rail",
+          "method": "search_snippet",
+          "notes": "Sold to the public on the operator's site.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8146"
+          ],
+          "value": "public"
+        },
+        "address": {
+          "confidence": "medium",
+          "evidence": "Convenient parking at P8146, 199 Scott Street, Buffalo, NY",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8146"
+          ],
+          "value": "199 Scott St, Buffalo, NY 14204"
+        },
+        "covered": {
+          "confidence": "low",
+          "evidence": "self park, uncovered lot",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "spothero-com-facility-111791-199-scott-st-parking"
+          ],
+          "value": "unavailable"
+        },
+        "description": {
+          "confidence": "medium",
+          "evidence": "Prime Buffalo location near KeyBank Center, Canalside & Metro Rail",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8146"
+          ],
+          "value": "Surface lot on Scott St listed by Premium Parking as near KeyBank Center, Canalside and Metro Rail. Event-day rates vary; no fixed event price is published."
+        },
+        "entrance_address": {
+          "confidence": "low",
+          "evidence": "This is the entrance address for the 199 Scott St. lot, operated by Premium Parking",
+          "method": "search_snippet",
+          "notes": "Not yet confirmed by the operator.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "spothero-com-facility-111791-199-scott-st-parking"
+          ],
+          "value": "229 Scott St, Buffalo, NY 14204"
+        },
+        "entrance_instructions": {
+          "confidence": "low",
+          "evidence": "located on the South side of Scott St. between Michigan Ave. and Chicago St.",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "spothero-com-facility-111791-199-scott-st-parking"
+          ],
+          "value": "On the south side of Scott St between Michigan Ave and Chicago St."
+        },
+        "entrance_verification": {
+          "confidence": "low",
+          "evidence": "This is the entrance address for the 199 Scott St. lot",
+          "method": "search_snippet",
+          "notes": "Directions go to the lot's street address until the entrance is confirmed.",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "spothero-com-facility-111791-199-scott-st-parking"
+          ],
+          "value": "needs_review"
+        },
+        "name": {
+          "confidence": "medium",
+          "evidence": "Convenient parking at P8146, 199 Scott Street, Buffalo, NY",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8146"
+          ],
+          "value": "Premium Parking P8146 (199 Scott St)"
+        },
+        "operator": {
+          "confidence": "medium",
+          "evidence": "Prime Buffalo location near KeyBank Center, Canalside & Metro Rail",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-p8146"
+          ],
+          "value": "Premium Parking"
+        },
+        "type": {
+          "confidence": "medium",
+          "evidence": "199 Scott Street Lot (P8146)",
+          "method": "search_snippet",
+          "observedAt": "2026-10-30",
+          "sources": [
+            "premiumparking-com-city-buffalo-hofbruhaus-buffalo"
+          ],
+          "value": "private_lot"
+        }
+      },
+      "prices": {}
     }
   },
   "slug": "keybank-center",
@@ -492,6 +1019,13 @@
       "retrievedAt": "2026-10-29",
       "type": "third_party",
       "url": "https://www.arenacapacity.com/?p=8938"
+    },
+    "bcarparking-com-locations": {
+      "method": "search_snippet",
+      "name": "Buffalo Civic Auto Ramps — Locations",
+      "retrievedAt": "2026-10-30",
+      "type": "operator",
+      "url": "https://bcarparking.com/locations"
     },
     "btpm-org-local-2025-03-11-downtown-parking-ramps-to-get-much-needed-renovations": {
       "method": "search_snippet",
@@ -549,6 +1083,13 @@
       "type": "third_party",
       "url": "https://gogriffs.com/facilities/lecom-harborcenter/1"
     },
+    "keybankcenter-com-plan-your-visit-directions-parking": {
+      "method": "search_snippet",
+      "name": "KeyBank Center — Directions & Parking",
+      "retrievedAt": "2026-10-30",
+      "type": "official",
+      "url": "https://www.keybankcenter.com/plan-your-visit/directions-parking"
+    },
     "koobit-com-sabres-vs-bruins-e215043-travel-parking-harborcenter-ramp-111820": {
       "method": "search_snippet",
       "name": "Koobit — Harborcenter Ramp parking listing",
@@ -570,6 +1111,20 @@
       "type": "third_party",
       "url": "https://www.latlong.net/poi/seneca-one-ramp-488934"
     },
+    "mapquest-com-us-new-york-fairmont-creamery-p8139-753398491": {
+      "method": "search_snippet",
+      "name": "MapQuest — Fairmont Creamery - P8139, 191 Scott St",
+      "retrievedAt": "2026-10-30",
+      "type": "third_party",
+      "url": "https://www.mapquest.com/us/new-york/fairmont-creamery-p8139-753398491"
+    },
+    "mapquest-com-us-new-york-premium-parking-lot-p8011-789017429": {
+      "method": "search_snippet",
+      "name": "MapQuest — Premium Parking Lot #P8011, 26 Mississippi St",
+      "retrievedAt": "2026-10-30",
+      "type": "third_party",
+      "url": "https://www.mapquest.com/us/new-york/premium-parking-lot-p8011-789017429"
+    },
     "nhl-com-sabres-fans-a-z-guide": {
       "method": "search_snippet",
       "name": "Buffalo Sabres — A–Z Guide",
@@ -590,6 +1145,97 @@
       "retrievedAt": "2026-10-29",
       "type": "third_party",
       "url": "https://openchargemap.org/poi/details/112300"
+    },
+    "parkmobile-io-parking-locations-ny-buffalo-parking-parking-lot-155-washington-st": {
+      "method": "search_snippet",
+      "name": "ParkMobile — 155 Washington St. Lot (P8027)",
+      "retrievedAt": "2026-10-30",
+      "type": "third_party",
+      "url": "https://parkmobile.io/parking/locations/ny/buffalo-parking/parking-lot/155-washington-st-lot-p8027"
+    },
+    "parkmobile-io-parking-locations-ny-buffalo-parking-parking-lot-64-exchange-st-lo": {
+      "method": "search_snippet",
+      "name": "ParkMobile — 64 Exchange St. Lot (P8019)",
+      "retrievedAt": "2026-10-30",
+      "type": "third_party",
+      "url": "https://parkmobile.io/parking/locations/ny/buffalo-parking/parking-lot/64-exchange-st-lot-p8019"
+    },
+    "parkwhiz-com-p-buffalo-parking-191-scott-st": {
+      "method": "search_snippet",
+      "name": "ParkWhiz — 191 Scott St. (operated by Premium Parking)",
+      "retrievedAt": "2026-10-30",
+      "type": "third_party",
+      "url": "https://www.parkwhiz.com/p/buffalo-parking/191-scott-st/?view=list"
+    },
+    "parkwhiz-com-p-buffalo-parking-26-mississippi-st": {
+      "method": "search_snippet",
+      "name": "ParkWhiz — 26 Mississippi St. (operated by Premium Parking)",
+      "retrievedAt": "2026-10-30",
+      "type": "third_party",
+      "url": "https://www.parkwhiz.com/p/buffalo-parking/26-mississippi-st/?view=list&venue_id=216922"
+    },
+    "premiumparking-com-city-buffalo-hofbruhaus-buffalo": {
+      "method": "search_snippet",
+      "name": "Premium Parking — Hofbräuhaus Buffalo parking (lists P8146 and P8139)",
+      "retrievedAt": "2026-10-30",
+      "type": "operator",
+      "url": "https://www.premiumparking.com/city/buffalo/hofbruhaus-buffalo"
+    },
+    "premiumparking-com-city-buffalo-keybank-center-sabres-vs-islanders-314": {
+      "method": "search_snippet",
+      "name": "Premium Parking — Sabres vs Islanders (KeyBank Center event page, 2024)",
+      "retrievedAt": "2026-10-30",
+      "type": "operator",
+      "url": "https://www.premiumparking.com/city/buffalo/keybank-center/sabres-vs-islanders-314"
+    },
+    "premiumparking-com-p8019": {
+      "method": "search_snippet",
+      "name": "Premium Parking — P8019",
+      "retrievedAt": "2026-10-30",
+      "type": "operator",
+      "url": "https://www.premiumparking.com/P8019"
+    },
+    "premiumparking-com-p8022": {
+      "method": "search_snippet",
+      "name": "Premium Parking — P8022, Commercial & Perry St",
+      "retrievedAt": "2026-10-30",
+      "type": "operator",
+      "url": "https://www.premiumparking.com/P8022"
+    },
+    "premiumparking-com-p8027": {
+      "method": "search_snippet",
+      "name": "Premium Parking — P8027, 155 Washington St",
+      "retrievedAt": "2026-10-30",
+      "type": "operator",
+      "url": "https://www.premiumparking.com/P8027"
+    },
+    "premiumparking-com-p8146": {
+      "method": "search_snippet",
+      "name": "Premium Parking — P8146, 199 Scott Street",
+      "retrievedAt": "2026-10-30",
+      "type": "operator",
+      "url": "https://www.premiumparking.com/P8146"
+    },
+    "spothero-com-facility-107743-155-washington-st-2-parking": {
+      "method": "search_snippet",
+      "name": "SpotHero — 155 Washington St (Cobblestone Lot)",
+      "retrievedAt": "2026-10-30",
+      "type": "third_party",
+      "url": "https://www.spothero.com/facility/107743/155-washington-st-2-parking"
+    },
+    "spothero-com-facility-107750-1-commercial-st-parking": {
+      "method": "search_snippet",
+      "name": "SpotHero — 36 Perry Blvd. (1 Commercial St.) - Aud Lot 2 (P8022)",
+      "retrievedAt": "2026-10-30",
+      "type": "third_party",
+      "url": "https://spothero.com/facility/107750/1-commercial-st-parking"
+    },
+    "spothero-com-facility-111791-199-scott-st-parking": {
+      "method": "search_snippet",
+      "name": "SpotHero — 229 Scott St. (199 Scott St.) - Lot (P8146)",
+      "retrievedAt": "2026-10-30",
+      "type": "third_party",
+      "url": "https://spothero.com/facility/111791/199-scott-st-parking"
     },
     "thestadiumreviews-com-parking-keybank-center": {
       "method": "search_snippet",
