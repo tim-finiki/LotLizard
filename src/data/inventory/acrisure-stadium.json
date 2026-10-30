@@ -536,7 +536,7 @@
           "confidence": "low",
           "evidence": "Directions to Event Day Parking (Card Only)",
           "method": "search_snippet",
-          "notes": "Search results place Nova Place Garage under the official page's card-only event-day heading; listing is a search summary.",
+          "notes": "Reported under the official page's card-only event-day heading; not yet confirmed directly.",
           "observedAt": "2026-10-29",
           "sources": [
             "acrisurestadium-com-stadium-parking-directions"
