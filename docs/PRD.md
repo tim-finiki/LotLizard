@@ -31,8 +31,7 @@ long-term moat is **trustworthy data** — every fact is attributed to a source 
 | **Visiting fan / first-timer** | Simple, safe, close option; know if pre-pay is required | Map, walk times, official vs private labeling, policies |
 | **Families / accessibility** | ADA parking, short walk, restrooms | Amenity filters, ADA info, walk estimates |
 | **Get-out-fast commuter** | Lowest exit time back to highway | Exit convenience ranking, exit-route notes, future exit predictions |
-| **Lot operators (future B2B)** | Visibility, accurate listings, bookings | Claimed listings, referral bookings |
-| **Data buyers (future B2B)** | Pricing/demand data across venues | Data API, aggregated reports |
+| **Lot owners and operators** | Visibility and accurate listings | Accurate, sourced lot pages |
 
 ## 4. Core principles
 
@@ -92,12 +91,9 @@ long-term moat is **trustworthy data** — every fact is attributed to a source 
 - Per-venue "Sources & confidence" section and a public methodology page (`/about/data`).
 - Structured data (JSON-LD) includes only non-price facts and never marks estimates as verified.
 
-### 5.8 Monetization-ready (not activated in MVP)
-- **Parking referrals:** lots can carry a booking link with partner + `isAffiliate` flag; links render with
-  `rel="sponsored"` and a disclosure.
-- **Sponsorships:** typed sponsorship placements (venue page, directory) always labelled "Sponsored".
-- **Data services:** versioned public JSON API (`/api/v1/...`) that includes attribution, ready for keys and
-  rate tiers later.
+### 5.8 Commercial content rules
+- Booking links and sponsored placements, where present, are always labelled and never change ranking
+  order. Business plans are kept in internal planning documents.
 
 ## 6. Out of scope for MVP
 User accounts, payments/bookings checkout, native apps, live occupancy, real traffic feeds, ML predictions,
@@ -112,7 +108,6 @@ operator self-serve portal, multi-language.
 | Lots with ≥ `medium` confidence price | ≥ 60% of pilot lots |
 | Community submissions / home game | ≥ 50, with < 10% rejected as spam |
 | Ranking interaction rate (preferences changed) | ≥ 25% of venue-page visitors |
-| Referral click-through (when activated) | ≥ 5% of venue-page visitors |
 
 ## 8. Risks & mitigations
 
@@ -124,7 +119,5 @@ operator self-serve portal, multi-language.
 | Map tile usage limits | Tile URL is configurable; move to a commercial/self-hosted tile provider before scale |
 | Trademark/affiliation confusion | Independent disclaimer site-wide; no team logos |
 
-## 9. Open questions (business decisions, deferred)
-- Which referral partner(s) to integrate (e.g., ParkWhiz/SpotHero affiliate programs) and the revenue share.
-- Database / map tile provider selection when moving beyond free tiers.
-- Whether operators can pay for "claimed listing" enhancements (must not affect ranking).
+## 9. Open questions
+- Business decisions are tracked in internal planning documents.
