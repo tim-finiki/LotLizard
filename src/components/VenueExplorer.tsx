@@ -20,7 +20,7 @@ import {
 } from "@/lib/ranking";
 import { AMENITY_LABEL, FACILITY_TYPE_COLOR, FACILITY_TYPE_LABEL } from "@/lib/labels";
 import { CONFIDENCE_LABEL } from "@/lib/confidence";
-import { DIRECTIONS_BASIS_LABEL, directionsLinks, type DirectionsLinks } from "@/lib/directions";
+import { directionsLabel, directionsLinks, type DirectionsLinks } from "@/lib/directions";
 import { eventShortLabel, formatClock, formatEventDate, lotOpenTime, upcomingEvents } from "@/lib/events";
 import { formatDistance } from "@/lib/geo";
 import { activeFilterCount, applyDisplayFilters, buildMarkers, clearFilters } from "@/lib/explorer";
@@ -88,6 +88,8 @@ const REC_STYLE: Record<Recommendation, { label: string; className: string }> = 
 export interface VenueExplorerProps {
   venue: Venue;
   facilities: ParkingFacility[];
+  /** Venue-specific default sort (e.g. walk-first downtown), used until the person sets their own. */
+  defaultWeights?: RankingPreferences["weights"];
   events: VenueEvent[];
 }
 
@@ -106,8 +108,12 @@ function useIsDesktop() {
   );
 }
 
-export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps) {
-  const [prefs, setPrefs] = usePreferences();
+export function VenueExplorer({ venue, facilities, events, defaultWeights }: VenueExplorerProps) {
+  const [savedPrefs, setPrefs] = usePreferences();
+  // Until someone sets their own sort, the venue's default applies (walking distance matters downtown,
+  // tailgating doesn't). Saved priorities always win.
+  const usingVenueDefault = !!defaultWeights && FACTORS.every((f) => savedPrefs.weights[f] === DEFAULT_PREFERENCES.weights[f]);
+  const prefs = useMemo(() => (usingVenueDefault ? { ...savedPrefs, weights: defaultWeights! } : savedPrefs), [usingVenueDefault, savedPrefs, defaultWeights]);
   const [eventId, setEventId] = useState<string>(NO_EVENT);
   const [today, setToday] = useState<string>();
   const [hiddenTypes, setHiddenTypes] = useState<FacilityType[]>([]);
@@ -561,6 +567,7 @@ export function VenueExplorer({ venue, facilities, events }: VenueExplorerProps)
           <FiltersPanel
             prefs={prefs}
             onChange={setPrefs}
+            defaultWeights={defaultWeights ?? DEFAULT_PREFERENCES.weights}
             presentTypes={presentTypes}
             hiddenTypes={hiddenTypes}
             onToggleType={(t) => setHiddenTypes((h) => (h.includes(t) ? h.filter((x) => x !== t) : [...h, t]))}
@@ -657,7 +664,7 @@ function DirectionsRow({ links, entrance }: { links: DirectionsLinks | null; ent
         <a href={links.apple} target="_blank" rel="noopener noreferrer" className="flex h-9 items-center rounded-lg bg-neutral-100 px-3 text-xs font-semibold dark:bg-neutral-800">
           Apple Maps
         </a>
-        <span className="text-[11px] text-neutral-500">{DIRECTIONS_BASIS_LABEL[links.basis]}</span>
+        <span className="text-[11px] text-neutral-500">{directionsLabel(links)}</span>
       </div>
     </div>
   );
@@ -917,6 +924,7 @@ function FiltersPanel({
   hiddenTypes,
   onToggleType,
   reportedAmenities,
+  defaultWeights,
   parking,
   onParking,
   presentForms,
@@ -929,6 +937,7 @@ function FiltersPanel({
   hiddenTypes: FacilityType[];
   onToggleType: (t: FacilityType) => void;
   reportedAmenities: Amenity[];
+  defaultWeights: RankingPreferences["weights"];
   parking: ParkingFilter;
   onParking: (p: ParkingFilter) => void;
   presentForms: Set<string | undefined>;
@@ -939,7 +948,7 @@ function FiltersPanel({
   const payment = prefs.payment;
   const setPayment = (p: PaymentFilter) => onChange({ ...prefs, payment: p });
   const setWeight = (f: Factor, v: number) => onChange({ ...prefs, weights: { ...prefs.weights, [f]: v } });
-  const balanced = FACTORS.every((f) => prefs.weights[f] === DEFAULT_PREFERENCES.weights[f]);
+  const balanced = FACTORS.every((f) => prefs.weights[f] === defaultWeights[f]);
 
   return (
     <div className="flex flex-col gap-6">
@@ -1100,7 +1109,7 @@ function FiltersPanel({
             onClick={() => onChange({ ...prefs, weights: DEFAULT_PREFERENCES.weights })}
             className="text-xs font-semibold text-brand-700 underline disabled:no-underline disabled:opacity-40 dark:text-brand-100"
           >
-            Reset to balanced
+            Reset to default
           </button>
         </div>
         <p className="mb-3 text-xs text-neutral-500">How much each matters to you. This changes the order, never what&apos;s shown.</p>

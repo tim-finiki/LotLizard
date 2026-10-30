@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { listVenues } from "@/lib/data/repository";
+import { listEvents, listFacilities, listVenues } from "@/lib/data/repository";
 import { siteJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { VenueCard } from "@/components/VenueCard";
 import { PrimaryLogo } from "@/components/Brand";
+import { FeaturedVenueCard } from "@/components/FeaturedVenueCard";
+import { FEATURED_VENUES, isFeatured } from "@/lib/featured";
 
 export const metadata: Metadata = { alternates: { canonical: "/" } };
 
@@ -16,11 +18,17 @@ const HOW_IT_WORKS = [
 
 export default async function Home() {
   const venues = await listVenues();
-  const pilot = venues.filter((v) => v.coverage === "pilot_detailed");
-  const guides = venues.filter((v) => v.coverage === "basic");
+  // Featured pilots, shown side by side; each with its own facts and focus.
+  const featured = await Promise.all(
+    FEATURED_VENUES.flatMap((profile) => {
+      const venue = venues.find((v) => v.slug === profile.slug);
+      return venue ? [Promise.all([listFacilities(venue.id), listEvents(venue.id)]).then(([facilities, events]) => ({ venue, profile, facilities, events }))] : [];
+    }),
+  );
+  const guides = venues.filter((v) => v.coverage !== "venue_only" && !isFeatured(v.slug));
   const more = venues.filter((v) => v.coverage === "venue_only").slice(0, 6);
   // "Popular" = venues that actually have parking guides (no invented popularity data).
-  const popular = [...pilot, ...guides].slice(0, 5);
+  const popular = [...featured.map((f) => f.venue), ...guides].slice(0, 5);
 
   return (
     <div>
@@ -78,19 +86,15 @@ export default async function Home() {
 
       <div className="mx-auto flex max-w-5xl flex-col gap-10 px-4 py-8">
         <section aria-labelledby="pilot-heading" className="flex flex-col gap-3">
-          <h2 id="pilot-heading" className="text-xl font-bold">Pilot venue</h2>
-          {pilot.map((v) => (
-            <Link
-              key={v.id}
-              href={`/venues/${v.slug}`}
-              className="group flex flex-col gap-2 rounded-3xl bg-white p-5 shadow-sm ring-1 ring-line transition hover:ring-lizard dark:bg-ink-soft dark:ring-white/10"
-            >
-              <span className="text-xs font-semibold uppercase tracking-wide text-forest dark:text-brand-100">Buffalo Bills · Orchard Park, NY</span>
-              <span className="font-display text-2xl font-extrabold">{v.name} parking guide</span>
-              <span className="text-sm text-neutral-600 dark:text-neutral-400">{v.summary}</span>
-              <span className="mt-1 inline-flex w-fit rounded-lg bg-lizard px-4 py-2 text-sm font-semibold text-ink group-hover:bg-lizard-strong">Compare lots →</span>
-            </Link>
-          ))}
+          <div>
+            <h2 id="pilot-heading" className="text-xl font-bold">Featured pilot venues</h2>
+            <p className="text-sm text-neutral-600 dark:text-neutral-400">Football in Orchard Park, hockey and concerts downtown — more event types to come.</p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {featured.map((f) => (
+              <FeaturedVenueCard key={f.venue.id} {...f} />
+            ))}
+          </div>
         </section>
 
         {guides.length > 0 && (

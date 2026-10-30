@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Venue } from "@/lib/types";
 import { COVERAGE_LABEL, VENUE_TYPE_LABEL } from "@/lib/labels";
 import { venuePath } from "@/lib/seo";
+import { isFeatured } from "@/lib/featured";
 
 export function VenueCard({ venue }: { venue: Venue }) {
   const detailed = venue.coverage !== "venue_only";
@@ -17,7 +18,7 @@ export function VenueCard({ venue }: { venue: Venue }) {
             detailed ? "bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-100" : "bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300"
           }`}
         >
-          {venue.coverage === "pilot_detailed" ? "Pilot" : detailed ? "Guide" : "Soon"}
+          {venue.coverage === "pilot_detailed" || isFeatured(venue.slug) ? "Pilot" : detailed ? "Guide" : "Soon"}
         </span>
       </div>
       <p className="text-sm text-neutral-600 dark:text-neutral-400">

@@ -13,7 +13,7 @@ import {
   listFacilities,
 } from "@/lib/data/repository";
 import { walkInfo } from "@/lib/ranking";
-import { DIRECTIONS_BASIS_LABEL, directionsLinks } from "@/lib/directions";
+import { directionsLabel, directionsLinks } from "@/lib/directions";
 import { formatDistance } from "@/lib/geo";
 import { AMENITY_LABEL, FACILITY_TYPE_COLOR, FACILITY_TYPE_LABEL } from "@/lib/labels";
 import { NOINDEX_FOLLOW, facilityJsonLd, facilityPath, isIndexableVenue, venuePath } from "@/lib/seo";
@@ -155,7 +155,7 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
             <a href={directions.apple} target="_blank" rel="noopener noreferrer" className="flex h-10 items-center rounded-lg bg-ink px-4 text-sm font-semibold text-white dark:bg-white dark:text-neutral-900">
               Apple Maps
             </a>
-            <span className="text-xs text-neutral-500">Routes {DIRECTIONS_BASIS_LABEL[directions.basis]}.</span>
+            <span className="text-xs text-neutral-500">Routes {directionsLabel(directions)}.</span>
           </div>
         ) : (
           !f.entrance?.instructions && (
@@ -239,7 +239,9 @@ export default async function LotPage({ params }: PageProps<"/venues/[venue]/par
 
         <Section id="details" title="Details">
           <dl className="divide-y divide-black/5 rounded-2xl bg-white px-4 ring-1 ring-black/5 dark:divide-white/10 dark:bg-ink-soft dark:ring-white/10">
-            <Row label="Parking address">{f.address ?? "Unknown"}</Row>
+            <Row label="Parking address" attribution={f.addressAttribution}>
+              {f.address ?? "Unknown"}
+            </Row>
             <Row label="Vehicle entrance" attribution={f.entrance?.attribution}>
               {f.entrance ? <EntranceInfo entrance={f.entrance} /> : "Unknown — not yet reported"}
             </Row>

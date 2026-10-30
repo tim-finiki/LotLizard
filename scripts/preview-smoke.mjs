@@ -84,6 +84,11 @@ try {
     await page.getByRole("heading", { level: 1 }).waitFor();
     await page.locator('img[alt="LotLizard"]').first().waitFor();
   });
+  await step("featured venues", async () => {
+    // Both pilot venues are featured on the homepage.
+    const section = page.locator("section", { has: page.getByRole("heading", { name: "Featured pilot venues" }) });
+    for (const name of ["Highmark Stadium", "KeyBank Center"]) await section.getByRole("heading", { name }).waitFor();
+  });
   await step("search", async () => {
     await page.fill("#home-search", "Highmark");
     await Promise.all([page.waitForURL(/\/venues\?q=/), page.getByRole("button", { name: "Search" }).click()]);
@@ -174,6 +179,14 @@ try {
     await page.waitForTimeout(1500);
     if (await page.getByText("Something went wrong").count()) throw new Error("the venue page crashed after returning to it");
     await page.waitForFunction(() => [...document.querySelectorAll("img.leaflet-tile-loaded")].some((t) => t.offsetParent), null, { timeout: 15_000 });
+  });
+  await step("keybank pilot", async () => {
+    // Downtown arena: lots are ranked by walking distance by default, and the map shows mapped ramps.
+    await page.goto(base + "/venues/keybank-center", { waitUntil: "domcontentloaded" });
+    await page.locator(".ll-marker").first().waitFor();
+    await page.getByText(/Sorted by shorter walk/).first().waitFor();
+    const ranked = await page.getByRole("button", { name: /^Rank \d+:/ }).count();
+    if (ranked < 1) throw new Error("no KeyBank lots ranked");
   });
 } catch {
   ok = false;

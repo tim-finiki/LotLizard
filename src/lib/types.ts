@@ -275,6 +275,8 @@ export interface ParkingFacility {
   access?: Attributed<AccessLevel>;
   /** The lot's official street address (not necessarily where cars enter; see `entrance`). */
   address?: string;
+  /** Where the address comes from. Below medium confidence it's shown, and routed to, as unverified. */
+  addressAttribution?: Attribution;
   /** Where vehicles enter, when known. */
   entrance?: VehicleEntrance;
   /** Omitted when no source pins the lot down — such lots are listed but not mapped. */
