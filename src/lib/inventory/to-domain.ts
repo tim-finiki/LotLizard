@@ -21,14 +21,13 @@ import { readField, type FieldName } from "@/lib/inventory/values";
  * unknown tailgating is "unknown", unknown payment is undefined, no row means no claim.
  */
 
-const SNIPPET_NOTE = "Seen in search results; direct page review pending.";
-
 export function inventorySourceId(venueSlug: string, sid: string) {
   return `inv:${venueSlug}:${sid}`;
 }
 
 function attribution(venueSlug: string, f: Fact): Attribution {
-  const notes = [f.notes, f.method === "search_snippet" ? SNIPPET_NOTE : undefined].filter(Boolean).join(" ");
+  // How a fact was collected (e.g. search_snippet) stays in the inventory file; it isn't customer-facing.
+  const notes = f.notes;
   return {
     sourceIds: f.sources.map((s) => inventorySourceId(venueSlug, s)),
     confidence: f.confidence,
@@ -58,7 +57,6 @@ export function inventorySources(inv: VenueInventory): DataSource[] {
     name: s.name,
     ...(s.url ? { url: s.url } : {}),
     retrievedAt: s.retrievedAt,
-    ...(s.method === "search_snippet" ? { notes: SNIPPET_NOTE } : {}),
   }));
 }
 
