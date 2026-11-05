@@ -17,7 +17,7 @@ LotLizard is an independent parking and event-day guide for stadiums and arenas 
 
 ## How work arrives and is reported
 
-- Tasks arrive as **GitHub issues** in this repo. A spec drafted in a chat is pasted into an issue; the issue is the source of truth.
+- Tasks arrive as **GitHub issues** in this repo. ChatGPT creates and updates issues directly through its GitHub integration (or Tim asks Claude to file one); the issue is the source of truth, not a chat transcript.
 - Work on a branch and open a **pull request** that says `Closes #N`, with what changed, how it was verified, and what was deliberately not changed. Every PR gets a Vercel preview; the preview smoke test runs against it.
 - Post a short result comment on the issue: PR link, check results, anything blocked or needing Tim.
 - Tim merges to `main` (production). Don't merge yourself unless the issue explicitly says so.
