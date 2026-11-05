@@ -1,0 +1,29 @@
+name: CI
+
+# Lint, typecheck and unit tests on every PR and on main. No secrets needed.
+# The Vercel preview build and preview-smoke.yml cover the production build.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Lint, typecheck, unit tests
+        run: npm run check
