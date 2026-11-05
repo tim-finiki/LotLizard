@@ -36,7 +36,8 @@ npm run inventory -- validate | report | import <file>
 
 - `preview-smoke.yml`: on each PR, waits for the Vercel preview and runs a mobile smoke test.
 - `production-check.yml`: daily, after each push to `main`, and on demand: robots.txt, sitemap, canonicals, noindex, JSON-LD on the live site.
-- There is no GitHub Actions job running `npm run check` yet; run it yourself before opening a PR.
+- `ci.yml`: on every PR and push to `main`, runs `npm run check` (lint, typecheck, unit tests). Run it yourself before opening a PR too.
+- Issue templates (task, research, decision) and a PR template are in `.github/`. Labels: `type:task`, `type:research`, `type:decision`, `needs-approval` (stop for Tim), `blocked`.
 
 ## Map
 
